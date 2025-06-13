@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -28,6 +29,7 @@ class FeatureCard extends StatelessWidget {
             icon,
             width: 24,
             height: 24,
+            package: 'skyfi_sdk',
             colorFilter: const ColorFilter.mode(
               AppColors.white,
               BlendMode.srcIn,

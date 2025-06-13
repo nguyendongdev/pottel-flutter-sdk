@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
-import '../../core/widgets/bottom_button.dart';
 import '../../core/widgets/gradient_button.dart';
 import '../../core/widgets/outline_button.dart';
 import '../../core/widgets/snack_bar_app.dart';
@@ -56,6 +56,7 @@ class StartVideoCallScreen extends StatelessWidget {
                   width: 303,
                   height: 188,
                   fit: BoxFit.contain,
+                  package: 'skyfi_sdk',
                 ),
               ),
             ),

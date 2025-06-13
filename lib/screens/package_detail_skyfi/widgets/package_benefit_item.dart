@@ -33,6 +33,7 @@ class PackageBenefitItem extends StatelessWidget {
             icon,
             width: 32,
             height: 32,
+            package: 'skyfi_sdk',
           ),
         ),
 

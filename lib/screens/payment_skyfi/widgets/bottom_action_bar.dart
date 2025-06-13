@@ -55,6 +55,8 @@ class BottomActionBar extends HookConsumerWidget {
       if (response.statusCode == 200 && data.code == 200) {
         final link = data.result?.redirectUrl;
         if (link != null) {
+          print('Link payment: $link');
+
           context.pushNamed(AppRouter.webviewPaymentSkyfi, extra: link);
         }
       }
@@ -63,14 +65,14 @@ class BottomActionBar extends HookConsumerWidget {
     void checkOutOrderGALAXYPAY() async {
       // Dialog loading with context
 
-      Common.startLoadingDialog(context, 'Đang tạo đơn hàng...');
+      // Common.startLoadingDialog(context, 'Đang tạo đơn hàng...');
       final order = ref.read(paymentOrderProvider);
       final items = order.items;
       final itemsJson = items?.map((item) => item.toJson()).toList();
       final orderJson = order.toJson();
       orderJson['items'] = itemsJson;
       final response = await api.post('/bss/app/create-order', data: orderJson);
-      Common.stopLoadingDialog(context);
+      // Common.stopLoadingDialog(context);
       final data = CreateOrder.fromJson(response.data);
       if (response.statusCode == 200 && data.code == 200) {
         final orderID = data.result?.orderNumber;
@@ -87,10 +89,8 @@ class BottomActionBar extends HookConsumerWidget {
     // Helper method to set payment method and proceed with checkout
     void setPaymentMethodAndCheckout() {
       // Set payment method
-      ref
-          .read(paymentOrderProvider.notifier)
-          .changePaymentMethod("GALAXYPAY");
-      
+      ref.read(paymentOrderProvider.notifier).changePaymentMethod("GALAXYPAY");
+
       // Use Future.microtask to ensure the state update is processed
       // before calling checkOutOrderGALAXYPAY
       Future.microtask(() => checkOutOrderGALAXYPAY());
@@ -177,7 +177,7 @@ class BottomActionBar extends HookConsumerWidget {
           showToast('Bạn phải đồng ý với Điều kiện & Điều khoản');
           return;
         }
-        
+
         // Set payment method and proceed with checkout
         setPaymentMethodAndCheckout();
         return;
@@ -238,7 +238,7 @@ class BottomActionBar extends HookConsumerWidget {
           showToast('Bạn phải đồng ý với Điều kiền & Điều khoản');
           return;
         }
-        
+
         // Set payment method and proceed with checkout
         setPaymentMethodAndCheckout();
         return;

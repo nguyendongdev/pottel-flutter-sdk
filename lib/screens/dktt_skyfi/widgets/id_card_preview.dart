@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../core/constants/colors.dart';
 
 class IdCardPreview extends StatelessWidget {
@@ -21,7 +22,10 @@ class IdCardPreview extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SvgPicture.asset('assets/icons/chip_card_img.svg'),
+          SvgPicture.asset(
+            'assets/icons/chip_card_img.svg',
+            package: 'skyfi_sdk',
+          ),
         ],
       ),
     );

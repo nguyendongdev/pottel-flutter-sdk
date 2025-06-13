@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -86,6 +87,7 @@ class SerialInputField extends StatelessWidget {
               'assets/icons/feat_scan.svg',
               width: 20,
               height: 20,
+              package: 'skyfi_sdk',
             ),
           ),
         ],

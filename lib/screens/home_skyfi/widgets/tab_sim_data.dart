@@ -299,7 +299,9 @@ class TabSimData extends HookConsumerWidget {
                                             width: 121,
                                             height: 110,
                                             fit: BoxFit.contain,
+                                            package: 'skyfi_sdk',
                                           ),
+
                                           const SizedBox(height: AppSpacing.md),
                                           Text(
                                             'Bạn đã có SIM SkyFi chưa?',

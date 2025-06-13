@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+// env
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
-import '../../routers/routers.dart';
 import 'paramTime.dart';
 import 'socketService.dart';
-// env
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class VideoCallViewJitsiScreen extends StatefulWidget {
   const VideoCallViewJitsiScreen(
@@ -295,6 +294,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
                 'assets/images/logo_skyfi_yellow.png',
                 width: MediaQuery.of(context).size.width * 0.6,
                 fit: BoxFit.contain,
+                package: 'skyfi_sdk',
               ),
               const SizedBox(height: 20),
               Text(

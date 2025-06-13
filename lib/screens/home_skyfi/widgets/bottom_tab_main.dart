@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/spacing.dart';
 
 import '../../../core/constants/text_styles.dart';
-import '../../../routers/routers.dart';
 import '../../../utilities/common.dart';
 
 class BottomTabMain extends StatelessWidget {
@@ -133,6 +131,7 @@ Widget _buildNavItem({
               isSelected ? AppColors.navHomeTextSelected : AppColors.text,
               BlendMode.srcIn,
             ),
+            package: 'skyfi_sdk',
           ),
         ),
         const SizedBox(height: AppSpacing.xs),

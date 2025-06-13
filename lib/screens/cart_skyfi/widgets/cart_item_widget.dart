@@ -75,6 +75,7 @@ class CartItemWidget extends HookConsumerWidget {
                     height: 40,
                     uri,
                     fit: BoxFit.cover,
+                    package: 'skyfi_sdk',
                   ),
           ),
           const SizedBox(width: AppSpacing.md),

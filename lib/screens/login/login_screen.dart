@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../routers/routers.dart';
 import '../../themes/colors.dart';
 import '../../widgets/core/button/BaseElevatedButton.dart';
 import '../../widgets/core/button/BaseOutlineButton.dart';
-import '../../widgets/core/input/BaseInput.dart';
 import '../../widgets/core/button/SocialButton.dart';
+import '../../widgets/core/input/BaseInput.dart';
 
 class LoginScreen extends HookConsumerWidget {
   const LoginScreen({super.key});
@@ -52,6 +53,7 @@ class LoginScreen extends HookConsumerWidget {
                     child: Image.asset(
                       'assets/images/logo_white.png',
                       height: 120,
+                      package: 'skyfi_sdk',
                     ),
                   ),
                   const SizedBox(height: 40),

@@ -164,6 +164,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                         'assets/icons/feat_sim_global.svg',
                         width: 20,
                         height: 20,
+                        package: 'skyfi_sdk',
                       ),
                     ),
                     const SizedBox(width: 8),

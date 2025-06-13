@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -31,6 +32,7 @@ class EmptyCart extends StatelessWidget {
             'assets/images/empty_cart.png',
             width: 200,
             height: 200,
+            package: 'skyfi_sdk',
           ),
           const SizedBox(height: AppSpacing.xl),
           Text(

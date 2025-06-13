@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
 
 import '../../../core/constants/spacing.dart';
 import '../../../core/widgets/app_cart.dart';
@@ -47,6 +46,7 @@ class HeaderHome extends HookConsumerWidget {
             child: Image.asset(
               'assets/images/logo_skyfi_yellow.png',
               height: 24,
+              package: 'skyfi_sdk',
             ),
           ),
           const Spacer(),

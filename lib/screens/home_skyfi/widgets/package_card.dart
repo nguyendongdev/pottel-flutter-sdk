@@ -107,6 +107,7 @@ class PackageCard extends StatelessWidget {
                                     'assets/icons/dashboard-speed.svg',
                                     width: 18,
                                     height: 18,
+                                    package: 'skyfi_sdk',
                                   ),
                                 ),
                                 const SizedBox(width: AppSpacing.sm),
@@ -133,6 +134,7 @@ class PackageCard extends StatelessWidget {
                                       'assets/icons/phone-home.svg',
                                       width: 18,
                                       height: 18,
+                                      package: 'skyfi_sdk',
                                     ),
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
@@ -160,6 +162,7 @@ class PackageCard extends StatelessWidget {
                                       'assets/icons/message-home.svg',
                                       width: 18,
                                       height: 18,
+                                      package: 'skyfi_sdk',
                                     ),
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
@@ -254,6 +257,7 @@ class PackageCard extends StatelessWidget {
                         'assets/icons/tag_sale.svg',
                         width: 33,
                         height: 33,
+                        package: 'skyfi_sdk',
                       ),
                       // center the text
                       RotationTransition(

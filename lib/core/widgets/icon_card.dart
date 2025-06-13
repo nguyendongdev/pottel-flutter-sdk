@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../constants/colors.dart';
 import '../constants/spacing.dart';
 
@@ -20,6 +21,7 @@ class IconCard extends StatelessWidget {
             icon,
             width: 24,
             height: 24,
+            package: 'skyfi_sdk',
           ),
         ],
       ),

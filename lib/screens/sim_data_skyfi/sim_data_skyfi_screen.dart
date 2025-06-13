@@ -267,6 +267,7 @@ class _SimNumberSection extends StatelessWidget {
                 'assets/icons/feat_sim_global.svg',
                 width: 24,
                 height: 24,
+                package: 'skyfi_sdk',
               ),
             ),
             const SizedBox(width: AppSpacing.md),

@@ -28,6 +28,7 @@ class AppCart extends ConsumerWidget {
             height: 24,
             colorFilter:
                 ColorFilter.mode(color ?? AppColors.text, BlendMode.srcIn),
+            package: 'skyfi_sdk',
           ),
         ),
         Positioned(

@@ -497,6 +497,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                 width: 118,
                 height: 36,
                 fit: BoxFit.contain,
+                package: 'skyfi_sdk',
               ),
               const SizedBox(height: 16),
               Text(

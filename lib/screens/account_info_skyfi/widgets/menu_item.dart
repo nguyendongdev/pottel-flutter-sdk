@@ -35,6 +35,7 @@ class MenuItem extends StatelessWidget {
                     AppColors.text,
                     BlendMode.srcIn,
                   ),
+                  package: 'skyfi_sdk',
                 ),
                 const SizedBox(width: 12),
                 Expanded(

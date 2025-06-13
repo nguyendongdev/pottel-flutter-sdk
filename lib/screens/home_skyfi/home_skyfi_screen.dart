@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
@@ -195,6 +196,7 @@ class HomeSkyFiScreen extends HookConsumerWidget {
           Image.asset(
             'assets/images/logo.png',
             height: 24,
+            package: 'skyfi_sdk',
           ),
           const Spacer(),
           const SizedBox(width: 24),

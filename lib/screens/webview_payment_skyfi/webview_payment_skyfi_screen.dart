@@ -197,6 +197,7 @@ class WebviewPaymentSkyfiScreen extends HookConsumerWidget {
                     width: 110,
                     height: 110,
                     fit: BoxFit.contain,
+                    package: 'skyfi_sdk',
                   ),
                   const SizedBox(height: 16),
                   Text('Mã đơn hàng: ${orderId.value}'),

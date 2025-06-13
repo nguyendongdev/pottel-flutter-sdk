@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -33,6 +34,7 @@ class PreviewCart extends HookConsumerWidget {
                 'assets/icons/feat_success_check.svg',
                 width: 22,
                 height: 22,
+                package: 'skyfi_sdk',
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
