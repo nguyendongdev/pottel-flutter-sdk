@@ -7,7 +7,7 @@ import 'intercepters/dio_intercepter.dart';
 class API {
   late final Dio _dio;
   API() : _dio = Dio() {
-    _dio.options.baseUrl = dotenv.get('BASE_API_URL');
+    _dio.options.baseUrl = _getBaseUrl();
     _dio.interceptors.add(DioInterceptor());
     _dio.options.connectTimeout = const Duration(seconds: 60);
     _dio.options.receiveTimeout = const Duration(seconds: 40);
@@ -25,6 +25,15 @@ class API {
         ),
       ),
     );
+  }
+
+  String _getBaseUrl() {
+    try {
+      return dotenv.get('BASE_API_URL');
+    } catch (e) {
+      // Return a default URL or throw a more descriptive error
+      return dotenv.maybeGet('BASE_API_URL') ?? 'https://api.default.com';
+    }
   }
 
   Future<Response> get(String path,
