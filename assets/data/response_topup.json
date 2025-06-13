@@ -1,0 +1,171 @@
+{
+  "topup": {
+    "user": {
+      "id": "USER123",
+      "phone_number": "0987654321",
+      "balance": 50000,
+      "currency": "VND"
+    },
+    "quick_amounts": [
+      {
+        "id": "TOP001",
+        "amount": 10000,
+        "display_text": "10.000đ",
+        "currency": "VND",
+        "is_popular": false,
+        "status": "ACTIVE"
+      },
+      {
+        "id": "TOP002",
+        "amount": 20000,
+        "display_text": "20.000đ",
+        "currency": "VND",
+        "is_popular": false,
+        "status": "ACTIVE"
+      },
+      {
+        "id": "TOP003",
+        "amount": 30000,
+        "display_text": "30.000đ",
+        "currency": "VND",
+        "is_popular": false,
+        "status": "ACTIVE"
+      },
+      {
+        "id": "TOP004",
+        "amount": 50000,
+        "display_text": "50.000đ",
+        "currency": "VND",
+        "is_popular": true,
+        "status": "ACTIVE"
+      },
+      {
+        "id": "TOP005",
+        "amount": 100000,
+        "display_text": "100.000đ",
+        "currency": "VND",
+        "is_popular": true,
+        "status": "ACTIVE"
+      },
+      {
+        "id": "TOP006",
+        "amount": 200000,
+        "display_text": "200.000đ",
+        "currency": "VND",
+        "is_popular": true,
+        "status": "ACTIVE"
+      },
+      {
+        "id": "TOP007",
+        "amount": 300000,
+        "display_text": "300.000đ",
+        "currency": "VND",
+        "is_popular": false,
+        "status": "ACTIVE"
+      },
+      {
+        "id": "TOP008",
+        "amount": 500000,
+        "display_text": "500.000đ",
+        "currency": "VND",
+        "is_popular": false,
+        "status": "ACTIVE"
+      }
+    ],
+    "payment_methods": [
+      {
+        "id": "PAY001",
+        "type": "CARD",
+        "name": "Thẻ cào",
+        "icon": "card",
+        "description": "Nạp tiền bằng mã thẻ cào",
+        "status": "ACTIVE",
+        "is_default": true,
+        "providers": [
+          {
+            "id": "PROV001",
+            "name": "Viettel",
+            "icon": "viettel",
+            "status": "ACTIVE"
+          },
+          {
+            "id": "PROV002",
+            "name": "Mobifone",
+            "icon": "mobifone",
+            "status": "ACTIVE"
+          },
+          {
+            "id": "PROV003",
+            "name": "Vinaphone",
+            "icon": "vinaphone",
+            "status": "ACTIVE"
+          }
+        ]
+      },
+      {
+        "id": "PAY002",
+        "type": "BANK_TRANSFER",
+        "name": "Chuyển khoản ngân hàng",
+        "icon": "bank",
+        "description": "Chuyển khoản qua tài khoản ngân hàng",
+        "status": "ACTIVE",
+        "is_default": false
+      },
+      {
+        "id": "PAY003",
+        "type": "E_WALLET",
+        "name": "Ví điện tử",
+        "icon": "wallet",
+        "description": "Thanh toán qua ví điện tử",
+        "status": "ACTIVE",
+        "is_default": false,
+        "providers": [
+          {
+            "id": "PROV004",
+            "name": "Momo",
+            "icon": "momo",
+            "status": "ACTIVE"
+          },
+          {
+            "id": "PROV005",
+            "name": "ZaloPay",
+            "icon": "zalopay",
+            "status": "ACTIVE"
+          }
+        ]
+      }
+    ],
+    "recent_transactions": [
+      {
+        "id": "TRX001",
+        "type": "TOPUP",
+        "amount": 100000,
+        "currency": "VND",
+        "payment_method": {
+          "id": "PAY001",
+          "type": "CARD",
+          "provider": "Viettel"
+        },
+        "status": "SUCCESS",
+        "created_at": "2024-04-16T10:30:00Z"
+      },
+      {
+        "id": "TRX002",
+        "type": "TOPUP",
+        "amount": 50000,
+        "currency": "VND",
+        "payment_method": {
+          "id": "PAY003",
+          "type": "E_WALLET",
+          "provider": "Momo"
+        },
+        "status": "SUCCESS",
+        "created_at": "2024-04-15T15:45:00Z"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2024-04-16T00:00:00Z"
+  }
+} 

@@ -1,0 +1,715 @@
+// Created by Crt Vavros, copyright © 2022 ZeroPass. All rights reserved.
+// ignore_for_file: prefer_adjacent_string_concatenation, prefer_interpolation_to_compose_strings
+
+import 'dart:io';
+
+import 'package:dmrtd/internal.dart';
+import 'package:expandable/expandable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:dmrtd/dmrtd.dart';
+import 'package:dmrtd/extensions.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:go_router/go_router.dart';
+import 'package:logging/logging.dart';
+import 'package:dmrtd/src/proto/can_key.dart';
+import 'package:intl/intl.dart';
+
+import 'package:dmrtd/src/proto/ecdh_pace.dart';
+import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
+import 'package:skyfi_sdk/routers/routers.dart';
+import 'package:skyfi_sdk/screens/dktt_skyfi/scan_nfc_chipcard_screen.dart';
+
+import '../../core/constants/colors.dart';
+import '../../core/constants/spacing.dart';
+import '../../core/constants/text_styles.dart';
+import '../../core/widgets/snack_bar_app.dart';
+import 'widgets/step_indicator.dart';
+
+class MrtdData {
+  EfCardAccess? cardAccess;
+  EfCardSecurity? cardSecurity;
+  EfCOM? com;
+  EfSOD? sod;
+  EfDG1? dg1;
+  EfDG2? dg2;
+  EfDG3? dg3;
+  EfDG4? dg4;
+  EfDG5? dg5;
+  EfDG6? dg6;
+  EfDG7? dg7;
+  EfDG8? dg8;
+  EfDG9? dg9;
+  EfDG10? dg10;
+  EfDG11? dg11;
+  EfDG12? dg12;
+  EfDG13? dg13;
+  EfDG14? dg14;
+  EfDG15? dg15;
+  EfDG16? dg16;
+  Uint8List? aaSig;
+  bool? isPACE;
+  bool? isDBA;
+}
+
+final Map<DgTag, String> dgTagToString = {
+  EfDG1.TAG: 'EF.DG1',
+  EfDG2.TAG: 'EF.DG2',
+  EfDG3.TAG: 'EF.DG3',
+  EfDG4.TAG: 'EF.DG4',
+  EfDG5.TAG: 'EF.DG5',
+  EfDG6.TAG: 'EF.DG6',
+  EfDG7.TAG: 'EF.DG7',
+  EfDG8.TAG: 'EF.DG8',
+  EfDG9.TAG: 'EF.DG9',
+  EfDG10.TAG: 'EF.DG10',
+  EfDG11.TAG: 'EF.DG11',
+  EfDG12.TAG: 'EF.DG12',
+  EfDG13.TAG: 'EF.DG13',
+  EfDG14.TAG: 'EF.DG14',
+  EfDG15.TAG: 'EF.DG15',
+  EfDG16.TAG: 'EF.DG16'
+};
+
+Widget _makeMrtdAccessDataWidget(
+    {required String header,
+    required String collapsedText,
+    required bool isPACE,
+    required bool isDBA}) {
+  return ExpandablePanel(
+      theme: const ExpandableThemeData(
+        headerAlignment: ExpandablePanelHeaderAlignment.center,
+        tapBodyToCollapse: true,
+        hasIcon: true,
+        iconColor: Colors.red,
+      ),
+      header: Text(header),
+      collapsed: Text(collapsedText,
+          softWrap: true, maxLines: 2, overflow: TextOverflow.ellipsis),
+      expanded: Container(
+          padding: const EdgeInsets.all(18),
+          color: Color.fromARGB(255, 239, 239, 239),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Text(
+              'Access protocol: ${isPACE ? "PACE" : "BAC"}',
+              //style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 8.0),
+            Text(
+              'Access key type: ${isDBA ? "DBA" : "CAN"}',
+              //style: TextStyle(fontSize: 16.0),
+            )
+          ])));
+}
+
+String formatEfCom(final EfCOM efCom) {
+  var str = "version: ${efCom.version}\n"
+      "unicode version: ${efCom.unicodeVersion}\n"
+      "DG tags:";
+
+  for (final t in efCom.dgTags) {
+    try {
+      str += " ${dgTagToString[t]!}";
+    } catch (e) {
+      str += " 0x${t.value.toRadixString(16)}";
+    }
+  }
+  return str;
+}
+
+String formatMRZ(final MRZ mrz) {
+  return "MRZ\n"
+          "  version: ${mrz.version}\n" +
+      "  doc code: ${mrz.documentCode}\n" +
+      "  doc No.: ${mrz.documentNumber}\n" +
+      "  country: ${mrz.country}\n" +
+      "  nationality: ${mrz.nationality}\n" +
+      "  name: ${mrz.firstName}\n" +
+      "  surname: ${mrz.lastName}\n" +
+      "  gender: ${mrz.gender}\n" +
+      "  date of birth: ${DateFormat.yMd().format(mrz.dateOfBirth)}\n" +
+      "  date of expiry: ${DateFormat.yMd().format(mrz.dateOfExpiry)}\n" +
+      "  add. data: ${mrz.optionalData}\n" +
+      "  add. data: ${mrz.optionalData2}";
+}
+
+String formatDG15(final EfDG15 dg15) {
+  var str = "EF.DG15:\n"
+      "  AAPublicKey\n"
+      "    type: ";
+
+  final rawSubPubKey = dg15.aaPublicKey.rawSubjectPublicKey();
+  if (dg15.aaPublicKey.type == AAPublicKeyType.RSA) {
+    final tvSubPubKey = TLV.fromBytes(rawSubPubKey);
+    var rawSeq = tvSubPubKey.value;
+    if (rawSeq[0] == 0x00) {
+      rawSeq = rawSeq.sublist(1);
+    }
+
+    final tvKeySeq = TLV.fromBytes(rawSeq);
+    final tvModule = TLV.decode(tvKeySeq.value);
+    final tvExp = TLV.decode(tvKeySeq.value.sublist(tvModule.encodedLen));
+
+    str += "RSA\n"
+        "    exponent: ${tvExp.value.hex()}\n"
+        "    modulus: ${tvModule.value.hex()}";
+  } else {
+    str += "EC\n    SubjectPublicKey: ${rawSubPubKey.hex()}";
+  }
+  return str;
+}
+
+String formatProgressMsg(String message, int percentProgress) {
+  final p = (percentProgress / 20).round();
+  final full = "🟢 " * p;
+  final empty = "⚪️ " * (5 - p);
+  return message + "\n\n" + full + empty;
+}
+
+class ScanNfcChipcardScreen extends StatefulWidget {
+  ScanNfcChipcardScreen({
+    super.key,
+    required this.docNumber,
+    required this.dob,
+    required this.doe,
+  });
+
+  String docNumber;
+  String dob;
+  String doe;
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _ScanNfcChipcardScreenState createState() => _ScanNfcChipcardScreenState();
+}
+
+class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
+    with TickerProviderStateMixin, WidgetsBindingObserver {
+  var _alertMessage = "";
+  final _log = Logger("mrtdeg.app");
+  var _isNfcAvailable = false;
+  var _isReading = false;
+
+  late final TextEditingController _docNumber;
+  late final TextEditingController _dob;
+  late final TextEditingController _doe;
+  late final TextEditingController _can;
+
+  late bool _checkBoxPACE;
+
+  MrtdData? _mrtdData;
+
+  final NfcProvider _nfc = NfcProvider();
+
+  // ignore: unused_field
+  late Timer _timerStateUpdater;
+  final _scrollController = ScrollController();
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /**
+     * Thêm observer để monitor app lifecycle
+     * Chỉ áp dụng cho Android để không ảnh hưởng đến iOS
+     * 
+     * Mục đích: Theo dõi khi nào app ở foreground/background để debug
+     * và đảm bảo NFC Foreground Dispatch hoạt động đúng
+     */
+    if (Platform.isAndroid) {
+      WidgetsBinding.instance.addObserver(this);
+      _log.info("Android: Đã thêm lifecycle observer cho NFC management");
+    }
+
+    // Initialize TextEditingControllers with widget parameters
+    _docNumber = TextEditingController(text: widget.docNumber);
+    _dob = TextEditingController(text: widget.dob);
+    _doe = TextEditingController(text: widget.doe);
+    _can = TextEditingController(
+        text: widget.docNumber.substring(widget.docNumber.length - 6));
+
+    // Initialize PACE checkbox with widget parameter
+    _checkBoxPACE = false;
+
+    _tabController = TabController(length: 2, vsync: this);
+    //_tabController.addListener(_handleTabSelection);
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    _initPlatformState();
+
+    // Update platform state every 3 sec
+    _timerStateUpdater = Timer.periodic(Duration(seconds: 3), (Timer t) {
+      _initPlatformState();
+    });
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> _initPlatformState() async {
+    bool isNfcAvailable;
+    try {
+      NfcStatus status = await NfcProvider.nfcStatus;
+      isNfcAvailable = status == NfcStatus.enabled;
+    } on PlatformException {
+      isNfcAvailable = false;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _isNfcAvailable = isNfcAvailable;
+    });
+  }
+
+  @override
+  void dispose() {
+    /**
+     * Cleanup khi widget bị dispose
+     * Chỉ remove observer trên Android
+     */
+    if (Platform.isAndroid) {
+      WidgetsBinding.instance.removeObserver(this);
+      _log.info("Android: Đã remove lifecycle observer");
+    }
+
+    _docNumber.dispose();
+    _dob.dispose();
+    _doe.dispose();
+    _can.dispose();
+    _tabController.dispose();
+    _timerStateUpdater.cancel();
+    super.dispose();
+  }
+
+  /**
+   * Override method để monitor app lifecycle state changes
+   * CHỈ HOẠT ĐỘNG TRÊN ANDROID - iOS không bị ảnh hưởng
+   * 
+   * Mục đích:
+   * - Theo dõi khi app chuyển từ foreground sang background và ngược lại
+   * - Debug để đảm bảo NFC Foreground Dispatch hoạt động đúng
+   * - Có thể thêm logic xử lý nếu cần thiết
+   */
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    // Chỉ log trên Android để debug
+    if (Platform.isAndroid) {
+      switch (state) {
+        case AppLifecycleState.resumed:
+          _log.info(
+              "Android: App RESUMED - NFC Foreground Dispatch sẽ được kích hoạt");
+          print("SkyFi: App ở foreground - NFC sẽ có độ ưu tiên cao nhất");
+          break;
+        case AppLifecycleState.paused:
+          _log.info("Android: App PAUSED - NFC Foreground Dispatch sẽ bị tắt");
+          print("SkyFi: App ở background - Các app khác có thể xử lý NFC");
+          break;
+        case AppLifecycleState.inactive:
+          _log.info("Android: App INACTIVE - Trạng thái chuyển tiếp");
+          break;
+        case AppLifecycleState.detached:
+          _log.info("Android: App DETACHED - App sắp bị terminate");
+          break;
+        case AppLifecycleState.hidden:
+          _log.info("Android: App HIDDEN - App bị ẩn");
+          break;
+        default:
+          _log.info("Android: App state không xác định: $state");
+          break;
+      }
+    }
+  }
+
+  /**
+   * Method để đảm bảo app luôn ở foreground sau khi đọc NFC
+   * CHỈ HOẠT ĐỘNG TRÊN ANDROID - iOS không bị ảnh hưởng
+   * 
+   * Cơ chế hoạt động:
+   * 1. Delay ngắn để đảm bảo NFC operation hoàn tất
+   * 2. Sử dụng SystemNavigator để bring app to foreground (nếu cần)
+   * 3. Log để debug
+   */
+  Future<void> _ensureAppInForeground() async {
+    if (!Platform.isAndroid) {
+      // iOS không cần xử lý gì thêm vì đã hoạt động tốt
+      return;
+    }
+
+    try {
+      // Delay ngắn để đảm bảo NFC operation đã hoàn tất
+      await Future.delayed(const Duration(milliseconds: 300));
+
+      _log.info("Android: Đảm bảo app ở foreground sau khi đọc NFC");
+      print("SkyFi: Đảm bảo app không bị các service NFC khác che khuất");
+
+      // Có thể thêm logic khác nếu cần thiết
+      // Ví dụ: SystemNavigator.pop() hoặc các method khác
+    } catch (e) {
+      _log.warning("Android: Lỗi khi đảm bảo app ở foreground: $e");
+    }
+  }
+
+  DateTime? _getDOBDate() {
+    if (_dob.text.isEmpty) {
+      return null;
+    }
+    return DateFormat.yMd().parse(_dob.text);
+  }
+
+  DateTime? _getDOEDate() {
+    if (_doe.text.isEmpty) {
+      return null;
+    }
+    return DateFormat.yMd().parse(_doe.text);
+  }
+
+  void _buttonPressed() async {
+    print('docNumber: ${_docNumber.text}');
+    print('dob: ${_dob.text}');
+    print('doe: ${_doe.text}');
+    print('can: ${_can.text}');
+    print('pace: ${_checkBoxPACE}');
+    print("Button pressed");
+    //Check on what tab we are
+    if (Platform.isIOS) {
+      //DBA tab
+      String errorText = "";
+      if (_doe.text.isEmpty) {
+        errorText += "Vui lòng nhập ngày hết hạn!\n";
+      }
+      if (_dob.text.isEmpty) {
+        errorText += "Vui lòng nhập ngày sinh!\n";
+      }
+      if (_docNumber.text.isEmpty) {
+        errorText += "Vui lòng nhập số thẻ căn cước công dân!";
+      }
+
+      setState(() {
+        _alertMessage = errorText;
+      });
+      //If there is an error, just jump out of the function
+      if (errorText.isNotEmpty) return;
+
+      final bacKeySeed = DBAKey(_docNumber.text, _getDOBDate()!, _getDOEDate()!,
+          paceMode: _checkBoxPACE);
+      _readMRTD(accessKey: bacKeySeed, isPace: _checkBoxPACE);
+    } else {
+      //PACE tab
+      String errorText = "";
+      if (_can.text.isEmpty) {
+        errorText = "Vui lòng nhập số thẻ căn cước công dân!";
+      } else if (_can.text.length != 6) {
+        errorText = "Số thẻ căn cước công dân phải có đúng 6 chữ số cuối!";
+      }
+
+      setState(() {
+        _alertMessage = errorText;
+      });
+      //If there is an error, just jump out of the function
+      if (errorText.isNotEmpty) return;
+
+      final canKeySeed = CanKey(_can.text);
+      _readMRTD(accessKey: canKeySeed, isPace: true);
+    }
+  }
+
+  void _readMRTD({required AccessKey accessKey, bool isPace = false}) async {
+    try {
+      setState(() {
+        _mrtdData = null;
+        _alertMessage = "Đang đợi thẻ căn cước công dân ...";
+        _isReading = true;
+      });
+      try {
+        bool demo = false;
+        if (!demo)
+          await _nfc.connect(
+              iosAlertMessage: "Đặt điện thoại gần thẻ căn cước công dân");
+
+        final passport = Passport(_nfc);
+
+        setState(() {
+          _alertMessage = "Đang đọc thẻ căn cước công dân ...";
+        });
+
+        _nfc.setIosAlertMessage("Đang đọc EF.CardAccess ...");
+        final mrtdData = MrtdData();
+
+        try {
+          mrtdData.cardAccess = await passport.readEfCardAccess();
+        } on PassportError {
+          //if (e.code != StatusWord.fileNotFound) rethrow;
+        }
+
+        _nfc.setIosAlertMessage("Đang đọc EF.CardSecurity ...");
+
+        try {
+          //mrtdData.cardSecurity = await passport.readEfCardSecurity();
+        } on PassportError {
+          //if (e.code != StatusWord.fileNotFound) rethrow;
+        }
+
+        _nfc.setIosAlertMessage("Đang khởi tạo phiên PACE...");
+        //set MrtdData
+        mrtdData.isPACE = isPace;
+        mrtdData.isDBA = accessKey.PACE_REF_KEY_TAG == 0x01 ? true : false;
+
+        if (isPace) {
+          //PACE session
+          await passport.startSessionPACE(accessKey, mrtdData.cardAccess!);
+        } else {
+          //BAC session
+          await passport.startSession(accessKey as DBAKey);
+        }
+
+        _nfc.setIosAlertMessage(formatProgressMsg("Đang đọc EF.COM ...", 0));
+        mrtdData.com = await passport.readEfCOM();
+
+        _nfc.setIosAlertMessage(
+            formatProgressMsg("Đang đọc Data Groups ...", 20));
+
+        if (mrtdData.com!.dgTags.contains(EfDG1.TAG)) {
+          mrtdData.dg1 = await passport.readEfDG1();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG2.TAG)) {
+          mrtdData.dg2 = await passport.readEfDG2();
+        }
+
+        // To read DG3 and DG4 session has to be established with CVCA certificate (not supported).
+        // if(mrtdData.com!.dgTags.contains(EfDG3.TAG)) {
+        //   mrtdData.dg3 = await passport.readEfDG3();
+        // }
+
+        // if(mrtdData.com!.dgTags.contains(EfDG4.TAG)) {
+        //   mrtdData.dg4 = await passport.readEfDG4();
+        // }
+
+        if (mrtdData.com!.dgTags.contains(EfDG5.TAG)) {
+          mrtdData.dg5 = await passport.readEfDG5();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG6.TAG)) {
+          mrtdData.dg6 = await passport.readEfDG6();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG7.TAG)) {
+          mrtdData.dg7 = await passport.readEfDG7();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG8.TAG)) {
+          mrtdData.dg8 = await passport.readEfDG8();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG9.TAG)) {
+          mrtdData.dg9 = await passport.readEfDG9();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG10.TAG)) {
+          mrtdData.dg10 = await passport.readEfDG10();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG11.TAG)) {
+          mrtdData.dg11 = await passport.readEfDG11();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG12.TAG)) {
+          mrtdData.dg12 = await passport.readEfDG12();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG13.TAG)) {
+          mrtdData.dg13 = await passport.readEfDG13();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG14.TAG)) {
+          mrtdData.dg14 = await passport.readEfDG14();
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG15.TAG)) {
+          mrtdData.dg15 = await passport.readEfDG15();
+          _nfc.setIosAlertMessage(formatProgressMsg("Doing AA ...", 60));
+          mrtdData.aaSig = await passport.activeAuthenticate(Uint8List(8));
+        }
+
+        if (mrtdData.com!.dgTags.contains(EfDG16.TAG)) {
+          mrtdData.dg16 = await passport.readEfDG16();
+        }
+
+        _nfc.setIosAlertMessage(formatProgressMsg("Đang đọc EF.SOD ...", 80));
+        mrtdData.sod = await passport.readEfSOD();
+
+        setState(() {
+          _mrtdData = mrtdData;
+        });
+
+        setState(() {
+          _alertMessage = "";
+        });
+
+        /**
+         * Đảm bảo app luôn ở foreground sau khi đọc NFC thành công
+         * CHỈ HOẠT ĐỘNG TRÊN ANDROID - iOS không bị ảnh hưởng
+         * 
+         * Mục đích: Ngăn các ứng dụng NFC service khác tự động mở và che khuất ứng dụng SkyFi
+         */
+        await _ensureAppInForeground();
+
+        // _scrollController.animateTo(300.0,
+        //     duration: Duration(milliseconds: 500), curve: Curves.ease);
+      } on Exception catch (e) {
+        final se = e.toString().toLowerCase();
+        setState(() {
+          _isReading = false;
+        });
+        String alertMsg = "Đã xảy ra lỗi khi đọc thẻ căn cước công dân!";
+        if (e is PassportError) {
+          if (se.contains("security status not satisfied")) {
+            alertMsg =
+                "Không thể khởi tạo phiên với thẻ căn cước công dân.\nKiểm tra dữ liệu đầu vào!";
+          }
+          _log.error("PassportError: ${e.message}");
+        } else {
+          _log.error(
+              "An exception was encountered while trying to read Passport: $e");
+        }
+
+        if (se.contains('timeout')) {
+          alertMsg = "Thời gian chờ đã hết, vui lòng thử lại";
+        } else if (se.contains("tag was lost")) {
+          alertMsg = "Thẻ đã bị mất, vui lòng thử lại";
+        } else if (se.contains("invalidated by user")) {
+          alertMsg = "";
+        }
+
+        setState(() {
+          _alertMessage = alertMsg;
+        });
+      } finally {
+        if (_alertMessage.isNotEmpty) {
+          await _nfc.disconnect(iosErrorMessage: _alertMessage);
+
+          /**
+           * Đảm bảo app ở foreground ngay cả khi có lỗi
+           * CHỈ HOẠT ĐỘNG TRÊN ANDROID - iOS không bị ảnh hưởng
+           * 
+           * Điều này quan trọng vì ngay cả khi có lỗi, các ứng dụng NFC khác
+           * vẫn có thể tự động mở và che khuất ứng dụng SkyFi
+           */
+          await _ensureAppInForeground();
+
+          SnackBarApp.showWarning(context,
+              message: "Lỗi khi đọc thẻ, Vui lòng thử lại");
+          setState(() {
+            _isReading = false;
+          });
+          // context.pushNamed(AppRouter.doubleCheckInfo, extra: {
+          //   'sod': "",
+          // });
+        } else {
+          await _nfc.disconnect(
+              iosAlertMessage: formatProgressMsg("Finished", 100));
+
+          /**
+           * Đảm bảo app ở foreground sau khi đọc thành công
+           * CHỈ HOẠT ĐỘNG TRÊN ANDROID - iOS không bị ảnh hưởng
+           */
+          await _ensureAppInForeground();
+
+          SnackBarApp.showSuccess(context, message: "Đọc thẻ thành công");
+          setState(() {
+            _isReading = false;
+          });
+          context.pushNamed(AppRouter.doubleCheckInfo, extra: {
+            'sod': _mrtdData!.sod!.toBytes().hex(),
+          });
+        }
+      }
+    } on Exception catch (e) {
+      _log.error("Read MRTD error: $e");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            context.pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+        title: const StepIndicator(
+          total: 4,
+          current: 3,
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                const SizedBox(height: AppSpacing.xxl),
+                Text(
+                  'Chuẩn bị quét thông tin CCCD',
+                  style: AppTextStyles.title
+                      .copyWith(color: AppColors.text, fontSize: 22),
+                ),
+                const SizedBox(height: AppSpacing.xxl),
+                Text(
+                  'Xem video hướng dẫn',
+                  style: AppTextStyles.title.copyWith(
+                    color: AppColors.blue,
+                    fontSize: 18,
+                    decoration: TextDecoration.underline,
+                    decorationColor: AppColors.blue,
+                  ),
+                ),
+                Spacer(),
+                GradientButton(
+                  height: 50,
+                  onPressed: _buttonPressed,
+                  text: _isReading ? 'Đang đọc ...' : 'Tôi đã sẵn sàng',
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Row(children: <Widget>[
+                  Text('NFC có sẵn:',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold)),
+                  SizedBox(width: 4),
+                  Text(_isNfcAvailable ? "Có" : "Không",
+                      style: TextStyle(fontSize: 18.0))
+                ]),
+                SizedBox(height: 15),
+                Text(_alertMessage,
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold)),
+                SizedBox(height: 15),
+              ]),
+        ),
+      ),
+    );
+  }
+}

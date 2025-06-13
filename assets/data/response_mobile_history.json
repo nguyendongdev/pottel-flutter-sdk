@@ -1,0 +1,154 @@
+{
+  "history": {
+    "dates": [
+      {
+        "date": "2024-04-16",
+        "display_text": "Hôm qua",
+        "histories": {
+          "topup": [
+            {
+              "id": "TOP001",
+              "type": "TOPUP",
+              "amount": 100000,
+              "currency": "VND",
+              "status": "SUCCESS",
+              "description": "Nạp thẻ cào",
+              "card_serial": "123456789",
+              "card_provider": "Viettel",
+              "created_at": "2024-04-16T10:30:00Z",
+              "updated_at": "2024-04-16T10:30:00Z"
+            },
+            {
+              "id": "TOP002",
+              "type": "TOPUP",
+              "amount": 50000,
+              "currency": "VND",
+              "status": "SUCCESS",
+              "description": "Nạp thẻ cào",
+              "card_serial": "987654321",
+              "card_provider": "Mobifone",
+              "created_at": "2024-04-16T15:45:00Z",
+              "updated_at": "2024-04-16T15:45:00Z"
+            }
+          ],
+          "service": [
+            {
+              "id": "SER001",
+              "type": "SERVICE",
+              "package_code": "SF69",
+              "amount": -70000,
+              "currency": "VND",
+              "status": "SUCCESS",
+              "description": "Đăng ký gói SF69",
+              "valid_from": "2024-04-16T00:00:00Z",
+              "valid_to": "2024-05-16T00:00:00Z",
+              "created_at": "2024-04-16T08:00:00Z",
+              "updated_at": "2024-04-16T08:00:00Z"
+            }
+          ],
+          "call": [
+            {
+              "id": "CALL001",
+              "type": "CALL",
+              "phone_number": "0987654321",
+              "duration": 180,
+              "amount": -3000,
+              "currency": "VND",
+              "status": "COMPLETED",
+              "description": "Cuộc gọi đi",
+              "call_type": "OUTGOING",
+              "created_at": "2024-04-16T09:15:00Z",
+              "updated_at": "2024-04-16T09:15:00Z"
+            },
+            {
+              "id": "CALL002",
+              "type": "CALL",
+              "phone_number": "0123456789",
+              "duration": 300,
+              "amount": -5000,
+              "currency": "VND",
+              "status": "COMPLETED",
+              "description": "Cuộc gọi đi",
+              "call_type": "OUTGOING",
+              "created_at": "2024-04-16T14:20:00Z",
+              "updated_at": "2024-04-16T14:20:00Z"
+            }
+          ]
+        }
+      },
+      {
+        "date": "2024-04-15",
+        "display_text": "Thứ 3, 15 Thg 4,2024",
+        "histories": {
+          "topup": [
+            {
+              "id": "TOP003",
+              "type": "TOPUP",
+              "amount": 200000,
+              "currency": "VND",
+              "status": "SUCCESS",
+              "description": "Nạp thẻ cào",
+              "card_serial": "456789123",
+              "card_provider": "Vinaphone",
+              "created_at": "2024-04-15T11:20:00Z",
+              "updated_at": "2024-04-15T11:20:00Z"
+            }
+          ],
+          "service": [
+            {
+              "id": "SER002",
+              "type": "SERVICE",
+              "package_code": "SF149",
+              "amount": -149000,
+              "currency": "VND",
+              "status": "SUCCESS",
+              "description": "Đăng ký gói SF149",
+              "valid_from": "2024-04-15T00:00:00Z",
+              "valid_to": "2024-05-15T00:00:00Z",
+              "created_at": "2024-04-15T07:30:00Z",
+              "updated_at": "2024-04-15T07:30:00Z"
+            },
+            {
+              "id": "SER003",
+              "type": "SERVICE",
+              "package_code": "SF99",
+              "amount": -99000,
+              "currency": "VND",
+              "status": "SUCCESS",
+              "description": "Đăng ký gói SF99",
+              "valid_from": "2024-04-15T12:00:00Z",
+              "valid_to": "2024-05-15T12:00:00Z",
+              "created_at": "2024-04-15T12:00:00Z",
+              "updated_at": "2024-04-15T12:00:00Z"
+            }
+          ],
+          "call": [
+            {
+              "id": "CALL003",
+              "type": "CALL",
+              "phone_number": "0369852147",
+              "duration": 240,
+              "amount": -4000,
+              "currency": "VND",
+              "status": "COMPLETED",
+              "description": "Cuộc gọi đi",
+              "call_type": "OUTGOING",
+              "created_at": "2024-04-15T16:45:00Z",
+              "updated_at": "2024-04-15T16:45:00Z"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "total_dates": 2,
+    "total_records": {
+      "topup": 3,
+      "service": 3,
+      "call": 3
+    },
+    "version": "1.0.0",
+    "last_updated": "2024-04-16T23:59:59Z"
+  }
+} 
