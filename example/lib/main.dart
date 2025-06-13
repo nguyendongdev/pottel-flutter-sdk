@@ -28,18 +28,34 @@ class _MyAppState extends State<MyApp> {
               title: const Text('Plugin example app'),
             ),
             body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(
-                  child: Text('Running on'),
+                const Center(
+                  child: Text('SkyFi SDK Example App'),
                 ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => SkyfiSdk()),
+                      MaterialPageRoute(builder: (_) => const SkyfiSdk()),
                     );
                   },
-                  child: const Text('Get platform version'),
+                  child: const Text('Mở SkyFi SDK'),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => SkyfiSdk.toScreen(
+                          initialLocation: SkyfiRoute.infoRegis.path,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Nạp tiền trực tiếp'),
                 ),
               ],
             ),

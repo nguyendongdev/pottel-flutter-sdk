@@ -27,6 +27,7 @@ class BottomActionBar extends HookConsumerWidget {
     final state = ref.watch(paymentOrderProvider);
     final termsAccepted = useState<bool>(false);
     final termsAcceptedESIM = useState<bool>(false);
+    final isLoading = useState<bool>(false);
 
     showToast(String message) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -45,44 +46,49 @@ class BottomActionBar extends HookConsumerWidget {
       );
     }
 
-    void getLinkPayment(String orderID) async {
-      // isLoading.value = true;
-      final response = await api.post(
-          '/bss/payment/gateways/GALAXYPAY/redirect',
-          data: {'orderNumber': orderID});
-      // isLoading.value = false;
-      final data = PaymentRespone.fromJson(response.data);
-      if (response.statusCode == 200 && data.code == 200) {
+    Future<String?> getLinkPayment(String orderID) async {
+      try {
+        final response = await api.post(
+            '/bss/payment/gateways/GALAXYPAY/redirect',
+            data: {'orderNumber': orderID});
+        // isLoading.value = false;
+        final data = PaymentRespone.fromJson(response.data);
+        if (response.statusCode != 200 && data.code != 200) return null;
         final link = data.result?.redirectUrl;
-        if (link != null) {
-          print('Link payment: $link');
-
-          context.pushNamed(AppRouter.webviewPaymentSkyfi, extra: link);
-        }
+        if (link == null) return null;
+        return link;
+      } catch (e) {
+        return null;
       }
     }
 
     void checkOutOrderGALAXYPAY() async {
-      // Dialog loading with context
-
-      // Common.startLoadingDialog(context, 'Đang tạo đơn hàng...');
-      final order = ref.read(paymentOrderProvider);
-      final items = order.items;
-      final itemsJson = items?.map((item) => item.toJson()).toList();
-      final orderJson = order.toJson();
-      orderJson['items'] = itemsJson;
-      final response = await api.post('/bss/app/create-order', data: orderJson);
-      // Common.stopLoadingDialog(context);
-      final data = CreateOrder.fromJson(response.data);
-      if (response.statusCode == 200 && data.code == 200) {
-        final orderID = data.result?.orderNumber;
-        if (orderID != null) {
-          getLinkPayment(orderID);
+      try {
+        isLoading.value = true;
+        final order = ref.read(paymentOrderProvider);
+        final items = order.items;
+        final itemsJson = items?.map((item) => item.toJson()).toList();
+        final orderJson = order.toJson();
+        orderJson['items'] = itemsJson;
+        final response =
+            await api.post('/bss/app/create-order', data: orderJson);
+        final data = CreateOrder.fromJson(response.data);
+        if (response.statusCode == 200 && data.code == 400) {
+          Common.showToast(data.message ?? 'Lỗi', context);
+          return;
         }
-      }
-      if (response.statusCode == 200 && data.code == 400) {
-        Common.showToast(data.message ?? 'Lỗi', context);
-        return;
+        if (response.statusCode == 200 && data.code == 200) {
+          final orderID = data.result?.orderNumber;
+          if (orderID == null) return;
+          final link = await getLinkPayment(orderID);
+          if (link == null) {
+            showToast('Lỗi khi lấy link thanh toán');
+            return;
+          }
+          context.pushNamed(AppRouter.webviewPaymentSkyfi, extra: link);
+        }
+      } finally {
+        isLoading.value = false;
       }
     }
 
@@ -316,10 +322,13 @@ class BottomActionBar extends HookConsumerWidget {
               onValidate(modeUI);
               // context.pushNamed(AppRouter.paymentMethodSkyFi);
             },
-            text:
-                modeUI == 'USIM' ? 'Chọn phương thức thanh toán' : 'Thanh toán',
+            text: isLoading.value
+                ? 'Loading...'
+                : (modeUI == 'USIM'
+                    ? 'Chọn phương thức thanh toán'
+                    : 'Thanh toán'),
             height: 48,
-            // disabled: false,
+            disabled: isLoading.value,
             textStyle: AppTextStyles.button.copyWith(
               color: AppColors.white,
             ),

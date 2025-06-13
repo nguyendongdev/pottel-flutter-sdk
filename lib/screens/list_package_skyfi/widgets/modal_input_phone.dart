@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 
@@ -11,7 +10,7 @@ import '../../../core/widgets/gradient_button.dart';
 import '../../../core/widgets/outline_button.dart';
 
 class ModalInputPhone extends HookConsumerWidget {
-  ModalInputPhone({
+  const ModalInputPhone({
     super.key,
     required this.onPressedContinue,
     this.phone = "",
@@ -54,7 +53,7 @@ class ModalInputPhone extends HookConsumerWidget {
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(AppSpacing.sm),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: AppColors.border,
                 ),
               ),
@@ -69,7 +68,7 @@ class ModalInputPhone extends HookConsumerWidget {
                 child: OutlineButton(
                   height: 48,
                   onPressed: () {
-                    context.pop();
+                    Navigator.of(context).pop();
                   },
                   text: 'Hủy',
                   textStyle: AppTextStyles.button.copyWith(
@@ -89,7 +88,7 @@ class ModalInputPhone extends HookConsumerWidget {
                         controller.text,
                       );
                     }
-                    context.pop();
+                    Navigator.of(context).pop();
                   },
                   text: 'Tiếp tục',
                   textStyle: AppTextStyles.button.copyWith(
