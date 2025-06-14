@@ -55,7 +55,36 @@ class _MyAppState extends State<MyApp> {
                       ),
                     );
                   },
-                  child: const Text('Nạp tiền trực tiếp'),
+                  child: const Text('Mở màn hình đăng ký'),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => SkyfiSdk.toScreen(
+                          initialLocation: SkyfiRoute.topupSkyFi.path,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Mở màn nạp tiền'),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => SkyfiSdk.toScreen(
+                          initialLocation: SkyfiRoute.topupSkyFi.path,
+                          
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Mở màn thông tin gói cước'),
                 ),
               ],
             ),

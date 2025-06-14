@@ -78,7 +78,9 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
 enum SkyfiRoute {
   home('/'),
   topup('/topup-skyfi'),
-  infoRegis('/info-regis');
+  infoRegis('/info-regis'),
+  topupSkyFi('/topup-skyfi'),
+  infoRegisSkyFi('/info-regis');
 
   const SkyfiRoute(this.path);
   final String path;
