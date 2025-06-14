@@ -66,12 +66,6 @@ class BottomTabMain extends StatelessWidget {
                 isSelected: navIndex.value == 1,
               ),
               NavItem(
-                onPressed: () => {Common.popupMaintaining(context)},
-                icon: 'assets/icons/bell.svg',
-                label: 'Thông báo',
-                isSelected: navIndex.value == 2,
-              ),
-              NavItem(
                 onPressed: () => onNavIndexChanged(3),
                 icon: 'assets/icons/nav_user.svg',
                 label: 'Cá nhân',

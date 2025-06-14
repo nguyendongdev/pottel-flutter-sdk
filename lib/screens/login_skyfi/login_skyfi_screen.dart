@@ -390,6 +390,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
       showDialog(
         context: context,
         barrierDismissible: false,
+        useRootNavigator: false,
         builder: (BuildContext context) {
           return PopupInputPass(
             phone: phone,
@@ -401,15 +402,35 @@ class LoginSkyFiScreen extends HookConsumerWidget {
             onClose: () {
               Navigator.of(context).pop();
             },
+            onLoginSuccess: () async {
+              // Update providers when login is successful
+              ref.read(isLoginProvider.notifier).setIsLogin(true);
+              ref.read(currentPhoneProvider.notifier).setCurrentPhone(phone);
+
+              // Fetch user info after successful login
+              try {
+                final userInfoResponse = await authService.fetchUserInfo(phone);
+                if (userInfoResponse.code == 200 &&
+                    userInfoResponse.result != null) {
+                  ref
+                      .read(userInfoProviderProvider.notifier)
+                      .setUserInfo(userInfoResponse.result!);
+                }
+              } catch (e) {
+                // Don't block login if user info fetch fails
+                debugPrint('Error fetching user info: $e');
+              }
+
+              // Refetch cart
+              try {
+                ref.read(cartProvider.notifier).refetchCart();
+              } catch (e) {
+                debugPrint('Error refetching cart: $e');
+              }
+            },
           );
         },
       );
-    }
-
-    void onLoginWithPassword() {
-      // ref.read(isLoginProvider.notifier).setIsLogin(true);
-      // ref.read(currentPhoneProvider.notifier).setCurrentPhone(phone.value);
-      // context.goNamed(AppRouter.homeSkyFiNew);
     }
 
     void onLogInPressed(String phone) async {
@@ -430,8 +451,6 @@ class LoginSkyFiScreen extends HookConsumerWidget {
       }
 
       try {
-        Common.startLoading(context);
-
         // Check if user has password set
         final checkPasswordResponse =
             await authService.checkUserPassword(phone);
@@ -440,11 +459,12 @@ class LoginSkyFiScreen extends HookConsumerWidget {
             checkPasswordResponse.result != null) {
           // print("checkPasswordResponse ${checkPasswordResponse.result.isSetPassword}");
           if (checkPasswordResponse.result!.isSetPassword) {
-            // User has password, show password input popup
+            print("User has password set, showing input password popup");
             onShowPopupInputPass(phone: phone);
           } else {
+            print("User does not have password set, sending OTP");
             // User doesn't have password, send OTP
-            onSendOtp();
+            // onSendOtp();
           }
         } else {
           Modal.showError(

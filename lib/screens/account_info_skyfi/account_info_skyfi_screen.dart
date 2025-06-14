@@ -106,30 +106,7 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                   context.pushNamed(AppRouter.infoRegis);
                 },
               ),
-              MenuItem(
-                title: 'Thông báo',
-                iconPath: 'assets/icons/bell.svg',
-                onTap: () {
-                  // TODO: Navigate to notifications
-                  popupMaintaining();
-                },
-              ),
-              MenuItem(
-                title: 'Đổi mật khẩu',
-                iconPath: 'assets/icons/lock.svg',
-                onTap: () {
-                  // TODO: Navigate to change password
-                  popupMaintaining();
-                },
-              ),
-              MenuItem(
-                title: 'Nhận diện khuôn mặt',
-                iconPath: 'assets/icons/face_id.svg',
-                onTap: () {
-                  // TODO: Navigate to face ID
-                  popupMaintaining();
-                },
-              ),
+
               MenuItem(
                 title: 'Hỗ trợ khách hàng',
                 iconPath: 'assets/icons/headphones.svg',

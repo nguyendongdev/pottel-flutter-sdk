@@ -101,6 +101,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
                           'assets/icons/arrow-circle-down.svg',
                           width: 21,
                           height: 21,
+                          package: 'skyfi_sdk',
                         ),
                       ),
                     )
