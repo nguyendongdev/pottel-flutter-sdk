@@ -56,6 +56,7 @@ class AmountChip extends StatelessWidget {
                     'assets/icons/half-check.svg',
                     width: 24,
                     height: 24,
+                    package: 'skyfi_sdk',
                   ),
                 ),
               ),

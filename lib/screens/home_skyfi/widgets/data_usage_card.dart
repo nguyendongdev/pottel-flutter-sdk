@@ -93,6 +93,7 @@ class DataUsageCard extends HookConsumerWidget {
                                           'assets/icons/top_calendar.svg',
                                           width: 16,
                                           height: 16,
+                                          package: 'skyfi_sdk',
                                         ),
                                         const SizedBox(width: AppSpacing.xs),
                                         Text(
@@ -120,6 +121,7 @@ class DataUsageCard extends HookConsumerWidget {
                                       'assets/icons/top_refresh.svg',
                                       width: 16,
                                       height: 16,
+                                      package: 'skyfi_sdk',
                                     ),
                                     const SizedBox(width: AppSpacing.xs),
                                     Text(

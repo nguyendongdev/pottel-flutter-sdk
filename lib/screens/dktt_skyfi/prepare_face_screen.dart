@@ -53,6 +53,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                   'assets/icons/pre_face_1.svg',
                   width: 62,
                   height: 62,
+                  package: 'skyfi_sdk',
                 ),
                 const SizedBox(width: AppSpacing.lg),
                 Text(
@@ -71,6 +72,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                   'assets/icons/pre_face_2.svg',
                   width: 62,
                   height: 62,
+                  package: 'skyfi_sdk',
                 ),
                 const SizedBox(width: AppSpacing.lg),
                 Expanded(
@@ -92,6 +94,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                   'assets/icons/pre_face_3.svg',
                   width: 62,
                   height: 62,
+                  package: 'skyfi_sdk',
                 ),
                 const SizedBox(width: AppSpacing.lg),
                 Text(

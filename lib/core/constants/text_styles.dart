@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class AppTextStyles {
-  static const String fontFamily = 'Inter';
+  static const String fontFamily = 'KoHo';
 
   static const TextStyle heading = TextStyle(
     fontFamily: fontFamily,

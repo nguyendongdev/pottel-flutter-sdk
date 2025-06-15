@@ -224,6 +224,7 @@ class SearchSimData extends HookConsumerWidget {
               'assets/icons/feat_search_empty.svg',
               width: 101,
               height: 108,
+              package: 'skyfi_sdk',
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(

@@ -207,7 +207,9 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                         style: AppTextStyles.heading,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.pushNamed(AppRouter.listPackageSkyFi);
+                        },
                         child: Row(
                           children: [
                             Text(

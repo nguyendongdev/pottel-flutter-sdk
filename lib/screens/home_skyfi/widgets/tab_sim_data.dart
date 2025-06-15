@@ -106,7 +106,7 @@ class TabSimData extends HookConsumerWidget {
                           height: 200,
                           width: double.infinity,
                           decoration: const BoxDecoration(
-                            gradient: AppColors.redGradient,
+                            gradient: AppColors.primaryGradient,
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(32),
                               bottomRight: Radius.circular(32),

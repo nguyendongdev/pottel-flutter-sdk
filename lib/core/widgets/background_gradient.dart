@@ -10,9 +10,9 @@ class BackgroundGradient extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 370,
+          height: 350,
           decoration: const BoxDecoration(
-            gradient: AppColors.redGradient,
+            gradient: AppColors.primaryGradient,
           ),
         ),
         Container(

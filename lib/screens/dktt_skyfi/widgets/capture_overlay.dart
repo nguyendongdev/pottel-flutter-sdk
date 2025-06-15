@@ -74,6 +74,7 @@ class CaptureOverlay extends StatelessWidget {
                     'assets/icons/feat_take.svg',
                     width: 71,
                     height: 71,
+                    package: 'skyfi_sdk',
                   ),
                 ),
               ),

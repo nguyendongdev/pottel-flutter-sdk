@@ -231,6 +231,7 @@ class PreviewContactScreen extends HookConsumerWidget {
                                 'assets/icons/feat_signature.svg',
                                 width: 36,
                                 height: 36,
+                                package: 'skyfi_sdk',
                               ),
                               const SizedBox(width: AppSpacing.sm),
                               Text(

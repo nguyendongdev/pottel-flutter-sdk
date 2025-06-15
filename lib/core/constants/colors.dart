@@ -42,17 +42,17 @@ class AppColors {
     end: Alignment.centerRight,
   );
 
-  // static const LinearGradient primaryGradient = LinearGradient(
-  //   colors: [Color(0xFFF9A51A), Color(0xFFFFDD00)],
-  //   begin: Alignment.centerLeft,
-  //   end: Alignment.centerRight,
-  // );
-
   static const LinearGradient primaryGradient = LinearGradient(
-    colors: [Color(0xFFF9A51A), Color(0xFFF9A51A)],
+    colors: [Color(0xFFF9A51A), Color(0xFFFFDD00)],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
+
+  // static const LinearGradient primaryGradient = LinearGradient(
+  //   colors: [Color(0xFFF9A51A), Color(0xFFF9A51A)],
+  //   begin: Alignment.centerLeft,
+  //   end: Alignment.centerRight,
+  // );
 
   static const LinearGradient backgroundGradient = LinearGradient(
     colors: [
