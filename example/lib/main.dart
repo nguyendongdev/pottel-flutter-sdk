@@ -38,7 +38,10 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const SkyfiSdk()),
+                      MaterialPageRoute(
+                          builder: (_) => const SkyfiSdk(
+                                phone: '0772574115',
+                              )),
                     );
                   },
                   child: const Text('Mở SkyFi SDK'),
@@ -51,6 +54,7 @@ class _MyAppState extends State<MyApp> {
                       MaterialPageRoute(
                         builder: (_) => SkyfiSdk.toScreen(
                           initialLocation: SkyfiRoute.infoRegis.path,
+                          phone: '0772574115',
                         ),
                       ),
                     );
@@ -65,6 +69,7 @@ class _MyAppState extends State<MyApp> {
                       MaterialPageRoute(
                         builder: (_) => SkyfiSdk.toScreen(
                           initialLocation: SkyfiRoute.topupSkyFi.path,
+                          phone: '0772574115',
                         ),
                       ),
                     );
@@ -79,7 +84,7 @@ class _MyAppState extends State<MyApp> {
                       MaterialPageRoute(
                         builder: (_) => SkyfiSdk.toScreen(
                           initialLocation: SkyfiRoute.topupSkyFi.path,
-                          
+                          phone: '0772574115',
                         ),
                       ),
                     );
