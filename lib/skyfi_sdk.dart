@@ -59,7 +59,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
           _isLogin = true;
         });
         // Lưu thông tin đăng nhập nếu cần
-        await StoreClient.setToken(res['result']['accessToken']);
+        await StoreClient.setToken(res['result']['token']);
         await StoreClient.setPhone(phone);
       } else {
         showMessage(

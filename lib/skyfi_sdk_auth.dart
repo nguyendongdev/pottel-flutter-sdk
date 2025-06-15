@@ -12,6 +12,7 @@ class SkyfiSdkAuth {
             'msisdn': phone,
             'code': encodeHmacSHA256(phone, 'c2t5ZmkyMDI1'),
           });
+      // print('response: ${response.data}');
       return response.data;
     } catch (e) {
       print('Error during loginWithPhone: $e');
