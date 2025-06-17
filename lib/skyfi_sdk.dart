@@ -35,12 +35,20 @@ class SkyfiSdk extends StatefulWidget {
 class _SkyfiSdkState extends State<SkyfiSdk> {
   bool _isInitialized = false;
   bool _isLogin = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
     _initialize();
     authenticateUser(widget.phone);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    StoreClient.setToken('');
+    StoreClient.setPhone('');
   }
 
   Future<void> _initialize() async {
@@ -51,12 +59,28 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
     });
   }
 
+  bool _checkPhone(String phone) {
+    final phoneRegex = RegExp(r'^(070)(\d{7})$').hasMatch(phone);
+    return !phoneRegex;
+  }
+
   Future<void> authenticateUser(String phone) async {
+    setState(() {
+      _isLoading = true;
+    });
+    if (_checkPhone(phone)) {
+      setState(() {
+        _isLogin = true;
+        _isLoading = false;
+      });
+      return;
+    }
     try {
       final res = await SkyfiSdkAuth().loginWithPhone(phone);
       if (res['code'] == 200) {
         setState(() {
           _isLogin = true;
+          _isLoading = false;
         });
         // Lưu thông tin đăng nhập nếu cần
         await StoreClient.setToken(res['result']['token']);
@@ -72,6 +96,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
         );
         setState(() {
           _isLogin = false;
+          _isLoading = false;
         });
       }
     } catch (e) {
@@ -85,6 +110,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
       );
       setState(() {
         _isLogin = false;
+        _isLoading = false;
       });
     }
   }
@@ -138,6 +164,16 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
         ),
       );
     }
+
+    if (_isInitialized && _isLoading) {
+      return const MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      );
+    }
     if (!_isLogin) {
       return const MaterialApp(
         home: Scaffold(
@@ -147,6 +183,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
         ),
       );
     }
+
     return ProviderScope(
         child: MaterialApp.router(
       routerConfig:
