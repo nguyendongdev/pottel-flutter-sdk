@@ -18,6 +18,10 @@ _$EsimPackageModelImpl _$$EsimPackageModelImplFromJson(
       validityDays: (json['validity_days'] as num).toInt(),
       variantId: (json['variant_id'] as num).toInt(),
       productId: (json['product_id'] as num).toInt(),
+      providerName: (json['countries_size'] as num).toInt(),
+      countriesArray: (json['countries_array'] as List<dynamic>?)
+          ?.map((e) => EsimRegionModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       quantity: (json['quantity'] as num?)?.toInt() ?? 0,
     );
 
@@ -33,7 +37,41 @@ Map<String, dynamic> _$$EsimPackageModelImplToJson(
       'validity_days': instance.validityDays,
       'variant_id': instance.variantId,
       'product_id': instance.productId,
+      'countries_size': instance.providerName,
+      'countries_array': instance.countriesArray,
       'quantity': instance.quantity,
+    };
+
+_$ImageEsimImpl _$$ImageEsimImplFromJson(Map<String, dynamic> json) =>
+    _$ImageEsimImpl(
+      url: json['url'] as String,
+      width: (json['width'] as num).toInt(),
+      height: (json['height'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$ImageEsimImplToJson(_$ImageEsimImpl instance) =>
+    <String, dynamic>{
+      'url': instance.url,
+      'width': instance.width,
+      'height': instance.height,
+    };
+
+_$EsimRegionModelImpl _$$EsimRegionModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$EsimRegionModelImpl(
+      countryCode: json['country_code'] as String,
+      title: json['title'] as String,
+      image: json['image'] == null
+          ? null
+          : ImageEsim.fromJson(json['image'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$EsimRegionModelImplToJson(
+        _$EsimRegionModelImpl instance) =>
+    <String, dynamic>{
+      'country_code': instance.countryCode,
+      'title': instance.title,
+      'image': instance.image,
     };
 
 _$EsimPackageResponseImpl _$$EsimPackageResponseImplFromJson(

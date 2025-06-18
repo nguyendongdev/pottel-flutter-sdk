@@ -316,6 +316,8 @@ mixin _$UserInfo {
   String? get gender => throw _privateConstructorUsedError;
   @JsonKey(name: 'email')
   String? get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'birthday')
+  String? get birthday => throw _privateConstructorUsedError;
 
   /// Serializes this UserInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -342,7 +344,8 @@ abstract class $UserInfoCopyWith<$Res> {
       @JsonKey(name: 'id_issue_place') String? idIssuePlace,
       @JsonKey(name: 'id_issue_date') String? idIssueDate,
       @JsonKey(name: 'gender') String? gender,
-      @JsonKey(name: 'email') String? email});
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'birthday') String? birthday});
 }
 
 /// @nodoc
@@ -370,6 +373,7 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
     Object? idIssueDate = freezed,
     Object? gender = freezed,
     Object? email = freezed,
+    Object? birthday = freezed,
   }) {
     return _then(_value.copyWith(
       msisdn: freezed == msisdn
@@ -412,6 +416,10 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -434,7 +442,8 @@ abstract class _$$UserInfoImplCopyWith<$Res>
       @JsonKey(name: 'id_issue_place') String? idIssuePlace,
       @JsonKey(name: 'id_issue_date') String? idIssueDate,
       @JsonKey(name: 'gender') String? gender,
-      @JsonKey(name: 'email') String? email});
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'birthday') String? birthday});
 }
 
 /// @nodoc
@@ -460,6 +469,7 @@ class __$$UserInfoImplCopyWithImpl<$Res>
     Object? idIssueDate = freezed,
     Object? gender = freezed,
     Object? email = freezed,
+    Object? birthday = freezed,
   }) {
     return _then(_$UserInfoImpl(
       msisdn: freezed == msisdn
@@ -502,6 +512,10 @@ class __$$UserInfoImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -519,7 +533,8 @@ class _$UserInfoImpl implements _UserInfo {
       @JsonKey(name: 'id_issue_place') this.idIssuePlace,
       @JsonKey(name: 'id_issue_date') this.idIssueDate,
       @JsonKey(name: 'gender') this.gender,
-      @JsonKey(name: 'email') this.email});
+      @JsonKey(name: 'email') this.email,
+      @JsonKey(name: 'birthday') this.birthday});
 
   factory _$UserInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserInfoImplFromJson(json);
@@ -554,10 +569,13 @@ class _$UserInfoImpl implements _UserInfo {
   @override
   @JsonKey(name: 'email')
   final String? email;
+  @override
+  @JsonKey(name: 'birthday')
+  final String? birthday;
 
   @override
   String toString() {
-    return 'UserInfo(msisdn: $msisdn, fullName: $fullName, address: $address, activeDate: $activeDate, balace: $balace, idNumber: $idNumber, idIssuePlace: $idIssuePlace, idIssueDate: $idIssueDate, gender: $gender, email: $email)';
+    return 'UserInfo(msisdn: $msisdn, fullName: $fullName, address: $address, activeDate: $activeDate, balace: $balace, idNumber: $idNumber, idIssuePlace: $idIssuePlace, idIssueDate: $idIssueDate, gender: $gender, email: $email, birthday: $birthday)';
   }
 
   @override
@@ -579,13 +597,26 @@ class _$UserInfoImpl implements _UserInfo {
             (identical(other.idIssueDate, idIssueDate) ||
                 other.idIssueDate == idIssueDate) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, msisdn, fullName, address,
-      activeDate, balace, idNumber, idIssuePlace, idIssueDate, gender, email);
+  int get hashCode => Object.hash(
+      runtimeType,
+      msisdn,
+      fullName,
+      address,
+      activeDate,
+      balace,
+      idNumber,
+      idIssuePlace,
+      idIssueDate,
+      gender,
+      email,
+      birthday);
 
   /// Create a copy of UserInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -614,7 +645,8 @@ abstract class _UserInfo implements UserInfo {
       @JsonKey(name: 'id_issue_place') final String? idIssuePlace,
       @JsonKey(name: 'id_issue_date') final String? idIssueDate,
       @JsonKey(name: 'gender') final String? gender,
-      @JsonKey(name: 'email') final String? email}) = _$UserInfoImpl;
+      @JsonKey(name: 'email') final String? email,
+      @JsonKey(name: 'birthday') final String? birthday}) = _$UserInfoImpl;
 
   factory _UserInfo.fromJson(Map<String, dynamic> json) =
       _$UserInfoImpl.fromJson;
@@ -649,6 +681,9 @@ abstract class _UserInfo implements UserInfo {
   @override
   @JsonKey(name: 'email')
   String? get email;
+  @override
+  @JsonKey(name: 'birthday')
+  String? get birthday;
 
   /// Create a copy of UserInfo
   /// with the given fields replaced by the non-null parameter values.

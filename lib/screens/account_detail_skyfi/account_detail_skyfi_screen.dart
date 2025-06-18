@@ -11,6 +11,26 @@ import 'widgets/info_field.dart';
 class AccountDetailSkyfiScreen extends HookConsumerWidget {
   const AccountDetailSkyfiScreen({super.key});
 
+  String _convertIssuePlace(String idIssuePlace) {
+//     BCA  BỘ CÔNG AN
+// CDD  Cục Trưởng Cục Cảnh sát ĐKQL cư trú và DLQG về dân cư
+// CQH  Cục Trưởng Cục Cảnh sát Quản lý hành chính về trật tự xã hội
+// CXN  Cục quản lý xuất nhập cảnh
+
+    switch (idIssuePlace) {
+      case 'BCA':
+        return 'Bộ Công An';
+      case 'CDD':
+        return 'Cục Trưởng Cục Cảnh sát ĐKQL cư trú và DLQG về dân cư';
+      case 'CQH':
+        return 'Cục Trưởng Cục Cảnh sát Quản lý hành chính về trật tự xã hội';
+      case 'CXN':
+        return 'Cục quản lý xuất nhập cảnh';
+      default:
+        return idIssuePlace;
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final UserInfo userInfo = ref.watch(userInfoProviderProvider);
@@ -46,12 +66,12 @@ class AccountDetailSkyfiScreen extends HookConsumerWidget {
               value: userInfo.gender ?? 'Chưa rõ',
             ),
             InfoField(
-              label: 'Số Căn cước công dân',
+              label: 'Số giấy tờ',
               value: userInfo.idNumber ?? '',
             ),
             InfoField(
               label: 'Ngày sinh',
-              value: 'Chưa có',
+              value: userInfo.birthday ?? '',
             ),
             Row(
               children: [
@@ -63,18 +83,18 @@ class AccountDetailSkyfiScreen extends HookConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: AppSpacing.md),
-                Expanded(
-                  child: InfoField(
-                    label: 'Ngày hết hạn',
-                    value: userInfo.idIssueDate?.substring(0, 10) ?? '',
-                    isFullWidth: false,
-                  ),
-                ),
+                // Expanded(
+                //   child: InfoField(
+                //     label: 'Ngày hết hạn',
+                //     value: userInfo.idIssueDate?.substring(0, 10) ?? '',
+                //     isFullWidth: false,
+                //   ),
+                // ),
               ],
             ),
             InfoField(
               label: 'Nơi cấp',
-              value: userInfo.idIssuePlace ?? '',
+              value: _convertIssuePlace(userInfo.idIssuePlace ?? ''),
             ),
             InfoField(
               label: 'Nơi thường trú',

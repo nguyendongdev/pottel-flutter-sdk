@@ -26,6 +26,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
     final phoneController = useTextEditingController(
       text: currentPhone,
     );
+    final textError = useState<String?>(null);
     final isValidPhone = useState(currentPhone.isNotEmpty);
 
     // Format phone number as user types
@@ -59,6 +60,13 @@ class TopupSkyFiScreen extends HookConsumerWidget {
         final phone = phoneController.text.replaceAll(' ', '');
         isValidPhone.value =
             phone.length == 10 && RegExp(r'^(070)(\d{7})$').hasMatch(phone);
+        if (phone.length != 10) {
+          textError.value = 'Số điện thoại không hợp lệ';
+        } else if (!RegExp(r'^(070)(\d{7})$').hasMatch(phone)) {
+          textError.value = 'Số điện thoại phải bắt đầu bằng 070';
+        } else {
+          textError.value = null;
+        }
       }
 
       phoneController.addListener(validatePhone);
@@ -182,7 +190,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                             controller: phoneController,
                             style: AppTextStyles.heading,
                             keyboardType: TextInputType.phone,
-                            maxLength: 12, // 10 digits + 2 spaces
+                            maxLength: 10, // 10 digits + 2 spaces
                             decoration: const InputDecoration(
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
@@ -199,6 +207,16 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                   ],
                 ),
               ),
+              textError.value != null
+                  ? Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(top: 8, left: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(textError.value!,
+                          style: AppTextStyles.body.copyWith(
+                              color: Colors.red, fontWeight: FontWeight.w500)),
+                    )
+                  : const SizedBox.shrink(),
               const SizedBox(height: 16),
               Expanded(
                 child: Padding(

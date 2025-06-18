@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
+import 'package:skyfi_sdk/screens/esim_travel_skyfi/widgets/modalContris.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/utilities/modal.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../routers/routers.dart';
 import '../models/esim_package_model.dart';
 
 class EsimPackageCard extends HookConsumerWidget {
@@ -28,168 +31,238 @@ class EsimPackageCard extends HookConsumerWidget {
     final quantity = useState(this.quantity);
     final textController =
         useTextEditingController(text: this.quantity.toString());
-    return InkWell(
-      onTap: () => onTap(quantity.value),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),
-          border: Border.all(color: AppColors.border),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  package.name,
-                  style: AppTextStyles.title,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withOpacity(0.15),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            onTap: () {
+              final packageWithQuantity =
+                  package.copyWith(quantity: quantity.value);
+              context.pushNamed(
+                AppRouter.detailEsimContent,
+                extra: packageWithQuantity,
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('assets/images/bgcard.png',
+                      package: 'skyfi_sdk'),
+                  fit: BoxFit.cover,
                 ),
-              ],
+                borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    package.name,
+                    style: AppTextStyles.title,
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: AppSpacing.sm),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Dung lượng ',
-                  style: AppTextStyles.body.copyWith(
-                    color: AppColors.textLight,
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+              ),
+              child: Column(children: [
+                if (package.countriesArray != null &&
+                    package.countriesArray!.length > 1)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Phạm vi phủ sóng',
+                        style: AppTextStyles.body.copyWith(
+                          color: AppColors.textLight,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showBottomSheetListCountries(package.countriesArray!);
+                        },
+                        child: Text(
+                          '${package.countriesArray!.length} quốc gia',
+                          style: AppTextStyles.body.copyWith(
+                              color: AppColors.blue,
+                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.w600,
+                              decorationColor: AppColors.blue),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Text(
-                  '${package.dataAmount.toInt()} ${package.dataUnit}',
-                  style: AppTextStyles.heading.copyWith(
-                    color: AppColors.text,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Hiệu lực ',
-                  style: AppTextStyles.body.copyWith(
-                    color: AppColors.textLight,
-                  ),
-                ),
-                Text(
-                  '${package.validityDays} ngày',
-                  style: AppTextStyles.heading.copyWith(
-                    color: AppColors.text,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Giá: ',
-                  style: AppTextStyles.body.copyWith(
-                    color: AppColors.textLight,
-                  ),
-                ),
-                Text(
-                  "${Common.formatCurrency(package.sellingPrice.toString())} ${package.currency}",
-                  style: AppTextStyles.heading.copyWith(
-                    color: AppColors.text,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            // số lượng
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Số lượng: ',
-                  style:
-                      AppTextStyles.body.copyWith(color: AppColors.textLight),
-                ),
+                const SizedBox(height: AppSpacing.md),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        quantity.value--;
-                        if (quantity.value < 1) {
-                          quantity.value = 1;
-                        }
-                        textController.text = quantity.value.toString();
-                      },
-                      icon: const Icon(
-                        Icons.remove_circle_outline,
+                    Text(
+                      'Dung lượng ',
+                      style: AppTextStyles.body.copyWith(
                         color: AppColors.textLight,
                       ),
                     ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: textController,
-                      decoration: InputDecoration(
-                        constraints: BoxConstraints(
-                          maxWidth: 30,
-                        ),
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        counterText: '',
-                        contentPadding: const EdgeInsets.all(0),
-                        hintStyle: AppTextStyles.body.copyWith(
-                            color: AppColors.textLight,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      style: AppTextStyles.body.copyWith(
-                          color: AppColors.text, fontWeight: FontWeight.w700),
-                      textAlign: TextAlign.center,
-                      maxLength: 2,
-                      onChanged: (value) {
-                        final intValue = int.tryParse(value) ?? 1;
-                        if (intValue > 0 && intValue <= 50) {
-                          quantity.value = intValue;
-                        } else {
-                          quantity.value = 1;
-                          textController.text = '1';
-                          Modal.showError(
-                            title: 'Số lượng không hợp lệ',
-                            message: 'Số lượng phải từ 1 đến 50',
-                          );
-                        }
-                      },
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        quantity.value++;
-                        if (quantity.value > 50) {
-                          quantity.value = 50;
-                        }
-                        textController.text = quantity.value.toString();
-                      },
-                      icon: const Icon(
-                        Icons.add_circle_outline,
-                        color: AppColors.primary,
+                    Text(
+                      '${package.dataAmount.toInt()} ${package.dataUnit}',
+                      style: AppTextStyles.heading.copyWith(
+                        color: AppColors.text,
                       ),
                     ),
                   ],
-                )
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            // Button Chọn mua
-            GradientButton(
-              height: 48,
-              onPressed: () => onTap(quantity.value),
-              text: 'Chọn mua',
-              textStyle: AppTextStyles.body.copyWith(color: Colors.white),
-            ),
-          ],
-        ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Hiệu lực',
+                      style: AppTextStyles.body.copyWith(
+                        color: AppColors.textLight,
+                      ),
+                    ),
+                    Text(
+                      '${package.validityDays} ngày',
+                      style: AppTextStyles.heading.copyWith(
+                        color: AppColors.text,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Giá: ',
+                      style: AppTextStyles.body.copyWith(
+                        color: AppColors.textLight,
+                      ),
+                    ),
+                    Text(
+                      "${Common.formatCurrency(package.sellingPrice.toString())} ${package.currency}",
+                      style: AppTextStyles.heading.copyWith(
+                        color: AppColors.text,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                // số lượng
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Số lượng: ',
+                      style: AppTextStyles.body
+                          .copyWith(color: AppColors.textLight),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            quantity.value--;
+                            if (quantity.value < 1) {
+                              quantity.value = 1;
+                            }
+                            textController.text = quantity.value.toString();
+                          },
+                          icon: const Icon(
+                            Icons.remove_circle_outline,
+                            color: AppColors.textLight,
+                          ),
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: textController,
+                          decoration: InputDecoration(
+                            constraints: const BoxConstraints(
+                              maxWidth: 30,
+                            ),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            counterText: '',
+                            contentPadding: const EdgeInsets.all(0),
+                            hintStyle: AppTextStyles.body.copyWith(
+                                color: AppColors.textLight,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          style: AppTextStyles.body.copyWith(
+                              color: AppColors.text,
+                              fontWeight: FontWeight.w700),
+                          textAlign: TextAlign.center,
+                          maxLength: 2,
+                          onChanged: (value) {
+                            final intValue = int.tryParse(value) ?? 1;
+                            if (intValue > 0 && intValue <= 50) {
+                              quantity.value = intValue;
+                            } else {
+                              quantity.value = 1;
+                              textController.text = '1';
+                              Modal.showError(
+                                title: 'Số lượng không hợp lệ',
+                                message: 'Số lượng phải từ 1 đến 50',
+                              );
+                            }
+                          },
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            quantity.value++;
+                            if (quantity.value > 50) {
+                              quantity.value = 50;
+                            }
+                            textController.text = quantity.value.toString();
+                          },
+                          icon: const Icon(
+                            Icons.add_circle_outline,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.md),
+                // Button Chọn mua
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                    top: BorderSide(
+                      color: AppColors.border,
+                      width: 1,
+                    ),
+                  )),
+                  child: GradientButton(
+                    height: 48,
+                    onPressed: () {
+                      onTap(quantity.value);
+                    },
+                    text: 'Chọn mua',
+                    textStyle: AppTextStyles.body.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ])),
+        ],
       ),
     );
   }

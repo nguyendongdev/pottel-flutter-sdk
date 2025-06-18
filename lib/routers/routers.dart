@@ -26,8 +26,10 @@ import '../screens/dktt_skyfi/scan_nfc_chipcard_screen.dart';
 import '../screens/dktt_skyfi/scan_nfc_chipcard_screen_new.dart';
 import '../screens/dktt_skyfi/start_video_call_screen.dart';
 import '../screens/dktt_skyfi/verify_otp_screen.dart';
+import '../screens/esim_travel_skyfi/detail_esim_content.dart';
 import '../screens/esim_travel_skyfi/detail_esim_travel_skyfi_screen.dart';
 import '../screens/esim_travel_skyfi/esim_travel_skyfi_screen.dart';
+import '../screens/esim_travel_skyfi/models/esim_package_model.dart';
 import '../screens/esim_travel_skyfi/models/region_model.dart';
 import '../screens/example/example_screen.dart';
 import '../screens/forgot_password/forgot_password_screen.dart';
@@ -35,7 +37,6 @@ import '../screens/history_mobile_skyfi/history_mobile_skyfi_screen.dart';
 import '../screens/home_skyfi/home_skyfi_screen.dart';
 import '../screens/home_skyfi/home_skyfi_screen_new.dart';
 import '../screens/list_package_skyfi/list_package_skyf_screen.dart';
-import '../screens/login/login_screen.dart';
 import '../screens/login_skyfi/login_skyfi_screen.dart';
 import '../screens/order_detail_skyfi/order_detail_skyfi_screen.dart';
 import '../screens/otp_register/otp_register_screen.dart';
@@ -87,6 +88,7 @@ class AppRouter {
   static const String paymentMethodSkyFi = 'payment-method-skyfi';
   static const String esimTravelSkyFi = 'esim-travel-skyfi';
   static const String detailEsimTravelSkyfi = 'detail-esim-travel-skyfi';
+  static const String detailEsimContent = 'detail-esim-content';
   static const String webviewPaymentSkyfi = 'webview-payment-skyfi';
   static const String webviewTermsSkyfi = 'webview-terms-skyfi';
   static const String listPackageSkyFi = 'list-package-skyfi';
@@ -108,11 +110,6 @@ class AppRouter {
         builder: (context, state) => const HomeSkyFiScreenNew(),
         routes: [
           GoRoute(
-            path: login,
-            name: login,
-            builder: (context, state) => const LoginScreen(),
-          ),
-          GoRoute(
             path: register,
             name: register,
             builder: (context, state) => const RegisterScreen(),
@@ -122,6 +119,7 @@ class AppRouter {
             name: forgotPassword,
             builder: (context, state) => const ForgotPasswordScreen(),
           ),
+
           GoRoute(
             path: example,
             name: example,
@@ -310,7 +308,7 @@ class AppRouter {
           GoRoute(
             path: scanNfcChipcardNew,
             name: scanNfcChipcardNew,
-            builder: (context, state) => ScanNfcChipcardScreenNew(),
+            builder: (context, state) => const ScanNfcChipcardScreenNew(),
           ),
 
           GoRoute(
@@ -345,6 +343,13 @@ class AppRouter {
             name: detailEsimTravelSkyfi,
             builder: (context, state) => DetailEsimTravelSkyfiScreen(
               region: state.extra as RegionModel,
+            ),
+          ),
+          GoRoute(
+            path: detailEsimContent,
+            name: detailEsimContent,
+            builder: (context, state) => DetailEsimContent(
+              package: state.extra as EsimPackageModel,
             ),
           ),
           GoRoute(

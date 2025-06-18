@@ -42,6 +42,7 @@ _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
       idIssueDate: json['id_issue_date'] as String?,
       gender: json['gender'] as String?,
       email: json['email'] as String?,
+      birthday: json['birthday'] as String?,
     );
 
 Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>
@@ -56,4 +57,5 @@ Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>
       'id_issue_date': instance.idIssueDate,
       'gender': instance.gender,
       'email': instance.email,
+      'birthday': instance.birthday,
     };

@@ -18,7 +18,7 @@ import '../home_skyfi/widgets/package_card.dart';
 
 class DetailDataUsageScreen extends HookConsumerWidget {
   final CurrentPackage? currentPackage;
-  DetailDataUsageScreen({super.key, this.currentPackage});
+  const DetailDataUsageScreen({super.key, this.currentPackage});
   String _daysLeft(String? toDate) {
     if (toDate == null) return '-';
     try {
@@ -130,7 +130,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                   progressStrokeWidth: 20,
                   textColor: AppColors.white,
                   textProgressColor: AppColors.white,
-                  progressColors: [
+                  progressColors: const [
                     Color(0xFFEE3436),
                     Color(0xFFF3B71A),
                     Color(0xFFF3B71A),
@@ -192,8 +192,13 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: AppSpacing.md,
+                SizedBox(
+                  height: currentPackage?.totalSms != null &&
+                          currentPackage?.totalSms != '0' &&
+                          currentPackage?.totalVoice != null &&
+                          currentPackage?.totalVoice != '0'
+                      ? AppSpacing.md
+                      : 60,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(

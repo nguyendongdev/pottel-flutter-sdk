@@ -15,11 +15,37 @@ class EsimPackageModel with _$EsimPackageModel {
     @JsonKey(name: 'validity_days') required int validityDays,
     @JsonKey(name: 'variant_id') required int variantId,
     @JsonKey(name: 'product_id') required int productId,
+    @JsonKey(name: 'countries_size') required int providerName,
+    @JsonKey(name: 'countries_array') List<EsimRegionModel>? countriesArray,
     @Default(0) int quantity,
   }) = _EsimPackageModel;
 
   factory EsimPackageModel.fromJson(Map<String, dynamic> json) =>
       _$EsimPackageModelFromJson(json);
+}
+
+@freezed
+class ImageEsim with _$ImageEsim {
+  const factory ImageEsim({
+    required String url,
+    required int width,
+    required int height,
+  }) = _ImageEsim;
+
+  factory ImageEsim.fromJson(Map<String, dynamic> json) =>
+      _$ImageEsimFromJson(json);
+}
+
+@freezed
+class EsimRegionModel with _$EsimRegionModel {
+  const factory EsimRegionModel({
+    @JsonKey(name: 'country_code') required String countryCode,
+    @JsonKey(name: 'title') required String title,
+    @JsonKey(name: 'image') ImageEsim? image,
+  }) = _EsimRegionModel;
+
+  factory EsimRegionModel.fromJson(Map<String, dynamic> json) =>
+      _$EsimRegionModelFromJson(json);
 }
 
 @freezed

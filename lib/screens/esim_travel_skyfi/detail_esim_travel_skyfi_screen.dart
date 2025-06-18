@@ -55,98 +55,102 @@ class DetailEsimTravelSkyfiScreen extends HookConsumerWidget {
         children: [
           Expanded(
             child: packagesAsync.when(
-              data: (packages) {
-                if (packages.isEmpty) {
-                  return EmptyCart(
-                    title: 'Không có gói cước nào',
-                    description: 'Vui lòng chọn quốc gia khác',
-                    onContinueShopping: () {
-                      context.pop();
-                    },
-                    titleButton: 'Tiếp tục mua eSIM',
-                  );
-                }
+                data: (packages) {
+                  if (packages.isEmpty) {
+                    return EmptyCart(
+                      title: 'Không có gói cước nào',
+                      description: 'Vui lòng chọn quốc gia khác',
+                      onContinueShopping: () {
+                        context.pop();
+                      },
+                      titleButton: 'Tiếp tục mua eSIM',
+                    );
+                  }
 
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    ref.invalidate(esimPackagesProvider);
-                  },
-                  child: ListView.separated(
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    itemCount: packages.length,
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: AppSpacing.md),
-                    itemBuilder: (context, index) {
-                      final package = packages[index];
-                      return EsimPackageCard(
-                        quantity: 1,
-                        package: package,
-                        onTap: (quantity) async {
-                          // print(package.toJson());
-                          // print(quantity);
-                          try {
-                            await ref.read(cartProvider.notifier).addToCart(
-                                  productId: package.productId,
-                                  variantId: package.variantId,
-                                  msisdnId: package.variantId,
-                                  quantity: quantity,
-                                  packCode: package.name,
-                                  simType: "ESIM_TRAVEL",
-                                );
-                            //  show action sheet
-                            if (context.mounted) {
-                              showModalBottomSheet(
-                                backgroundColor: AppColors.white,
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) => const PreviewCart(),
-                              );
-                            }
-                          } catch (e) {
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                      'Thêm vào giỏ hàng thất bại: ${e.toString()}'),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                            }
-                          }
-                        },
-                      );
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      ref.invalidate(esimPackagesProvider);
                     },
-                  ),
-                );
-              },
-              loading: () => const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: AppSpacing.md),
-                    Text(
-                      'Đang tải gói cước...',
-                      style: AppTextStyles.body,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.all(AppSpacing.lg),
+                      itemCount: packages.length,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: AppSpacing.md),
+                      itemBuilder: (context, index) {
+                        final package = packages[index];
+                        return EsimPackageCard(
+                          quantity: 1,
+                          package: package,
+                          onTap: (quantity) async {
+                            // print(package.toJson());
+                            // print(quantity);
+                            try {
+                              await ref.read(cartProvider.notifier).addToCart(
+                                    productId: package.productId,
+                                    variantId: package.variantId,
+                                    msisdnId: package.variantId,
+                                    quantity: quantity,
+                                    packCode: package.name,
+                                    simType: "ESIM_TRAVEL",
+                                  );
+                              //  show action sheet
+                              if (context.mounted) {
+                                showModalBottomSheet(
+                                  backgroundColor: AppColors.white,
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (context) => const PreviewCart(),
+                                );
+                              }
+                            } catch (e) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        'Thêm vào giỏ hàng thất bại: ${e.toString()}'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                        );
+                      },
                     ),
-                  ],
-                ),
-              ),
-              error: (error, stack) => Center(
-                child: SelectableText.rich(
-                  TextSpan(
-                    text: 'Đã có lỗi xảy ra\n',
-                    style: AppTextStyles.heading.copyWith(color: AppColors.red),
-                    children: [
-                      TextSpan(
-                        text: error.toString(),
-                        style: AppTextStyles.body,
+                  );
+                },
+                loading: () => const Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(height: AppSpacing.md),
+                          Text(
+                            'Đang tải gói cước...',
+                            style: AppTextStyles.body,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+                    ),
+                error: (error, stack) {
+                  print('Error loading packages: $error');
+                  print('Stack trace: $stack');
+                  return Center(
+                    child: SelectableText.rich(
+                      TextSpan(
+                        text: 'Đã có lỗi xảy ra\n',
+                        style: AppTextStyles.heading
+                            .copyWith(color: AppColors.red),
+                        children: [
+                          TextSpan(
+                            text: error.toString(),
+                            style: AppTextStyles.body,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:skyfi_sdk/screens/history_mobile_skyfi/services/historyService.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
@@ -25,13 +26,20 @@ class TopupHistory extends _$TopupHistory {
     return [];
   }
 
+  String _formattedDate(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    DateFormat formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
+    return formatter.format(dateTime);
+  }
+
   Future<void> getTopupHistory() async {
     try {
       final history = await Historyservice().getHistory();
       state = history.map((item) {
         return HistoryItem(
           title: 'Nạp tiền ',
-          dateTime: item.transactionDate?.toString() ?? 'Unknown',
+          dateTime:
+              _formattedDate(item.transactionDate?.toString() ?? 'Unknown'),
           amount: '+${Common.formatCurrency(item.amount.toString())} VND',
         );
       }).toList();

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'user_info.g.dart';
 part 'user_info.freezed.dart';
+part 'user_info.g.dart';
 
 // {
 //     "requestId": null,
@@ -40,18 +40,18 @@ class UserInfoResponse with _$UserInfoResponse {
 
 @freezed
 class UserInfo with _$UserInfo {
-  const factory UserInfo({
-    @JsonKey(name: 'msisdn') String? msisdn,
-    @JsonKey(name: 'full_name') String? fullName,
-    @JsonKey(name: 'address') String? address,
-    @JsonKey(name: 'active_date') String? activeDate,
-    @JsonKey(name: 'balace') String? balace,
-    @JsonKey(name: 'id_number') String? idNumber,
-    @JsonKey(name: 'id_issue_place') String? idIssuePlace,
-    @JsonKey(name: 'id_issue_date') String? idIssueDate,
-    @JsonKey(name: 'gender') String? gender,
-    @JsonKey(name: 'email') String? email,
-  }) = _UserInfo;
+  const factory UserInfo(
+      {@JsonKey(name: 'msisdn') String? msisdn,
+      @JsonKey(name: 'full_name') String? fullName,
+      @JsonKey(name: 'address') String? address,
+      @JsonKey(name: 'active_date') String? activeDate,
+      @JsonKey(name: 'balace') String? balace,
+      @JsonKey(name: 'id_number') String? idNumber,
+      @JsonKey(name: 'id_issue_place') String? idIssuePlace,
+      @JsonKey(name: 'id_issue_date') String? idIssueDate,
+      @JsonKey(name: 'gender') String? gender,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'birthday') String? birthday}) = _UserInfo;
 
   factory UserInfo.fromJson(Map<String, dynamic> json) =>
       _$UserInfoFromJson(json);
