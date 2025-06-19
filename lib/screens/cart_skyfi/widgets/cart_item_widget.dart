@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +11,21 @@ import '../../../core/constants/text_styles.dart';
 import '../../../utilities/common.dart';
 import '../models/cart_response.dart';
 import '../provider/cart_provider.dart';
+
+// Custom useDebounce hook
+String useDebounce(String value, Duration delay) {
+  final debouncedValue = useState(value);
+
+  useEffect(() {
+    final timer = Timer(delay, () {
+      debouncedValue.value = value;
+    });
+
+    return timer.cancel;
+  }, [value]);
+
+  return debouncedValue.value;
+}
 
 class CartItemWidget extends HookConsumerWidget {
   final CartItem item;
@@ -29,6 +46,9 @@ class CartItemWidget extends HookConsumerWidget {
     final textController =
         useTextEditingController(text: quantity.value.toString());
 
+    final debouncedText =
+        useDebounce(textController.text, const Duration(milliseconds: 800));
+
     useEffect(() {
       quantity.value = item.quantity;
       textController.text = quantity.value.toString();
@@ -41,6 +61,13 @@ class CartItemWidget extends HookConsumerWidget {
             quantity.value,
           );
     }
+
+    useEffect(() {
+      if (debouncedText.isNotEmpty) {
+        updateQuantity();
+      }
+      return null;
+    }, [debouncedText]);
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
@@ -111,12 +138,11 @@ class CartItemWidget extends HookConsumerWidget {
                       IconButton(
                         disabledColor: AppColors.textLight,
                         onPressed: () {
-                          if (quantity.value < 1) {
+                          if (quantity.value <= 1) {
                             return;
                           }
                           quantity.value--;
                           textController.text = quantity.value.toString();
-                          updateQuantity();
                         },
                         icon: Icon(Icons.remove_circle_outline,
                             color: item.quantity > 1
@@ -149,17 +175,10 @@ class CartItemWidget extends HookConsumerWidget {
                           final intValue = int.tryParse(value) ?? 1;
                           if (intValue > 0 && intValue <= 50) {
                             quantity.value = intValue;
-                            Future.delayed(const Duration(milliseconds: 500),
-                                () {
-                              updateQuantity();
-                            });
                           } else {
                             quantity.value = 1;
                             textController.text = '1';
-                            Future.delayed(const Duration(milliseconds: 500),
-                                () {
-                              updateQuantity();
-                            });
+
                             Modal.showError(
                               title: 'Số lượng không hợp lệ',
                               message: 'Số lượng phải từ 1 đến 50',
@@ -174,7 +193,6 @@ class CartItemWidget extends HookConsumerWidget {
                           }
                           quantity.value++;
                           textController.text = quantity.value.toString();
-                          updateQuantity();
                         },
                         icon: Icon(Icons.add_circle_outline,
                             color: item.quantity < 50

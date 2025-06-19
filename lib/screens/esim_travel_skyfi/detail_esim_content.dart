@@ -81,44 +81,50 @@ class DetailEsimContent extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: white,
       appBar: _buildAppBar(context),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset('assets/images/bannerEsim.png',
-                      width: double.infinity,
-                      fit: BoxFit.contain,
-                      package: 'skyfi_sdk',
-                      height: MediaQuery.of(context).size.height * 0.1),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 16),
-                        _buildDiscoverTitle(),
-                        const SizedBox(height: 16),
-                        _buildPackageCard(
-                            textController: textController, quantity: quantity),
-                        const SizedBox(height: 24),
-                        _buildCountriesSection(),
-                        const SizedBox(height: 16),
-                        _buildWarningAlert(),
-                      ],
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset('assets/images/bannerEsim.png',
+                        width: double.infinity,
+                        fit: BoxFit.contain,
+                        package: 'skyfi_sdk',
+                        height: MediaQuery.of(context).size.height * 0.1),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 16),
+                          _buildDiscoverTitle(),
+                          const SizedBox(height: 16),
+                          _buildPackageCard(
+                              textController: textController,
+                              quantity: quantity),
+                          const SizedBox(height: 24),
+                          _buildCountriesSection(),
+                          const SizedBox(height: 16),
+                          _buildWarningAlert(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          _buildBottomActions(
-            onAddToCart: () => onAddToCart(quantity.value),
-            onCheckout: () => onCheckout(quantity.value),
-          ),
-        ],
+            _buildBottomActions(
+              onAddToCart: () => onAddToCart(quantity.value),
+              onCheckout: () => onCheckout(quantity.value),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -279,14 +285,16 @@ class DetailEsimContent extends HookConsumerWidget {
               IconButton(
                 onPressed: () {
                   quantity.value--;
-                  if (quantity.value < 1) {
+                  if (quantity.value <= 1) {
                     quantity.value = 1;
                   }
                   textController.text = quantity.value.toString();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.remove_circle_outline,
-                  color: AppColors.textLight,
+                  color: quantity.value > 1
+                      ? AppColors.primary
+                      : AppColors.textLight,
                 ),
               ),
               TextFormField(
@@ -327,14 +335,16 @@ class DetailEsimContent extends HookConsumerWidget {
               IconButton(
                 onPressed: () {
                   quantity.value++;
-                  if (quantity.value > 50) {
+                  if (quantity.value >= 50) {
                     quantity.value = 50;
                   }
                   textController.text = quantity.value.toString();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.add_circle_outline,
-                  color: AppColors.primary,
+                  color: quantity.value < 50
+                      ? AppColors.primary
+                      : AppColors.textLight,
                 ),
               ),
             ],

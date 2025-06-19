@@ -33,214 +33,219 @@ class CartSkyfiScreen extends ConsumerWidget {
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
       ),
-      body: cartAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(
-          child: Text(
-            'Có lỗi xảy ra: $error',
-            style: AppTextStyles.body.copyWith(color: AppColors.red),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: cartAsync.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error, stack) => Center(
+            child: Text(
+              'Có lỗi xảy ra: $error',
+              style: AppTextStyles.body.copyWith(color: AppColors.red),
+            ),
           ),
-        ),
-        data: (cart) => cart.items.isEmpty
-            ? EmptyCart(
-                onContinueShopping: () {
-                  // TODO: Navigate to shop
-                  context.pop();
-                },
-              )
-            : Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.all(AppSpacing.screenPadding),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Text(
-                                  '${cart.items.length} sản phẩm | ${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
-                                  style: AppTextStyles.title,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.screenPadding,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(
-                                    right: AppSpacing.xl * 4,
-                                    bottom: AppSpacing.md,
+          data: (cart) => cart.items.isEmpty
+              ? EmptyCart(
+                  onContinueShopping: () {
+                    // TODO: Navigate to shop
+                    context.pop();
+                  },
+                )
+              : Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(
+                                  AppSpacing.screenPadding),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Text(
+                                    '${cart.items.length} sản phẩm | ${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
+                                    style: AppTextStyles.title,
                                   ),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          'Sản Phẩm',
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.screenPadding,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.only(
+                                      right: AppSpacing.xl * 4,
+                                      bottom: AppSpacing.md,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            'Sản Phẩm',
+                                            style: AppTextStyles.title,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Giá',
                                           style: AppTextStyles.title,
                                         ),
+                                      ],
+                                    ),
+                                  ),
+                                  ...cart.items.map((item) => CartItemWidget(
+                                        item: item,
+                                      )),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: AppSpacing.xl),
+                            Container(
+                              padding: const EdgeInsets.all(
+                                  AppSpacing.screenPadding),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  const Text(
+                                    'Tóm tắt đơn hàng',
+                                    style: AppTextStyles.heading,
+                                  ),
+                                  const SizedBox(height: AppSpacing.lg),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '${cart.items.length} sản phẩm',
+                                        style: AppTextStyles.body,
                                       ),
                                       Text(
-                                        'Giá',
-                                        style: AppTextStyles.title,
+                                        '${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
+                                        style: AppTextStyles.body.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                ...cart.items.map((item) => CartItemWidget(
-                                      item: item,
-                                    )),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: AppSpacing.xl),
-                          Container(
-                            padding:
-                                const EdgeInsets.all(AppSpacing.screenPadding),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                const Text(
-                                  'Tóm tắt đơn hàng',
-                                  style: AppTextStyles.heading,
-                                ),
-                                const SizedBox(height: AppSpacing.lg),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${cart.items.length} sản phẩm',
-                                      style: AppTextStyles.body,
-                                    ),
-                                    Text(
-                                      '${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
-                                      style: AppTextStyles.body.copyWith(
-                                        fontWeight: FontWeight.w500,
+                                  const SizedBox(height: AppSpacing.sm),
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Thuế & Phí dịch vụ',
+                                        style: AppTextStyles.body,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: AppSpacing.sm),
-                                const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Thuế & Phí dịch vụ',
-                                      style: AppTextStyles.body,
-                                    ),
-                                    Text(
-                                      'Đã bao gồm',
-                                      style: AppTextStyles.body,
-                                    ),
-                                  ],
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: AppSpacing.md,
+                                      Text(
+                                        'Đã bao gồm',
+                                        style: AppTextStyles.body,
+                                      ),
+                                    ],
                                   ),
-                                  child: Divider(
-                                    color: AppColors.border,
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: AppSpacing.md,
+                                    ),
+                                    child: Divider(
+                                      color: AppColors.border,
+                                    ),
                                   ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      'Tổng cộng',
-                                      style: AppTextStyles.heading,
-                                    ),
-                                    Text(
-                                      '${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
-                                      style: AppTextStyles.heading,
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        'Tổng cộng',
+                                        style: AppTextStyles.heading,
+                                      ),
+                                      Text(
+                                        '${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
+                                        style: AppTextStyles.heading,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
+                            const SizedBox(height: AppSpacing.xl),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: AppSpacing.screenPadding,
+                        right: AppSpacing.screenPadding,
+                        top: AppSpacing.lg,
+                        bottom: MediaQuery.of(context).padding.bottom +
+                            AppSpacing.lg,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: AppColors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x1A000000),
+                            blurRadius: 16,
+                            offset: Offset(0, 0),
                           ),
-                          const SizedBox(height: AppSpacing.xl),
                         ],
                       ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      left: AppSpacing.screenPadding,
-                      right: AppSpacing.screenPadding,
-                      top: AppSpacing.lg,
-                      bottom:
-                          MediaQuery.of(context).padding.bottom + AppSpacing.lg,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: AppColors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x1A000000),
-                          blurRadius: 16,
-                          offset: Offset(0, 0),
+                      child: GradientButton(
+                        onPressed: () {
+                          // Map cart items to payment items
+                          final paymentItems = cart.items
+                              .map((cartItem) => Item(
+                                    productId: cartItem.productId,
+                                    variantId: cartItem.id,
+                                    msisdnId: cartItem.msisdnId,
+                                    packPrice: cartItem.packPrice.toInt(),
+                                    simPrice: cartItem.simPrice.toInt(),
+                                    salePrice: cartItem.salePrice.toInt(),
+                                    quantity: cartItem.quantity,
+                                    simType: cartItem.simType,
+                                    packCode: cartItem.packCode,
+                                  ))
+                              .toList();
+
+                          // Initialize payment order with empty values
+
+                          // ref.read(paymentOrderProvider.notifier).resetOrder();
+
+                          // Set items and total amount in payment provider
+                          ref
+                              .read(paymentOrderProvider.notifier)
+                              .changeItems(paymentItems);
+                          ref
+                              .read(paymentOrderProvider.notifier)
+                              .changeTotalAmount(ref
+                                  .read(cartProvider.notifier)
+                                  .totalAmount
+                                  .toInt());
+                          ref
+                              .read(paymentOrderProvider.notifier)
+                              .changeCreateFromCartId(cart.cartId);
+
+                          // Navigate to payment screen
+                          context.pushNamed(AppRouter.paymentSkyFi,
+                              extra: paymentItems);
+                        },
+                        text: 'Thanh toán',
+                        height: 48,
+                        textStyle: AppTextStyles.body.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white,
                         ),
-                      ],
-                    ),
-                    child: GradientButton(
-                      onPressed: () {
-                        // Map cart items to payment items
-                        final paymentItems = cart.items
-                            .map((cartItem) => Item(
-                                  productId: cartItem.productId,
-                                  variantId: cartItem.id,
-                                  msisdnId: cartItem.msisdnId,
-                                  packPrice: cartItem.packPrice.toInt(),
-                                  simPrice: cartItem.simPrice.toInt(),
-                                  salePrice: cartItem.salePrice.toInt(),
-                                  quantity: cartItem.quantity,
-                                  simType: cartItem.simType,
-                                  packCode: cartItem.packCode,
-                                ))
-                            .toList();
-
-                        // Initialize payment order with empty values
-
-                        // ref.read(paymentOrderProvider.notifier).resetOrder();
-
-                        // Set items and total amount in payment provider
-                        ref
-                            .read(paymentOrderProvider.notifier)
-                            .changeItems(paymentItems);
-                        ref
-                            .read(paymentOrderProvider.notifier)
-                            .changeTotalAmount(ref
-                                .read(cartProvider.notifier)
-                                .totalAmount
-                                .toInt());
-                        ref
-                            .read(paymentOrderProvider.notifier)
-                            .changeCreateFromCartId(cart.cartId);
-
-                        // Navigate to payment screen
-                        context.pushNamed(AppRouter.paymentSkyFi,
-                            extra: paymentItems);
-                      },
-                      text: 'Thanh toán',
-                      height: 48,
-                      textStyle: AppTextStyles.body.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white,
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+        ),
       ),
     );
   }
