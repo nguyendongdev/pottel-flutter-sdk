@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => const SkyfiSdk(
+                          builder: (_) => SkyfiSdk(
                                 phone: '0707991999',
                               )),
                     );

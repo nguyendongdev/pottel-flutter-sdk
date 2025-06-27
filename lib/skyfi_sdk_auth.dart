@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
+import 'package:skyfi_sdk/skyfi_sdk_config.dart';
 
 class SkyfiSdkAuth {
   loginWithPhone(String phone) async {
     try {
       final response = await Dio().post(
-          'https://bss-api.skyfi.network/api/bss/app/login-with-access-token',
+          '${SkyfiSdkConfig.baseUrl}/bss/app/login-with-access-token',
           data: {
             'msisdn': phone,
             'code': encodeHmacSHA256(phone, 'c2t5ZmkyMDI1'),

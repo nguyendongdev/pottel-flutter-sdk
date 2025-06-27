@@ -1,9 +1,9 @@
+import 'package:skyfi_sdk/skyfi_sdk_config.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SocketService {
   late IO.Socket? _io;
-  final String baseUrl = dotenv.get('BASE_URL_SOCKET');
+  final String baseUrl = SkyfiSdkConfig.baseUrlSocket;
 
   connect() {
     _io =

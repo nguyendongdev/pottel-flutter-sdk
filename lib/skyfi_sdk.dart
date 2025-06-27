@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/modals/modalMessage.dart';
 import 'package:skyfi_sdk/network/store.dart';
 import 'package:skyfi_sdk/skyfi_sdk_auth.dart';
+import 'package:skyfi_sdk/skyfi_sdk_config.dart';
 
 import 'data/configs/app_configs.dart';
 import 'routers/routers.dart';
@@ -20,12 +21,21 @@ Future<void> _initializeCameras() async {
 List<CameraDescription> get cameras => _cameras;
 
 class SkyfiSdk extends StatefulWidget {
-  const SkyfiSdk({super.key, this.initialLocation, required this.phone});
+  SkyfiSdk(
+      {super.key,
+      this.initialLocation,
+      required this.phone,
+      this.type = 'dev'}) {
+    SkyfiSdkConfig(type: type);
+  }
+
   final String? initialLocation;
   final String phone;
+  final String type;
 
-  static Widget toScreen({String? initialLocation, required String phone}) {
-    return SkyfiSdk(initialLocation: initialLocation, phone: phone);
+  static Widget toScreen(
+      {String? initialLocation, required String phone, String type = 'dev'}) {
+    return SkyfiSdk(initialLocation: initialLocation, phone: phone, type: type);
   }
 
   @override
@@ -41,6 +51,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   void initState() {
     super.initState();
     _initialize();
+    SkyfiSdkConfig(type: widget.type); // Initialize SDK configuration
     authenticateUser(widget.phone);
   }
 

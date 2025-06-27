@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-// env
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
+import 'package:skyfi_sdk/skyfi_sdk_config.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 
 import '../../core/constants/colors.dart';
@@ -36,7 +35,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
   String tellerId = '';
   Timer? timerClear;
   // String linkVideoCall = dotenv.get('JITSI_MEET_URL');
-  String linkVideoCall = dotenv.get('JITSI_MEET_URL');
+  String linkVideoCall = SkyfiSdkConfig.baseUrlJitsi;
   late ParamTime paramTime = ParamTime();
   ParamTime? paramTimeSave;
 
@@ -147,9 +146,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
   _eventAdminStopCall(data) {
     print("onAdminStopCall: $data");
 
-    if (_jitsiMeetPlugin != null) {
-      _jitsiMeetPlugin.hangUp();
-    }
+    _jitsiMeetPlugin.hangUp();
     // Pass data về màn trước
     // context.pop({
     //   "status": "admin-stop-call",
@@ -234,9 +231,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
 
   _eventAdminRejectClientRegistration(data) {
     print("onAdminRejectClientRegistration: $data");
-    if (_jitsiMeetPlugin != null) {
-      _jitsiMeetPlugin.hangUp();
-    }
+    _jitsiMeetPlugin.hangUp();
   }
 
   _adminStartRecording(data) {
@@ -246,9 +241,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
   @override
   void dispose() {
     socketService.disconnect();
-    if (_jitsiMeetPlugin != null) {
-      _jitsiMeetPlugin.hangUp();
-    }
+    _jitsiMeetPlugin.hangUp();
     super.dispose();
   }
 
