@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>Access to camera is needed for document and face capture</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Access to microphone is needed for video call</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to photo library is needed for document and face capture</string>
 </dict>
 </plist>
