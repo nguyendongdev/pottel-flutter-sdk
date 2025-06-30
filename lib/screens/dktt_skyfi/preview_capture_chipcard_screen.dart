@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
-import 'package:camera/camera.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/models/get_number_id_regis/get_number_id_regis.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/utilities/ekyc_helper.dart';
+
 import '../../core/models/code_error_handle/code_error_handle.dart';
 import '../../core/widgets/snack_bar_app.dart';
 import '../../network/api.dart';
@@ -16,9 +15,9 @@ import '../../network/ekyc_api.dart';
 import '../../routers/routers.dart';
 import 'models/face_matching_response/face_matching_response.dart';
 import 'models/respone_cards_ekyc/respone_cards_ekyc.dart';
+import 'provider/ekyc_provider.dart';
 import 'provider/save_log_dktt_provider.dart';
 import 'widgets/preview_overlay.dart';
-import 'provider/ekyc_provider.dart';
 
 class PreviewCaptureChipCardScreen extends HookConsumerWidget {
   const PreviewCaptureChipCardScreen({
@@ -31,8 +30,11 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
   // loading
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // print('image: $image');
-    // print('type: $type');
+    final screenSize = MediaQuery.of(context).size;
+    const scanAreaWidth = 300.0;
+    const scanAreaHeight = 200.0;
+    final left = (screenSize.width - scanAreaWidth) / 2;
+    final top = (screenSize.height - scanAreaHeight) / 2;
     final ekycApi = EKYC_API();
     final api = API();
 
@@ -288,31 +290,40 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
                 child: CircularProgressIndicator(),
               )
             else
-              Image.memory(
-                base64Decode(image),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                fit: BoxFit.cover,
-                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                  if (wasSynchronouslyLoaded) return child;
-                  return AnimatedOpacity(
-                    opacity: frame == null ? 0 : 1,
-                    duration: const Duration(milliseconds: 300),
-                    child: child,
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.black,
-                    child: const Center(
-                      child: Icon(
-                        Icons.error,
-                        color: Colors.white,
-                        size: 50,
+              Positioned(
+                top: type == EkycType.selfie ? 0 : top,
+                left: type == EkycType.selfie ? 0 : left,
+                child: Image.memory(
+                  base64Decode(image),
+                  width: type == EkycType.selfie
+                      ? MediaQuery.of(context).size.width
+                      : scanAreaWidth,
+                  height: type == EkycType.selfie
+                      ? MediaQuery.of(context).size.height
+                      : scanAreaHeight,
+                  fit: BoxFit.contain,
+                  frameBuilder:
+                      (context, child, frame, wasSynchronouslyLoaded) {
+                    if (wasSynchronouslyLoaded) return child;
+                    return AnimatedOpacity(
+                      opacity: frame == null ? 0 : 1,
+                      duration: const Duration(milliseconds: 300),
+                      child: child,
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.black,
+                      child: const Center(
+                        child: Icon(
+                          Icons.error,
+                          color: Colors.white,
+                          size: 50,
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             // Image.file(
             //   width: MediaQuery.of(context).size.width,
@@ -330,7 +341,7 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
                 onNext();
               },
               onBack: () {
-                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
             ),
           ],
