@@ -89,7 +89,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
 
     void onBackSimData() {
       // ref.read(paymentOrderProvider.notifier).resetOrder();
-      context.pop();
+       Navigator.of(context).pop();
       context.pushNamed(AppRouter.simDataSkyFi);
     }
 

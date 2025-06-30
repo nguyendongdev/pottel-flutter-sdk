@@ -108,7 +108,7 @@ class PreviewContactScreen extends HookConsumerWidget {
         ),
         leading: IconButton(
           onPressed: () {
-            context.pop();
+             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

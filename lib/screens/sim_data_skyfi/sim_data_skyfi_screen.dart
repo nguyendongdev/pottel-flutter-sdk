@@ -100,7 +100,7 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.text),
           onPressed: () {
-            context.pop();
+             Navigator.of(context).pop();
           },
         ),
         actions: const [
@@ -149,7 +149,7 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
                   if (chooseSim.value?.packages?.isEmpty == true)
                     EmptyCart(
                       onContinueShopping: () {
-                        context.pop();
+                         Navigator.of(context).pop();
                       },
                     ),
                   if (chooseSim.value?.packages?.isNotEmpty == true)
@@ -230,7 +230,7 @@ class _SimNumberActionSheet extends StatelessWidget {
               const Spacer(),
               IconButton(
                 onPressed: () {
-                  context.pop();
+                   Navigator.of(context).pop();
                 },
                 icon: const Icon(Icons.close),
               ),

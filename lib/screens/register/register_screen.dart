@@ -162,7 +162,7 @@ class RegisterScreen extends HookConsumerWidget {
               // Login Link
               GestureDetector(
                 onTap: () {
-                  context.pop();
+                   Navigator.of(context).pop();
                 },
                 child: const Text(
                   'Đã có tài khoản? Đăng nhập ngay!',

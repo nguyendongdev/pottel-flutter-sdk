@@ -49,7 +49,7 @@ class CartSkyfiScreen extends ConsumerWidget {
               ? EmptyCart(
                   onContinueShopping: () {
                     // TODO: Navigate to shop
-                    context.pop();
+                     Navigator.of(context).pop();
                   },
                 )
               : Column(

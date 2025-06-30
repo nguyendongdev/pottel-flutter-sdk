@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../routers/routers.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -16,7 +16,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     // splash screen is shown for 2 seconds
     super.initState();
-    FlutterNativeSplash.remove();
   }
 
   @override

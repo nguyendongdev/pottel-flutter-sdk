@@ -46,7 +46,7 @@ class ModalInputMoneyFail extends HookConsumerWidget {
                 child: OutlineButton(
                   height: 48,
                   onPressed: () {
-                    context.pop();
+                     Navigator.of(context).pop();
                   },
                   text: 'Hủy',
                   textStyle: AppTextStyles.button.copyWith(

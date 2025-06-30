@@ -113,7 +113,7 @@ class ChangePackageSkyFiScreen extends ConsumerWidget {
                           if (value['code'] == 200) {
                             SnackBarApp.showSuccess(context,
                                 message: value['message']);
-                            context.pop();
+                             Navigator.of(context).pop();
                           } else {
                             SnackBarApp.showError(context,
                                 message: value['message']);

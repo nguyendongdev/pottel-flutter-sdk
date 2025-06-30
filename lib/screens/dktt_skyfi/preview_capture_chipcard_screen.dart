@@ -330,7 +330,7 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
                 onNext();
               },
               onBack: () {
-                context.pop();
+                 Navigator.of(context).pop();
               },
             ),
           ],
