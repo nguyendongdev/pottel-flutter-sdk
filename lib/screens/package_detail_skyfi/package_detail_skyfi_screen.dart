@@ -99,7 +99,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                       onPressedContinue: (otp) {
                         onRegisterPackage(phoneRegister.value, packageCode,
                             otp: otp);
-                        context.pop();
+                         Navigator.of(context).pop();
                       },
                       onPressedResendOtp: () async {
                         await onPressedContinueOtp(
@@ -161,10 +161,10 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                 isLogin
                     ? onRegisterPackage(phone, packageCode)
                     : onPressedContinueOtp(phone, packageCode);
-                context.pop();
+                 Navigator.of(context).pop();
               },
               onCancel: () {
-                context.pop();
+                 Navigator.of(context).pop();
               },
               msisdn: phone,
               leftDay: data['result'][0]['toDate'],

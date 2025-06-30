@@ -71,7 +71,7 @@ class ModalInputOtp extends HookConsumerWidget {
                   height: 48,
                   onPressed: () {
                     onPressedResendOtp();
-                    context.pop();
+                     Navigator.of(context).pop();
                   },
                   text: 'Gửi lại mã',
                   textStyle: AppTextStyles.button.copyWith(
@@ -88,7 +88,7 @@ class ModalInputOtp extends HookConsumerWidget {
                       Common.showToast('Vui lòng nhập mã OTP', context);
                     } else {
                       onPressedContinue(otp.value);
-                      context.pop();
+                       Navigator.of(context).pop();
                     }
                   },
                   text: 'Xác nhận',

@@ -140,7 +140,7 @@ class InfoRegisScreen extends HookConsumerWidget {
               'Thông báo',
               'Số thuê bao ${msisdnController.text} của Bạn đăng ký thông tin chưa thành công. Bạn có muốn tiếp tục cuộc gọi với SkyFi không?',
               () {
-                context.pop();
+                 Navigator.of(context).pop();
                 // open start video call
                 context.pushNamed(AppRouter.startVideoCall, extra: {
                   'id': response.result?.callId,
@@ -157,7 +157,7 @@ class InfoRegisScreen extends HookConsumerWidget {
                 ref
                     .read(saveLogDkttNotifierProvider.notifier)
                     .setSeri(response.result?.iccid);
-                context.pop();
+                 Navigator.of(context).pop();
                 context.pushNamed(AppRouter.prepareChipCard);
               },
               primaryButtonText: 'Gọi lại',

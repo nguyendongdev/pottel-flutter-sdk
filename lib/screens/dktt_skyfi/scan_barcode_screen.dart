@@ -43,7 +43,7 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
   }
 
   void _onManualInput() {
-    context.pop();
+     Navigator.of(context).pop();
   }
 
   @override

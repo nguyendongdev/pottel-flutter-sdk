@@ -124,7 +124,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.text),
           onPressed: () {
-            context.pop();
+             Navigator.of(context).pop();
           },
         ),
       ),

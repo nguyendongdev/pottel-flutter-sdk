@@ -85,7 +85,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        context.pop();
+                         Navigator.of(context).pop();
                       },
                       icon: const Icon(
                         Icons.arrow_back_ios,

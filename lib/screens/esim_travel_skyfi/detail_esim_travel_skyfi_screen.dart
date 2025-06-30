@@ -61,7 +61,7 @@ class DetailEsimTravelSkyfiScreen extends HookConsumerWidget {
                       title: 'Không có gói cước nào',
                       description: 'Vui lòng chọn quốc gia khác',
                       onContinueShopping: () {
-                        context.pop();
+                         Navigator.of(context).pop();
                       },
                       titleButton: 'Tiếp tục mua eSIM',
                     );

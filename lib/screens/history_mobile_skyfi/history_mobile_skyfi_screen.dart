@@ -43,7 +43,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            context.pop();
+             Navigator.of(context).pop();
           },
         ),
       ),

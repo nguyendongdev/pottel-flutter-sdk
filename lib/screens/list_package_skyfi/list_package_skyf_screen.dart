@@ -186,10 +186,10 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
                 } else {
                   onPressedContinueOtp(phoneRegister.value);
                 }
-                context.pop();
+                 Navigator.of(context).pop();
               },
               onCancel: () {
-                context.pop();
+                 Navigator.of(context).pop();
               },
               msisdn: phoneRegister.value,
               leftDay: data['result'][0]['toDate'],
