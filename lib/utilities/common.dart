@@ -249,7 +249,7 @@ class Common {
       builder: (context) => PopupNotice(
         onButtonTap: () {
           onConfirm?.call();
-          context.pop();
+           Navigator.of(context).pop();
         },
         title: title,
         description: description,

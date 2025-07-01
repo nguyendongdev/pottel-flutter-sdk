@@ -187,7 +187,7 @@ class HomeSkyFiScreen extends HookConsumerWidget {
         children: [
           GestureDetector(
             onTap: () {
-              context.pop();
+               Navigator.of(context).pop();
             },
             child: const Icon(
               Icons.arrow_back,

@@ -486,7 +486,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
         backgroundColor: AppColors.transparent,
         leading: IconButton(
           onPressed: () {
-            context.pop();
+             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.close, color: AppColors.text),
         ),

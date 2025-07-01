@@ -1,15 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image/image.dart' as img;
 import 'package:permission_handler/permission_handler.dart';
+
 import '../../routers/routers.dart';
 import '../../utilities/ekyc_helper.dart';
-import 'widgets/capture_overlay.dart';
 import 'provider/ekyc_provider.dart';
+import 'widgets/capture_overlay.dart';
 
 class CaptureChipCardScreen extends StatefulWidget {
   const CaptureChipCardScreen({super.key, required this.type});
@@ -80,8 +83,9 @@ class _CaptureChipCardScreenState extends State<CaptureChipCardScreen>
   }
 
   Future<void> setupCamera(CameraDescription cameraDescription) async {
-    final resolutionPreset =
-        Platform.isAndroid ? ResolutionPreset.high : ResolutionPreset.high;
+    final resolutionPreset = Platform.isAndroid
+        ? ResolutionPreset.veryHigh
+        : ResolutionPreset.veryHigh;
 
     try {
       final controller = CameraController(
@@ -165,6 +169,82 @@ class _CaptureChipCardScreenState extends State<CaptureChipCardScreen>
     }
   }
 
+  Future<Uint8List?> _cropImageToScanArea(Uint8List imageBytes) async {
+    try {
+      final originalImage = img.decodeImage(imageBytes);
+      if (originalImage == null) return null;
+
+      final screenSize = MediaQuery.of(context).size;
+      final imageWidth = originalImage.width;
+      final imageHeight = originalImage.height;
+
+      // Calculate scale factors
+      final scaleX = imageWidth / screenSize.width;
+      final scaleY = imageHeight / screenSize.height;
+
+      if (widget.type == EkycType.selfie) {
+        // Oval crop for selfie
+        const ovalWidth = 300.0;
+        const ovalHeight = 500.0;
+        final centerX = screenSize.width / 2;
+        final centerY = screenSize.height / 2;
+
+        // Convert screen coordinates to image coordinates
+        final cropX = ((centerX - ovalWidth / 2) * scaleX).round();
+        final cropY = ((centerY - ovalHeight / 2) * scaleY).round();
+        final cropWidth = (ovalWidth * scaleX).round();
+        final cropHeight = (ovalHeight * scaleY).round();
+
+        // Ensure crop area is within image bounds
+        final safeX = cropX.clamp(0, imageWidth - 1);
+        final safeY = cropY.clamp(0, imageHeight - 1);
+        final safeWidth = (cropWidth).clamp(1, imageWidth - safeX);
+        final safeHeight = (cropHeight).clamp(1, imageHeight - safeY);
+
+        final croppedImage = img.copyCrop(
+          originalImage,
+          x: safeX,
+          y: safeY,
+          width: safeWidth,
+          height: safeHeight,
+        );
+
+        return Uint8List.fromList(img.encodeJpg(croppedImage, quality: 85));
+      } else {
+        // Rectangle crop for ID cards
+        const scanAreaWidth = 350.0;
+        const scanAreaHeight = 280.0;
+        final left = (screenSize.width - scanAreaWidth) / 2;
+        final top = (screenSize.height - scanAreaHeight) / 2;
+
+        // Convert screen coordinates to image coordinates
+        final cropX = (left * scaleX).round();
+        final cropY = (top * scaleY).round();
+        final cropWidth = (scanAreaWidth * scaleX).round();
+        final cropHeight = (scanAreaHeight * scaleY).round();
+
+        // Ensure crop area is within image bounds
+        final safeX = cropX.clamp(0, imageWidth - 1);
+        final safeY = cropY.clamp(0, imageHeight - 1);
+        final safeWidth = (cropWidth).clamp(1, imageWidth - safeX);
+        final safeHeight = (cropHeight).clamp(1, imageHeight - safeY);
+
+        final croppedImage = img.copyCrop(
+          originalImage,
+          x: safeX,
+          y: safeY,
+          width: safeWidth,
+          height: safeHeight,
+        );
+
+        return Uint8List.fromList(img.encodeJpg(croppedImage, quality: 85));
+      }
+    } catch (e) {
+      debugPrint('Error cropping image: $e');
+      return null;
+    }
+  }
+
   Future<void> captureImage() async {
     if (_cameraController == null) return;
 
@@ -186,7 +266,11 @@ class _CaptureChipCardScreenState extends State<CaptureChipCardScreen>
         });
       }
 
-      final base64Image = base64Encode(originalBytes);
+      // Crop image to fit scanning area
+      final croppedBytes = await _cropImageToScanArea(originalBytes);
+      final finalBytes = croppedBytes ?? originalBytes;
+
+      final base64Image = base64Encode(finalBytes);
 
       // Compress and encode image based on type
       // final base64Image = await EkycHelper.compressAndEncodeImage(

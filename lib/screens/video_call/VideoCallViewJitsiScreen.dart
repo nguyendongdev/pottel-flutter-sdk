@@ -155,14 +155,14 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
     // });
 
     Common.showToast('Cuộc gọi đã được tắt', context);
-    // context.pop();
+    //  Navigator.of(context).pop();
   }
 
   _eventRegisterResult(data) {
     print("onRegisterResult: $data");
     Common.showToast('Kết nối thành công ${data['phone']}', context);
     print(data);
-    // context.pop();
+    //  Navigator.of(context).pop();
   }
 
   _onStartVideoCall(data) {

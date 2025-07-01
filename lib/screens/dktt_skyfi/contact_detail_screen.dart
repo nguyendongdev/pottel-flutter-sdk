@@ -30,7 +30,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
         surfaceTintColor: AppColors.white,
         leading: IconButton(
           onPressed: () {
-            context.pop();
+             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back_ios_new),
         ),

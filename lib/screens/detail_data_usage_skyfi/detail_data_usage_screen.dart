@@ -85,7 +85,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        context.pop();
+                         Navigator.of(context).pop();
                       },
                       icon: const Icon(
                         Icons.arrow_back_ios,
@@ -123,7 +123,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                 ),
                 CircularProgressGradient(
                   size: 180,
-                  progress: remain / total,
+                  progress: remain / total * 100,
                   total: total,
                   used: remain,
                   backStrokeWidth: 20,
@@ -192,82 +192,91 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: currentPackage?.totalSms != null &&
-                          currentPackage?.totalSms != '0' &&
-                          currentPackage?.totalVoice != null &&
-                          currentPackage?.totalVoice != '0'
-                      ? AppSpacing.md
-                      : 60,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.screenPadding,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Gói cước hot',
-                        style: AppTextStyles.heading,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.pushNamed(AppRouter.listPackageSkyFi);
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              'Khám phá',
-                              style: AppTextStyles.button.copyWith(
-                                color: AppColors.strongSecondary,
-                              ),
-                            ),
-                            const SizedBox(width: AppSpacing.xs),
-                            const Icon(
-                              Icons.chevron_right,
-                              color: AppColors.strongSecondary,
-                              size: 20,
-                            ),
-                          ],
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: currentPackage?.totalSms != null &&
+                                  currentPackage?.totalSms != '0' &&
+                                  currentPackage?.totalVoice != null &&
+                                  currentPackage?.totalVoice != '0'
+                              ? AppSpacing.md
+                              : 60,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 290,
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.screenPadding,
-                      vertical: AppSpacing.md,
-                    ),
-                    scrollDirection: Axis.horizontal,
-                    children: listOutStandingPackage.value.isNotEmpty
-                        ? listOutStandingPackage.value.map((pkg) {
-                            return PackageCard(
-                              package: pkg,
-                              margin: const EdgeInsets.only(right: 16),
-                              onTapDetail: () {
-                                context.pushNamed(AppRouter.packageDetailSkyfi,
-                                    extra: {
-                                      'packageId': pkg.id.toInt(),
-                                    });
-                              },
-                              onTapRegister: () {
-                                context.pushNamed(AppRouter.packageDetailSkyfi,
-                                    extra: {
-                                      'packageId': pkg.id.toInt(),
-                                      'isRegister': true,
-                                    });
-                              },
-                            );
-                          }).toList()
-                        : [
-                            const Center(
-                              child: Text('Không có gói cước hot hiện tại.'),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.screenPadding,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Gói cước hot',
+                                style: AppTextStyles.heading,
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Khám phá',
+                                      style: AppTextStyles.button.copyWith(
+                                        color: AppColors.strongSecondary,
+                                      ),
+                                    ),
+                                    const SizedBox(width: AppSpacing.xs),
+                                    const Icon(
+                                      Icons.chevron_right,
+                                      color: AppColors.strongSecondary,
+                                      size: 20,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 290,
+                          child: ListView(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.screenPadding,
+                              vertical: AppSpacing.md,
                             ),
-                          ],
+                            scrollDirection: Axis.horizontal,
+                            children: listOutStandingPackage.value.isNotEmpty
+                                ? listOutStandingPackage.value.map((pkg) {
+                                    return PackageCard(
+                                      package: pkg,
+                                      margin: const EdgeInsets.only(right: 16),
+                                      onTapDetail: () {
+                                        context.pushNamed(
+                                            AppRouter.packageDetailSkyfi,
+                                            extra: {
+                                              'packageId': pkg.id.toInt(),
+                                            });
+                                      },
+                                      onTapRegister: () {
+                                        context.pushNamed(
+                                            AppRouter.packageDetailSkyfi,
+                                            extra: {
+                                              'packageId': pkg.id.toInt(),
+                                              'isRegister': true,
+                                            });
+                                      },
+                                    );
+                                  }).toList()
+                                : [
+                                    const Center(
+                                      child: Text(
+                                          'Không có gói cước hot hiện tại.'),
+                                    ),
+                                  ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

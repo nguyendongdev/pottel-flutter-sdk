@@ -30,7 +30,7 @@ class PrepareChipCardScreen extends HookConsumerWidget {
             color: AppColors.text,
           ),
           onPressed: () {
-            context.pop();
+             Navigator.of(context).pop();
           },
         ),
         title: const StepIndicator(

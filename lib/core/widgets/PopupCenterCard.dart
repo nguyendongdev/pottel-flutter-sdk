@@ -107,7 +107,10 @@ class _FilledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onTap,
+      onPressed: () {
+        Navigator.of(context).pop();
+        onTap();
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: AppColors.white,
@@ -144,7 +147,10 @@ class _OutlinedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: onTap,
+      onPressed: () {
+        Navigator.of(context).pop();
+        onTap();
+      },
       style: OutlinedButton.styleFrom(
         foregroundColor: color,
         side: BorderSide(color: color),

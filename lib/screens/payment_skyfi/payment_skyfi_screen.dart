@@ -63,7 +63,7 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
             ref.read(addressSelectionProvider.notifier).reset();
             // reset shipping amount
             ref.read(paymentOrderProvider.notifier).changeShippingAmount(0);
-            context.pop();
+             Navigator.of(context).pop();
           },
         ),
       ),

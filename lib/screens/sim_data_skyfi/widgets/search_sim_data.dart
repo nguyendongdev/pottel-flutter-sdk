@@ -210,7 +210,7 @@ class SearchSimData extends HookConsumerWidget {
               const Spacer(),
               IconButton(
                 onPressed: () {
-                  context.pop();
+                   Navigator.of(context).pop();
                 },
                 icon: const Icon(Icons.close),
               ),
@@ -281,7 +281,7 @@ class SearchSimData extends HookConsumerWidget {
                         element.msisdn == ref.watch(chooseSimSearchProvider),
                   ),
                 );
-                context.pop();
+                 Navigator.of(context).pop();
               },
               text: 'Xác nhận',
               height: 48,
