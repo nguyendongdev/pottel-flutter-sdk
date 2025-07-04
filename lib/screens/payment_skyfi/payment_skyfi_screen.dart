@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/screens/payment_skyfi/provider/address_provider.dart';
 import 'package:skyfi_sdk/screens/payment_skyfi/provider/payment_order_provider.dart';
+import 'package:skyfi_sdk/screens/payment_skyfi/widgets/coupon_code_input.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
@@ -11,7 +12,6 @@ import '../sim_data_skyfi/models/create_order/item.dart';
 import 'widgets/address_form.dart';
 import 'widgets/bottom_action_bar.dart';
 import 'widgets/contact_form.dart';
-import 'widgets/discount_code_input.dart';
 import 'widgets/transaction_summary.dart';
 
 class PaymentSkyfiScreen extends HookConsumerWidget {
@@ -63,7 +63,7 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
             ref.read(addressSelectionProvider.notifier).reset();
             // reset shipping amount
             ref.read(paymentOrderProvider.notifier).changeShippingAmount(0);
-             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
         ),
       ),
@@ -86,8 +86,8 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
                   const AddressForm(),
 
                 const SizedBox(height: AppSpacing.lg),
-                const DiscountCodeInput(),
-                const SizedBox(height: AppSpacing.lg),
+                // const DiscountCodeInput(),
+                // const SizedBox(height: AppSpacing.lg),
                 TransactionSummary(
                   totalAmountCart: totalAmountCart ?? 0,
                   fee: totalFee.value,
@@ -97,6 +97,7 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
                       ref.watch(paymentOrderProvider).shippingAmount ?? 0,
                 ),
                 const SizedBox(height: AppSpacing.lg),
+                const CouponCodeInput(),
               ],
             ),
           ),

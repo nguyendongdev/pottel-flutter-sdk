@@ -22,6 +22,7 @@ class CreateOrder with _$CreateOrder {
     @JsonKey(name: 'total_amount') int? totalAmount,
     @JsonKey(name: 'create_from_cart_id') int? createFromCartId,
     List<Item>? items,
+    @JsonKey(name: 'coupon_code') String? couponCode,
   }) = _CreateOrder;
 
   factory CreateOrder.fromJson(Map<String, dynamic> json) =>

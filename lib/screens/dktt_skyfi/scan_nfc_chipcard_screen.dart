@@ -1,29 +1,22 @@
 // Created by Crt Vavros, copyright © 2022 ZeroPass. All rights reserved.
 // ignore_for_file: prefer_adjacent_string_concatenation, prefer_interpolation_to_compose_strings
 
-import 'dart:io';
-
-import 'package:dmrtd/internal.dart';
-import 'package:expandable/expandable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'dart:async';
-import 'dart:convert';
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:dmrtd/dmrtd.dart';
 import 'package:dmrtd/extensions.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:go_router/go_router.dart';
-import 'package:logging/logging.dart';
 import 'package:dmrtd/src/proto/can_key.dart';
+import 'package:expandable/expandable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-
-import 'package:dmrtd/src/proto/ecdh_pace.dart';
+import 'package:logging/logging.dart';
 import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/scan_nfc_chipcard_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -212,6 +205,8 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
   final _scrollController = ScrollController();
   late final TabController _tabController;
 
+  late YoutubePlayerController _youtubeController;
+
   @override
   void initState() {
     super.initState();
@@ -240,6 +235,22 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
 
     _tabController = TabController(length: 2, vsync: this);
     //_tabController.addListener(_handleTabSelection);
+
+    // Initialize YouTube player controller
+    _youtubeController = YoutubePlayerController(
+      initialVideoId: 'vuiXwp86RUg',
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+        enableCaption: false,
+        loop: false,
+        forceHD: false,
+        disableDragSeek: true,
+        hideControls: false,
+        controlsVisibleAtStart: true,
+        useHybridComposition: true,
+      ),
+    );
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -290,6 +301,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
     _doe.dispose();
     _can.dispose();
     _tabController.dispose();
+    _youtubeController.dispose();
     _timerStateUpdater.cancel();
     super.dispose();
   }
@@ -376,6 +388,55 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
       return null;
     }
     return DateFormat.yMd().parse(_doe.text);
+  }
+
+  /// Mở video hướng dẫn trên YouTube
+  ///
+  /// Method này sẽ mở link YouTube trong trình duyệt mặc định của thiết bị
+  /// Nếu không thể mở được, sẽ hiển thị thông báo lỗi cho người dùng
+  Future<void> _openTutorialVideo() async {
+    // URL của video hướng dẫn YouTube
+    const String videoUrl =
+        'https://youtube.com/shorts/vuiXwp86RUg?feature=share';
+
+    try {
+      // Tạo Uri object từ string URL
+      final Uri url = Uri.parse(videoUrl);
+
+      // Kiểm tra xem có thể mở URL này không
+      if (await canLaunchUrl(url)) {
+        // Mở URL trong trình duyệt mặc định
+        await launchUrl(
+          url,
+          mode: LaunchMode
+              .externalApplication, // Mở trong app bên ngoài (trình duyệt)
+        );
+        _log.info("Đã mở video hướng dẫn: $videoUrl");
+      } else {
+        // Không thể mở URL
+        _log.warning("Không thể mở video hướng dẫn: $videoUrl");
+
+        // Hiển thị thông báo lỗi cho người dùng
+        if (mounted) {
+          SnackBarApp.showWarning(
+            context,
+            message:
+                "Không thể mở video hướng dẫn. Vui lòng kiểm tra kết nối internet.",
+          );
+        }
+      }
+    } catch (e) {
+      // Xử lý lỗi khi mở URL
+      _log.error("Lỗi khi mở video hướng dẫn: $e");
+
+      // Hiển thị thông báo lỗi cho người dùng
+      if (mounted) {
+        SnackBarApp.showWarning(
+          context,
+          message: "Đã xảy ra lỗi khi mở video hướng dẫn.",
+        );
+      }
+    }
   }
 
   void _buttonPressed() async {
@@ -651,7 +712,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-             Navigator.of(context).pop();
+            context.pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -664,7 +725,8 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 const SizedBox(height: AppSpacing.xxl),
                 Text(
@@ -673,13 +735,76 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
                       .copyWith(color: AppColors.text, fontSize: 22),
                 ),
                 const SizedBox(height: AppSpacing.xxl),
-                Text(
-                  'Xem video hướng dẫn',
-                  style: AppTextStyles.title.copyWith(
-                    color: AppColors.blue,
-                    fontSize: 18,
-                    decoration: TextDecoration.underline,
-                    decorationColor: AppColors.blue,
+                TextButton(
+                  onPressed: () {
+                    // Mở video hướng dẫn YouTube khi người dùng tap vào text
+                    _openTutorialVideo();
+                  },
+                  child: Text(
+                    'Xem video hướng dẫn',
+                    style: AppTextStyles.title.copyWith(
+                      color: AppColors.blue,
+                      fontSize: 18,
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.blue,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                Container(
+                  width: double.infinity,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        spreadRadius: 2,
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: YoutubePlayerBuilder(
+                      onEnterFullScreen: () {
+                        // Prevent entering fullscreen by returning immediately
+                        return;
+                      },
+                      onExitFullScreen: () {
+                        // Handle exit fullscreen if needed
+                      },
+                      player: YoutubePlayer(
+                        controller: _youtubeController,
+                        showVideoProgressIndicator: true,
+                        progressIndicatorColor: AppColors.blue,
+                        progressColors: ProgressBarColors(
+                          playedColor: AppColors.blue,
+                          handleColor: AppColors.blue,
+                        ),
+                        bottomActions: [
+                          // Custom bottom actions without fullscreen button
+                          CurrentPosition(),
+                          const SizedBox(width: 10.0),
+                          ProgressBar(isExpanded: true),
+                          const SizedBox(width: 10.0),
+                          RemainingDuration(),
+                          // Note: Removed FullScreenButton() to hide fullscreen
+                        ],
+                        onReady: () {
+                          // Ensure portrait orientation when player is ready
+                          SystemChrome.setPreferredOrientations([
+                            DeviceOrientation.portraitUp,
+                            DeviceOrientation.portraitDown,
+                          ]);
+                        },
+                      ),
+                      builder: (context, player) {
+                        return player;
+                      },
+                    ),
                   ),
                 ),
                 Spacer(),

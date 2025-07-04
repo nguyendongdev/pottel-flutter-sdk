@@ -7,6 +7,8 @@ import 'package:skyfi_sdk/screens/manager_sim/detail_eSim.dart';
 import 'package:skyfi_sdk/screens/manager_sim/manager_sim.dart';
 import 'package:skyfi_sdk/screens/manager_sim/models/response_manager_esim/item_my_esim.dart';
 import 'package:skyfi_sdk/screens/sim_data_skyfi/models/create_order/item.dart';
+import 'package:skyfi_sdk/screens/video_call/RecordVideoScreen.dart'
+    show EnumServiceSim, RecordVideoScreen;
 
 import '../screens/account_detail_skyfi/account_detail_skyfi_screen.dart';
 import '../screens/account_info_skyfi/account_info_skyfi_screen.dart';
@@ -98,6 +100,7 @@ class AppRouter {
   static const String scanNfcChipcardNew = 'scan-nfc-chipcard-new';
   static const String contactDetail = 'contact-detail';
   static const String managerSim = 'manager-sim';
+  static const String recordVideo = 'record-video';
 
   static const String managerSimDetail = 'manager-sim-detail';
 
@@ -405,6 +408,18 @@ class AppRouter {
               final data = state.extra as Map<String, dynamic>;
               return DetailESim(
                 esim: data['esim'] as ItemMyEsim,
+              );
+            },
+          ),
+          GoRoute(
+            path: recordVideo,
+            name: recordVideo,
+            builder: (context, state) {
+              final data = state.extra as Map<String, dynamic>;
+              return RecordVideoScreen(
+                idCall: data['idCall'] as String,
+                phoneNumber: data['phoneNumber'] as String,
+                type: data['type'] as EnumServiceSim,
               );
             },
           ),

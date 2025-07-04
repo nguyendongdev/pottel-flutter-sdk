@@ -209,11 +209,11 @@ class _CountryListItem extends StatelessWidget {
 
   Widget _buildCountryFlag(EsimRegionModel country) {
     // If country has an image URL, try to load it
-    if (country.image?.url != null && country.image!.url.isNotEmpty) {
+    if (country.image.isNotEmpty) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(15),
         child: Image.network(
-          country.image!.url,
+          country.image,
           width: 30,
           height: 30,
           fit: BoxFit.cover,

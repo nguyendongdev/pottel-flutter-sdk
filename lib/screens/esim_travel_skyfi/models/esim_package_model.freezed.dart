@@ -642,12 +642,12 @@ EsimRegionModel _$EsimRegionModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EsimRegionModel {
-  @JsonKey(name: 'country_code')
+  @JsonKey(name: 'code')
   String get countryCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'name')
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'image')
-  ImageEsim? get image => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
 
   /// Serializes this EsimRegionModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -666,11 +666,9 @@ abstract class $EsimRegionModelCopyWith<$Res> {
       _$EsimRegionModelCopyWithImpl<$Res, EsimRegionModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'country_code') String countryCode,
-      @JsonKey(name: 'title') String title,
-      @JsonKey(name: 'image') ImageEsim? image});
-
-  $ImageEsimCopyWith<$Res>? get image;
+      {@JsonKey(name: 'code') String countryCode,
+      @JsonKey(name: 'name') String title,
+      @JsonKey(name: 'image') String image});
 }
 
 /// @nodoc
@@ -690,7 +688,7 @@ class _$EsimRegionModelCopyWithImpl<$Res, $Val extends EsimRegionModel>
   $Res call({
     Object? countryCode = null,
     Object? title = null,
-    Object? image = freezed,
+    Object? image = null,
   }) {
     return _then(_value.copyWith(
       countryCode: null == countryCode
@@ -701,25 +699,11 @@ class _$EsimRegionModelCopyWithImpl<$Res, $Val extends EsimRegionModel>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      image: freezed == image
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as ImageEsim?,
+              as String,
     ) as $Val);
-  }
-
-  /// Create a copy of EsimRegionModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ImageEsimCopyWith<$Res>? get image {
-    if (_value.image == null) {
-      return null;
-    }
-
-    return $ImageEsimCopyWith<$Res>(_value.image!, (value) {
-      return _then(_value.copyWith(image: value) as $Val);
-    });
   }
 }
 
@@ -732,12 +716,9 @@ abstract class _$$EsimRegionModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'country_code') String countryCode,
-      @JsonKey(name: 'title') String title,
-      @JsonKey(name: 'image') ImageEsim? image});
-
-  @override
-  $ImageEsimCopyWith<$Res>? get image;
+      {@JsonKey(name: 'code') String countryCode,
+      @JsonKey(name: 'name') String title,
+      @JsonKey(name: 'image') String image});
 }
 
 /// @nodoc
@@ -755,7 +736,7 @@ class __$$EsimRegionModelImplCopyWithImpl<$Res>
   $Res call({
     Object? countryCode = null,
     Object? title = null,
-    Object? image = freezed,
+    Object? image = null,
   }) {
     return _then(_$EsimRegionModelImpl(
       countryCode: null == countryCode
@@ -766,10 +747,10 @@ class __$$EsimRegionModelImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      image: freezed == image
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as ImageEsim?,
+              as String,
     ));
   }
 }
@@ -778,22 +759,22 @@ class __$$EsimRegionModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$EsimRegionModelImpl implements _EsimRegionModel {
   const _$EsimRegionModelImpl(
-      {@JsonKey(name: 'country_code') required this.countryCode,
-      @JsonKey(name: 'title') required this.title,
-      @JsonKey(name: 'image') this.image});
+      {@JsonKey(name: 'code') required this.countryCode,
+      @JsonKey(name: 'name') required this.title,
+      @JsonKey(name: 'image') required this.image});
 
   factory _$EsimRegionModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$EsimRegionModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'country_code')
+  @JsonKey(name: 'code')
   final String countryCode;
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'name')
   final String title;
   @override
   @JsonKey(name: 'image')
-  final ImageEsim? image;
+  final String image;
 
   @override
   String toString() {
@@ -834,22 +815,23 @@ class _$EsimRegionModelImpl implements _EsimRegionModel {
 
 abstract class _EsimRegionModel implements EsimRegionModel {
   const factory _EsimRegionModel(
-      {@JsonKey(name: 'country_code') required final String countryCode,
-      @JsonKey(name: 'title') required final String title,
-      @JsonKey(name: 'image') final ImageEsim? image}) = _$EsimRegionModelImpl;
+          {@JsonKey(name: 'code') required final String countryCode,
+          @JsonKey(name: 'name') required final String title,
+          @JsonKey(name: 'image') required final String image}) =
+      _$EsimRegionModelImpl;
 
   factory _EsimRegionModel.fromJson(Map<String, dynamic> json) =
       _$EsimRegionModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'country_code')
+  @JsonKey(name: 'code')
   String get countryCode;
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'name')
   String get title;
   @override
   @JsonKey(name: 'image')
-  ImageEsim? get image;
+  String get image;
 
   /// Create a copy of EsimRegionModel
   /// with the given fields replaced by the non-null parameter values.

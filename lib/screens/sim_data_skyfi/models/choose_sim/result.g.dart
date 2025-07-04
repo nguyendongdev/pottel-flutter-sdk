@@ -16,6 +16,7 @@ _$ResultImpl _$$ResultImplFromJson(Map<String, dynamic> json) => _$ResultImpl(
       variantId: (json['variant_id'] as num?)?.toInt(),
       usimPrice: (json['usim_price'] as num?)?.toInt(),
       esimPrice: (json['esim_price'] as num?)?.toInt(),
+      networkPrice: (json['network_price'] as num?)?.toInt(),
       packages: (json['packages'] as List<dynamic>?)
           ?.map((e) => Package.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -32,5 +33,6 @@ Map<String, dynamic> _$$ResultImplToJson(_$ResultImpl instance) =>
       'variant_id': instance.variantId,
       'usim_price': instance.usimPrice,
       'esim_price': instance.esimPrice,
+      'network_price': instance.networkPrice,
       'packages': instance.packages,
     };

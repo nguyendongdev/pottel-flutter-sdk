@@ -113,6 +113,12 @@ class PaymentOrder extends _$PaymentOrder {
     state = _cachedOrder!;
   }
 
+  // coupon code
+  void changeCouponCode(String couponCode) {
+    _cachedOrder = state.copyWith(couponCode: couponCode);
+    state = _cachedOrder!;
+  }
+
   bool get isEmailValid {
     return state.email != null && state.email!.isNotEmpty;
   }

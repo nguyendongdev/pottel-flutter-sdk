@@ -23,7 +23,7 @@ final selectedHistoryTabProvider =
 );
 
 typedef _$SelectedHistoryTab = AutoDisposeNotifier<HistoryTab>;
-String _$topupHistoryHash() => r'0bbdc4d705907092e757933ab131c6592460eefa';
+String _$topupHistoryHash() => r'e68a7af6cdb79afb159799b6653f0da20d630a83';
 
 /// See also [TopupHistory].
 @ProviderFor(TopupHistory)

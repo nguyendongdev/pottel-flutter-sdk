@@ -24,6 +24,7 @@ _$CreateOrderImpl _$$CreateOrderImplFromJson(Map<String, dynamic> json) =>
       items: (json['items'] as List<dynamic>?)
           ?.map((e) => Item.fromJson(e as Map<String, dynamic>))
           .toList(),
+      couponCode: json['coupon_code'] as String?,
     );
 
 Map<String, dynamic> _$$CreateOrderImplToJson(_$CreateOrderImpl instance) =>
@@ -42,4 +43,5 @@ Map<String, dynamic> _$$CreateOrderImplToJson(_$CreateOrderImpl instance) =>
       'total_amount': instance.totalAmount,
       'create_from_cart_id': instance.createFromCartId,
       'items': instance.items,
+      'coupon_code': instance.couponCode,
     };

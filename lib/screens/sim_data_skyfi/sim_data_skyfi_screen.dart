@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/screens/sim_data_skyfi/models/choose_sim/package.dart';
 import 'package:skyfi_sdk/screens/sim_data_skyfi/models/choose_sim/result.dart';
+import 'package:skyfi_sdk/utilities/calculate.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 
 import '../../core/constants/colors.dart';
@@ -55,18 +56,13 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
       if (selectedPackage == '') {
         packPrice.value = '0';
         final simType = ref.watch(simTypeProvider);
-        final simNumberPrice = chooseSim.value?.salePrice;
-        final simPrice = simType == TypeOfSim.physical
-            ? chooseSim.value?.usimPrice
-            : chooseSim.value?.esimPrice;
-        final sumPrice = (simNumberPrice ?? 0) + (simPrice ?? 0);
+        final sumPrice = priceSim(chooseSim.value, simType: simType);
         totalPrice.value = sumPrice.toString();
         // simPriceState.value = (simPrice ?? 0).toString();
       }
       if (chooseSim.value != null && selectedPackage != '') {
         // find package by name
         final simType = ref.watch(simTypeProvider);
-        final simNumberPrice = chooseSim.value?.salePrice;
         final simPrice = simType == TypeOfSim.physical
             ? chooseSim.value?.usimPrice
             : chooseSim.value?.esimPrice;
@@ -74,8 +70,8 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
           (package) => package.name == selectedPackage,
         );
         packPrice.value = package?.salePrice.toString() ?? '0';
-        final sumPrice =
-            (package?.salePrice ?? 0) + (simNumberPrice ?? 0) + (simPrice ?? 0);
+        final sumPrice = (package?.salePrice ?? 0) +
+            priceSim(chooseSim.value!, simType: simType);
         totalPrice.value = sumPrice.toString();
         simPriceState.value = simPrice.toString();
       }
@@ -100,7 +96,7 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.text),
           onPressed: () {
-             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
         ),
         actions: const [
@@ -140,16 +136,14 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
                   ),
                   const SizedBox(height: AppSpacing.xxl),
                   _SimTypeSection(
-                    simPrice: chooseSim.value?.salePrice.toString() ?? '0',
-                    esimPrice: chooseSim.value?.esimPrice.toString() ?? '0',
-                    usimPrice: chooseSim.value?.usimPrice.toString() ?? '0',
+                    chooseSim: chooseSim.value ?? Result(),
                   ),
                   const SizedBox(height: AppSpacing.xxl),
                   // show empty state if no packages
                   if (chooseSim.value?.packages?.isEmpty == true)
                     EmptyCart(
                       onContinueShopping: () {
-                         Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
                     ),
                   if (chooseSim.value?.packages?.isNotEmpty == true)
@@ -230,7 +224,7 @@ class _SimNumberActionSheet extends StatelessWidget {
               const Spacer(),
               IconButton(
                 onPressed: () {
-                   Navigator.of(context).pop();
+                  Navigator.of(context).pop();
                 },
                 icon: const Icon(Icons.close),
               ),
@@ -311,18 +305,13 @@ class _SimNumberSection extends StatelessWidget {
 }
 
 class _SimTypeSection extends ConsumerWidget {
-  const _SimTypeSection(
-      {required this.simPrice,
-      required this.esimPrice,
-      required this.usimPrice});
-  final String simPrice;
-  final String esimPrice;
-  final String usimPrice;
+  const _SimTypeSection({Key? key, required this.chooseSim});
+  final Result chooseSim;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final simType = ref.watch(simTypeProvider);
-    final feeSim = simType == TypeOfSim.physical ? usimPrice : esimPrice ?? '0';
+    final feeSim = priceSim(chooseSim, simType: simType);
     void onShowDeviceList() {
       showModalBottomSheet(
         context: context,
@@ -358,7 +347,7 @@ class _SimTypeSection extends ConsumerWidget {
             ),
             const Spacer(),
             Text(
-              '${Common.formatCurrency((int.parse(simPrice) + int.parse(feeSim)).toString())} VND',
+              '${Common.formatCurrency(feeSim.toString())} VND',
               style: AppTextStyles.heading,
             ),
           ],

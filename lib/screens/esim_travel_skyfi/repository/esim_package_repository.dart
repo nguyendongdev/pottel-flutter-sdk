@@ -1,4 +1,5 @@
 import 'package:skyfi_sdk/network/api.dart';
+
 import '../models/esim_package_model.dart';
 
 class EsimPackageRepository {
@@ -9,7 +10,7 @@ class EsimPackageRepository {
   Future<EsimPackageResponse> getEsimPackagesByRegion(int regionId) async {
     try {
       final response =
-          await api.get('/bss/app/get-esim-package-by-region/$regionId');
+          await api.get('/bss/app/v2/get-esim-package-by-region/$regionId');
       return EsimPackageResponse.fromJson(response.data);
     } catch (e) {
       rethrow;

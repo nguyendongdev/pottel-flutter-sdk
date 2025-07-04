@@ -17,6 +17,7 @@ class Result with _$Result {
     @JsonKey(name: 'variant_id') int? variantId,
     @JsonKey(name: 'usim_price') int? usimPrice,
     @JsonKey(name: 'esim_price') int? esimPrice,
+    @JsonKey(name: 'network_price') int? networkPrice,
     List<Package>? packages,
   }) = _Result;
 

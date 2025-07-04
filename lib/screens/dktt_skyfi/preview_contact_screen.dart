@@ -65,7 +65,7 @@ class PreviewContactScreen extends HookConsumerWidget {
 
     void saveLog() async {
       try {
-        Common.startLoadingDialog(context, 'Đang lưu thông tin...');
+        // Common.startLoadingDialog(context, 'Đang lưu thông tin...');
         isLoading.value = true;
         final response = await api.post(
           '/bss/videocall/save-log-video-call',
@@ -87,7 +87,7 @@ class PreviewContactScreen extends HookConsumerWidget {
         SnackBarApp.showError(context, message: e.toString());
       } finally {
         isLoading.value = false;
-        Common.stopLoadingDialog(context);
+        // Common.stopLoadingDialog(context);
       }
     }
 
@@ -108,7 +108,7 @@ class PreviewContactScreen extends HookConsumerWidget {
         ),
         leading: IconButton(
           onPressed: () {
-             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

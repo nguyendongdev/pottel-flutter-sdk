@@ -59,18 +59,16 @@ Map<String, dynamic> _$$ImageEsimImplToJson(_$ImageEsimImpl instance) =>
 _$EsimRegionModelImpl _$$EsimRegionModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EsimRegionModelImpl(
-      countryCode: json['country_code'] as String,
-      title: json['title'] as String,
-      image: json['image'] == null
-          ? null
-          : ImageEsim.fromJson(json['image'] as Map<String, dynamic>),
+      countryCode: json['code'] as String,
+      title: json['name'] as String,
+      image: json['image'] as String,
     );
 
 Map<String, dynamic> _$$EsimRegionModelImplToJson(
         _$EsimRegionModelImpl instance) =>
     <String, dynamic>{
-      'country_code': instance.countryCode,
-      'title': instance.title,
+      'code': instance.countryCode,
+      'name': instance.title,
       'image': instance.image,
     };
 

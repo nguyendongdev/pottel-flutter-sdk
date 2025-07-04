@@ -36,6 +36,8 @@ mixin _$Result {
   int? get usimPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'esim_price')
   int? get esimPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'network_price')
+  int? get networkPrice => throw _privateConstructorUsedError;
   List<Package>? get packages => throw _privateConstructorUsedError;
 
   /// Serializes this Result to a JSON map.
@@ -62,6 +64,7 @@ abstract class $ResultCopyWith<$Res> {
       @JsonKey(name: 'variant_id') int? variantId,
       @JsonKey(name: 'usim_price') int? usimPrice,
       @JsonKey(name: 'esim_price') int? esimPrice,
+      @JsonKey(name: 'network_price') int? networkPrice,
       List<Package>? packages});
 }
 
@@ -89,6 +92,7 @@ class _$ResultCopyWithImpl<$Res, $Val extends Result>
     Object? variantId = freezed,
     Object? usimPrice = freezed,
     Object? esimPrice = freezed,
+    Object? networkPrice = freezed,
     Object? packages = freezed,
   }) {
     return _then(_value.copyWith(
@@ -128,6 +132,10 @@ class _$ResultCopyWithImpl<$Res, $Val extends Result>
           ? _value.esimPrice
           : esimPrice // ignore: cast_nullable_to_non_nullable
               as int?,
+      networkPrice: freezed == networkPrice
+          ? _value.networkPrice
+          : networkPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
       packages: freezed == packages
           ? _value.packages
           : packages // ignore: cast_nullable_to_non_nullable
@@ -153,6 +161,7 @@ abstract class _$$ResultImplCopyWith<$Res> implements $ResultCopyWith<$Res> {
       @JsonKey(name: 'variant_id') int? variantId,
       @JsonKey(name: 'usim_price') int? usimPrice,
       @JsonKey(name: 'esim_price') int? esimPrice,
+      @JsonKey(name: 'network_price') int? networkPrice,
       List<Package>? packages});
 }
 
@@ -178,6 +187,7 @@ class __$$ResultImplCopyWithImpl<$Res>
     Object? variantId = freezed,
     Object? usimPrice = freezed,
     Object? esimPrice = freezed,
+    Object? networkPrice = freezed,
     Object? packages = freezed,
   }) {
     return _then(_$ResultImpl(
@@ -217,6 +227,10 @@ class __$$ResultImplCopyWithImpl<$Res>
           ? _value.esimPrice
           : esimPrice // ignore: cast_nullable_to_non_nullable
               as int?,
+      networkPrice: freezed == networkPrice
+          ? _value.networkPrice
+          : networkPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
       packages: freezed == packages
           ? _value._packages
           : packages // ignore: cast_nullable_to_non_nullable
@@ -238,6 +252,7 @@ class _$ResultImpl implements _Result {
       @JsonKey(name: 'variant_id') this.variantId,
       @JsonKey(name: 'usim_price') this.usimPrice,
       @JsonKey(name: 'esim_price') this.esimPrice,
+      @JsonKey(name: 'network_price') this.networkPrice,
       final List<Package>? packages})
       : _packages = packages;
 
@@ -269,6 +284,9 @@ class _$ResultImpl implements _Result {
   @override
   @JsonKey(name: 'esim_price')
   final int? esimPrice;
+  @override
+  @JsonKey(name: 'network_price')
+  final int? networkPrice;
   final List<Package>? _packages;
   @override
   List<Package>? get packages {
@@ -281,7 +299,7 @@ class _$ResultImpl implements _Result {
 
   @override
   String toString() {
-    return 'Result(msisdnId: $msisdnId, msisdn: $msisdn, name: $name, basePrice: $basePrice, salePrice: $salePrice, productId: $productId, variantId: $variantId, usimPrice: $usimPrice, esimPrice: $esimPrice, packages: $packages)';
+    return 'Result(msisdnId: $msisdnId, msisdn: $msisdn, name: $name, basePrice: $basePrice, salePrice: $salePrice, productId: $productId, variantId: $variantId, usimPrice: $usimPrice, esimPrice: $esimPrice, networkPrice: $networkPrice, packages: $packages)';
   }
 
   @override
@@ -305,6 +323,8 @@ class _$ResultImpl implements _Result {
                 other.usimPrice == usimPrice) &&
             (identical(other.esimPrice, esimPrice) ||
                 other.esimPrice == esimPrice) &&
+            (identical(other.networkPrice, networkPrice) ||
+                other.networkPrice == networkPrice) &&
             const DeepCollectionEquality().equals(other._packages, _packages));
   }
 
@@ -321,6 +341,7 @@ class _$ResultImpl implements _Result {
       variantId,
       usimPrice,
       esimPrice,
+      networkPrice,
       const DeepCollectionEquality().hash(_packages));
 
   /// Create a copy of Result
@@ -350,6 +371,7 @@ abstract class _Result implements Result {
       @JsonKey(name: 'variant_id') final int? variantId,
       @JsonKey(name: 'usim_price') final int? usimPrice,
       @JsonKey(name: 'esim_price') final int? esimPrice,
+      @JsonKey(name: 'network_price') final int? networkPrice,
       final List<Package>? packages}) = _$ResultImpl;
 
   factory _Result.fromJson(Map<String, dynamic> json) = _$ResultImpl.fromJson;
@@ -379,6 +401,9 @@ abstract class _Result implements Result {
   @override
   @JsonKey(name: 'esim_price')
   int? get esimPrice;
+  @override
+  @JsonKey(name: 'network_price')
+  int? get networkPrice;
   @override
   List<Package>? get packages;
 

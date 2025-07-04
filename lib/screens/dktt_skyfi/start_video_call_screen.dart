@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skyfi_sdk/screens/video_call/RecordVideoScreen.dart';
+import 'package:skyfi_sdk/utilities/common.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -30,7 +32,7 @@ class StartVideoCallScreen extends StatelessWidget {
         surfaceTintColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-             Navigator.of(context).pop();
+            context.pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -147,12 +149,34 @@ class StartVideoCallScreen extends StatelessWidget {
                     // Xử lý data trả về từ VideoCallViewJitsiScreen
                     if (result != null && result is Map<String, dynamic>) {
                       final status = result['status'];
+                      print('status: $status');
                       if (status == 'no-free-teller') {
                         // Hiển thị thông báo khi không có teller rảnh
                         if (context.mounted) {
-                          SnackBarApp.showWarning(context,
-                              message: result['message'] ??
-                                  'Không có teller nào rảnh');
+                          print('message: ${result['message']}');
+                          // SnackBarApp.showWarning(context,
+                          //     message: result['message'] ??
+                          //         'Không có teller nào rảnh');
+
+                          Common.showDialogConfirm(
+                            context,
+                            'Thông báo',
+                            result['message'] ?? 'Không có teller nào rảnh',
+                            () {
+                              context.pop();
+                              context.pushNamed(AppRouter.recordVideo, extra: {
+                                'idCall': id,
+                                'phoneNumber': phone,
+                                'type': EnumServiceSim.activity,
+                              });
+                            },
+                            () {
+                              context.pop();
+                            },
+                            primaryButtonText: 'Quay Video',
+                            secondaryButtonText: 'Đóng',
+                          );
+                          return;
                         }
                       } else if (status == 'connecting-teller') {
                         // Xử lý khi đang kết nối teller

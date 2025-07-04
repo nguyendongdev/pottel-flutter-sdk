@@ -43,6 +43,10 @@ class API {
     return _dio.post(path, data: data);
   }
 
+  Future<Response> postWithFormData(String path, {Object? data}) async {
+    return _dio.post(path, data: data);
+  }
+
   Future<Response> put(String path, {Map<String, dynamic>? data}) async {
     return _dio.put(path, data: data);
   }

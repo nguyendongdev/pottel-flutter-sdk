@@ -6,7 +6,7 @@ part of 'payment_order_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$paymentOrderHash() => r'59587021e66db87a80bca3878eb28fdc56bd5622';
+String _$paymentOrderHash() => r'c308408484f50341963473646fc98f83aad0c0aa';
 
 /// See also [PaymentOrder].
 @ProviderFor(PaymentOrder)

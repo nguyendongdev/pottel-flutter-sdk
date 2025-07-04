@@ -39,9 +39,9 @@ class ImageEsim with _$ImageEsim {
 @freezed
 class EsimRegionModel with _$EsimRegionModel {
   const factory EsimRegionModel({
-    @JsonKey(name: 'country_code') required String countryCode,
-    @JsonKey(name: 'title') required String title,
-    @JsonKey(name: 'image') ImageEsim? image,
+    @JsonKey(name: 'code') required String countryCode,
+    @JsonKey(name: 'name') required String title,
+    @JsonKey(name: 'image') required String image,
   }) = _EsimRegionModel;
 
   factory EsimRegionModel.fromJson(Map<String, dynamic> json) =>

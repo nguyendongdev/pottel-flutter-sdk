@@ -46,6 +46,8 @@ mixin _$CreateOrder {
   @JsonKey(name: 'create_from_cart_id')
   int? get createFromCartId => throw _privateConstructorUsedError;
   List<Item>? get items => throw _privateConstructorUsedError;
+  @JsonKey(name: 'coupon_code')
+  String? get couponCode => throw _privateConstructorUsedError;
 
   /// Serializes this CreateOrder to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -77,7 +79,8 @@ abstract class $CreateOrderCopyWith<$Res> {
       @JsonKey(name: 'customer_name') String? customerName,
       @JsonKey(name: 'total_amount') int? totalAmount,
       @JsonKey(name: 'create_from_cart_id') int? createFromCartId,
-      List<Item>? items});
+      List<Item>? items,
+      @JsonKey(name: 'coupon_code') String? couponCode});
 }
 
 /// @nodoc
@@ -109,6 +112,7 @@ class _$CreateOrderCopyWithImpl<$Res, $Val extends CreateOrder>
     Object? totalAmount = freezed,
     Object? createFromCartId = freezed,
     Object? items = freezed,
+    Object? couponCode = freezed,
   }) {
     return _then(_value.copyWith(
       deliveryAddress: freezed == deliveryAddress
@@ -167,6 +171,10 @@ class _$CreateOrderCopyWithImpl<$Res, $Val extends CreateOrder>
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<Item>?,
+      couponCode: freezed == couponCode
+          ? _value.couponCode
+          : couponCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -193,7 +201,8 @@ abstract class _$$CreateOrderImplCopyWith<$Res>
       @JsonKey(name: 'customer_name') String? customerName,
       @JsonKey(name: 'total_amount') int? totalAmount,
       @JsonKey(name: 'create_from_cart_id') int? createFromCartId,
-      List<Item>? items});
+      List<Item>? items,
+      @JsonKey(name: 'coupon_code') String? couponCode});
 }
 
 /// @nodoc
@@ -223,6 +232,7 @@ class __$$CreateOrderImplCopyWithImpl<$Res>
     Object? totalAmount = freezed,
     Object? createFromCartId = freezed,
     Object? items = freezed,
+    Object? couponCode = freezed,
   }) {
     return _then(_$CreateOrderImpl(
       deliveryAddress: freezed == deliveryAddress
@@ -281,6 +291,10 @@ class __$$CreateOrderImplCopyWithImpl<$Res>
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<Item>?,
+      couponCode: freezed == couponCode
+          ? _value.couponCode
+          : couponCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -302,7 +316,8 @@ class _$CreateOrderImpl implements _CreateOrder {
       @JsonKey(name: 'customer_name') this.customerName,
       @JsonKey(name: 'total_amount') this.totalAmount,
       @JsonKey(name: 'create_from_cart_id') this.createFromCartId,
-      final List<Item>? items})
+      final List<Item>? items,
+      @JsonKey(name: 'coupon_code') this.couponCode})
       : _items = items;
 
   factory _$CreateOrderImpl.fromJson(Map<String, dynamic> json) =>
@@ -357,8 +372,12 @@ class _$CreateOrderImpl implements _CreateOrder {
   }
 
   @override
+  @JsonKey(name: 'coupon_code')
+  final String? couponCode;
+
+  @override
   String toString() {
-    return 'CreateOrder(deliveryAddress: $deliveryAddress, paymentMethod: $paymentMethod, discountAmount: $discountAmount, shippingAmount: $shippingAmount, contactPhone: $contactPhone, email: $email, cityId: $cityId, districtId: $districtId, wardId: $wardId, createdBy: $createdBy, customerName: $customerName, totalAmount: $totalAmount, createFromCartId: $createFromCartId, items: $items)';
+    return 'CreateOrder(deliveryAddress: $deliveryAddress, paymentMethod: $paymentMethod, discountAmount: $discountAmount, shippingAmount: $shippingAmount, contactPhone: $contactPhone, email: $email, cityId: $cityId, districtId: $districtId, wardId: $wardId, createdBy: $createdBy, customerName: $customerName, totalAmount: $totalAmount, createFromCartId: $createFromCartId, items: $items, couponCode: $couponCode)';
   }
 
   @override
@@ -389,7 +408,9 @@ class _$CreateOrderImpl implements _CreateOrder {
                 other.totalAmount == totalAmount) &&
             (identical(other.createFromCartId, createFromCartId) ||
                 other.createFromCartId == createFromCartId) &&
-            const DeepCollectionEquality().equals(other._items, _items));
+            const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.couponCode, couponCode) ||
+                other.couponCode == couponCode));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -409,7 +430,8 @@ class _$CreateOrderImpl implements _CreateOrder {
       customerName,
       totalAmount,
       createFromCartId,
-      const DeepCollectionEquality().hash(_items));
+      const DeepCollectionEquality().hash(_items),
+      couponCode);
 
   /// Create a copy of CreateOrder
   /// with the given fields replaced by the non-null parameter values.
@@ -429,20 +451,22 @@ class _$CreateOrderImpl implements _CreateOrder {
 
 abstract class _CreateOrder implements CreateOrder {
   factory _CreateOrder(
-      {@JsonKey(name: 'delivery_address') final String? deliveryAddress,
-      @JsonKey(name: 'payment_method') final String? paymentMethod,
-      @JsonKey(name: 'discount_amount') final int? discountAmount,
-      @JsonKey(name: 'shipping_amount') final int? shippingAmount,
-      @JsonKey(name: 'contact_phone') final String? contactPhone,
-      final String? email,
-      @JsonKey(name: 'city_id') final int? cityId,
-      @JsonKey(name: 'district_id') final int? districtId,
-      @JsonKey(name: 'ward_id') final int? wardId,
-      @JsonKey(name: 'created_by') final String? createdBy,
-      @JsonKey(name: 'customer_name') final String? customerName,
-      @JsonKey(name: 'total_amount') final int? totalAmount,
-      @JsonKey(name: 'create_from_cart_id') final int? createFromCartId,
-      final List<Item>? items}) = _$CreateOrderImpl;
+          {@JsonKey(name: 'delivery_address') final String? deliveryAddress,
+          @JsonKey(name: 'payment_method') final String? paymentMethod,
+          @JsonKey(name: 'discount_amount') final int? discountAmount,
+          @JsonKey(name: 'shipping_amount') final int? shippingAmount,
+          @JsonKey(name: 'contact_phone') final String? contactPhone,
+          final String? email,
+          @JsonKey(name: 'city_id') final int? cityId,
+          @JsonKey(name: 'district_id') final int? districtId,
+          @JsonKey(name: 'ward_id') final int? wardId,
+          @JsonKey(name: 'created_by') final String? createdBy,
+          @JsonKey(name: 'customer_name') final String? customerName,
+          @JsonKey(name: 'total_amount') final int? totalAmount,
+          @JsonKey(name: 'create_from_cart_id') final int? createFromCartId,
+          final List<Item>? items,
+          @JsonKey(name: 'coupon_code') final String? couponCode}) =
+      _$CreateOrderImpl;
 
   factory _CreateOrder.fromJson(Map<String, dynamic> json) =
       _$CreateOrderImpl.fromJson;
@@ -487,6 +511,9 @@ abstract class _CreateOrder implements CreateOrder {
   int? get createFromCartId;
   @override
   List<Item>? get items;
+  @override
+  @JsonKey(name: 'coupon_code')
+  String? get couponCode;
 
   /// Create a copy of CreateOrder
   /// with the given fields replaced by the non-null parameter values.

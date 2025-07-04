@@ -196,7 +196,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
     // if unmout clear function
     if (mounted) {
       Future.delayed(const Duration(seconds: 30), () {
-        context.pop({
+        Navigator.of(context).pop({
           "status": "no-free-teller",
           "message": "Không có teller nào rảnh",
           "data": data
