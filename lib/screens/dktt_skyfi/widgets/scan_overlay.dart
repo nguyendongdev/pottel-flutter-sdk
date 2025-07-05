@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../core/widgets/gradient_button.dart';
 
 class ScanOverlay extends StatelessWidget {
   const ScanOverlay({
     super.key,
     required this.onManualInput,
+    required this.onUpload,
   });
 
   final VoidCallback onManualInput;
-
+  final VoidCallback onUpload;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -19,7 +20,7 @@ class ScanOverlay extends StatelessWidget {
         // Background overlay with cutout
         CustomPaint(
           size: Size.infinite,
-          painter: ScanOverlayPainter(),
+          painter: ScanOverlayPainter(context: context),
         ),
         // Content
         SafeArea(
@@ -36,32 +37,66 @@ class ScanOverlay extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
-              const Spacer(),
+              // const Spacer(),
               Text(
                 'Quét mã QR trên thân thẻ',
                 style: AppTextStyles.heading.copyWith(
                   color: AppColors.white,
                 ),
               ),
-              const SizedBox(height: 250),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.5),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
                 child: Text(
-                  'Hướng camera về phía mã Barcode trên thân thẻ chứa Sim để quét mã vạch',
+                  'Đối với SIM vật lý: Quét mã trên thẻ SIM\nĐối với eSIM: Quét mã QR đã gửi về email',
                   textAlign: TextAlign.center,
                   style: AppTextStyles.body.copyWith(
                     color: AppColors.white,
                   ),
                 ),
               ),
-              const Spacer(),
+              // Button up
+              Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 56,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: onUpload,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.upload,
+                          color: AppColors.white,
+                          size: 24,
+                        ),
+                        Text(
+                          'Tải mã QR',
+                          style: AppTextStyles.heading.copyWith(
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              // const Spacer(),
+              // Button down
               Padding(
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 child: GradientButton(
-                  width: 160,
+                  width: 200,
                   height: 56,
                   textStyle: AppTextStyles.heading.copyWith(
-                    color: AppColors.text,
+                    color: AppColors.white,
                   ),
                   onPressed: onManualInput,
                   text: 'Nhập số serial',
@@ -77,6 +112,8 @@ class ScanOverlay extends StatelessWidget {
 }
 
 class ScanOverlayPainter extends CustomPainter {
+  final BuildContext context;
+  ScanOverlayPainter({required this.context});
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -84,10 +121,10 @@ class ScanOverlayPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     // Calculate the scanning area dimensions
-    const scanAreaWidth = 350.0;
-    const scanAreaHeight = 150.0;
+    final scanAreaWidth = MediaQuery.of(context).size.width * 0.9;
+    final scanAreaHeight = MediaQuery.of(context).size.height * 0.25;
     final left = (size.width - scanAreaWidth) / 2;
-    final top = (size.height - scanAreaHeight) / 2;
+    final top = (size.height - scanAreaHeight) / 2.5;
     final scanArea = RRect.fromRectAndRadius(
       Rect.fromLTWH(left, top, scanAreaWidth, scanAreaHeight),
       const Radius.circular(12),

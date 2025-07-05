@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:image_picker/image_picker.dart';
 import 'widgets/scan_overlay.dart';
 
 class ScanBarcodeScreen extends StatefulWidget {
@@ -42,8 +43,46 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
     controller.stop();
   }
 
+  
+
   void _onManualInput() {
-     Navigator.of(context).pop();
+    context.pop();
+  }
+
+  Future<void> _onUpload() async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      
+      if (image != null) {
+        final result = await controller.analyzeImage(image.path);
+        
+        if (result != null && result.barcodes.isNotEmpty) {
+          final barcode = result.barcodes.first.rawValue;
+          if (barcode != null && mounted) {
+            context.pop(barcode.trim());
+          }
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Không tìm thấy mã vạch trong ảnh'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Lỗi khi đọc ảnh: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -58,6 +97,7 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
           ),
           ScanOverlay(
             onManualInput: _onManualInput,
+            onUpload: _onUpload,
           ),
         ],
       ),

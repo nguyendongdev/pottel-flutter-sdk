@@ -100,13 +100,16 @@ class InfoRegisScreen extends HookConsumerWidget {
       print("result $result");
       if (result != null) {
         final infoFromIccid = await getInfoFromIccid(result);
+        print("infoFromIccid ${infoFromIccid?.toString()}");
         if (infoFromIccid != null) {
           // Check if it's a successful result (InfoFromIccid result)
           if (infoFromIccid is! CodeErrorHandle) {
             // This means we got InfoFromIccid result (Result object)
             final info = infoFromIccid as Result;
-            serialController.text =
-                info.iccid!.substring(info.iccid!.length - 11) ?? '';
+            // serialController.text =
+            //     info.iccid!.substring(info.iccid!.length - 11) ?? '';
+            // cut 2 first character and 1 last character
+            serialController.text = info.iccid?.substring(2, info.iccid!.length - 1) ?? '';
             msisdnController.text = info.msisdn ?? '';
             isUpdateMsisdn.value = false;
           } else {
@@ -140,7 +143,7 @@ class InfoRegisScreen extends HookConsumerWidget {
               'Thông báo',
               'Số thuê bao ${msisdnController.text} của Bạn đăng ký thông tin chưa thành công. Bạn có muốn tiếp tục cuộc gọi với SkyFi không?',
               () {
-                 Navigator.of(context).pop();
+                context.pop();
                 // open start video call
                 context.pushNamed(AppRouter.startVideoCall, extra: {
                   'id': response.result?.callId,
@@ -157,7 +160,7 @@ class InfoRegisScreen extends HookConsumerWidget {
                 ref
                     .read(saveLogDkttNotifierProvider.notifier)
                     .setSeri(response.result?.iccid);
-                 Navigator.of(context).pop();
+                context.pop();
                 context.pushNamed(AppRouter.prepareChipCard);
               },
               primaryButtonText: 'Gọi lại',
@@ -253,7 +256,7 @@ class InfoRegisScreen extends HookConsumerWidget {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.xl,
-            vertical: AppSpacing.xl,
+            vertical: AppSpacing.xxl,
           ),
           child: BottomButton(
             onPressed: () {
@@ -261,10 +264,9 @@ class InfoRegisScreen extends HookConsumerWidget {
                 Common.showToast('Số thuê bao phải có 10 chữ số', context);
                 return;
               }
-
-              if (serialController.text.length != 11) {
-                Common.showToast('Số serial phải có 11 chữ số', context);
-                return;
+              if (serialController.text.length != 16) {
+                Common.showToast('Số serial phải có 16 chữ số', context);
+                return; 
               }
               _onCheckSim();
             },
