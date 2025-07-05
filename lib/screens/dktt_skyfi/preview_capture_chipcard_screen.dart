@@ -48,7 +48,7 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
 
     Future<bool> checkIsCanRegister(String id) async {
       try {
-        Common.loadingWithContext(context, show: true);
+        // Common.loadingWithContext(context, show: true);
         final response =
             await api.post('/bss/videocall/check-number-sim-registered', data: {
           'id_number': id,
@@ -59,6 +59,11 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
         if (statusCode == 200) {
           if (codeErrorHandle.code == 200) {
             final numberIdRegis = GetNumberIdRegis.fromJson(data);
+            final numberIdRegisInt = (numberIdRegis.result?.value ?? 0);
+            ref
+                .read(numberIdRegisProvider.notifier)
+                .setNumberIdRegis(numberIdRegisInt);
+
             return numberIdRegis.result!.value! <
                 numberIdRegis.result!.valueBlock!;
           } else {

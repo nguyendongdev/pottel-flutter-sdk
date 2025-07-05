@@ -6,11 +6,15 @@ import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/gradient_button.dart';
 
 class ItemSendOtp extends StatelessWidget {
-  const ItemSendOtp({super.key});
+  const ItemSendOtp({super.key, required this.phone, required this.onPressed});
+
+  final String phone;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.background,
@@ -31,7 +35,7 @@ class ItemSendOtp extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '0772 123 456',
+                    phone.startsWith('0') ? phone : '0$phone',
                     style: AppTextStyles.title.copyWith(
                       color: AppColors.text,
                     ),
@@ -41,10 +45,12 @@ class ItemSendOtp extends StatelessWidget {
             ),
             GradientButton(
               width: 100,
-              onPressed: () {},
+              onPressed: () {
+                onPressed();
+              },
               text: 'Gửi OTP',
               textStyle: AppTextStyles.button.copyWith(
-                color: AppColors.text,
+                color: AppColors.white,
               ),
             ),
           ],

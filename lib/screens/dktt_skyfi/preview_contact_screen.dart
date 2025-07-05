@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:signature/signature.dart';
+import 'package:skyfi_sdk/screens/dktt_skyfi/provider/ekyc_provider.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
 
 import '../../core/constants/colors.dart';
@@ -25,6 +26,7 @@ class PreviewContactScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final numberIdRegis = ref.watch(numberIdRegisProvider);
     final isLoading = useState(false);
     API api = API();
     final isAgree = useState(false);
@@ -108,7 +110,7 @@ class PreviewContactScreen extends HookConsumerWidget {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            context.pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -213,81 +215,96 @@ class PreviewContactScreen extends HookConsumerWidget {
                   ),
                   const SizedBox(height: AppSpacing.md),
                   // Signature box
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.border),
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.background,
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppSpacing.md),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/feat_signature.svg',
-                                width: 36,
-                                height: 36,
-                                package: 'skyfi_sdk',
-                              ),
-                              const SizedBox(width: AppSpacing.sm),
-                              Text(
-                                'Chữ ký khách hàng',
-                                style: AppTextStyles.title.copyWith(
-                                  color: AppColors.text,
-                                ),
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                onPressed: () {
-                                  _controller.clear();
-                                },
-                                icon: const Icon(Icons.close),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: AppSpacing.md),
-                          Signature(
-                            backgroundColor: AppColors.white,
-                            controller: _controller,
-                            height: 200,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        child: BottomButton(
-          isLoading: isLoading.value,
-          onPressed: () async {
-            final image = await _controller.toPngBytes();
-            if (image == null) {
-              SnackBarApp.showWarning(context,
-                  message: 'Vui lòng ký vào ô chữ ký');
-              return;
-            }
-            if (!isAgree.value) {
-              SnackBarApp.showWarning(context,
-                  message: 'Vui lòng đọc và đồng ý với các điều kiện');
-              return;
-            }
-            final base64 = base64Encode(image!);
-            ref.read(saveLogDkttNotifierProvider.notifier).setImg4(base64);
-            saveLog();
-          },
-          text: 'Bắt đầu cuộc gọi Video',
-          textStyle: AppTextStyles.button.copyWith(
-            color: AppColors.white,
+      bottomNavigationBar: SizedBox(
+        height: 390,
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.border),
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColors.background,
+                ),
+                width: MediaQuery.of(context).size.width,
+                height: 300,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/feat_signature.svg',
+                            width: 36,
+                            height: 36,
+                          ),
+                          const SizedBox(width: AppSpacing.sm),
+                          Text(
+                            'Chữ ký khách hàng',
+                            style: AppTextStyles.title.copyWith(
+                              color: AppColors.text,
+                            ),
+                          ),
+                          const Spacer(),
+                          IconButton(
+                            onPressed: () {
+                              _controller.clear();
+                            },
+                            icon: const Icon(Icons.close),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      Signature(
+                        backgroundColor: AppColors.white,
+                        controller: _controller,
+                        height: 200,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              BottomButton(
+                isLoading: isLoading.value,
+                onPressed: () async {
+                  final image = await _controller.toPngBytes();
+                  if (image == null) {
+                    SnackBarApp.showWarning(context,
+                        message: 'Vui lòng ký vào ô chữ ký');
+                    return;
+                  }
+                  if (!isAgree.value) {
+                    SnackBarApp.showWarning(context,
+                        message: 'Vui lòng đọc và đồng ý với các điều kiện');
+                    return;
+                  }
+                  final base64 = base64Encode(image!);
+                  ref
+                      .read(saveLogDkttNotifierProvider.notifier)
+                      .setImg4(base64);
+                  if (numberIdRegis == 0) {
+                    saveLog();
+                  } else {
+                    Navigator.of(context).pushNamed(AppRouter.verifyOtp);
+                    return;
+                  }
+                },
+                text:
+                    numberIdRegis == 0 ? 'Bắt đầu cuộc gọi Video' : 'Tiếp tục',
+                textStyle: AppTextStyles.button.copyWith(
+                  color: AppColors.white,
+                ),
+              ),
+            ],
           ),
         ),
       ),

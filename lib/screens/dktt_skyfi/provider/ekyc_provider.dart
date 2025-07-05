@@ -40,3 +40,19 @@ class TypesScreen extends _$TypesScreen {
     return state.toString();
   }
 }
+
+@Riverpod(keepAlive: true)
+class NumberIdRegis extends _$NumberIdRegis {
+  @override
+  int build() {
+    return 0;
+  }
+
+  void setNumberIdRegis(int numberIdRegis) {
+    state = numberIdRegis;
+  }
+
+  int getNumberIdRegis() {
+    return state;
+  }
+}

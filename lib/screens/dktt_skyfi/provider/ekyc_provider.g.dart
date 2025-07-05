@@ -35,5 +35,20 @@ final typesScreenProvider =
 );
 
 typedef _$TypesScreen = AutoDisposeNotifier<EkycType>;
+String _$numberIdRegisHash() => r'9f675a2b6529a1e318a59c48a91e50b4453c7701';
+
+/// See also [NumberIdRegis].
+@ProviderFor(NumberIdRegis)
+final numberIdRegisProvider = NotifierProvider<NumberIdRegis, int>.internal(
+  NumberIdRegis.new,
+  name: r'numberIdRegisProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$numberIdRegisHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$NumberIdRegis = Notifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
