@@ -7,6 +7,7 @@ import 'package:skyfi_sdk/screens/sim_data_skyfi/models/choose_sim/package.dart'
 import 'package:skyfi_sdk/screens/sim_data_skyfi/models/choose_sim/result.dart';
 import 'package:skyfi_sdk/utilities/calculate.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:skyfi_sdk/widgets/core/tooltip.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -312,6 +313,7 @@ class _SimTypeSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final simType = ref.watch(simTypeProvider);
     final feeSim = priceSim(chooseSim, simType: simType);
+
     void onShowDeviceList() {
       showModalBottomSheet(
         context: context,
@@ -349,6 +351,14 @@ class _SimTypeSection extends ConsumerWidget {
             Text(
               '${Common.formatCurrency(feeSim.toString())} VND',
               style: AppTextStyles.heading,
+            ),
+            const BaseTooltip(
+              message: 'Giá tiền bao gồm tiền SIM + Phí hòa mạng + Số',
+              triggerMode: TooltipTriggerMode.tap,
+              child: Padding(
+                padding: EdgeInsets.only(left: 4.0),
+                child: Icon(Icons.info, color: AppColors.textLight),
+              ),
             ),
           ],
         ),
@@ -495,7 +505,7 @@ class _DataPackage extends StatelessWidget {
                               color: AppColors.red,
                               size: 24,
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                       const SizedBox(width: AppSpacing.xs),
                       Text('$name - $validityDay ngày',
                           style: AppTextStyles.button.copyWith(
@@ -721,11 +731,11 @@ class _BottomBar extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Text(
+              const Text(
                 'Tổng cộng',
                 style: AppTextStyles.title,
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 '${Common.formatCurrency(totalPrice)} VND',
                 style: AppTextStyles.heading,
