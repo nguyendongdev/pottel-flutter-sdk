@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import 'package:skyfi_sdk/routers/routers.dart';
 
 import 'models/response_manager_esim/item_my_esim.dart';
 
@@ -18,11 +20,6 @@ class SimNotActiveDetail extends ConsumerWidget {
         children: [
           // QR Code Installation Section
           _buildQRCodeSection(),
-
-          SizedBox(height: 16),
-
-          // Device Installation Guides
-          _buildDeviceGuideSection(),
 
           SizedBox(height: 16),
 
@@ -246,7 +243,7 @@ class SimNotActiveDetail extends ConsumerWidget {
           ),
 
           _buildDetailItem(
-            label: 'Hiệu lực',
+            label: 'Hiệu lực ',
             value: '${esim.validityDays ?? 5} ngày',
           ),
 
@@ -333,19 +330,13 @@ class SimNotActiveDetail extends ConsumerWidget {
   }
 
   void _showInstallationGuide(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Hướng dẫn cài đặt eSIM'),
-        content: Text(
-            'Đây là hướng dẫn chi tiết cài đặt eSIM cho thiết bị của bạn.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Đóng'),
-          ),
-        ],
-      ),
+    context.pushNamed(
+      AppRouter.webviewTermsSkyfi,
+      extra: {
+        'url': 'https://skyfi.vn/vi/esimGuide?src=app',
+        'title': 'Hướng dẫn cài đặt eSIM',
+        'isCheckbox': false,
+      },
     );
   }
 
@@ -365,60 +356,4 @@ class SimNotActiveDetail extends ConsumerWidget {
       ),
     );
   }
-}
-
-// Custom painter to create QR code pattern
-class QRCodePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = AppColors.text
-      ..style = PaintingStyle.fill;
-
-    final blockSize = size.width / 25; // 25x25 grid for QR code pattern
-
-    // Create a simplified QR code pattern
-    final pattern = [
-      [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-      [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-      [1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1],
-      [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-      [1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1],
-      [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-      [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-      [0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-      [0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1],
-      [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-      [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-      [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-      [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1],
-      [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-    ];
-
-    for (int i = 0; i < pattern.length && i < 21; i++) {
-      for (int j = 0; j < pattern[i].length && j < 21; j++) {
-        if (pattern[i][j] == 1) {
-          canvas.drawRect(
-            Rect.fromLTWH(
-              j * blockSize + 10,
-              i * blockSize + 10,
-              blockSize - 1,
-              blockSize - 1,
-            ),
-            paint,
-          );
-        }
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
