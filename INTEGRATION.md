@@ -19,7 +19,7 @@ SkyFi SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, n
 dependencies:
   skyfi_sdk:
     git:
-      url: https://github.com/skyfi_sdk/skyfi_sdk.git
+      url: https://github.com/skyfi2024/new_sdk_SkyFi.git
       ref: main
     # Hoặc nếu sử dụng local path
     # path: ../skyfi_sdk
