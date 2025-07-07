@@ -7,7 +7,7 @@ SkyFi SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, n
 ## Yêu cầu hệ thống
 
 - **Flutter**: >= 3.29.0
-- **Dart**: >= 3.7.0 < 4.0.0
+- **Dart**: >= 3.2.5 < 4.0.0
 - **Android**: API level 26+
 - **iOS**: iOS 15.6+
 
@@ -21,7 +21,7 @@ dependencies:
     git:
       url: https://github.com/skyfi2024/new_sdk_SkyFi.git
       ref: main
-    # Hoặc nếu sử dụng local path
+    # Hoặc nếu sử dụng local path trong development
     # path: ../skyfi_sdk
 ```
 
@@ -67,12 +67,12 @@ Thêm các permissions vào `ios/Runner/Info.plist`:
 <string>Ứng dụng cần quyền truy cập thư viện ảnh</string>
 ```
 
-### 5. Cấu hình môi trường
+### 5. Cấu hình môi trường (Tùy chọn)
 
-Tạo file `.env` trong thư mục root của project:
+SDK sử dụng cấu hình mặc định, bạn có thể tùy chỉnh bằng cách tạo file `.env` trong thư mục root của project:
 
 ```env
-# API Configuration
+# API Configuration (Tùy chọn)
 API_BASE_URL=https://your-api-endpoint.com
 API_KEY=your-api-key
 
@@ -80,7 +80,7 @@ API_KEY=your-api-key
 DEBUG_MODE=true
 ```
 
-Thêm file `.env` vào `pubspec.yaml`:
+Thêm file `.env` vào `pubspec.yaml` nếu có:
 
 ```yaml
 flutter:
@@ -103,26 +103,30 @@ import 'package:flutter/material.dart';
 import 'package:skyfi_sdk/skyfi_sdk.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('My App')),
+        appBar: AppBar(title: const Text('My App')),
         body: Center(
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const SkyfiSdk(),
+                  builder: (_) => SkyfiSdk(
+                    phone: '0707040618', // Số điện thoại cần thiết
+                  ),
                 ),
               );
             },
-            child: Text('Mở SkyFi SDK'),
+            child: const Text('Mở SkyFi SDK'),
           ),
         ),
       ),
@@ -140,6 +144,7 @@ Navigator.push(
   MaterialPageRoute(
     builder: (_) => SkyfiSdk.toScreen(
       initialLocation: SkyfiRoute.infoRegis.path,
+      phone: '0707991197', // Số điện thoại cần thiết
     ),
   ),
 );
@@ -150,6 +155,7 @@ Navigator.push(
   MaterialPageRoute(
     builder: (_) => SkyfiSdk.toScreen(
       initialLocation: SkyfiRoute.topupSkyFi.path,
+      phone: '0807991197', // Số điện thoại cần thiết
     ),
   ),
 );
@@ -236,7 +242,9 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       home: Scaffold(
-        body: SkyfiSdk.toScreen(),
+        body: SkyfiSdk.toScreen(
+          phone: '0707040618', // Số điện thoại cần thiết
+        ),
       ),
     );
   }
@@ -258,6 +266,7 @@ class _SkyfiIntegrationState extends State<SkyfiIntegration> {
       MaterialPageRoute(
         builder: (_) => SkyfiSdk.toScreen(
           initialLocation: SkyfiRoute.topupSkyFi.path,
+          phone: '0707040618', // Số điện thoại cần thiết
         ),
       ),
     ).then((result) {
@@ -294,7 +303,9 @@ MaterialApp(
     primarySwatch: Colors.blue,
     fontFamily: 'KoHo', // SDK hỗ trợ font KoHo và Inter
   ),
-  home: SkyfiSdk.toScreen(),
+  home: SkyfiSdk.toScreen(
+    phone: '0707040618', // Số điện thoại cần thiết
+  ),
 )
 ```
 
@@ -491,6 +502,7 @@ class HomeScreen extends StatelessWidget {
       MaterialPageRoute(
         builder: (_) => SkyfiSdk.toScreen(
           initialLocation: initialLocation,
+          phone: '0707040618', // Số điện thoại cần thiết
         ),
       ),
     );
@@ -532,11 +544,3 @@ class HomeScreen extends StatelessWidget {
 - Tính năng nạp tiền
 - eKYC với camera và NFC
 - Video call xác thực 
-
-
-### Flutter package manager
-- dart pub global activate fvm
-- export PATH="$PATH":"$HOME/.pub-cache/bin"
-- fvm use 3.29.3
-- alias flutter="fvm flutter"
-- alias dart="fvm dart" 
