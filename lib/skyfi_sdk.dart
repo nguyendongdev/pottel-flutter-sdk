@@ -22,20 +22,17 @@ List<CameraDescription> get cameras => _cameras;
 
 class SkyfiSdk extends StatefulWidget {
   SkyfiSdk(
-      {super.key,
-      this.initialLocation,
-      required this.phone,
-      this.type = 'dev'}) {
-    SkyfiSdkConfig(type: type);
+      {super.key, this.initialLocation, this.phone, this.env = SkyfiEnv.dev}) {
+    SkyfiSdkConfig(environment: env);
   }
 
   final String? initialLocation;
-  final String phone;
-  final String type;
+  final String? phone;
+  final SkyfiEnv env;
 
   static Widget toScreen(
-      {String? initialLocation, required String phone, String type = 'dev'}) {
-    return SkyfiSdk(initialLocation: initialLocation, phone: phone, type: type);
+      {String? initialLocation, String? phone, SkyfiEnv env = SkyfiEnv.dev}) {
+    return SkyfiSdk(initialLocation: initialLocation, phone: phone, env: env);
   }
 
   @override
@@ -51,7 +48,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   void initState() {
     super.initState();
     _initialize();
-    SkyfiSdkConfig(type: widget.type); // Initialize SDK configuration
+    SkyfiSdkConfig(environment: widget.env); // Initialize SDK configuration
     authenticateUser(widget.phone);
   }
 
@@ -75,7 +72,14 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
     return !phoneRegex;
   }
 
-  Future<void> authenticateUser(String phone) async {
+  Future<void> authenticateUser(String? phone) async {
+    if (phone == null || phone.isEmpty) {
+      setState(() {
+        _isLoading = false;
+        _isLogin = true;
+      });
+      return;
+    }
     setState(() {
       _isLoading = true;
     });
@@ -210,8 +214,11 @@ enum SkyfiRoute {
   topup('/topup-skyfi'),
   infoRegis('/info-regis'),
   topupSkyFi('/topup-skyfi'),
-  infoRegisSkyFi('/info-regis');
+  infoRegisSkyFi('/info-regis'),
+  detailDataUsage('/detail-data-usage');
 
   const SkyfiRoute(this.path);
   final String path;
 }
+
+enum SkyfiEnv { dev, prod }

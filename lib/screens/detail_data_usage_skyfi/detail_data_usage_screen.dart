@@ -7,6 +7,7 @@ import 'package:skyfi_sdk/network/api.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/screens/detail_data_usage_skyfi/widgets/card_used_square.dart';
 import 'package:skyfi_sdk/screens/home_skyfi/models/current_package.dart';
+import 'package:skyfi_sdk/screens/home_skyfi/provider/login_provider.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -17,8 +18,7 @@ import '../home_skyfi/models/outstanding_pakage.dart';
 import '../home_skyfi/widgets/package_card.dart';
 
 class DetailDataUsageScreen extends HookConsumerWidget {
-  final CurrentPackage? currentPackage;
-  const DetailDataUsageScreen({super.key, this.currentPackage});
+  const DetailDataUsageScreen({super.key});
   String _daysLeft(String? toDate) {
     if (toDate == null) return '-';
     try {
@@ -37,8 +37,6 @@ class DetailDataUsageScreen extends HookConsumerWidget {
       final parsedStartDate = _convertDate(startDate);
       final parsedToDate = _convertDate(toDate);
       final diff = parsedToDate.difference(parsedStartDate).inDays;
-      print(
-          'Start Date: $parsedStartDate, To Date: $parsedToDate, Diff: $diff');
       return diff > 0 ? '/$diff ngày' : 'hết hạn';
     } catch (_) {
       return '-';
@@ -55,8 +53,11 @@ class DetailDataUsageScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final api = API();
     final listOutStandingPackage = useState<List<PackageModel>>([]);
-    final remain = double.tryParse(currentPackage?.remainData ?? '') ?? 0.0;
-    final total = double.tryParse(currentPackage?.totalData ?? '') ?? 0.0;
+    final currentPackage = useState<CurrentPackage?>(null);
+    final remain = useState<double>(0.0);
+    final total = useState<double>(0.0);
+    final load = useState<bool>(false);
+    final phone = ref.watch(currentPhoneProvider);
 
     void fetchOutStandingPackage() async {
       final response = await api.get('/bss/app/get-outstanding-package');
@@ -67,223 +68,271 @@ class DetailDataUsageScreen extends HookConsumerWidget {
       }
     }
 
+    fetchCurrentPackage() async {
+      if (phone.isEmpty) {
+        return;
+      }
+      try {
+        load.value = true;
+        final response = await api.get('/bss/app/get-current-package/$phone');
+        final data = CurrentPackageResponse.fromJson(response.data);
+        if (data.code == 200 &&
+            data.result != null &&
+            data.result!.isNotEmpty) {
+          final _currentPackage =
+              data.result!.firstWhere((pkg) => pkg.isMain == 1, orElse: () {
+            return data.result!.first;
+          });
+          currentPackage.value = _currentPackage;
+          final remainValue =
+              double.tryParse(_currentPackage.remainData ?? '0') ?? 0.0;
+          final totalValue =
+              double.tryParse(_currentPackage.totalData ?? '0') ?? 0.0;
+
+          // Ensure values are valid numbers
+          remain.value = remainValue.isFinite ? remainValue : 0.0;
+          total.value =
+              totalValue.isFinite && totalValue > 0 ? totalValue : 1.0;
+        }
+      } finally {
+        load.value = false;
+      }
+    }
+
+    useEffect(() {
+      fetchCurrentPackage();
+      return;
+    }, [phone]);
+
     useEffect(() {
       fetchOutStandingPackage();
-      return null;
+      return;
     }, []);
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Stack(
-        children: [
-          const BackgroundGradient(),
-          SafeArea(
-            child: Column(
+      body: load.value
+          ? const Center(child: CircularProgressIndicator())
+          : Stack(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                         Navigator.of(context).pop();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: AppColors.white,
-                      ),
-                    ),
-                    Text.rich(
-                      TextSpan(
+                const BackgroundGradient(),
+                SafeArea(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TextSpan(
-                            text:
-                                'Còn lại ${_daysLeft(currentPackage?.toDate)}',
-                            style: AppTextStyles.title.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.white),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: AppColors.white,
+                            ),
                           ),
-                          TextSpan(
-                            text: _daysLeftFromDate(
-                                currentPackage!.fromDate ?? '',
-                                currentPackage!.toDate ?? ''),
-                            style: AppTextStyles.title.copyWith(
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.white),
+                          Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text:
+                                      'Còn lại ${_daysLeft(currentPackage.value?.toDate)}',
+                                  style: AppTextStyles.title.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.white),
+                                ),
+                                TextSpan(
+                                  text: _daysLeftFromDate(
+                                      currentPackage.value?.fromDate ?? '',
+                                      currentPackage.value?.toDate ?? ''),
+                                  style: AppTextStyles.title.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 24,
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      width: 24,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                CircularProgressGradient(
-                  size: 180,
-                  progress: remain / total * 100,
-                  total: total,
-                  used: remain,
-                  backStrokeWidth: 20,
-                  progressStrokeWidth: 20,
-                  textColor: AppColors.white,
-                  textProgressColor: AppColors.white,
-                  progressColors: const [
-                    Color(0xFFEE3436),
-                    Color(0xFFF3B71A),
-                    Color(0xFFF3B71A),
-                  ],
-                  textTitle:
-                      'Còn lại ${_daysLeft(currentPackage?.toDate)} ngày',
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.screenPadding,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (currentPackage?.totalVoice != null &&
-                          currentPackage?.totalVoice != '0')
-                        Expanded(
-                          child: CardUsedSquare(
-                            title: 'Gọi',
-                            date: 'Tháng',
-                            description:
-                                '${currentPackage?.totalVoice ?? ''} phút/ tháng',
-                            used: int.tryParse(
-                                    currentPackage?.remainVoice ?? '0') ??
-                                0,
-                            total: int.tryParse(
-                                    currentPackage?.totalVoice ?? '0') ??
-                                0,
-                            icon: 'assets/icons/feat_call.svg',
-                          ),
-                        ),
-                      SizedBox(
-                        width: currentPackage?.totalSms != null &&
-                                currentPackage?.totalSms != '0'
-                            ? AppSpacing.md
-                            : 0,
+                      const SizedBox(
+                        height: 24,
                       ),
-                      if (currentPackage?.totalSms != null &&
-                          currentPackage?.totalSms != '0')
-                        Expanded(
-                          child: CardUsedSquare(
-                            title: 'Tin nhắn',
-                            date: 'Tháng',
-                            description:
-                                '${currentPackage?.totalSms ?? '0'} SMS/ tháng',
-                            used: int.tryParse(
-                                    currentPackage?.remainSms ?? '0') ??
-                                0,
-                            total:
-                                int.tryParse(currentPackage?.totalSms ?? '0') ??
-                                    0,
-                            icon: 'assets/icons/feat_message.svg',
-                          ),
+                      CircularProgressGradient(
+                        size: 180,
+                        progress: remain.value / total.value * 100,
+                        total: total.value,
+                        used: remain.value,
+                        backStrokeWidth: 20,
+                        progressStrokeWidth: 20,
+                        textColor: AppColors.white,
+                        textProgressColor: AppColors.white,
+                        progressColors: const [
+                          Color(0xFFEE3436),
+                          Color(0xFFF3B71A),
+                          Color.fromARGB(255, 247, 113, 115),
+                        ],
+                        textTitle:
+                            'Còn lại ${_daysLeft(currentPackage.value?.toDate)} ngày',
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.screenPadding,
                         ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: currentPackage?.totalSms != null &&
-                                  currentPackage?.totalSms != '0' &&
-                                  currentPackage?.totalVoice != null &&
-                                  currentPackage?.totalVoice != '0'
-                              ? AppSpacing.md
-                              : 60,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.screenPadding,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Gói cước hot',
-                                style: AppTextStyles.heading,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (currentPackage.value?.totalVoice != null &&
+                                currentPackage.value?.totalVoice != '0')
+                              Expanded(
+                                child: CardUsedSquare(
+                                  title: 'Gọi',
+                                  date: 'Tháng',
+                                  description:
+                                      '${currentPackage.value?.totalVoice ?? ''} phút/ tháng',
+                                  used: int.tryParse(
+                                          currentPackage.value?.remainVoice ??
+                                              '0') ??
+                                      0,
+                                  total: int.tryParse(
+                                          currentPackage.value?.totalVoice ??
+                                              '0') ??
+                                      0,
+                                  icon: 'assets/icons/feat_call.svg',
+                                ),
                               ),
-                              TextButton(
-                                onPressed: () {},
+                            SizedBox(
+                              width: currentPackage.value?.totalSms != null &&
+                                      currentPackage.value?.totalSms != '0'
+                                  ? AppSpacing.md
+                                  : 0,
+                            ),
+                            if (currentPackage.value?.totalSms != null &&
+                                currentPackage.value?.totalSms != '0')
+                              Expanded(
+                                child: CardUsedSquare(
+                                  title: 'Tin nhắn',
+                                  date: 'Tháng',
+                                  description:
+                                      '${currentPackage.value?.totalSms ?? '0'} SMS/ tháng',
+                                  used: int.tryParse(
+                                          currentPackage.value?.remainSms ??
+                                              '0') ??
+                                      0,
+                                  total: int.tryParse(
+                                          currentPackage.value?.totalSms ??
+                                              '0') ??
+                                      0,
+                                  icon: 'assets/icons/feat_message.svg',
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: currentPackage.value?.totalSms !=
+                                            null &&
+                                        currentPackage.value?.totalSms != '0' &&
+                                        currentPackage.value?.totalVoice !=
+                                            null &&
+                                        currentPackage.value?.totalVoice != '0'
+                                    ? AppSpacing.md
+                                    : 60,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSpacing.screenPadding,
+                                ),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      'Khám phá',
-                                      style: AppTextStyles.button.copyWith(
-                                        color: AppColors.strongSecondary,
+                                    const Text(
+                                      'Gói cước hot',
+                                      style: AppTextStyles.heading,
+                                    ),
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Khám phá',
+                                            style:
+                                                AppTextStyles.button.copyWith(
+                                              color: AppColors.strongSecondary,
+                                            ),
+                                          ),
+                                          const SizedBox(width: AppSpacing.xs),
+                                          const Icon(
+                                            Icons.chevron_right,
+                                            color: AppColors.strongSecondary,
+                                            size: 20,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    const SizedBox(width: AppSpacing.xs),
-                                    const Icon(
-                                      Icons.chevron_right,
-                                      color: AppColors.strongSecondary,
-                                      size: 20,
-                                    ),
                                   ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 290,
+                                child: ListView(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: AppSpacing.screenPadding,
+                                    vertical: AppSpacing.md,
+                                  ),
+                                  scrollDirection: Axis.horizontal,
+                                  children: listOutStandingPackage
+                                          .value.isNotEmpty
+                                      ? listOutStandingPackage.value.map((pkg) {
+                                          return PackageCard(
+                                            package: pkg,
+                                            margin: const EdgeInsets.only(
+                                                right: 16),
+                                            onTapDetail: () {
+                                              context.pushNamed(
+                                                  AppRouter.packageDetailSkyfi,
+                                                  extra: {
+                                                    'packageId': pkg.id.toInt(),
+                                                  });
+                                            },
+                                            onTapRegister: () {
+                                              context.pushNamed(
+                                                  AppRouter.packageDetailSkyfi,
+                                                  extra: {
+                                                    'packageId': pkg.id.toInt(),
+                                                    'isRegister': true,
+                                                  });
+                                            },
+                                          );
+                                        }).toList()
+                                      : [
+                                          const Center(
+                                            child: Text(
+                                                'Không có gói cước hot hiện tại.'),
+                                          ),
+                                        ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 290,
-                          child: ListView(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.screenPadding,
-                              vertical: AppSpacing.md,
-                            ),
-                            scrollDirection: Axis.horizontal,
-                            children: listOutStandingPackage.value.isNotEmpty
-                                ? listOutStandingPackage.value.map((pkg) {
-                                    return PackageCard(
-                                      package: pkg,
-                                      margin: const EdgeInsets.only(right: 16),
-                                      onTapDetail: () {
-                                        context.pushNamed(
-                                            AppRouter.packageDetailSkyfi,
-                                            extra: {
-                                              'packageId': pkg.id.toInt(),
-                                            });
-                                      },
-                                      onTapRegister: () {
-                                        context.pushNamed(
-                                            AppRouter.packageDetailSkyfi,
-                                            extra: {
-                                              'packageId': pkg.id.toInt(),
-                                              'isRegister': true,
-                                            });
-                                      },
-                                    );
-                                  }).toList()
-                                : [
-                                    const Center(
-                                      child: Text(
-                                          'Không có gói cước hot hiện tại.'),
-                                    ),
-                                  ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/contact_detail_screen.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/double_check_info_screen.dart';
-import 'package:skyfi_sdk/screens/home_skyfi/models/current_package.dart';
 import 'package:skyfi_sdk/screens/manager_sim/detail_eSim.dart';
 import 'package:skyfi_sdk/screens/manager_sim/manager_sim.dart';
 import 'package:skyfi_sdk/screens/manager_sim/models/response_manager_esim/item_my_esim.dart';
@@ -184,9 +183,7 @@ class AppRouter {
             path: detailDataUsage,
             name: detailDataUsage,
             builder: (context, state) {
-              final CurrentPackage? currentPackage =
-                  state.extra as CurrentPackage?;
-              return DetailDataUsageScreen(currentPackage: currentPackage);
+              return DetailDataUsageScreen();
             },
           ),
           GoRoute(
