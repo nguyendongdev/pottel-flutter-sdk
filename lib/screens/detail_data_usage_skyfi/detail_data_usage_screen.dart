@@ -99,6 +99,15 @@ class DetailDataUsageScreen extends HookConsumerWidget {
       }
     }
 
+    // Helper function to calculate safe progress
+    double _getSafeProgress() {
+      if (total.value <= 0 || !remain.value.isFinite || !total.value.isFinite) {
+        return 0.0;
+      }
+      final progress = (remain.value / total.value * 100);
+      return progress.isFinite ? progress.clamp(0.0, 100.0) : 0.0;
+    }
+
     useEffect(() {
       fetchCurrentPackage();
       return;
@@ -162,7 +171,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                       ),
                       CircularProgressGradient(
                         size: 180,
-                        progress: remain.value / total.value * 100,
+                        progress: _getSafeProgress(),
                         total: total.value,
                         used: remain.value,
                         backStrokeWidth: 20,
