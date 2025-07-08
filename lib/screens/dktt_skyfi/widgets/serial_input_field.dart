@@ -66,7 +66,7 @@ class SerialInputField extends StatelessWidget {
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
-                    hintText: 'Nhập 11 số cuối serial SIM',
+                    hintText: 'Nhập 16 số cuối serial SIM',
                     hintStyle: TextStyle(
                       color: AppColors.textLight,
                       fontSize: 16,
