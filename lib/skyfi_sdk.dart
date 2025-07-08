@@ -48,15 +48,15 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   void initState() {
     super.initState();
     _initialize();
-    SkyfiSdkConfig(environment: widget.env); // Initialize SDK configuration
+
     authenticateUser(widget.phone);
   }
 
   @override
   void dispose() {
     super.dispose();
-    StoreClient.setToken('');
-    StoreClient.setPhone('');
+    // StoreClient.setToken('');
+    // StoreClient.setPhone('');
   }
 
   Future<void> _initialize() async {
@@ -83,13 +83,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
     setState(() {
       _isLoading = true;
     });
-    if (_checkPhone(phone)) {
-      setState(() {
-        _isLogin = true;
-        _isLoading = false;
-      });
-      return;
-    }
+
     try {
       final res = await SkyfiSdkAuth().loginWithPhone(phone);
       if (res['code'] == 200) {
@@ -98,6 +92,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
           _isLoading = false;
         });
         // Lưu thông tin đăng nhập nếu cần
+        print(' điện thoại: ${res['result']['token']}');
         await StoreClient.setToken(res['result']['token']);
         await StoreClient.setPhone(phone);
       } else {
