@@ -68,12 +68,14 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   }
 
   bool _checkPhone(String phone) {
-    final phoneRegex = RegExp(r'^(070)(\d{7})$').hasMatch(phone);
+    final phoneRegex = RegExp(r'^(\+8470|8470|070)(\d{7})$').hasMatch(phone);
     return !phoneRegex;
   }
 
   Future<void> authenticateUser(String? phone) async {
-    if (phone == null || phone.isEmpty) {
+    if (phone == null || phone.isEmpty || _checkPhone(phone)) {
+      StoreClient.setToken('');
+      StoreClient.setPhone('');
       setState(() {
         _isLoading = false;
         _isLogin = true;
