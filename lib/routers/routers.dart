@@ -405,6 +405,7 @@ class AppRouter {
               final data = state.extra as Map<String, dynamic>;
               return DetailESim(
                 esim: data['esim'] as ItemMyEsim,
+                isBuying: data['isBuying'] as bool? ?? false,
               );
             },
           ),

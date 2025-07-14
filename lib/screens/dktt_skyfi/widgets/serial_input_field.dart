@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -66,7 +65,7 @@ class SerialInputField extends StatelessWidget {
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
-                    hintText: 'Nhập 16 số cuối serial SIM',
+                    hintText: 'Nhập serial SIM hoặc quét mã',
                     hintStyle: TextStyle(
                       color: AppColors.textLight,
                       fontSize: 16,

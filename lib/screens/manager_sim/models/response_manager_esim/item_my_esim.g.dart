@@ -20,7 +20,7 @@ ItemMyEsim _$ItemMyEsimFromJson(Map<String, dynamic> json) => ItemMyEsim(
       data: json['data'] == null
           ? null
           : DataMyEsim.fromJson(json['data'] as Map<String, dynamic>),
-    );
+    )..sellingPrice = (json['selling_price'] as num?)?.toInt();
 
 Map<String, dynamic> _$ItemMyEsimToJson(ItemMyEsim instance) =>
     <String, dynamic>{
@@ -34,5 +34,6 @@ Map<String, dynamic> _$ItemMyEsimToJson(ItemMyEsim instance) =>
       'region_id': instance.regionId,
       'region_name': instance.regionName,
       'provider_name': instance.providerName,
+      'selling_price': instance.sellingPrice,
       'data': instance.data,
     };

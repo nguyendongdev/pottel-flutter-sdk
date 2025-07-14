@@ -40,8 +40,11 @@ class _MyAppState extends State<MyApp> {
                       context,
                       MaterialPageRoute(
                           builder: (_) => SkyfiSdk(
-                                phone: '0707654169',
-                              )),
+                            phone: '+84707654169',
+                            env: SkyfiEnv.dev,
+                            initialLocation: SkyfiRoute.home.path,
+                          ),
+                        ),
                     );
                   },
                   child: const Text('Mở SkyFi SDK'),
@@ -68,7 +71,7 @@ class _MyAppState extends State<MyApp> {
                       MaterialPageRoute(
                         builder: (_) => SkyfiSdk.toScreen(
                           initialLocation: SkyfiRoute.topupSkyFi.path,
-                          phone: '0807991197',
+                          phone: '+84707654169',
                         ),
                       ),
                     );
@@ -83,7 +86,7 @@ class _MyAppState extends State<MyApp> {
                       MaterialPageRoute(
                         builder: (_) => SkyfiSdk.toScreen(
                           initialLocation: SkyfiRoute.detailDataUsage.path,
-                          phone: '0707654169',
+                          phone: '+84707654169',
                         ),
                       ),
                     );

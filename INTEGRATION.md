@@ -544,3 +544,15 @@ class HomeScreen extends StatelessWidget {
 - Tính năng nạp tiền
 - eKYC với camera và NFC
 - Video call xác thực 
+
+
+### Release APK or AAB android
+# If your android app cannot open Video Call Room
+# add this line inside folder android/app/proguard-rules.pro 
+# WebRTC
+-keep class org.webrtc.** { *; }
+-dontwarn org.chromium.build.BuildHooksAndroid
+
+# Jisti Meet SDK
+-keep class org.jitsi.meet.** { *; }
+-keep class org.jitsi.meet.sdk.** { *; }
