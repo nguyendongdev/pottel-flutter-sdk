@@ -147,7 +147,10 @@ class SimActive extends ConsumerWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle buy more data
+                    context.pushNamed(
+                      AppRouter.managerSimDetail,
+                      extra: {'esim': esim, 'isBuying': true},
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFFAA61A),
