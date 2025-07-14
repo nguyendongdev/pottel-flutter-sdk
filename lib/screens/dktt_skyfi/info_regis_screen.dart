@@ -141,7 +141,7 @@ class InfoRegisScreen extends HookConsumerWidget {
             Common.showDialogConfirm(
               context,
               'Thông báo',
-              'Số thuê bao ${msisdnController.text} của Bạn đăng ký thông tin chưa thành công. Bạn có muốn tiếp tục cuộc gọi với SkyFi không?',
+              'Số thuê bao ${msisdnController.text} đang tiến hành đến bược gọi tổng đài. Bạn có thể đi thẳng tới bước gọi tổng đài hoặc thực hiện lại từ đầu từ bước chụp ảnh giấy tờ',
               () {
                 context.pop();
                 // open start video call
@@ -225,6 +225,13 @@ class InfoRegisScreen extends HookConsumerWidget {
                       Text(
                         'Thông tin SIM',
                         style: AppTextStyles.heading.copyWith(
+                          color: AppColors.text,
+                        ),
+                      ),
+                       const SizedBox(height: AppSpacing.lg),
+                      Text(
+                        'Lưu ý: Bạn có tối đa 10 lần nhập/quét số Serial SIM cho 1 số thuê bao trong 1 ngày. Vượt quá số lần quy định, vui lòng thử lại sau 24 giờ.',
+                        style: AppTextStyles.label.copyWith(
                           color: AppColors.text,
                         ),
                       ),
