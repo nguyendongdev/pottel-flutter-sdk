@@ -9,8 +9,9 @@ import 'sim_not_active_detail.dart';
 
 class DetailESim extends ConsumerWidget {
   final ItemMyEsim esim;
+  final bool isBuying;
 
-  const DetailESim({super.key, required this.esim});
+  const DetailESim({super.key, required this.esim, this.isBuying = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,7 +33,7 @@ class DetailESim extends ConsumerWidget {
         centerTitle: true,
       ),
       body: isActive
-          ? SimActiveDetail(esim: esim)
+          ? SimActiveDetail(esim: esim, isBuying: isBuying)
           : SimNotActiveDetail(esim: esim),
     );
   }

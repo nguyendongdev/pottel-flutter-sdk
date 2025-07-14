@@ -8,16 +8,58 @@ import 'package:skyfi_sdk/screens/manager_sim/widgets/data_package_card.dart';
 
 import 'models/response_manager_esim/item_my_esim.dart';
 
-class SimActiveDetail extends ConsumerWidget {
+class SimActiveDetail extends ConsumerStatefulWidget {
   final ItemMyEsim esim;
+  final bool isBuying;
 
-  const SimActiveDetail({super.key, required this.esim});
+  const SimActiveDetail({super.key, required this.esim, this.isBuying = false});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final esimNotifierProvider = managerESimListDataProvider(esim.iccid ?? '');
+  ConsumerState<SimActiveDetail> createState() => _SimActiveDetailState();
+}
+
+class _SimActiveDetailState extends ConsumerState<SimActiveDetail> {
+  late ScrollController _scrollController;
+  final GlobalKey _additionalPackagesKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+
+    // Auto-scroll to additional packages section if isBuying is true
+    if (widget.isBuying) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToAdditionalPackages();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToAdditionalPackages() {
+    final context = _additionalPackagesKey.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final esimNotifierProvider =
+        managerESimListDataProvider(widget.esim.iccid ?? '');
     final esimAsyncValue = ref.watch(esimNotifierProvider);
+    Size size = MediaQuery.sizeOf(context);
     return SingleChildScrollView(
+      controller: _scrollController,
       padding: EdgeInsets.all(16),
       child: Column(
         children: [
@@ -31,23 +73,39 @@ class SimActiveDetail extends ConsumerWidget {
           SizedBox(height: 16),
 
           // Additional Data Packages Section
-          esimAsyncValue.when(
-            data: (data) => _buildAdditionalPackagesSection(data.result ?? []),
-            error: (error, stack) {
-              return Center(
-                child: Text(
-                  'Lỗi tải dữ liệu: $error',
-                  style: AppTextStyles.body.copyWith(color: AppColors.red),
-                ),
-              );
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
+          Container(
+            key: _additionalPackagesKey,
+            child: esimAsyncValue.when(
+              data: (data) =>
+                  _buildAdditionalPackagesSection(data.result ?? []),
+              error: (error, stack) {
+                return Center(
+                  child: Text(
+                    'Lỗi tải dữ liệu: $error',
+                    style: AppTextStyles.body.copyWith(color: AppColors.red),
+                  ),
+                );
+              },
+              loading: () => SizedBox(
+                  height: size.height,
+                  child: const Center(child: CircularProgressIndicator())),
+            ),
           ),
 
           SizedBox(height: 32),
         ],
       ),
     );
+  }
+
+  String convertDataUnit(double dataAmount) {
+    if (dataAmount >= 1024 * 1024) {
+      return '${(dataAmount / (1024 * 1024)).toStringAsFixed(0)}TB';
+    } else if (dataAmount >= 1024) {
+      return '${(dataAmount / 1024).toStringAsFixed(0)}GB';
+    } else {
+      return '${dataAmount.toStringAsFixed(0)}MB';
+    }
   }
 
   Widget _buildMainPackageSection() {
@@ -89,9 +147,10 @@ class SimActiveDetail extends ConsumerWidget {
 
   Widget _buildDataUsageCircle() {
     // Data usage calculation
-    final totalData =
-        esim.data?.total?.toDouble() ?? esim.dataAmount?.toDouble() ?? 8.0;
-    final remaining = esim.data?.remaining?.toDouble() ?? 6.0;
+    final totalData = widget.esim.data?.total?.toDouble() ??
+        widget.esim.dataAmount?.toDouble() ??
+        8.0;
+    final remaining = widget.esim.data?.remaining?.toDouble() ?? 6.0;
     final usedData = totalData - remaining;
     final progress = totalData > 0 ? usedData / totalData : 0.0;
 
@@ -127,7 +186,7 @@ class SimActiveDetail extends ConsumerWidget {
               ),
               SizedBox(height: 4),
               Text(
-                '${(totalData - usedData).toStringAsFixed(1)}GB/${totalData.toStringAsFixed(0)}GB',
+                '${convertDataUnit(totalData - usedData)} / ${convertDataUnit(totalData)}',
                 style: AppTextStyles.heading.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -146,16 +205,17 @@ class SimActiveDetail extends ConsumerWidget {
       children: [
         _buildDetailItem(
           label: 'Phạm vi phủ sóng',
-          value: esim.regionName ?? 'Singapore',
+          value: widget.esim.regionName ?? 'Singapore',
         ),
         _buildDetailItem(
           label: 'Cung cấp bởi',
-          value: esim.providerName ?? 'Singtel',
+          value: widget.esim.providerName ?? 'Singtel',
           hasInfo: true,
         ),
         _buildDetailItem(
           label: 'Dung lượng',
-          value: '${esim.dataAmount ?? 8} ${esim.dataUnit ?? 'GB'}',
+          value:
+              '${widget.esim.dataAmount ?? 8} ${widget.esim.dataUnit ?? 'GB'}',
         ),
         _buildDetailItem(
           label: 'Loại gói',
@@ -164,7 +224,7 @@ class SimActiveDetail extends ConsumerWidget {
         ),
         _buildDetailItem(
           label: 'Hiệu lực',
-          value: '${esim.validityDays ?? 30} ngày',
+          value: '${widget.esim.validityDays ?? 30} ngày',
         ),
         _buildDetailItem(
           label: 'eKYC (Xác minh danh tính)',
@@ -172,7 +232,7 @@ class SimActiveDetail extends ConsumerWidget {
         ),
         _buildDetailItem(
           label: 'ICCID',
-          value: esim.iccid ?? '89840480003232863650',
+          value: widget.esim.iccid ?? '89840480003232863650',
           isLast: true,
         ),
       ],
@@ -271,7 +331,7 @@ class SimActiveDetail extends ConsumerWidget {
                 padding: const EdgeInsets.only(bottom: 16),
                 child: DataPackageCard(
                   package: package,
-                  iccid: esim.iccid ?? '',
+                  iccid: widget.esim.iccid ?? '',
                 ),
               );
             }).toList(),

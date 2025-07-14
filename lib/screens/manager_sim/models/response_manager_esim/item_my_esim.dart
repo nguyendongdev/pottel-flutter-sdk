@@ -24,6 +24,8 @@ class ItemMyEsim {
   String? regionName;
   @JsonKey(name: 'provider_name')
   String? providerName;
+  @JsonKey(name: 'selling_price')
+  int? sellingPrice;
   DataMyEsim? data;
 
   ItemMyEsim({

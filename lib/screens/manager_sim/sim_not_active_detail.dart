@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
+import 'package:skyfi_sdk/utilities/common.dart';
 
 import 'models/response_manager_esim/item_my_esim.dart';
 
@@ -249,7 +250,10 @@ class SimNotActiveDetail extends ConsumerWidget {
 
           _buildDetailItem(
             label: 'Giá',
-            value: '199.000 VND',
+            value: Common.formatCurrency(
+                  esim.sellingPrice.toString() ?? '0',
+                ) +
+                ' VND',
           ),
 
           _buildDetailItem(
