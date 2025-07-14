@@ -40,11 +40,10 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
 
     void getLinkPayment(String orderID) async {
       isLoading.value = true;
-      Common.startLoadingDialog(context, 'Đang tạo đơn hàng...');
       final response = await api.post(
           '/bss/payment/gateways/GALAXYPAY/redirect',
           data: {'orderNumber': orderID});
-      Common.stopLoadingDialog(context);
+
       isLoading.value = false;
       final data = PaymentRespone.fromJson(response.data);
       if (response.statusCode == 200 && data.code == 200) {
@@ -57,7 +56,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
 
     void checkOutOrderGALAXYPAY() async {
       isLoading.value = true;
-      Common.startLoadingDialog(context, 'Đang tạo đơn hàng...');
+
       final order = ref.read(paymentOrderProvider);
       final items = order.items;
       final itemsJson = items?.map((item) => item.toJson()).toList();
@@ -66,7 +65,6 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
       print('orderJson: $orderJson');
       isLoading.value = false;
       final response = await api.post('/bss/app/create-order', data: orderJson);
-      Common.stopLoadingDialog(context);
       isLoading.value = false;
       final data = CreateOrder.fromJson(response.data);
       if (response.statusCode == 200 && data.code == 200) {
@@ -89,7 +87,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
 
     void onBackSimData() {
       // ref.read(paymentOrderProvider.notifier).resetOrder();
-       Navigator.of(context).pop();
+      Navigator.of(context).pop();
       context.pushNamed(AppRouter.simDataSkyFi);
     }
 
