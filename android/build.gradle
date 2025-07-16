@@ -65,8 +65,8 @@ android {
             }
         }
     }
-    packagingOptions {
-        pickFirst '**/RtspMediaSource.class'
-        pickFirst '**/RtspMediaSource$Factory.class'
-    }
+//    packagingOptions {
+//        pickFirst '**/RtspMediaSource.class'
+//        pickFirst '**/RtspMediaSource$Factory.class'
+//    }
 }
