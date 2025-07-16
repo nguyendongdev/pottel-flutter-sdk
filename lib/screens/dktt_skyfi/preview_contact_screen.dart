@@ -47,7 +47,7 @@ class PreviewContactScreen extends HookConsumerWidget {
           final base64 = base64Encode(image!);
           ref.read(saveLogDkttNotifierProvider.notifier).setImg4(base64);
         }
-        Common.startLoadingDialog(context, 'Đang lấy thông tin hợp đồng...');
+        // Common.startLoadingDialog(context, 'Đang lấy thông tin hợp đồng...');
         final response = await api.post(
           '/bss/videocall/get_img4_app',
           data: ref.read(saveLogDkttNotifierProvider).toJson(),
@@ -58,9 +58,9 @@ class PreviewContactScreen extends HookConsumerWidget {
         } else {
           SnackBarApp.showError(context, message: 'Lỗi xem thông tin hợp đồng');
         }
-        Common.stopLoadingDialog(context);
+        // Common.stopLoadingDialog(context);
       } catch (e) {
-        Common.stopLoadingDialog(context);
+        // Common.stopLoadingDialog(context);
         SnackBarApp.showError(context, message: 'Lỗi xem thông tin hợp đồng');
       }
     }
