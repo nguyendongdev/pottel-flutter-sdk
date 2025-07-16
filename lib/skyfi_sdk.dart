@@ -100,7 +100,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
         // Lưu thông tin đăng nhập nếu cần
         print(' điện thoại: ${res['result']['token']}');
         await StoreClient.setToken(res['result']['token']);
-        await StoreClient.setPhone(phone);
+        await StoreClient.setPhone(phoneNumber);
       } else {
         showMessage(
           '${res['message']}',
