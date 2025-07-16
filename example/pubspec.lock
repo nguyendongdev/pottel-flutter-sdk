@@ -270,8 +270,8 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "4447593ff85980c26f7466f3672b17fa6907856a"
-      url: "https://github.com/matheonguyen73/dmrtd.git"
+      resolved-ref: "677f3e71b14b6f5cc714dd98798c3ed3737e24a5"
+      url: "https://github.com/gj-loitp/dmrtd.git"
     source: git
     version: "2.0.0"
   expandable:
@@ -740,10 +740,10 @@ packages:
     dependency: transitive
     description:
       name: jitsi_meet_flutter_sdk
-      sha256: e2cd379118541274a189a00133b2c803873d35d5d4da651451dc3720b8ca7106
+      sha256: "890c8dcf97c2bff7aa7cef449699adf66c6d7f61ec3c0d94cf3b5f1329addfd4"
       url: "https://pub.dev"
     source: hosted
-    version: "11.2.0"
+    version: "11.3.0"
   js:
     dependency: transitive
     description:
