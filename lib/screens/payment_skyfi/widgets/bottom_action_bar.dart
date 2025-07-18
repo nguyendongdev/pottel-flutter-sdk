@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skyfi_sdk/modals/modalWebview.dart';
 import 'package:skyfi_sdk/screens/esim_travel_skyfi/compatible_devices_screen.dart';
 
 import '../../../core/constants/colors.dart';
@@ -284,38 +285,48 @@ class BottomActionBar extends HookConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (modeUI == 'USIM' || modeUI == 'ALL')
-            AppCheckboxWithLink(
-              value: termsAccepted.value,
-              onChanged: (value) {
-                termsAccepted.value = value ?? false;
-              },
-              text:
-                  'Tôi đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi',
-              linkText: 'Điều khoản & Điều kiện',
-              onLinkTap: () {
-                context.pushNamed(
-                  AppRouter.webviewTermsSkyfi,
-                  extra: {
-                    'url': 'https://skyfi.network/vi/terms-and-conditions',
-                    'title': 'Điều khoản & Điều kiện',
-                  },
-                );
-              },
-            ),
           const SizedBox(height: AppSpacing.sm),
-          if (modeUI == 'ESIM' || modeUI == 'ALL')
-            AppCheckboxWithLink(
-              value: termsAcceptedESIM.value,
-              onChanged: (value) {
-                termsAcceptedESIM.value = value ?? false;
-              },
-              text: 'Thiết bị của tôi là tương thích với eSIM.',
-              linkText: 'tương thích với eSIM',
-              onLinkTap: () {
-                onShowDeviceList();
-              },
-            ),
+          AppCheckboxWithLink(
+            value: termsAcceptedESIM.value,
+            onChanged: (value) {
+              termsAcceptedESIM.value = value ?? false;
+              termsAccepted.value = value ?? false;
+            },
+            text: modeUI == 'ESIM' || modeUI == 'ALL'
+                ? 'Thiết bị của tôi là tương thích với eSIM. Tôi đồng ý với Điều kiện & Điều khoản.'
+                : 'Tôi đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi',
+            links: [
+              modeUI == 'ESIM' || modeUI == 'ALL'
+                  ? LinkData(
+                      text: 'tương thích với eSIM',
+                      onTap: () {
+                        onShowDeviceList();
+                      },
+                    )
+                  : LinkData(
+                      text: 'Điều khoản & Điều kiện giao dịch',
+                      onTap: () {
+                        WebViewModal.showWebContent(
+                          context: context,
+                          url:
+                              'https://skyfi.pro/vi/terms-and-conditions?src=app',
+                          title: 'Điều khoản & Điều kiện ',
+                        );
+                      },
+                    ),
+              if (modeUI == 'ESIM' || modeUI == 'ALL')
+                LinkData(
+                  text: 'Điều kiện & Điều khoản.',
+                  onTap: () {
+                    WebViewModal.showWebContent(
+                      context: context,
+                      url: 'https://skyfi.pro/vi/terms-and-conditions?src=app',
+                      title: 'Điều khoản & Điều kiện ',
+                    );
+                  },
+                ),
+            ],
+          ),
           const SizedBox(height: AppSpacing.lg),
           GradientButton(
             onPressed: () {

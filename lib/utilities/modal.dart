@@ -104,6 +104,7 @@ class Modal {
     String? cancelText,
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
+    bool showBothButtons = true,
     Widget? icon,
   }) {
     return show(
@@ -113,7 +114,7 @@ class Modal {
       closeText: cancelText ?? 'Hủy',
       onConfirm: onConfirm,
       onClose: onCancel,
-      showBothButtons: true,
+      showBothButtons: showBothButtons,
       icon: icon,
     );
   }
