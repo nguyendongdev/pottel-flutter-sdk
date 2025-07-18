@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_card.dart';
-
 import '../../../core/widgets/icon_card.dart';
 import '../../../core/widgets/progress_gradient_line.dart';
 
@@ -29,13 +30,13 @@ class DataAddonCard extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          'Data',
+                          context.l10n.translate('data'),
                           style: AppTextStyles.heading.copyWith(
                             color: AppColors.text,
                           ),
                         ),
                         Text(
-                          'ngày',
+                          context.l10n.translate('day'),
                           style: AppTextStyles.body.copyWith(
                             color: AppColors.textGrey,
                           ),
@@ -44,7 +45,7 @@ class DataAddonCard extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      'Gói ngày D3',
+                      context.l10n.translate('daily_package'),
                       style: AppTextStyles.heading.copyWith(
                         color: AppColors.text,
                       ),
@@ -61,7 +62,7 @@ class DataAddonCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '/ngày',
+                      context.l10n.translate('per_day'),
                       style: AppTextStyles.body.copyWith(
                         fontWeight: FontWeight.w700,
                         color: AppColors.textGrey,
@@ -107,7 +108,7 @@ class DataAddonCard extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: '/1 ngày',
+                            text: '/1 ${context.l10n.translate('day')}',
                             style: AppTextStyles.small.copyWith(
                               color: AppColors.textGrey,
                             ),

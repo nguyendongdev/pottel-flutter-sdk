@@ -6,16 +6,25 @@ PODS:
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - flutter_inappwebview_ios (0.0.1):
+    - Flutter
+    - flutter_inappwebview_ios/Core (= 0.0.1)
+    - OrderedSet (~> 6.0.3)
+  - flutter_inappwebview_ios/Core (0.0.1):
+    - Flutter
+    - OrderedSet (~> 6.0.3)
   - flutter_nfc_kit (3.6.0):
     - Flutter
   - Giphy (2.2.12):
     - libwebp
+  - image_picker_ios (0.0.1):
+    - Flutter
   - integration_test (0.0.1):
     - Flutter
-  - jitsi_meet_flutter_sdk (11.1.1):
+  - jitsi_meet_flutter_sdk (11.3.0):
     - Flutter
-    - JitsiMeetSDK (= 11.1.1)
-  - JitsiMeetSDK (11.1.1):
+    - JitsiMeetSDK (= 11.3.0)
+  - JitsiMeetSDK (11.3.0):
     - Giphy (= 2.2.12)
     - JitsiWebRTC (~> 124.0)
   - JitsiWebRTC (124.0.2)
@@ -37,6 +46,7 @@ PODS:
   - mobile_scanner (7.0.0):
     - Flutter
     - FlutterMacOS
+  - OrderedSet (6.0.3)
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -70,7 +80,9 @@ DEPENDENCIES:
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
+  - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_nfc_kit (from `.symlinks/plugins/flutter_nfc_kit/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - jitsi_meet_flutter_sdk (from `.symlinks/plugins/jitsi_meet_flutter_sdk/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/darwin`)
@@ -93,6 +105,7 @@ SPEC REPOS:
     - JitsiMeetSDK
     - JitsiWebRTC
     - libwebp
+    - OrderedSet
 
 EXTERNAL SOURCES:
   audio_session:
@@ -103,8 +116,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
+  flutter_inappwebview_ios:
+    :path: ".symlinks/plugins/flutter_inappwebview_ios/ios"
   flutter_nfc_kit:
     :path: ".symlinks/plugins/flutter_nfc_kit/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
   jitsi_meet_flutter_sdk:
@@ -141,15 +158,18 @@ SPEC CHECKSUMS:
   camera_avfoundation: adb0207d868b2d873e895371d88448399ab78d87
   device_info_plus: bf2e3232933866d73fe290f2942f2156cdd10342
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_inappwebview_ios: 6f63631e2c62a7c350263b13fa5427aedefe81d4
   flutter_nfc_kit: 3985c93f749b9cb4747479205c2f10bd2f877a11
   Giphy: 83628960ed04e1c3428ff1b4fb2b027f65e82f50
+  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
-  jitsi_meet_flutter_sdk: 626f186a58fb4a9caae49d6e36f625ba2273d209
-  JitsiMeetSDK: 4e1c269aaaed8f2cb7b0fff2d3c00f08359b170e
+  jitsi_meet_flutter_sdk: c6715c37a1098396d6caf1a164283b847251724a
+  JitsiMeetSDK: 39df41cda49c290e41293e60e01f822c59b92b64
   JitsiWebRTC: b47805ab5668be38e7ee60e2258f49badfe8e1d0
   just_audio: a42c63806f16995daf5b219ae1d679deb76e6a79
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   mobile_scanner: 77265f3dc8d580810e91849d4a0811a90467ed5e
+  OrderedSet: e539b66b644ff081c73a262d24ad552a69be3a94
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2

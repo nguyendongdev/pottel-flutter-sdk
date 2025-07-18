@@ -8,6 +8,7 @@ import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/gradient_button.dart';
+import '../../../l10n/localization_extension.dart';
 
 class PackageCard extends StatelessWidget {
   const PackageCard(
@@ -72,7 +73,7 @@ class PackageCard extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    ' - ${package.validityDay} ngày',
+                                    ' - ${package.validityDay} ${context.l10n.translate('days')}',
                                     style: AppTextStyles.button.copyWith(
                                       color: AppColors.text,
                                     ),
@@ -82,7 +83,7 @@ class PackageCard extends StatelessWidget {
                                   GestureDetector(
                                     onTap: onTapDetail?.call,
                                     child: Text(
-                                      'Chi tiết',
+                                      context.l10n.translate('details'),
                                       style: AppTextStyles.label.copyWith(
                                         color: AppColors.blue,
                                         decoration: TextDecoration.underline,
@@ -112,7 +113,7 @@ class PackageCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: AppSpacing.sm),
                                 Text(
-                                  'Data: ${package.dataPerDay.toInt()}GB/ngày',
+                                  'Data: ${package.dataPerDay.toInt()}GB/${context.l10n.translate('day')}',
                                   style: AppTextStyles.button.copyWith(
                                     color: AppColors.text,
                                   ),
@@ -139,7 +140,7 @@ class PackageCard extends StatelessWidget {
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
                                   Text(
-                                    'Phút gọi: ${package.freeCallMinute} phút gọi liên mạng',
+                                    context.l10n.translate('call_minutes').replaceAll('{0}', package.freeCallMinute.toString()),
                                     style: AppTextStyles.button.copyWith(
                                       color: AppColors.text,
                                     ),
@@ -167,7 +168,7 @@ class PackageCard extends StatelessWidget {
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
                                   Text(
-                                    'SMS: ${package.freeSms} tin nhắn nội mạng',
+                                    context.l10n.translate('sms_messages').replaceAll('{0}', package.freeSms.toString()),
                                     style: AppTextStyles.button.copyWith(
                                       color: AppColors.text,
                                     ),
@@ -209,7 +210,7 @@ class PackageCard extends StatelessWidget {
                               ),
                               const SizedBox(width: AppSpacing.xs),
                               Text(
-                                '/ ${package.validityDay} ngày',
+                                '/ ${package.validityDay} ${context.l10n.translate('days')}',
                                 style: AppTextStyles.small.copyWith(
                                   color: AppColors.text,
                                 ),
@@ -235,7 +236,7 @@ class PackageCard extends StatelessWidget {
                         textStyle: AppTextStyles.button.copyWith(
                           color: AppColors.white,
                         ),
-                        text: 'Đăng ký',
+                        text: context.l10n.translate('register'),
                         height: 36,
                       ),
                     ],

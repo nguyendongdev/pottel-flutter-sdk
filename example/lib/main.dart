@@ -39,12 +39,13 @@ class _MyAppState extends State<MyApp> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => SkyfiSdk(
-                            phone: '+84707654169',
-                            env: SkyfiEnv.dev,
-                            initialLocation: SkyfiRoute.home.path,
-                          ),
+                        builder: (_) => SkyfiSdk(
+                          phone: '+84707654160',
+                          env: SkyfiEnv.dev,
+                          initialLocation: SkyfiRoute.home.path,
+                          locale: AppLocale.en,
                         ),
+                      ),
                     );
                   },
                   child: const Text('Mở SkyFi SDK'),

@@ -8,6 +8,7 @@ import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/circular_progress_gradient.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../../routers/routers.dart';
 import '../provider/data_usage_provider.dart';
 
@@ -24,12 +25,12 @@ class DataUsageCard extends HookConsumerWidget {
       error: (err, stack) => const SizedBox.shrink(),
       data: (pkg) {
         if (pkg == null) {
-          return const AppCard(
+          return AppCard(
             child: Padding(
               padding: EdgeInsets.all(AppSpacing.cardPadding),
               child: Center(
                 child: Text(
-                  'Không có dữ liệu gói cước',
+                  context.l10n.translate('no_package_data'),
                   style: AppTextStyles.body,
                 ),
               ),
@@ -56,8 +57,8 @@ class DataUsageCard extends HookConsumerWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Gói cước chính',
+                              Text(
+                                context.l10n.translate('main_package'),
                                 style: AppTextStyles.label,
                               ),
                               const SizedBox(height: AppSpacing.xs),
@@ -66,15 +67,15 @@ class DataUsageCard extends HookConsumerWidget {
                                 style: AppTextStyles.title,
                               ),
                               const SizedBox(height: AppSpacing.xs),
-                              const Text(
-                                'Thời hạn còn',
+                              Text(
+                                context.l10n.translate('time_remaining'),
                                 style: AppTextStyles.label,
                               ),
                               const SizedBox(height: AppSpacing.xs),
                               Row(
                                 children: [
                                   Text(
-                                    _daysLeft(pkg.toDate),
+                                    _daysLeft(pkg.toDate, context),
                                     style: AppTextStyles.title,
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
@@ -125,7 +126,7 @@ class DataUsageCard extends HookConsumerWidget {
                                     ),
                                     const SizedBox(width: AppSpacing.xs),
                                     Text(
-                                      'Đổi gói cước',
+                                      context.l10n.translate('change_package'),
                                       style: AppTextStyles.button.copyWith(
                                         color: AppColors.strongSecondary,
                                       ),
@@ -154,7 +155,7 @@ class DataUsageCard extends HookConsumerWidget {
   }
 }
 
-String _daysLeft(String? toDate) {
+String _daysLeft(String? toDate, BuildContext context) {
   if (toDate == null) return '-';
   try {
     final parts = toDate.split(' ');
@@ -162,7 +163,9 @@ String _daysLeft(String? toDate) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final diff = date.difference(today).inDays;
-    return diff > 0 ? '$diff ngày' : 'Hết hạn';
+    return diff > 0
+        ? '$diff ${context.l10n.translate('days')}'
+        : context.l10n.translate('expired');
   } catch (_) {
     return '-';
   }

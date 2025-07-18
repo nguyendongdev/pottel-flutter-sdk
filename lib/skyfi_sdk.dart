@@ -1,7 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 import 'package:skyfi_sdk/modals/modalMessage.dart';
 import 'package:skyfi_sdk/network/store.dart';
 import 'package:skyfi_sdk/skyfi_sdk_auth.dart';
@@ -21,18 +23,33 @@ Future<void> _initializeCameras() async {
 List<CameraDescription> get cameras => _cameras;
 
 class SkyfiSdk extends StatefulWidget {
-  SkyfiSdk(
-      {super.key, this.initialLocation, this.phone, this.env = SkyfiEnv.dev}) {
+  SkyfiSdk({
+    super.key,
+    this.initialLocation,
+    this.phone,
+    this.env = SkyfiEnv.dev,
+    this.locale = AppLocale.vi,
+  }) {
     SkyfiSdkConfig(environment: env);
   }
 
   final String? initialLocation;
   final String? phone;
   final SkyfiEnv env;
+  final AppLocale locale;
 
-  static Widget toScreen(
-      {String? initialLocation, String? phone, SkyfiEnv env = SkyfiEnv.dev}) {
-    return SkyfiSdk(initialLocation: initialLocation, phone: phone, env: env);
+  static Widget toScreen({
+    String? initialLocation,
+    String? phone,
+    SkyfiEnv env = SkyfiEnv.dev,
+    AppLocale locale = AppLocale.vi,
+  }) {
+    return SkyfiSdk(
+      initialLocation: initialLocation,
+      phone: phone,
+      env: env,
+      locale: locale,
+    );
   }
 
   @override
@@ -48,15 +65,8 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   void initState() {
     super.initState();
     _initialize();
-
+    _initializeLanguage();
     authenticateUser(widget.phone);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    // StoreClient.setToken('');
-    // StoreClient.setPhone('');
   }
 
   Future<void> _initialize() async {
@@ -65,6 +75,18 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
     setState(() {
       _isInitialized = true;
     });
+  }
+
+  Future<void> _initializeLanguage() async {
+    // Initialize language provider with the provided locale
+    // This will be done in the ProviderScope Consumer
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // StoreClient.setToken('');
+    // StoreClient.setPhone('');
   }
 
   bool _checkPhone(String phone) {
@@ -102,10 +124,14 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
         await StoreClient.setToken(res['result']['token']);
         await StoreClient.setPhone(phoneNumber);
       } else {
+        final currentLocale = Localizations.localeOf(context);
+        final localizedStrings =
+            currentLocale.languageCode == 'vi' ? viStrings : enStrings;
+
         showMessage(
           '${res['message']}',
-          title: 'Thông báo',
-          confirmText: 'OK',
+          title: localizedStrings['notification'],
+          confirmText: localizedStrings['ok'],
           onConfirm: () {
             Navigator.of(context).pop();
           },
@@ -116,10 +142,15 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
         });
       }
     } catch (e) {
+      final currentLocale = Localizations.localeOf(context);
+      final localizedStrings =
+          currentLocale.languageCode == 'vi' ? viStrings : enStrings;
+
       showMessage(
-        'Đã xảy ra lỗi trong quá trình đăng nhập. Vui lòng thử lại sau.',
-        title: 'Thông báo',
-        confirmText: 'OK',
+        localizedStrings['authentication_error'] ??
+            'An error occurred during login. Please try again later.',
+        title: localizedStrings['notification'],
+        confirmText: localizedStrings['ok'],
         onConfirm: () {
           Navigator.of(context).pop();
         },
@@ -132,24 +163,29 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   }
 
   showMessage(String message,
-      {String title = 'Thông báo',
-      String confirmText = 'OK',
-      String closeText = 'Hủy',
+      {String? title,
+      String? confirmText,
+      String? closeText,
       VoidCallback? onConfirm,
       VoidCallback? onClose,
       bool showBothButtons = false,
       Widget? icon,
       Color? titleColor,
       Color? messageColor}) {
+    // Get localized strings based on current locale
+    final currentLocale = Localizations.localeOf(context);
+    final localizedStrings =
+        currentLocale.languageCode == 'vi' ? viStrings : enStrings;
+
     return showDialog<bool>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return ModalMessage(
-          title: title,
+          title: title ?? localizedStrings['notification'] ?? 'Notification',
           message: message,
-          confirmText: confirmText,
-          closeText: closeText,
+          confirmText: confirmText ?? localizedStrings['ok'] ?? 'OK',
+          closeText: closeText ?? localizedStrings['cancel'] ?? 'Cancel',
           onConfirm: onConfirm,
           onClose: onClose,
           showBothButtons: showBothButtons,
@@ -172,41 +208,89 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   @override
   Widget build(BuildContext context) {
     if (!_isInitialized) {
-      return const MaterialApp(
+      return MaterialApp(
         home: Scaffold(
           body: Center(
-            child: CircularProgressIndicator(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                Text(
+                  viStrings['loading'] ?? 'Loading...',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
           ),
         ),
       );
     }
 
     if (_isInitialized && _isLoading) {
-      return const MaterialApp(
+      return MaterialApp(
         home: Scaffold(
           body: Center(
-            child: CircularProgressIndicator(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                Text(
+                  viStrings['loading'] ?? 'Loading...',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
           ),
         ),
       );
     }
+
     if (!_isLogin) {
-      return const MaterialApp(
+      return MaterialApp(
         home: Scaffold(
           body: Center(
-            child: Text('User is not logged in'),
+            child: Text(
+              viStrings['user_not_logged_in'] ?? 'User is not logged in',
+              style: const TextStyle(fontSize: 16),
+            ),
           ),
         ),
       );
     }
 
     return ProviderScope(
-        child: MaterialApp.router(
-      routerConfig:
-          _createGoRouter(initialLocation: widget.initialLocation ?? '/'),
-      theme: themeData,
-      debugShowCheckedModeBanner: false,
-    ));
+      child: Consumer(
+        builder: (context, ref, child) {
+          // Initialize language provider with the provided locale if not already set
+          final currentLocale = ref.watch(languageProvider);
+          final languageNotifier = ref.read(languageProvider.notifier);
+
+          // Set initial locale if it's different from the current one
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (currentLocale != widget.locale.locale) {
+              languageNotifier.setLanguage(widget.locale.locale);
+            }
+          });
+
+          return MaterialApp.router(
+            routerConfig:
+                _createGoRouter(initialLocation: widget.initialLocation ?? '/'),
+            theme: themeData,
+            debugShowCheckedModeBanner: false,
+            locale: currentLocale,
+            localizationsDelegates: const [
+              AppLocalization.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalization.supportedLocales,
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -223,3 +307,59 @@ enum SkyfiRoute {
 }
 
 enum SkyfiEnv { dev, prod }
+
+/// Enum representing supported locales in the SkyFi SDK
+enum AppLocale {
+  vi('vi', 'Tiếng Việt', '🇻🇳'),
+
+  en('en', 'English', '🇺🇸');
+
+  const AppLocale(this.code, this.name, this.flag);
+
+  /// Language code (e.g., 'vi', 'en')
+  final String code;
+
+  /// Display name of the language
+  final String name;
+
+  /// Flag emoji for the language
+  final String flag;
+
+  /// Convert to Flutter Locale
+  Locale get locale => Locale(code, '');
+
+  /// Get AppLocale from language code
+  static AppLocale fromCode(String code) {
+    switch (code) {
+      case 'vi':
+        return AppLocale.vi;
+      case 'en':
+        return AppLocale.en;
+      default:
+        return AppLocale.vi; // Default to Vietnamese
+    }
+  }
+
+  /// Get AppLocale from Flutter Locale
+  static AppLocale fromLocale(Locale locale) {
+    return fromCode(locale.languageCode);
+  }
+
+  /// Get all supported locales as Flutter Locale list
+  static List<Locale> get supportedLocales =>
+      AppLocale.values.map((e) => e.locale).toList();
+
+  /// Get all supported locales as AppLocale list
+  static List<AppLocale> get supportedAppLocales => AppLocale.values;
+
+  /// Check if the given locale is supported
+  static bool isSupported(Locale locale) {
+    return supportedLocales
+        .any((supported) => supported.languageCode == locale.languageCode);
+  }
+
+  /// Check if the given language code is supported
+  static bool isSupportedCode(String code) {
+    return AppLocale.values.any((locale) => locale.code == code);
+  }
+}

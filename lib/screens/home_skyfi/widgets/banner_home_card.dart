@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../provider/banner_provider.dart';
@@ -51,7 +53,7 @@ class BannerHomeCard extends ConsumerWidget {
         child: Center(
           child: SelectableText.rich(
             TextSpan(
-              text: 'Error loading banners: ',
+              text: context.l10n.translate('error_loading_banners'),
               children: [
                 TextSpan(
                   text: error.toString(),
