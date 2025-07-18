@@ -73,6 +73,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   }
 
   Future<void> authenticateUser(String? phone) async {
+    // print('phone: $phone');
     if (phone == null || phone.isEmpty || _checkPhone(phone)) {
       StoreClient.setToken('');
       StoreClient.setPhone('');
@@ -87,7 +88,10 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
     });
 
     try {
-      final res = await SkyfiSdkAuth().loginWithPhone(phone);
+      // cut 7 number from phone and + 070
+      final phoneNumber = '070${phone.substring(phone.length - 7)}';
+      print('phoneNumber: $phoneNumber');
+      final res = await SkyfiSdkAuth().loginWithPhone(phoneNumber);
       if (res['code'] == 200) {
         setState(() {
           _isLogin = true;
@@ -96,7 +100,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
         // Lưu thông tin đăng nhập nếu cần
         print(' điện thoại: ${res['result']['token']}');
         await StoreClient.setToken(res['result']['token']);
-        await StoreClient.setPhone(phone);
+        await StoreClient.setPhone(phoneNumber);
       } else {
         showMessage(
           '${res['message']}',
