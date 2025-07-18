@@ -59,6 +59,15 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    configurations.all {
+        exclude group: 'androidx.media3', module: 'media3-exoplayer-rtsp'
+        resolutionStrategy {
+            force 'androidx.media3:media3-exoplayer:1.4.1'
+            force 'androidx.media3:media3-common:1.4.1'
+            force 'androidx.media3:media3-datasource:1.4.1'
+        }
+    }
 }
 
 flutter {
