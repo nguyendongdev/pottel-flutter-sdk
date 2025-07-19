@@ -9,6 +9,7 @@ import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/gradient_button.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../../routers/routers.dart';
 
 class PackageInsite extends StatelessWidget {
@@ -98,7 +99,7 @@ class PackageInsite extends StatelessWidget {
                         },
                       ),
                       child: Text(
-                        'Xem chi tiết',
+                        context.l10n.translate('view_detail'),
                         style: AppTextStyles.label.copyWith(
                           color: AppColors.blue,
                           decoration: TextDecoration.underline,
@@ -126,7 +127,7 @@ class PackageInsite extends StatelessWidget {
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Text(
-                      'Data: ${package.dataPerDay.toInt().toString()}GB/ngày',
+                      'Data: ${package.dataPerDay.toInt().toString()}GB/${context.l10n.translate('day')}',
                       style: AppTextStyles.button.copyWith(
                         color: AppColors.text,
                       ),
@@ -152,7 +153,7 @@ class PackageInsite extends StatelessWidget {
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Text(
-                        'Phút gọi: ${package.freeCallMinute} phút gọi liên mạng',
+                        context.l10n.translate('call_minutes').replaceAll('{0}', package.freeCallMinute.toString()),
                         style: AppTextStyles.button.copyWith(
                           color: AppColors.text,
                         ),
@@ -178,7 +179,7 @@ class PackageInsite extends StatelessWidget {
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Text(
-                        'SMS: ${package.freeSms} tin nhắn nội mạng',
+                        context.l10n.translate('sms_messages').replaceAll('{0}', package.freeSms.toString()),
                         style: AppTextStyles.button.copyWith(
                           color: AppColors.text,
                         ),
@@ -201,7 +202,7 @@ class PackageInsite extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.xs),
               Text(
-                '/ ${package.validityDay} ngày',
+                '/ ${package.validityDay} ${context.l10n.translate('days')}',
                 style: AppTextStyles.label.copyWith(color: AppColors.textGrey),
               ),
               const SizedBox(width: AppSpacing.sm),
@@ -210,7 +211,7 @@ class PackageInsite extends StatelessWidget {
 
               // button register
               GradientButton(
-                text: 'Mua ngay',
+                text: context.l10n.translate('buy_now'),
                 onPressed: onTapRegister ?? () {},
               ),
             ],

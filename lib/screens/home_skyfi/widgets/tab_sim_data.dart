@@ -10,6 +10,7 @@ import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_cart.dart';
 import '../../../core/widgets/outline_button.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../../network/api.dart';
 import '../../../routers/routers.dart';
 import '../../../utilities/common.dart';
@@ -169,7 +170,7 @@ class TabSimData extends HookConsumerWidget {
                                                 vertical: AppSpacing.xs,
                                               ),
                                               child: Text(
-                                                'Đăng nhập',
+                                                context.l10n.translate('login'),
                                                 style: AppTextStyles.button
                                                     .copyWith(
                                                   color: AppColors.white,
@@ -304,14 +305,14 @@ class TabSimData extends HookConsumerWidget {
 
                                           const SizedBox(height: AppSpacing.md),
                                           Text(
-                                            'Bạn đã có SIM SkyFi chưa?',
+                                            context.l10n.translate('do_you_have_skyfi_sim'),
                                             style:
                                                 AppTextStyles.heading.copyWith(
                                               color: AppColors.text,
                                             ),
                                           ),
                                           Text(
-                                            " Chọn ngay 'Mua SIM' để sở hữu số đẹp và gói cước hấp dẫn",
+                                            context.l10n.translate('choose_buy_sim_description'),
                                             style: AppTextStyles.body.copyWith(
                                               color: AppColors.text,
                                             ),
@@ -327,7 +328,7 @@ class TabSimData extends HookConsumerWidget {
                                                     context.pushNamed(
                                                         AppRouter.infoRegis);
                                                   },
-                                                  text: 'Kích hoạt SIM',
+                                                  text: context.l10n.translate('activate_sim'),
                                                   textStyle: AppTextStyles
                                                       .button
                                                       .copyWith(
@@ -344,7 +345,7 @@ class TabSimData extends HookConsumerWidget {
                                                     context.pushNamed(
                                                         AppRouter.simDataSkyFi);
                                                   },
-                                                  text: 'Mua SIM',
+                                                  text: context.l10n.translate('buy_sim'),
                                                 ),
                                               ),
                                             ],
@@ -382,10 +383,10 @@ class TabSimData extends HookConsumerWidget {
                                         context
                                             .pushNamed(AppRouter.simDataSkyFi);
                                       },
-                                      child: const FeatureCard(
+                                      child: FeatureCard(
                                         // icon: 'assets/icons/feat_support.svg',
                                         icon: 'assets/icons/nav_sim_data.svg',
-                                        label: 'Mua Sim',
+                                        label: context.l10n.translate('buy_sim'),
                                       ),
                                     ),
                                     GestureDetector(
@@ -393,18 +394,18 @@ class TabSimData extends HookConsumerWidget {
                                         context.pushNamed(
                                             AppRouter.listPackageSkyFi);
                                       },
-                                      child: const FeatureCard(
+                                      child: FeatureCard(
                                         icon: 'assets/icons/feat_history.svg',
-                                        label: 'Gói cước',
+                                        label: context.l10n.translate('packages'),
                                       ),
                                     ),
                                     GestureDetector(
                                       onTap: () {
                                         context.pushNamed(AppRouter.topupSkyFi);
                                       },
-                                      child: const FeatureCard(
+                                      child: FeatureCard(
                                         icon: 'assets/icons/feat_bank.svg',
-                                        label: 'Nạp tiền',
+                                        label: context.l10n.translate('topup'),
                                       ),
                                     ),
                                     GestureDetector(
@@ -417,10 +418,10 @@ class TabSimData extends HookConsumerWidget {
                                         //   'doe': '11/01/2033',
                                         // });
                                       },
-                                      child: const FeatureCard(
+                                      child: FeatureCard(
                                         // icon: 'assets/icons/feat_gift.svg',
                                         icon: 'assets/icons/nav_travel.svg',
-                                        label: 'eSIM Du lịch',
+                                        label: context.l10n.translate('esim_travel'),
                                       ),
                                     ),
                                   ],
@@ -443,8 +444,8 @@ class TabSimData extends HookConsumerWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      'Gói cước hot',
+                                    Text(
+                                      context.l10n.translate('hot_packages'),
                                       style: AppTextStyles.heading,
                                     ),
                                     TextButton(
@@ -455,7 +456,7 @@ class TabSimData extends HookConsumerWidget {
                                       child: Row(
                                         children: [
                                           Text(
-                                            'Khám phá',
+                                            context.l10n.translate('explore'),
                                             style:
                                                 AppTextStyles.button.copyWith(
                                               color: AppColors.strongSecondary,

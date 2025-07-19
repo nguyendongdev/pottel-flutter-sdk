@@ -5,6 +5,7 @@ import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/outline_button.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../../routers/routers.dart';
 import '../../../utilities/common.dart';
 
@@ -27,7 +28,7 @@ class WalletCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Tài khoản chính',
+                    context.l10n.translate('main_account'),
                     style: AppTextStyles.label,
                   ),
                   // SizedBox(height: AppSpacing.xs),
@@ -41,7 +42,7 @@ class WalletCard extends StatelessWidget {
                 onPressed: () {
                   context.pushNamed(AppRouter.topupSkyFi);
                 },
-                text: 'Nạp tiền',
+                text: context.l10n.translate('topup_money'),
                 textStyle: AppTextStyles.button.copyWith(
                   color: AppColors.primary,
                 ),

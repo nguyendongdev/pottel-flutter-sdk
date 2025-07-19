@@ -6,6 +6,7 @@ import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/circular_progress_gradient.dart';
 import '../../../core/widgets/gradient_button.dart';
+import '../../../l10n/localization_extension.dart';
 
 class TabESimTravel extends StatefulWidget {
   const TabESimTravel({super.key});
@@ -61,9 +62,9 @@ class _TabESimTravelState extends State<TabESimTravel>
             labelColor: AppColors.primary,
             unselectedLabelColor: Colors.grey,
             indicatorColor: AppColors.primary,
-            tabs: const [
-              Tab(text: 'eSIM đang sử dụng'),
-              Tab(text: 'eSIM chưa cài'),
+            tabs: [
+              Tab(text: context.l10n.translate('esim_in_use')),
+              Tab(text: context.l10n.translate('esim_not_installed')),
             ],
           ),
         ),
@@ -118,30 +119,30 @@ class TabESimTravelDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Các quốc gia
-                        const Text(
-                          'Các quốc gia',
+                        Text(
+                          context.l10n.translate('countries'),
                           style: AppTextStyles.title,
                         ),
                         const SizedBox(height: AppSpacing.xs),
-                        const Text(
-                          'Phạm vi phủ sóng',
+                        Text(
+                          context.l10n.translate('coverage_area'),
                           style: AppTextStyles.label,
                         ),
                         const SizedBox(height: AppSpacing.xs),
-                        const Text(
-                          'Singapore',
+                        Text(
+                          context.l10n.translate('singapore'),
                           style: AppTextStyles.title,
                         ),
                         const SizedBox(height: AppSpacing.xs),
-                        const Text(
-                          'Thời hạn còn',
+                        Text(
+                          context.l10n.translate('time_remaining'),
                           style: AppTextStyles.label,
                         ),
                         const SizedBox(height: AppSpacing.xs),
                         Row(
                           children: [
-                            const Text(
-                              '5 ngày',
+                            Text(
+                              '5 ${context.l10n.translate('days')}',
                               style: AppTextStyles.title,
                             ),
                             const SizedBox(width: AppSpacing.sm),
@@ -177,8 +178,8 @@ class TabESimTravelDetail extends StatelessWidget {
                         ),
                         const SizedBox(height: AppSpacing.xs),
                         // ICCID
-                        const Text(
-                          'ICCID',
+                        Text(
+                          context.l10n.translate('iccid'),
                           style: AppTextStyles.label,
                         ),
                         const SizedBox(height: AppSpacing.xs),
@@ -214,14 +215,14 @@ class TabESimTravelDetail extends StatelessWidget {
                           borderRadius: BorderRadius.circular(AppSpacing.md),
                         ),
                       ),
-                      child: const Text('Xem chi tiết'),
+                      child: Text(context.l10n.translate('view_details')),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     // button 'Mua thêm dung lượng' gradient
                     GradientButton(
                       height: 40,
                       onPressed: () {},
-                      text: 'Mua thêm dung lượng',
+                      text: context.l10n.translate('buy_more_data'),
                       textStyle: AppTextStyles.button.copyWith(
                         color: AppColors.text,
                       ),

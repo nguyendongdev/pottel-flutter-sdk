@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/spacing.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../../core/constants/text_styles.dart';
 import '../../../utilities/common.dart';
@@ -53,7 +54,7 @@ class BottomTabMain extends StatelessWidget {
               NavItem(
                 onPressed: () => onNavIndexChanged(0),
                 icon: 'assets/icons/nav_home.svg',
-                label: 'Trang chủ',
+                label: context.l10n.translate('home'),
                 isSelected: navIndex.value == 0,
               ),
               NavItem(
@@ -62,13 +63,13 @@ class BottomTabMain extends StatelessWidget {
                   Common.popupMaintaining(context)
                 },
                 icon: 'assets/icons/feat_support.svg',
-                label: 'Hỗ trợ',
+                label: context.l10n.translate('support'),
                 isSelected: navIndex.value == 1,
               ),
               NavItem(
                 onPressed: () => onNavIndexChanged(3),
                 icon: 'assets/icons/nav_user.svg',
-                label: 'Cá nhân',
+                label: context.l10n.translate('personal'),
                 isSelected: navIndex.value == 3,
               ),
             ],
