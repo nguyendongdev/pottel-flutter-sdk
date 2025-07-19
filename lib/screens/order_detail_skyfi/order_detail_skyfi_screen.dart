@@ -60,7 +60,11 @@ class OrderDetailSkyfiScreen extends HookConsumerWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(AppSpacing.xl),
+        padding: EdgeInsets.only(
+          left: AppSpacing.md,
+          right: AppSpacing.md,
+          bottom: MediaQuery.of(context).padding.bottom,
+        ),
         child: BottomButton(
           onPressed: () {
             context.goNamed(AppRouter.homeSkyFiNew);

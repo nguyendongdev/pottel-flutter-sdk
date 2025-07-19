@@ -30,7 +30,7 @@ class PrepareChipCardScreen extends HookConsumerWidget {
             color: AppColors.text,
           ),
           onPressed: () {
-             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
         ),
         title: const StepIndicator(
@@ -57,9 +57,9 @@ class PrepareChipCardScreen extends HookConsumerWidget {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.xl,
-          vertical: AppSpacing.xl,
+          vertical: MediaQuery.of(context).padding.bottom,
         ),
         child: BottomButton(
           onPressed: () {

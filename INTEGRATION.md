@@ -556,3 +556,11 @@ class HomeScreen extends StatelessWidget {
 # Jisti Meet SDK
 -keep class org.jitsi.meet.** { *; }
 -keep class org.jitsi.meet.sdk.** { *; }
+
+
+### Flutter package manager
+- dart pub global activate fvm
+- export PATH="$PATH":"$HOME/.pub-cache/bin"
+- fvm use 3.32.4
+- alias flutter="fvm flutter"
+- alias dart="fvm dart" 

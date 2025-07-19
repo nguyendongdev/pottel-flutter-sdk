@@ -84,7 +84,11 @@ class DoubleCheckInfoScreen extends HookConsumerWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(AppSpacing.md),
+        padding: EdgeInsets.only(
+          left: AppSpacing.md,
+          right: AppSpacing.md,
+          bottom: MediaQuery.of(context).padding.bottom,
+        ),
         child: BottomButton(
           onPressed: () {
             if (sod?.isNotEmpty ?? false) {

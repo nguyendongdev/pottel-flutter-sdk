@@ -261,9 +261,9 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.screenPadding,
-          vertical: AppSpacing.screenPadding,
+          vertical: MediaQuery.of(context).padding.bottom,
         ),
         child: isLoading.value
             ? const Center(child: CircularProgressIndicator())

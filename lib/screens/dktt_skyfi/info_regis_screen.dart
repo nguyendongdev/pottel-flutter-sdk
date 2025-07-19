@@ -109,7 +109,8 @@ class InfoRegisScreen extends HookConsumerWidget {
             // serialController.text =
             //     info.iccid!.substring(info.iccid!.length - 11) ?? '';
             // cut 2 first character and 1 last character
-            serialController.text = info.iccid?.substring(2, info.iccid!.length - 1) ?? '';
+            serialController.text =
+                info.iccid?.substring(2, info.iccid!.length - 1) ?? '';
             msisdnController.text = info.msisdn ?? '';
             isUpdateMsisdn.value = false;
           } else {
@@ -228,7 +229,7 @@ class InfoRegisScreen extends HookConsumerWidget {
                           color: AppColors.text,
                         ),
                       ),
-                       const SizedBox(height: AppSpacing.lg),
+                      const SizedBox(height: AppSpacing.lg),
                       Text(
                         'Lưu ý: Bạn có tối đa 10 lần nhập/quét số Serial SIM cho 1 số thuê bao trong 1 ngày. Vượt quá số lần quy định, vui lòng thử lại sau 24 giờ.',
                         style: AppTextStyles.label.copyWith(
@@ -261,9 +262,9 @@ class InfoRegisScreen extends HookConsumerWidget {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
             horizontal: AppSpacing.xl,
-            vertical: AppSpacing.xxl,
+            vertical: MediaQuery.of(context).padding.bottom,
           ),
           child: BottomButton(
             onPressed: () {
@@ -273,7 +274,7 @@ class InfoRegisScreen extends HookConsumerWidget {
               }
               if (serialController.text.length != 16) {
                 Common.showToast('Số serial phải có 16 chữ số', context);
-                return; 
+                return;
               }
               _onCheckSim();
             },

@@ -110,9 +110,9 @@ class PrepareFaceScreen extends HookConsumerWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
-          vertical: AppSpacing.xl,
+          vertical: MediaQuery.of(context).padding.bottom,
         ),
         child: BottomButton(
           onPressed: () {
