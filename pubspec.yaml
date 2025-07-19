@@ -87,7 +87,6 @@ flutter:
     - assets/icon/
     - assets/fonts/
     - assets/icons/
-    - assets/data/
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
@@ -113,18 +112,5 @@ flutter:
           weight: 600
         - asset: assets/fonts/KoHo-Light.ttf
           weight: 300
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter_18pt-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Inter_18pt-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Inter_18pt-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Inter_18pt-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Inter_18pt-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Inter_18pt-Thin.ttf
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages

@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
                           phone: '+84707654160',
                           env: SkyfiEnv.dev,
                           initialLocation: SkyfiRoute.home.path,
-                          locale: AppLocale.en,
+                          locale: AppLocale.vi,
                         ),
                       ),
                     );
@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
                       MaterialPageRoute(
                         builder: (_) => SkyfiSdk.toScreen(
                           initialLocation: SkyfiRoute.infoRegis.path,
+                          locale: AppLocale.vi,
                         ),
                       ),
                     );
@@ -73,6 +74,7 @@ class _MyAppState extends State<MyApp> {
                         builder: (_) => SkyfiSdk.toScreen(
                           initialLocation: SkyfiRoute.topupSkyFi.path,
                           phone: '+84707654169',
+                          locale: AppLocale.vi,
                         ),
                       ),
                     );
@@ -88,6 +90,7 @@ class _MyAppState extends State<MyApp> {
                         builder: (_) => SkyfiSdk.toScreen(
                           initialLocation: SkyfiRoute.detailDataUsage.path,
                           phone: '+84707654169',
+                          locale: AppLocale.vi,
                         ),
                       ),
                     );
