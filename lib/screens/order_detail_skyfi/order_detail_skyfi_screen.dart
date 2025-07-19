@@ -63,7 +63,7 @@ class OrderDetailSkyfiScreen extends HookConsumerWidget {
         padding: EdgeInsets.only(
           left: AppSpacing.md,
           right: AppSpacing.md,
-          bottom: MediaQuery.of(context).padding.bottom,
+          bottom: MediaQuery.of(context).padding.bottom + AppSpacing.lg,
         ),
         child: BottomButton(
           onPressed: () {
