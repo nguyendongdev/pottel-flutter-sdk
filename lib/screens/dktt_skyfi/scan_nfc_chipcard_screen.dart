@@ -356,34 +356,49 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
    * 2. Disable NFC foreground dispatch để ngăn auto-launch apps khác
    * 3. Log để debug
    */
-  Future<void> _ensureAppInForeground() async {
+  /**
+   * Method để suppress NFC task chooser dialog và đảm bảo app ở foreground
+   */
+  Future<void> _suppressNfcDialogAndEnsureForeground() async {
     if (!Platform.isAndroid) {
-      // iOS không cần xử lý gì thêm vì đã hoạt động tốt
       return;
     }
 
     try {
-      // Delay ngắn để đảm bảo NFC operation đã hoàn tất
-      await Future.delayed(const Duration(milliseconds: 300));
+      // 1. Tắt NFC task chooser dialog bằng cách set system flags
+      await _suppressNfcTaskChooserDialog();
+      
+      // 2. Delay ngắn để đảm bảo NFC operation đã hoàn tất
+      await Future.delayed(const Duration(milliseconds: 200));
 
-      _log.info("Android: Đảm bảo app ở foreground sau khi đọc NFC");
-      print("SkyFi: Đảm bảo app không bị các service NFC khác che khuất");
+      _log.info("Android: Đảm bảo app ở foreground và tắt NFC dialog");
 
-      // Disable NFC foreground dispatch để ngăn auto-launch
-      try {
-        await _nfc.disconnect();
-        _log.info("Android: Đã disable NFC foreground dispatch");
-      } catch (e) {
-        _log.warning("Android: Lỗi khi disable NFC foreground dispatch: $e");
-      }
-
-      // Đảm bảo system không tự động launch NFC services khác
-      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, 
-          overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+      // 3. Đảm bảo app ở foreground
+      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       
     } catch (e) {
-      _log.warning("Android: Lỗi khi đảm bảo app ở foreground: $e");
+      _log.warning("Android: Lỗi khi suppress NFC dialog: $e");
     }
+  }
+
+  /**
+   * Method để tắt NFC task chooser dialog thông qua platform channel
+   */
+  Future<void> _suppressNfcTaskChooserDialog() async {
+    if (!Platform.isAndroid) return;
+    
+    try {
+      const platform = MethodChannel('nfc.skyfi.suppressor');
+      await platform.invokeMethod('suppressNfcDialog');
+      _log.info("Android: Đã gọi suppress NFC dialog");
+    } catch (e) {
+      _log.warning("Android: Không thể suppress NFC dialog: $e");
+    }
+  }
+
+  @Deprecated("Use _suppressNfcDialogAndEnsureForeground instead")
+  Future<void> _ensureAppInForeground() async {
+    await _suppressNfcDialogAndEnsureForeground();
   }
 
   DateTime? _getDOBDate() {
@@ -633,12 +648,10 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         });
 
         /**
-         * Đảm bảo app luôn ở foreground sau khi đọc NFC thành công
+         * Tắt NFC task chooser dialog và đảm bảo app ở foreground
          * CHỈ HOẠT ĐỘNG TRÊN ANDROID - iOS không bị ảnh hưởng
-         * 
-         * Mục đích: Ngăn các ứng dụng NFC service khác tự động mở và che khuất ứng dụng SkyFi
          */
-        await _ensureAppInForeground();
+        await _suppressNfcDialogAndEnsureForeground();
 
         // _scrollController.animateTo(300.0,
         //     duration: Duration(milliseconds: 500), curve: Curves.ease);
@@ -675,13 +688,10 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
           await _nfc.disconnect(iosErrorMessage: _alertMessage);
 
           /**
-           * Đảm bảo app ở foreground ngay cả khi có lỗi
+           * Tắt NFC dialog và đảm bảo app ở foreground ngay cả khi có lỗi
            * CHỈ HOẠT ĐỘNG TRÊN ANDROID - iOS không bị ảnh hưởng
-           * 
-           * Điều này quan trọng vì ngay cả khi có lỗi, các ứng dụng NFC khác
-           * vẫn có thể tự động mở và che khuất ứng dụng SkyFi
            */
-          await _ensureAppInForeground();
+          await _suppressNfcDialogAndEnsureForeground();
 
           SnackBarApp.showWarning(context,
               message: "Lỗi khi đọc thẻ, Vui lòng thử lại");
@@ -696,10 +706,10 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
               iosAlertMessage: formatProgressMsg("Finished", 100));
 
           /**
-           * Đảm bảo app ở foreground sau khi đọc thành công
+           * Tắt NFC dialog và đảm bảo app ở foreground sau khi đọc thành công
            * CHỈ HOẠT ĐỘNG TRÊN ANDROID - iOS không bị ảnh hưởng
            */
-          await _ensureAppInForeground();
+          await _suppressNfcDialogAndEnsureForeground();
 
           SnackBarApp.showSuccess(context, message: "Đọc thẻ thành công");
           setState(() {
