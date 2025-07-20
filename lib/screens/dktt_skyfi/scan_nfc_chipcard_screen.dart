@@ -353,7 +353,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
    * 
    * Cơ chế hoạt động:
    * 1. Delay ngắn để đảm bảo NFC operation hoàn tất
-   * 2. Sử dụng SystemNavigator để bring app to foreground (nếu cần)
+   * 2. Disable NFC foreground dispatch để ngăn auto-launch apps khác
    * 3. Log để debug
    */
   Future<void> _ensureAppInForeground() async {
@@ -369,8 +369,18 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
       _log.info("Android: Đảm bảo app ở foreground sau khi đọc NFC");
       print("SkyFi: Đảm bảo app không bị các service NFC khác che khuất");
 
-      // Có thể thêm logic khác nếu cần thiết
-      // Ví dụ: SystemNavigator.pop() hoặc các method khác
+      // Disable NFC foreground dispatch để ngăn auto-launch
+      try {
+        await _nfc.disconnect();
+        _log.info("Android: Đã disable NFC foreground dispatch");
+      } catch (e) {
+        _log.warning("Android: Lỗi khi disable NFC foreground dispatch: $e");
+      }
+
+      // Đảm bảo system không tự động launch NFC services khác
+      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, 
+          overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+      
     } catch (e) {
       _log.warning("Android: Lỗi khi đảm bảo app ở foreground: $e");
     }

@@ -41,6 +41,8 @@ class PreviewContactScreen extends HookConsumerWidget {
         ));
 
     void onGetContactDetail() async {
+      if (isLoading.value) return;
+      isLoading.value = true;
       try {
         final image = await _controller.toPngBytes();
         if (image != null) {
@@ -52,6 +54,7 @@ class PreviewContactScreen extends HookConsumerWidget {
           '/bss/videocall/get_img4_app',
           data: ref.read(saveLogDkttNotifierProvider).toJson(),
         );
+        isLoading.value = false;
         final ing4 = response.data['result'];
         if (ing4 != null) {
           context.pushNamed(AppRouter.contactDetail, extra: ing4);
@@ -60,6 +63,7 @@ class PreviewContactScreen extends HookConsumerWidget {
         }
         // Common.stopLoadingDialog(context);
       } catch (e) {
+        isLoading.value = false;
         // Common.stopLoadingDialog(context);
         SnackBarApp.showError(context, message: 'Lỗi xem thông tin hợp đồng');
       }
