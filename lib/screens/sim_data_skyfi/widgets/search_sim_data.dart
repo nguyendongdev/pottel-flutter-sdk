@@ -8,6 +8,8 @@ import 'package:skyfi_sdk/screens/sim_data_skyfi/provider/simType_provider.dart'
 import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/utilities/search_sim.dart';
 
+import '../../../l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -206,7 +208,7 @@ class SearchSimData extends HookConsumerWidget {
         children: [
           Row(
             children: [
-              const Text('Chọn số khác', style: AppTextStyles.heading),
+              Text(context.l10n.translate('choose_another_number_title'), style: AppTextStyles.heading),
               const Spacer(),
               IconButton(
                 onPressed: () {
@@ -228,7 +230,7 @@ class SearchSimData extends HookConsumerWidget {
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
-              '!!! Rất tiếc, số bạn đang tìm hiện không còn. Có thể bạn sẽ thích những số sau:',
+              context.l10n.translate('number_not_available'),
               style: AppTextStyles.label.copyWith(
                 fontWeight: FontWeight.w500,
               ),
@@ -283,7 +285,7 @@ class SearchSimData extends HookConsumerWidget {
                 );
                  Navigator.of(context).pop();
               },
-              text: 'Xác nhận',
+              text: context.l10n.translate('confirm'),
               height: 48,
               textStyle: AppTextStyles.button.copyWith(
                 color: AppColors.white,

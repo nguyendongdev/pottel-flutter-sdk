@@ -10,6 +10,7 @@ import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/widgets/core/tooltip.dart';
 
 import '../../core/constants/colors.dart';
+import '../../l10n/localization_extension.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/app_card.dart';
@@ -90,8 +91,8 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
       appBar: AppBar(
         surfaceTintColor: AppColors.white,
         backgroundColor: AppColors.white,
-        title: const Text(
-          'Chọn số và gói cước',
+        title: Text(
+          context.l10n.translate('choose_number_and_package'),
           style: AppTextStyles.title,
         ),
         leading: IconButton(
@@ -269,7 +270,7 @@ class _SimNumberSection extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  'Số dành cho bạn',
+                  context.l10n.translate('number_for_you'),
                   style: AppTextStyles.body.copyWith(color: AppColors.textGrey),
                 ),
                 Text(
@@ -295,7 +296,7 @@ class _SimNumberSection extends StatelessWidget {
                     vertical: 0,
                   ),
                 ),
-                child: const Text('Chọn số khác'),
+                child: Text(context.l10n.translate('choose_another_number')),
               ),
             ),
           ],
@@ -329,7 +330,7 @@ class _SimTypeSection extends ConsumerWidget {
         Row(
           children: [
             _RadioOption(
-              text: 'eSIM',
+              text: context.l10n.translate('esim'),
               isSelected: ref.watch(simTypeProvider) == TypeOfSim.eSim,
               onTap: () {
                 ref
@@ -339,7 +340,7 @@ class _SimTypeSection extends ConsumerWidget {
             ),
             const SizedBox(width: AppSpacing.xl),
             _RadioOption(
-              text: 'SIM vật lý',
+              text: context.l10n.translate('physical_sim'),
               isSelected: ref.watch(simTypeProvider) == TypeOfSim.physical,
               onTap: () {
                 ref
@@ -352,8 +353,8 @@ class _SimTypeSection extends ConsumerWidget {
               '${Common.formatCurrency(feeSim.toString())} VND',
               style: AppTextStyles.heading,
             ),
-            const BaseTooltip(
-              message: 'Giá tiền bao gồm tiền SIM + Phí hòa mạng + Số',
+            BaseTooltip(
+              message: context.l10n.translate('price_includes_note'),
               triggerMode: TooltipTriggerMode.tap,
               child: Padding(
                 padding: EdgeInsets.only(left: 4.0),
@@ -365,7 +366,7 @@ class _SimTypeSection extends ConsumerWidget {
         const SizedBox(height: AppSpacing.xs),
         if (ref.watch(simTypeProvider) == TypeOfSim.physical)
           Text(
-            '* Giao SIM tại nhà - Có tính phí vận chuyển',
+            context.l10n.translate('home_delivery_note'),
             style: AppTextStyles.small.copyWith(color: AppColors.textGrey),
           ),
         if (ref.watch(simTypeProvider) == TypeOfSim.eSim)
@@ -373,13 +374,13 @@ class _SimTypeSection extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Lưu ý: eSIM là SIM điện tử, được gửi qua email khách hàng. eSIM chỉ sử dụng được trên các thiết bị di động có hỗ trợ. ',
+                context.l10n.translate('esim_note'),
                 style: AppTextStyles.small.copyWith(color: AppColors.textGrey),
               ),
               GestureDetector(
                 onTap: onShowDeviceList,
                 child: Text(
-                  'Xem danh sách thiết bị',
+                  context.l10n.translate('view_device_list'),
                   style: AppTextStyles.label.copyWith(
                     color: AppColors.blue,
                     decoration: TextDecoration.underline,
@@ -544,7 +545,7 @@ class _DataPackage extends StatelessWidget {
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Text(
-                        'Data: ${dataPerDay}GB/ngày',
+                        context.l10n.translate('data_gb_per_day').replaceAll('{0}', dataPerDay),
                         style: AppTextStyles.button.copyWith(
                           color: AppColors.text,
                         ),
@@ -570,7 +571,7 @@ class _DataPackage extends StatelessWidget {
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Text(
-                          'Phút gọi: $freeCallMinute phút gọi liên mạng',
+                          context.l10n.translate('call_minutes_inter_network').replaceAll('{0}', freeCallMinute),
                           style: AppTextStyles.button.copyWith(
                             color: AppColors.text,
                           ),
@@ -596,7 +597,7 @@ class _DataPackage extends StatelessWidget {
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Text(
-                          'SMS: $freeSms tin nhắn nội mạng',
+                          context.l10n.translate('sms_intra_network').replaceAll('{0}', freeSms),
                           style: AppTextStyles.button.copyWith(
                             color: AppColors.text,
                           ),
@@ -620,7 +621,7 @@ class _DataPackage extends StatelessWidget {
                 ),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
-                  '/ $validityDay ngày',
+                  context.l10n.translate('per_days').replaceAll('{0}', validityDay),
                   style:
                       AppTextStyles.small.copyWith(color: AppColors.textGrey),
                 ),
@@ -731,8 +732,8 @@ class _BottomBar extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Text(
-                'Tổng cộng',
+              Text(
+                context.l10n.translate('total'),
                 style: AppTextStyles.title,
               ),
               const Spacer(),
@@ -773,7 +774,7 @@ class _BottomBar extends ConsumerWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                                'Thêm vào giỏ hàng thất bại: ${e.toString()}'),
+                                '${context.l10n.translate('add_to_cart_failed')}${e.toString()}'),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -790,7 +791,7 @@ class _BottomBar extends ConsumerWidget {
                           BorderRadius.circular(AppSpacing.buttonRadius),
                     ),
                   ),
-                  child: const Text('Thêm vào giỏ hàng'),
+                  child: Text(context.l10n.translate('add_to_cart')),
                 ),
               ),
               const SizedBox(width: AppSpacing.lg),
@@ -822,7 +823,7 @@ class _BottomBar extends ConsumerWidget {
                         .changeTotalAmount(double.parse(totalPrice).toInt());
                     context.pushNamed(AppRouter.paymentSkyFi, extra: items);
                   },
-                  text: 'Thanh toán',
+                  text: context.l10n.translate('payment'),
                   height: 48,
                   textStyle: AppTextStyles.button.copyWith(
                     color: AppColors.white,

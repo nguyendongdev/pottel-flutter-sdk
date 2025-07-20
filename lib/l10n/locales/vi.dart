@@ -64,4 +64,34 @@ const Map<String, String> viStrings = {
   'good_evening': 'Chào buổi tối',
   'good_night': 'Chúc ngủ ngon',
   'hello': 'Xin chào',
+  
+  // Sim Data SkyFi Screen
+  'choose_number_and_package': 'Chọn số và gói cước',
+  'number_for_you': 'Số dành cho bạn',
+  'choose_another_number': 'Chọn số khác',
+  'esim': 'eSIM',
+  'physical_sim': 'SIM vật lý',
+  'home_delivery_note': '* Giao SIM tại nhà - Có tính phí vận chuyển',
+  'esim_note': 'Lưu ý: eSIM là SIM điện tử, được gửi qua email khách hàng. eSIM chỉ sử dụng được trên các thiết bị di động có hỗ trợ. ',
+  'view_device_list': 'Xem danh sách thiết bị',
+  'price_includes_note': 'Giá tiền bao gồm tiền SIM + Phí hòa mạng + Số',
+  'total': 'Tổng cộng',
+  'add_to_cart': 'Thêm vào giỏ hàng',
+  'payment': 'Thanh toán',
+  'add_to_cart_failed': 'Thêm vào giỏ hàng thất bại: ',
+  'data_gb_per_day': 'Data: {0}GB/ngày',
+  'call_minutes_inter_network': 'Phút gọi: {0} phút gọi liên mạng',
+  'sms_intra_network': 'SMS: {0} tin nhắn nội mạng',
+  'per_days': '/ {0} ngày',
+  
+  // Preview Cart
+  'cart_success_title': 'Thêm giỏ hàng thành công',
+  'error_occurred': 'Có lỗi xảy ra: ',
+  'view_cart': 'Xem giỏ hàng ({0})',
+  'quantity': 'Số lượng: ',
+  
+  // Search Sim Data
+  'choose_another_number_title': 'Chọn số khác',
+  'number_not_available': '!!! Rất tiếc, số bạn đang tìm hiện không còn. Có thể bạn sẽ thích những số sau:',
+  'confirm': 'Xác nhận',
 };

@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -38,7 +40,7 @@ class PreviewCart extends HookConsumerWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'Thêm giỏ hàng thành công',
+                context.l10n.translate('cart_success_title'),
                 style: AppTextStyles.heading.copyWith(
                   color: AppColors.green,
                 ),
@@ -60,7 +62,7 @@ class PreviewCart extends HookConsumerWidget {
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, stack) => Center(
                 child: Text(
-                  'Có lỗi xảy ra: $error',
+                  '${context.l10n.translate('error_occurred')}$error',
                   style: AppTextStyles.body.copyWith(color: AppColors.red),
                 ),
               ),
@@ -82,8 +84,8 @@ class PreviewCart extends HookConsumerWidget {
                   const SizedBox(height: AppSpacing.lg),
                   Row(
                     children: [
-                      const Text(
-                        'Tổng cộng',
+                      Text(
+                        context.l10n.translate('total'),
                         style: AppTextStyles.title,
                       ),
                       const Spacer(),
@@ -113,7 +115,7 @@ class PreviewCart extends HookConsumerWidget {
                                   AppSpacing.buttonRadius),
                             ),
                           ),
-                          child: Text('Xem giỏ hàng (${cart.items.length})'),
+                          child: Text(context.l10n.translate('view_cart').replaceAll('{0}', cart.items.length.toString())),
                         ),
                       ),
                       const SizedBox(width: AppSpacing.lg),
@@ -154,7 +156,7 @@ class PreviewCart extends HookConsumerWidget {
                             context.pushNamed(AppRouter.paymentSkyFi,
                                 extra: paymentItems);
                           },
-                          text: 'Thanh toán',
+                          text: context.l10n.translate('payment'),
                           height: 48,
                           textStyle: AppTextStyles.button.copyWith(
                             color: AppColors.white,

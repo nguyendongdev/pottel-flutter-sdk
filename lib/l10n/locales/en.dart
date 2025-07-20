@@ -64,4 +64,34 @@ const Map<String, String> enStrings = {
   'good_evening': 'Good evening',
   'good_night': 'Good night',
   'hello': 'Hello',
+  
+  // Sim Data SkyFi Screen
+  'choose_number_and_package': 'Choose number and package',
+  'number_for_you': 'Number for you',
+  'choose_another_number': 'Choose another',
+  'esim': 'eSIM',
+  'physical_sim': 'Physical SIM',
+  'home_delivery_note': '* Home SIM delivery - Shipping fee applies',
+  'esim_note': 'Note: eSIM is an electronic SIM, sent via customer email. eSIM can only be used on supported mobile devices. ',
+  'view_device_list': 'View device list',
+  'price_includes_note': 'Price includes SIM + Activation fee + Number',
+  'total': 'Total',
+  'add_to_cart': 'Add to cart',
+  'payment': 'Payment',
+  'add_to_cart_failed': 'Add to cart failed: ',
+  'data_gb_per_day': 'Data: {0}GB/day',
+  'call_minutes_inter_network': 'Call minutes: {0} inter-network minutes',
+  'sms_intra_network': 'SMS: {0} intra-network messages',
+  'per_days': '/ {0} days',
+  
+  // Preview Cart
+  'cart_success_title': 'Added to cart successfully',
+  'error_occurred': 'An error occurred: ',
+  'view_cart': 'View cart ({0})',
+  'quantity': 'Quantity: ',
+  
+  // Search Sim Data
+  'choose_another_number_title': 'Choose another number',
+  'number_not_available': '!!! Sorry, the number you are looking for is currently unavailable. You might like these numbers:',
+  'confirm': 'Confirm',
 };

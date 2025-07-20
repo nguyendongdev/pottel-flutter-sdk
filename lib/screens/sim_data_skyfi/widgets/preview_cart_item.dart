@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -59,8 +61,8 @@ class PreviewCartItem extends ConsumerWidget {
                       const SizedBox(height: AppSpacing.xs),
                       Row(
                         children: [
-                          const Text(
-                            'Số lượng: ',
+                          Text(
+                            context.l10n.translate('quantity'),
                             style: AppTextStyles.label,
                           ),
                           Text(
