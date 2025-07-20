@@ -5,6 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/screens/esim_travel_skyfi/models/region_model.dart';
 
+import '../../l10n/localization_extension.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
@@ -22,11 +24,11 @@ class EsimTravelSkyfiScreen extends HookConsumerWidget {
     final selectedTab = ref.watch(selectedTabProvider);
     String subTitle = '';
     if (selectedTab == 0) {
-      subTitle = 'Các quốc gia';
+      subTitle = context.l10n.translate('countries_tab');
     } else if (selectedTab == 1) {
-      subTitle = 'Các khu vực';
+      subTitle = context.l10n.translate('regions');
     } else if (selectedTab == 2) {
-      subTitle = 'Gói dữ liệu toàn cầu';
+      subTitle = context.l10n.translate('global_data_packages');
     }
 
     void onShowDeviceList() {
@@ -50,7 +52,7 @@ class EsimTravelSkyfiScreen extends HookConsumerWidget {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          'Mua eSIM du lịch',
+          context.l10n.translate('buy_esim_travel'),
           style: AppTextStyles.title.copyWith(
             color: AppColors.text,
           ),
@@ -81,7 +83,7 @@ class EsimTravelSkyfiScreen extends HookConsumerWidget {
                       _buildTabItem(
                         context,
                         index: 0,
-                        title: 'eSIM quốc gia',
+                        title: context.l10n.translate('esim_country'),
                         isSelected: selectedTab == 0,
                         onTap: () =>
                             ref.read(selectedTabProvider.notifier).state = 0,
@@ -89,21 +91,21 @@ class EsimTravelSkyfiScreen extends HookConsumerWidget {
                       _buildTabItem(
                         context,
                         index: 1,
-                        title: 'eSIM khu vực',
+                        title: context.l10n.translate('esim_region'),
                         isSelected: selectedTab == 1,
                         onTap: () =>
                             ref.read(selectedTabProvider.notifier).state = 1,
                       ),
                       _buildTabItem(context,
                           index: 2,
-                          title: 'eSIM toàn cầu',
+                          title: context.l10n.translate('esim_global'),
                           isSelected: selectedTab == 2,
                           onTap: () => context.pushNamed(
                               AppRouter.detailEsimTravelSkyfi,
                               extra: RegionModel(
                                   id: 1,
                                   code: '',
-                                  name: 'Toàn cầu',
+                                  name: context.l10n.translate('global'),
                                   type: ''))),
                     ],
                   ),
@@ -118,13 +120,13 @@ class EsimTravelSkyfiScreen extends HookConsumerWidget {
                             children: [
                               TextSpan(
                                 text:
-                                    'Lưu ý: eSIM là SIM điện tử, được gửi qua email khách hàng. eSIM chỉ sử dụng được trên các thiết bị di động có hỗ trợ.',
+                                    context.l10n.translate('esim_note_long'),
                                 style: AppTextStyles.label.copyWith(
                                   color: AppColors.text,
                                 ),
                               ),
                               TextSpan(
-                                text: ' Xem danh sách thiết bị',
+                                text: ' ${context.l10n.translate('view_device_list')}',
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     onShowDeviceList();
@@ -221,7 +223,7 @@ class EsimTravelSkyfiScreen extends HookConsumerWidget {
           error: (error, stack) => Center(
             child: SelectableText.rich(
               TextSpan(
-                text: 'Đã có lỗi xảy ra\n',
+                text: '${context.l10n.translate('error_occurred_generic')}\n',
                 style: AppTextStyles.heading.copyWith(color: AppColors.red),
                 children: [
                   TextSpan(

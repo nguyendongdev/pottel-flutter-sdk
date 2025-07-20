@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 import '../provider/compatible_device_provider.dart';
 
 class DeviceSearchBar extends HookConsumerWidget {
@@ -20,7 +21,7 @@ class DeviceSearchBar extends HookConsumerWidget {
         onChanged: (value) =>
             ref.read(searchQueryProvider.notifier).update(value),
         decoration: InputDecoration(
-          hintText: 'Nhập tên máy (ví dụ Iphone 15, SS Galaxy...)',
+          hintText: context.l10n.translate('device_search_hint'),
           hintStyle: AppTextStyles.body.copyWith(
             color: AppColors.placeholder,
           ),

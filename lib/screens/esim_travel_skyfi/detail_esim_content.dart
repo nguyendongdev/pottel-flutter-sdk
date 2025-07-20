@@ -12,6 +12,7 @@ import 'package:skyfi_sdk/screens/sim_data_skyfi/models/create_order/item.dart';
 import 'package:skyfi_sdk/screens/sim_data_skyfi/widgets/preview_cart.dart';
 import 'package:skyfi_sdk/utilities/modal.dart';
 
+import '../../l10n/localization_extension.dart';
 import '../../themes/colors.dart';
 import 'models/esim_package_model.dart';
 
@@ -51,7 +52,8 @@ class DetailEsimContent extends HookConsumerWidget {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Thêm vào giỏ hàng thất bại: ${e.toString()}'),
+              content: Text(
+                  '${context.l10n.translate('add_to_cart_failed')}${e.toString()}'),
               backgroundColor: Colors.red,
             ),
           );
@@ -103,15 +105,16 @@ class DetailEsimContent extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 16),
-                          _buildDiscoverTitle(),
+                          _buildDiscoverTitle(context),
                           const SizedBox(height: 16),
                           _buildPackageCard(
                               textController: textController,
-                              quantity: quantity),
+                              quantity: quantity,
+                              context: context),
                           const SizedBox(height: 24),
-                          _buildCountriesSection(),
+                          _buildCountriesSection(context),
                           const SizedBox(height: 16),
-                          _buildWarningAlert(),
+                          _buildWarningAlert(context),
                         ],
                       ),
                     ),
@@ -122,6 +125,7 @@ class DetailEsimContent extends HookConsumerWidget {
             _buildBottomActions(
               onAddToCart: () => onAddToCart(quantity.value),
               onCheckout: () => onCheckout(quantity.value),
+              context: context,
             ),
           ],
         ),
@@ -140,9 +144,9 @@ class DetailEsimContent extends HookConsumerWidget {
           Navigator.pop(context);
         },
       ),
-      title: const Text(
-        'Chi tiết gói cước',
-        style: TextStyle(
+      title: Text(
+        context.l10n.translate('package_details'),
+        style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
           color: neutral0,
@@ -151,10 +155,10 @@ class DetailEsimContent extends HookConsumerWidget {
     );
   }
 
-  Widget _buildDiscoverTitle() {
-    return const Text(
-      'Discover',
-      style: TextStyle(
+  Widget _buildDiscoverTitle(BuildContext context) {
+    return Text(
+      context.l10n.translate('discover'),
+      style: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: neutral0,
@@ -165,6 +169,7 @@ class DetailEsimContent extends HookConsumerWidget {
   Widget _buildPackageCard({
     required TextEditingController textController,
     required ValueNotifier<int> quantity,
+    required BuildContext context,
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -185,7 +190,7 @@ class DetailEsimContent extends HookConsumerWidget {
         children: [
           Text(
             package.name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: neutral0,
@@ -193,26 +198,30 @@ class DetailEsimContent extends HookConsumerWidget {
           ),
           const SizedBox(height: 16),
           _buildInfoRow(
-            'Dung lượng',
+            context.l10n.translate('data_capacity_detail'),
             '${package.dataAmount.toStringAsFixed(0)} ${package.dataUnit}',
             icon: Icons.storage,
+            context: context,
           ),
           _buildInfoRow(
-            'Hiệu lực',
-            '${package.validityDays} ngày',
+            context.l10n.translate('validity_detail'),
+            '${package.validityDays} ${context.l10n.translate('days_unit')}',
             icon: Icons.calendar_today,
+            context: context,
           ),
-          _buildPriceRow(),
+          _buildPriceRow(context),
           _buildQuantityRow(
             textController: textController,
             quantity: quantity,
+            context: context,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoRow(String label, String value, {IconData? icon}) {
+  Widget _buildInfoRow(String label, String value,
+      {IconData? icon, required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
@@ -238,15 +247,15 @@ class DetailEsimContent extends HookConsumerWidget {
     );
   }
 
-  Widget _buildPriceRow() {
+  Widget _buildPriceRow(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Giá',
-            style: TextStyle(
+          Text(
+            context.l10n.translate('price'),
+            style: const TextStyle(
               fontSize: 14,
               color: neutral0,
             ),
@@ -267,15 +276,16 @@ class DetailEsimContent extends HookConsumerWidget {
   Widget _buildQuantityRow({
     required TextEditingController textController,
     required ValueNotifier<int> quantity,
+    required BuildContext context,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Số lượng',
-            style: TextStyle(
+          Text(
+            context.l10n.translate('quantity'),
+            style: const TextStyle(
               fontSize: 14,
               color: neutral0,
             ),
@@ -301,7 +311,7 @@ class DetailEsimContent extends HookConsumerWidget {
                 keyboardType: TextInputType.number,
                 controller: textController,
                 decoration: InputDecoration(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxWidth: 30,
                   ),
                   border: InputBorder.none,
@@ -326,8 +336,8 @@ class DetailEsimContent extends HookConsumerWidget {
                     quantity.value = 1;
                     textController.text = '1';
                     Modal.showError(
-                      title: 'Số lượng không hợp lệ',
-                      message: 'Số lượng phải từ 1 đến 50',
+                      title: context.l10n.translate('invalid_quantity'),
+                      message: context.l10n.translate('quantity_range_error'),
                     );
                   }
                 },
@@ -354,13 +364,13 @@ class DetailEsimContent extends HookConsumerWidget {
     );
   }
 
-  Widget _buildCountriesSection() {
+  Widget _buildCountriesSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Các quốc gia',
-          style: TextStyle(
+        Text(
+          context.l10n.translate('countries_list_detail'),
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
             color: neutral0,
@@ -368,46 +378,55 @@ class DetailEsimContent extends HookConsumerWidget {
         ),
         const SizedBox(height: 8),
         _buildCountryInfoCard(
-          'Phạm vi phủ sóng',
-          '${package.countriesArray?.length ?? 0} quốc gia',
+          context.l10n.translate('coverage_area'),
+          context.l10n
+              .translate('countries_count')
+              .replaceAll('{0}', '${package.countriesArray?.length ?? 0}'),
           onClick: () {
             showBottomSheetListCountries(
               package.countriesArray ?? [],
             );
           },
+          context: context,
         ),
         _buildCountryInfoCard(
-          'Cung cấp bởi',
-          'Singtel',
+          context.l10n.translate('provided_by'),
+          context.l10n.translate('singtel'),
           showInfo: true,
+          context: context,
         ),
         _buildCountryInfoCard(
-          'Chính sách kích hoạt',
-          'Thời hạn hiệu lực sẽ bắt đầu lúc cài',
+          context.l10n.translate('activation_policy'),
+          context.l10n.translate('validity_starts_on_install'),
+          context: context,
         ),
         _buildCountryInfoCard(
-          'Dung lượng',
+          context.l10n.translate('data_capacity_detail'),
           '${package.dataAmount.toStringAsFixed(0)} ${package.dataUnit}',
+          context: context,
         ),
         _buildCountryInfoCard(
-          'Hiệu lực',
-          '${package.validityDays} ngày',
+          context.l10n.translate('validity_detail'),
+          '${package.validityDays} ${context.l10n.translate('days_unit')}',
+          context: context,
         ),
         _buildCountryInfoCard(
-          'Loại gói',
-          'Chỉ dữ liệu',
+          context.l10n.translate('package_type'),
+          context.l10n.translate('data_only'),
           showInfo: true,
+          context: context,
         ),
         _buildCountryInfoCard(
-          'eKYC (Xác minh danh tính)',
-          'Không bắt buộc',
+          context.l10n.translate('ekyc_verification'),
+          context.l10n.translate('not_required'),
+          context: context,
         ),
       ],
     );
   }
 
   Widget _buildCountryInfoCard(String label, String value,
-      {VoidCallback? onClick, bool showInfo = false}) {
+      {VoidCallback? onClick, bool showInfo = false, BuildContext? context}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 1),
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
@@ -465,7 +484,7 @@ class DetailEsimContent extends HookConsumerWidget {
     );
   }
 
-  Widget _buildWarningAlert() {
+  Widget _buildWarningAlert(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -492,9 +511,9 @@ class DetailEsimContent extends HookConsumerWidget {
                 ),
               ),
               const SizedBox(width: 4),
-              const Text(
-                'Lưu ý',
-                style: TextStyle(
+              Text(
+                context.l10n.translate('note'),
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                   color: Color(0xFFFF831E),
@@ -503,9 +522,9 @@ class DetailEsimContent extends HookConsumerWidget {
             ],
           ),
           const SizedBox(height: 4),
-          const Text(
-            'eSIM chỉ sử dụng được trên các thiết bị di động có hỗ trợ. Xem danh sách thiết bị',
-            style: TextStyle(
+          Text(
+            context.l10n.translate('esim_device_support_note'),
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
               color: neutral0,
@@ -517,7 +536,9 @@ class DetailEsimContent extends HookConsumerWidget {
   }
 
   Widget _buildBottomActions(
-      {required VoidCallback onAddToCart, required VoidCallback onCheckout}) {
+      {required VoidCallback onAddToCart,
+      required VoidCallback onCheckout,
+      required BuildContext context}) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -549,9 +570,9 @@ class DetailEsimContent extends HookConsumerWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text(
-                  'Thêm vào giỏ hàng',
-                  style: TextStyle(
+                child: Text(
+                  context.l10n.translate('add_to_cart_esim'),
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFFE69818),
@@ -572,9 +593,9 @@ class DetailEsimContent extends HookConsumerWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text(
-                  'Mua ngay',
-                  style: TextStyle(
+                child: Text(
+                  context.l10n.translate('buy_now_esim'),
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: white,

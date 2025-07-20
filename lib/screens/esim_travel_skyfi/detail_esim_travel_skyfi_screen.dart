@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/screens/cart_skyfi/widgets/empty_cart.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
+import '../../l10n/localization_extension.dart';
 import '../cart_skyfi/provider/cart_provider.dart';
 import '../sim_data_skyfi/widgets/preview_cart.dart';
 import 'models/region_model.dart';
@@ -58,12 +58,14 @@ class DetailEsimTravelSkyfiScreen extends HookConsumerWidget {
                 data: (packages) {
                   if (packages.isEmpty) {
                     return EmptyCart(
-                      title: 'Không có gói cước nào',
-                      description: 'Vui lòng chọn quốc gia khác',
+                      title: context.l10n.translate('no_packages_available'),
+                      description: context.l10n
+                          .translate('please_choose_another_country'),
                       onContinueShopping: () {
-                         Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
-                      titleButton: 'Tiếp tục mua eSIM',
+                      titleButton:
+                          context.l10n.translate('continue_buying_esim'),
                     );
                   }
 
@@ -107,7 +109,7 @@ class DetailEsimTravelSkyfiScreen extends HookConsumerWidget {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                        'Thêm vào giỏ hàng thất bại: ${e.toString()}'),
+                                        '${context.l10n.translate('add_to_cart_failed')}${e.toString()}'),
                                     backgroundColor: Colors.red,
                                   ),
                                 );
@@ -119,14 +121,14 @@ class DetailEsimTravelSkyfiScreen extends HookConsumerWidget {
                     ),
                   );
                 },
-                loading: () => const Center(
+                loading: () => Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CircularProgressIndicator(),
-                          SizedBox(height: AppSpacing.md),
+                          const CircularProgressIndicator(),
+                          const SizedBox(height: AppSpacing.md),
                           Text(
-                            'Đang tải gói cước...',
+                            context.l10n.translate('loading_packages'),
                             style: AppTextStyles.body,
                           ),
                         ],
@@ -138,7 +140,8 @@ class DetailEsimTravelSkyfiScreen extends HookConsumerWidget {
                   return Center(
                     child: SelectableText.rich(
                       TextSpan(
-                        text: 'Đã có lỗi xảy ra\n',
+                        text:
+                            '${context.l10n.translate('error_occurred_generic')}\n',
                         style: AppTextStyles.heading
                             .copyWith(color: AppColors.red),
                         children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
+import '../../../l10n/localization_extension.dart';
 import '../provider/region_provider.dart';
 
 class SearchField extends ConsumerWidget {
@@ -13,11 +14,11 @@ class SearchField extends ConsumerWidget {
     String hintText = '';
     print("selectedTab $selectedTab");
     if (selectedTab == 0) {
-      hintText = 'Tìm kiếm theo quốc gia';
+      hintText = context.l10n.translate('search_by_country');
     } else if (selectedTab == 1) {
-      hintText = 'Tìm kiếm theo khu vực';
+      hintText = context.l10n.translate('search_by_region');
     } else if (selectedTab == 2) {
-      hintText = 'Tìm kiếm toàn cầu';
+      hintText = context.l10n.translate('search_global');
     }
 
     return Container(

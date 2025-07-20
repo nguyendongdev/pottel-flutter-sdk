@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
+import '../../l10n/localization_extension.dart';
 import 'provider/compatible_device_provider.dart';
 import 'widgets/brand_section.dart';
 import 'widgets/device_search_bar.dart';
@@ -30,7 +31,7 @@ class CompatibleDevicesScreen extends HookConsumerWidget {
         children: [
           Row(children: [
             Text(
-              'Thiết bị di động có hỗ trợ eSIM',
+              context.l10n.translate('mobile_devices_support_esim'),
               style: AppTextStyles.title.copyWith(
                 color: AppColors.text,
               ),
@@ -42,7 +43,7 @@ class CompatibleDevicesScreen extends HookConsumerWidget {
             ),
           ]),
           Text(
-            'Lưu ý: eSIM là một loại eSIM điện tử (sử dụng mã QR) và không phải là thẻ eSIM vật lý lắp vào điện thoại, eSIM không dùng cho các loại đồng hồ thông minh',
+            context.l10n.translate('esim_electronic_note'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.text,
             ),

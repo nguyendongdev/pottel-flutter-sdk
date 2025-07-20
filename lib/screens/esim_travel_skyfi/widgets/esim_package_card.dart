@@ -7,6 +7,8 @@ import 'package:skyfi_sdk/screens/esim_travel_skyfi/widgets/modalContris.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/utilities/modal.dart';
 
+import '../../../l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -85,7 +87,7 @@ class EsimPackageCard extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Phạm vi phủ sóng',
+                          context.l10n.translate('coverage_area_label'),
                           style: AppTextStyles.body.copyWith(
                             color: AppColors.textLight,
                           ),
@@ -96,7 +98,7 @@ class EsimPackageCard extends HookConsumerWidget {
                                 package.countriesArray!);
                           },
                           child: Text(
-                            '${package.countriesArray!.length} quốc gia',
+                            context.l10n.translate('countries_count').replaceAll('{0}', package.countriesArray!.length.toString()),
                             style: AppTextStyles.body.copyWith(
                                 color: AppColors.blue,
                                 decoration: TextDecoration.underline,
@@ -111,7 +113,7 @@ class EsimPackageCard extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Dung lượng ',
+                        context.l10n.translate('data_capacity_label'),
                         style: AppTextStyles.body.copyWith(
                           color: AppColors.textLight,
                         ),
@@ -129,13 +131,13 @@ class EsimPackageCard extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Hiệu lực',
+                        context.l10n.translate('validity_label'),
                         style: AppTextStyles.body.copyWith(
                           color: AppColors.textLight,
                         ),
                       ),
                       Text(
-                        '${package.validityDays} ngày',
+                        '${package.validityDays} ${context.l10n.translate('days_unit')}',
                         style: AppTextStyles.heading.copyWith(
                           color: AppColors.text,
                         ),
@@ -147,7 +149,7 @@ class EsimPackageCard extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Giá: ',
+                        context.l10n.translate('price_label'),
                         style: AppTextStyles.body.copyWith(
                           color: AppColors.textLight,
                         ),
@@ -166,7 +168,7 @@ class EsimPackageCard extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Số lượng: ',
+                        context.l10n.translate('quantity_label'),
                         style: AppTextStyles.body
                             .copyWith(color: AppColors.textLight),
                       ),
@@ -216,8 +218,8 @@ class EsimPackageCard extends HookConsumerWidget {
                                 quantity.value = 1;
                                 textController.text = '1';
                                 Modal.showError(
-                                  title: 'Số lượng không hợp lệ',
-                                  message: 'Số lượng phải từ 1 đến 50',
+                                  title: context.l10n.translate('invalid_quantity'),
+                                  message: context.l10n.translate('quantity_range_error'),
                                 );
                               }
                             },
@@ -258,7 +260,7 @@ class EsimPackageCard extends HookConsumerWidget {
                       onPressed: () {
                         onTap(quantity.value);
                       },
-                      text: 'Chọn mua',
+                      text: context.l10n.translate('choose_buy'),
                       textStyle: AppTextStyles.body.copyWith(
                           color: Colors.white, fontWeight: FontWeight.w700),
                     ),
