@@ -163,7 +163,7 @@ class StartVideoCallScreen extends StatelessWidget {
                             'Thông báo',
                             result['message'] ?? 'Không có teller nào rảnh',
                             () {
-                              context.pop();
+                              // context.pop();
                               context.pushNamed(AppRouter.recordVideo, extra: {
                                 'idCall': id,
                                 'phoneNumber': phone,
@@ -171,7 +171,7 @@ class StartVideoCallScreen extends StatelessWidget {
                               });
                             },
                             () {
-                              context.pop();
+                              // context.pop();
                             },
                             primaryButtonText: 'Quay Video',
                             secondaryButtonText: 'Đóng',
