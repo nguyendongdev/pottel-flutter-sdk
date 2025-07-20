@@ -160,4 +160,34 @@ const Map<String, String> viStrings = {
   'search_by_country': 'Tìm kiếm theo quốc gia',
   'search_by_region': 'Tìm kiếm theo khu vực',
   'search_global': 'Tìm kiếm toàn cầu',
+  
+  // List Package SkyFi Screen
+  'package_list': 'Danh sách gói cước',
+  'monthly_package': 'Gói tháng',
+  'daily_package_tab': 'Gói ngày',
+  'supplement_package': 'Gói bổ sung',
+  'no_data': 'Không có dữ liệu',
+  'error': 'Lỗi',
+  'notification': 'Thông báo',
+  'topup_money_action': 'Nạp tiền',
+  
+  // Modal Input OTP
+  'otp_verification_message': 'Vui lòng nhập OTP được gửi về số điện thoại {0} để xác nhận.',
+  'enter_otp_to_verify': 'Nhập mã OTP để xác thực',
+  'resend_code': 'Gửi lại mã',
+  'please_enter_otp': 'Vui lòng nhập mã OTP',
+  
+  // Modal Input Phone
+  'phone_register_message': 'Vui lòng nhập số điện thoại muốn đăng ký gói cước.',
+  'phone_number': 'Số điện thoại',
+  'enter_phone_number': 'Nhập số điện thoại',
+  'cancel': 'Hủy',
+  'continue': 'Tiếp tục',
+  'please_enter_phone_number': 'Vui lòng nhập số điện thoại',
+  
+  // Modal Money Fail
+  'insufficient_balance_message': 'Tài khoản chính của Bạn không đủ tiền để đăng ký gói cước này .Vui lòng nạp thêm tiền để đăng ký gói cước.',
+  
+  // Search Package
+  'search_packages': 'Tìm kiếm gói cước',
 };

@@ -160,4 +160,34 @@ const Map<String, String> enStrings = {
   'search_by_country': 'Search by country',
   'search_by_region': 'Search by region',
   'search_global': 'Search global',
+  
+  // List Package SkyFi Screen
+  'package_list': 'Package List',
+  'monthly_package': 'Monthly Package',
+  'daily_package_tab': 'Daily Package',
+  'supplement_package': 'Supplement Package',
+  'no_data': 'No data',
+  'error': 'Error',
+  'notification': 'Notification',
+  'topup_money_action': 'Top up',
+  
+  // Modal Input OTP
+  'otp_verification_message': 'Please enter the OTP sent to phone number {0} to confirm.',
+  'enter_otp_to_verify': 'Enter OTP to verify',
+  'resend_code': 'Resend code',
+  'please_enter_otp': 'Please enter OTP',
+  
+  // Modal Input Phone
+  'phone_register_message': 'Please enter the phone number you want to register for the package.',
+  'phone_number': 'Phone number',
+  'enter_phone_number': 'Enter phone number',
+  'cancel': 'Cancel',
+  'continue': 'Continue',
+  'please_enter_phone_number': 'Please enter phone number',
+  
+  // Modal Money Fail
+  'insufficient_balance_message': 'Your main account does not have enough money to register for this package. Please top up more money to register for the package.',
+  
+  // Search Package
+  'search_packages': 'Search packages',
 };

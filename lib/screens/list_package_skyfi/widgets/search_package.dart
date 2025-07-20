@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
+import '../../../l10n/localization_extension.dart';
 
 class SearchPackage extends StatelessWidget {
   const SearchPackage({super.key, required this.onChanged});
@@ -17,18 +18,18 @@ class SearchPackage extends StatelessWidget {
       ),
       child: TextField(
         onChanged: onChanged,
-        decoration: const InputDecoration(
-          hintText: 'Tìm kiếm gói cước',
-          hintStyle: TextStyle(
+        decoration: InputDecoration(
+          hintText: context.l10n.translate('search_packages'),
+          hintStyle: const TextStyle(
             color: AppColors.textLight,
             fontSize: 14,
           ),
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.search,
             color: AppColors.textLight,
           ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(
+          contentPadding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.md,
             vertical: AppSpacing.md,
           ),

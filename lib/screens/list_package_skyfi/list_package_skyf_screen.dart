@@ -8,6 +8,7 @@ import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/PopupCenterCard.dart';
 import '../../core/widgets/snack_bar_app.dart';
+import '../../l10n/localization_extension.dart';
 import '../../network/api.dart';
 import '../../utilities/common.dart';
 import '../change_package_skyfi/widgets/confirmation_dialog.dart';
@@ -88,10 +89,10 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
           SnackBarApp.showSuccess(context, message: response.data['message']);
         } else {
           Common.showAlertDialog(
-              context, 'Lỗi', response.data['message'], null);
+              context, context.l10n.translate('error'), response.data['message'], null);
         }
       } catch (e) {
-        Common.showAlertDialog(context, 'Lỗi', e.toString(), null);
+        Common.showAlertDialog(context, context.l10n.translate('error'), e.toString(), null);
         print(e);
       } finally {
         isLoading.value = false;
@@ -157,9 +158,9 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
           showDialog(
             context: context,
             builder: (context) => PopupCenterCard(
-              title: 'Thông báo',
+              title: context.l10n.translate('notification'),
               description: data['message'],
-              secondaryButtonText: 'Nạp tiền',
+              secondaryButtonText: context.l10n.translate('topup_money_action'),
               onPrimaryButtonTap: () => Navigator.of(context).pop(),
               onSecondaryButtonTap: () =>
                   {context.pushNamed(AppRouter.topupSkyFi)},
@@ -220,8 +221,8 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
-        title: const Text(
-          'Danh sách gói cước',
+        title: Text(
+          context.l10n.translate('package_list'),
           style: AppTextStyles.title,
         ),
         centerTitle: true,
@@ -236,15 +237,15 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
             Row(
               children: [
                 TabItem(
-                    title: 'Gói tháng',
+                    title: context.l10n.translate('monthly_package'),
                     isSelected: selectedTab.value == 'month',
                     onTap: () => selectedTab.value = 'month'),
                 TabItem(
-                    title: 'Gói ngày',
+                    title: context.l10n.translate('daily_package_tab'),
                     isSelected: selectedTab.value == 'day',
                     onTap: () => selectedTab.value = 'day'),
                 TabItem(
-                    title: 'Gói bổ sung',
+                    title: context.l10n.translate('supplement_package'),
                     isSelected: selectedTab.value == 'supplement',
                     onTap: () => selectedTab.value = 'supplement'),
               ],
@@ -265,9 +266,9 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
                       fetchOutStandingPackage();
                     },
                     child: packages.value.isEmpty
-                        ? const Center(
+                        ? Center(
                             child: Text(
-                              'Không có dữ liệu',
+                              context.l10n.translate('no_data'),
                               style: AppTextStyles.body,
                             ),
                           )

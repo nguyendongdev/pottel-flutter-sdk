@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 
+import '../../../l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -32,16 +34,16 @@ class ModalInputPhone extends HookConsumerWidget {
       padding: const EdgeInsets.all(AppSpacing.xl),
       child: Column(
         children: [
-          Text('Thông báo',
+          Text(context.l10n.translate('notification'),
               style: AppTextStyles.title.copyWith(fontSize: AppSpacing.xl)),
           const SizedBox(height: AppSpacing.sm),
-          const Text('Vui lòng nhập số điện thoại muốn đăng ký gói cước.',
+          Text(context.l10n.translate('phone_register_message'),
               style: AppTextStyles.label),
           const SizedBox(height: AppSpacing.sm),
           // TEXT LEFT
           Row(
             children: [
-              const Text("Số điện thoại ", style: AppTextStyles.title),
+              Text("${context.l10n.translate('phone_number')} ", style: AppTextStyles.title),
               Text("*",
                   style: AppTextStyles.title.copyWith(color: AppColors.red)),
             ],
@@ -57,7 +59,7 @@ class ModalInputPhone extends HookConsumerWidget {
                   color: AppColors.border,
                 ),
               ),
-              hintText: 'Nhập số điện thoại',
+              hintText: context.l10n.translate('enter_phone_number'),
             ),
             keyboardType: TextInputType.phone,
           ),
@@ -70,7 +72,7 @@ class ModalInputPhone extends HookConsumerWidget {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  text: 'Hủy',
+                  text: context.l10n.translate('cancel'),
                   textStyle: AppTextStyles.button.copyWith(
                     color: AppColors.primary,
                   ),
@@ -82,7 +84,7 @@ class ModalInputPhone extends HookConsumerWidget {
                   height: 48,
                   onPressed: () {
                     if (controller.text.isEmpty) {
-                      Common.showToast('Vui lòng nhập số điện thoại', context);
+                      Common.showToast(context.l10n.translate('please_enter_phone_number'), context);
                     } else {
                       onPressedContinue(
                         controller.text,
@@ -90,7 +92,7 @@ class ModalInputPhone extends HookConsumerWidget {
                     }
                     Navigator.of(context).pop();
                   },
-                  text: 'Tiếp tục',
+                  text: context.l10n.translate('continue'),
                   textStyle: AppTextStyles.button.copyWith(
                     color: AppColors.white,
                   ),

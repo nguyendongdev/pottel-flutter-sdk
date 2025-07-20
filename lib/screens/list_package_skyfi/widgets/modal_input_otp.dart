@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 
+import '../../../l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -37,11 +39,11 @@ class ModalInputOtp extends HookConsumerWidget {
       padding: const EdgeInsets.all(AppSpacing.xl),
       child: Column(
         children: [
-          Text('Thông báo',
+          Text(context.l10n.translate('notification'),
               style: AppTextStyles.title.copyWith(fontSize: AppSpacing.xl)),
           const SizedBox(height: AppSpacing.sm),
           Text(
-              'Vui lòng nhập OTP được gửi về số điện thoại $phone để xác nhận.',
+              context.l10n.translate('otp_verification_message').replaceAll('{0}', phone),
               style: AppTextStyles.label),
           const SizedBox(height: AppSpacing.sm),
           const SizedBox(height: AppSpacing.sm),
@@ -58,7 +60,7 @@ class ModalInputOtp extends HookConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'Nhập mã OTP để xác thực',
+            context.l10n.translate('enter_otp_to_verify'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.text,
             ),
@@ -73,7 +75,7 @@ class ModalInputOtp extends HookConsumerWidget {
                     onPressedResendOtp();
                      Navigator.of(context).pop();
                   },
-                  text: 'Gửi lại mã',
+                  text: context.l10n.translate('resend_code'),
                   textStyle: AppTextStyles.button.copyWith(
                     color: AppColors.primary,
                   ),
@@ -85,13 +87,13 @@ class ModalInputOtp extends HookConsumerWidget {
                   height: 48,
                   onPressed: () {
                     if (otp.value.isEmpty || otp.value.length != 6) {
-                      Common.showToast('Vui lòng nhập mã OTP', context);
+                      Common.showToast(context.l10n.translate('please_enter_otp'), context);
                     } else {
                       onPressedContinue(otp.value);
                        Navigator.of(context).pop();
                     }
                   },
-                  text: 'Xác nhận',
+                  text: context.l10n.translate('confirm'),
                   textStyle: AppTextStyles.button.copyWith(
                     color: AppColors.white,
                   ),
