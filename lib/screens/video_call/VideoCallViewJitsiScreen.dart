@@ -195,10 +195,10 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
     // delay 30s and pop screen
     // if unmout clear function
     if (mounted) {
-      Future.delayed(const Duration(seconds: 30), () {
+      Future.delayed(const Duration(seconds: 5), () {
         Navigator.of(context).pop({
           "status": "no-free-teller",
-          "message": "Không có teller nào rảnh",
+          "message": "Rất tiếc, không có tổng đài viên nào đang rảnh, Bạn vui lòng bấm vào 'Quay video' để được hoản tất quá trình Đăng ký thông tin",
           "data": data
         });
       });
