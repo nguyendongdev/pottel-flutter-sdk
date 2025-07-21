@@ -679,4 +679,30 @@ const Map<String, String> viStrings = {
   // Package Register Button
   'package_id_error': 'Lỗi: Không thể xác định ID gói cước',
   'registration_error': 'Lỗi: {0}',
+  
+  // Order Detail Screen
+  'order_detail_title': 'Chi tiết đơn hàng',
+  'order_not_found': 'Không tìm thấy đơn hàng',
+  'back_to_home': 'Về trang chủ',
+  'order_information': 'Thông tin đơn hàng',
+  'order_code': 'Mã đơn hàng:',
+  'order_date': 'Ngày đặt hàng:',
+  'order_overview': 'Tổng quan đơn hàng',
+  'physical_sim_quantity': 'Số lượng sim vật lý:',
+  'esim_quantity': 'Số lượng eSIM:',
+  'esim_travel_quantity': 'Số lượng eSIM du lịch:',
+  'total_amount_order': 'Tổng tiền:',
+  
+  // Package Detail Screen
+  'package_detail_title': 'Chi tiết gói cước',
+  'data_load_error_package': 'Lỗi khi tải dữ liệu: ',
+  'package_label': 'Gói cước',
+  'days_unit_package': 'ngày',
+  'free_label': 'Miễn phí',
+  'gb_per_day_unit': 'GB/ngày',
+  'sms_unit': 'SMS',
+  'minutes_unit': 'phút',
+  'register_package': 'Đăng ký',
+  'per_days_label': '/ {0} ngày',
+  'topup_money_button': 'Nạp tiền',
 };

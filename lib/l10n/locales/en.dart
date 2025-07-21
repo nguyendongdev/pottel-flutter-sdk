@@ -686,4 +686,44 @@ const Map<String, String> enStrings = {
   // Package Register Button
   'package_id_error': 'Error: Cannot determine package ID',
   'registration_error': 'Error: {0}',
+  
+  // Order Detail Screen
+  'order_detail_title': 'Order Details',
+  'order_not_found': 'Order not found',
+  'back_to_home': 'Back to Home',
+  'order_information': 'Order Information',
+  'order_code': 'Order Code:',
+  'order_date': 'Order Date:',
+  'order_overview': 'Order Overview',
+  'physical_sim_quantity': 'Physical SIM quantity:',
+  'esim_quantity': 'eSIM quantity:',
+  'esim_travel_quantity': 'eSIM Travel quantity:',
+  'total_amount_order': 'Total Amount:',
+  
+  // Package Detail Screen
+  'package_detail_title': 'Package Details',
+  'data_load_error_package': 'Error loading data: ',
+  'package_label': 'Package',
+  'days_unit_package': 'days',
+  'free_label': 'Free',
+  'gb_per_day_unit': 'GB/day',
+  'sms_unit': 'SMS',
+  'minutes_unit': 'minutes',
+  'register_package': 'Register',
+  'per_days_label': '/ {0} days',
+  'topup_money_button': 'Top up',
+  
+  // Payment Method Screen
+  'payment_method_title': 'Payment Method',
+  'choose_payment_method': 'Choose payment method',
+  'no_payment_methods_available': 'No payment methods available',
+  'confirm_button': 'Confirm',
+  'success_title': 'Success',
+  'order_created_successfully': 'Order created successfully',
+  'view_details_button': 'View Details',
+  'buy_more_button': 'Buy More',
+  'please_choose_payment_method': 'Please choose a payment method',
+  'esim_not_support_cod': 'eSIM does not support COD payment',
+  'error_general': 'Error',
 };
+

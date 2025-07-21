@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 
 import '../../core/constants/colors.dart';
+import '../../l10n/localization_extension.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/bottom_button.dart';
@@ -48,8 +49,8 @@ class OrderDetailSkyfiScreen extends HookConsumerWidget {
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
         elevation: 0,
-        title: const Text(
-          'Chi tiết đơn hàng',
+        title: Text(
+          context.l10n.translate('order_detail_title'),
           style: AppTextStyles.title,
         ),
         leading: IconButton(
@@ -69,14 +70,14 @@ class OrderDetailSkyfiScreen extends HookConsumerWidget {
           onPressed: () {
             context.goNamed(AppRouter.homeSkyFiNew);
           },
-          text: 'Về trang chủ',
+          text: context.l10n.translate('back_to_home'),
           textStyle: null,
         ),
       ),
       body: isLoading.value
           ? const Center(child: CircularProgressIndicator())
           : orderDetail.value == null
-              ? const Center(child: Text('Không tìm thấy đơn hàng'))
+              ? Center(child: Text(context.l10n.translate('order_not_found')))
               : SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(AppSpacing.screenPadding),

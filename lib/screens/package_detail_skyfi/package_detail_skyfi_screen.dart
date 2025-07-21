@@ -9,6 +9,7 @@ import 'package:skyfi_sdk/network/api.dart';
 import 'package:skyfi_sdk/screens/package_detail_skyfi/models/package_model_detail/result.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
+import '../../l10n/localization_extension.dart';
 import '../../core/widgets/PopupCenterCard.dart';
 import '../../core/widgets/snack_bar_app.dart';
 import '../../routers/routers.dart';
@@ -60,10 +61,10 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
         } else {
           // SnackBarApp.showError(context, message: response.data['message']);
           Common.showAlertDialog(
-              context, 'Lỗi', response.data['message'], null);
+              context, context.l10n.translate('error_title'), response.data['message'], null);
         }
       } catch (e) {
-        Common.showAlertDialog(context, 'Lỗi', e.toString(), () {});
+        Common.showAlertDialog(context, context.l10n.translate('error_title'), e.toString(), () {});
         print(e);
       } finally {
         isLoading.value = false;
@@ -134,9 +135,9 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
           showDialog(
             context: context,
             builder: (context) => PopupCenterCard(
-              title: 'Thông báo',
+              title: context.l10n.translate('notification_title'),
               description: data['message'],
-              secondaryButtonText: 'Nạp tiền',
+              secondaryButtonText: context.l10n.translate('topup_money_button'),
               onPrimaryButtonTap: () => Navigator.of(context).pop(),
               onSecondaryButtonTap: () =>
                   {context.pushNamed(AppRouter.topupSkyFi)},
@@ -194,7 +195,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text('Chi tiết gói cước',
+        title: Text(context.l10n.translate('package_detail_title'),
             style: AppTextStyles.heading.copyWith(fontSize: 16)),
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
@@ -215,9 +216,9 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
               child: SelectableText.rich(
                 TextSpan(
                   children: [
-                    const TextSpan(
-                      text: 'Lỗi khi tải dữ liệu: ',
-                      style: TextStyle(
+                    TextSpan(
+                      text: context.l10n.translate('data_load_error_package'),
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: Colors.red,
@@ -247,12 +248,12 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Package name section
-                        _buildPackageNameSection(packageDetail!),
+                        _buildPackageNameSection(context, packageDetail!),
 
                         const SizedBox(height: 24),
 
                         // Benefits list
-                        _buildBenefitsList(packageDetail),
+                        _buildBenefitsList(context, packageDetail),
 
                         const SizedBox(height: 24),
 
@@ -279,13 +280,13 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
     );
   }
 
-  Widget _buildPackageNameSection(Result packageDetail) {
+  Widget _buildPackageNameSection(BuildContext context, Result packageDetail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Gói cước',
-          style: TextStyle(
+        Text(
+          context.l10n.translate('package_label'),
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
             color: Color(0xFF666666),
@@ -311,7 +312,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
               ),
             ),
             Text(
-              packageDetail.validityDay.toString() + ' ngày',
+              '${packageDetail.validityDay.toString()} ${context.l10n.translate('days_unit_package')}',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -324,7 +325,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
     );
   }
 
-  Widget _buildBenefitsList(Result packageDetail) {
+  Widget _buildBenefitsList(BuildContext context, Result packageDetail) {
     return Row(
       children: [
         // Data benefit
@@ -332,9 +333,9 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
           child: PackageBenefitItem(
             icon: 'assets/icons/dashboard-speed.svg',
             iconColor: const Color(0xFFB40005),
-            title: 'Miễn phí',
+            title: context.l10n.translate('free_label'),
             subtitle:
-                '${packageDetail.dataPerDay?.toStringAsFixed(0) ?? '0'}GB/ngày',
+                '${packageDetail.dataPerDay?.toStringAsFixed(0) ?? '0'}${context.l10n.translate('gb_per_day_unit')}',
           ),
         ),
 
@@ -345,8 +346,8 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
           child: PackageBenefitItem(
             icon: "assets/icons/message-home.svg",
             iconColor: const Color(0xFFB40005),
-            title: 'Miễn phí',
-            subtitle: '${packageDetail.freeSms?.toString() ?? '0'} SMS',
+            title: context.l10n.translate('free_label'),
+            subtitle: '${packageDetail.freeSms?.toString() ?? '0'} ${context.l10n.translate('sms_unit')}',
           ),
         ),
 
@@ -357,8 +358,8 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
           child: PackageBenefitItem(
             icon: "assets/icons/phone-home.svg",
             iconColor: const Color(0xFFB40005),
-            title: 'Miễn phí',
-            subtitle: '${packageDetail.freeCallMinute?.toString() ?? '0'} phút',
+            title: context.l10n.translate('free_label'),
+            subtitle: '${packageDetail.freeCallMinute?.toString() ?? '0'} ${context.l10n.translate('minutes_unit')}',
           ),
         ),
       ],
@@ -406,7 +407,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                       ),
                     ),
                     Text(
-                      ' / ${packageDetail.validityDay.toString()} ngày',
+                      context.l10n.translate('per_days_label').replaceAll('{0}', packageDetail.validityDay.toString()),
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -416,7 +417,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                     const Spacer(),
                     if (isRegister)
                       GradientButton(
-                        text: 'Đăng ký',
+                        text: context.l10n.translate('register_package'),
                         onPressed: () {
                           showDialog(
                             context: context,

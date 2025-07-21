@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/constants/colors.dart';
+import '../../l10n/localization_extension.dart';
 import '../../core/widgets/app_bar_custom.dart';
 import '../../network/api.dart';
 import 'models/order_detail_model.dart';
@@ -41,13 +42,13 @@ class OrderDetailScreen extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBarCustom(
-        title: 'Chi tiết đơn hàng',
+        title: context.l10n.translate('order_detail_title'),
         onBack: () => Navigator.pop(context),
       ),
       body: isLoading.value
           ? const Center(child: CircularProgressIndicator())
           : orderDetail.value == null
-              ? const Center(child: Text('Không tìm thấy đơn hàng'))
+              ? Center(child: Text(context.l10n.translate('order_not_found')))
               : SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
