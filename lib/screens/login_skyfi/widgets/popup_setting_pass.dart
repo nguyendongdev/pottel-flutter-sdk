@@ -7,6 +7,7 @@ import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/gradient_button.dart';
 import '../../../core/widgets/outline_button.dart';
+import '../../../l10n/localization_extension.dart';
 
 class PopupSettingPass extends StatefulWidget {
   const PopupSettingPass({
@@ -104,27 +105,27 @@ class _PopupSettingPassState extends State<PopupSettingPass> {
 
   void _onSetPassword() {
     if (_pinValue.length != 6) {
-      _showError('Vui lòng nhập đủ 6 số PIN');
+      _showError(context.l10n.translate('please_enter_6_digit_pin'));
       return;
     }
 
     if (_confirmPinValue.length != 6) {
-      _showError('Vui lòng xác nhận đủ 6 số PIN');
+      _showError(context.l10n.translate('please_confirm_6_digit_pin'));
       return;
     }
 
     if (_pinValue != _confirmPinValue) {
-      _showError('Mã PIN xác nhận không khớp');
+      _showError(context.l10n.translate('pin_confirmation_not_match'));
       return;
     }
 
     if (_hasConsecutiveDigits(_pinValue)) {
-      _showError('Mã PIN không được chứa số liên tiếp');
+      _showError(context.l10n.translate('pin_no_consecutive_digits'));
       return;
     }
 
     if (_hasRepeatedDigits(_pinValue)) {
-      _showError('Mã PIN không được chứa các số giống nhau liên tiếp');
+      _showError(context.l10n.translate('pin_no_repeated_digits'));
       return;
     }
 
@@ -132,7 +133,7 @@ class _PopupSettingPassState extends State<PopupSettingPass> {
   }
 
   void _showError(String message) {
-    Modal.showError(title: 'Thông báo', message: message);
+    Modal.showError(title: context.l10n.translate('notification'), message: message);
   }
 
   Widget _buildPinField(int index, List<TextEditingController> controllers,
@@ -215,7 +216,7 @@ class _PopupSettingPassState extends State<PopupSettingPass> {
               children: [
                 Expanded(
                   child: Text(
-                    'Cài đặt mật khẩu',
+                    context.l10n.translate('set_password_title'),
                     style: AppTextStyles.heading.copyWith(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
@@ -235,7 +236,7 @@ class _PopupSettingPassState extends State<PopupSettingPass> {
 
             // Description
             Text(
-              'Chỉ cần 1 phút để cài đặt mật khẩu và kể từ sau đó Bạn có thể truy cập App một cách dễ dàng và nhanh chóng!',
+              context.l10n.translate('password_setup_description'),
               style: AppTextStyles.small.copyWith(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
@@ -253,7 +254,7 @@ class _PopupSettingPassState extends State<PopupSettingPass> {
                 children: [
                   // PIN Label
                   Text(
-                    'Nhập mã PIN',
+                    context.l10n.translate('enter_pin_label'),
                     style: AppTextStyles.body.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -274,7 +275,7 @@ class _PopupSettingPassState extends State<PopupSettingPass> {
 
                   // Confirm PIN Label
                   Text(
-                    'Xác nhận mã PIN',
+                    context.l10n.translate('confirm_pin_label'),
                     style: AppTextStyles.body.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -303,7 +304,7 @@ class _PopupSettingPassState extends State<PopupSettingPass> {
                     width: double.infinity,
                     height: 48,
                     onPressed: widget.onSkip,
-                    text: 'Để sau',
+                    text: context.l10n.translate('skip_button'),
                     textStyle: AppTextStyles.body.copyWith(
                       color: AppColors.strongSecondary,
                       fontWeight: FontWeight.w700,
@@ -317,7 +318,7 @@ class _PopupSettingPassState extends State<PopupSettingPass> {
                     width: double.infinity,
                     height: 48,
                     onPressed: _onSetPassword,
-                    text: 'Đặt mật khẩu',
+                    text: context.l10n.translate('set_password_button'),
                   ),
                 ),
               ],

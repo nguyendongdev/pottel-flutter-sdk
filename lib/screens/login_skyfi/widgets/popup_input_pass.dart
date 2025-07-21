@@ -8,6 +8,7 @@ import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/gradient_button.dart';
 import '../../../core/widgets/outline_button.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../../network/store.dart';
 import '../../../routers/routers.dart';
 import '../../../utilities/common.dart';
@@ -64,7 +65,7 @@ class PopupInputPass extends HookConsumerWidget {
         context: context,
         builder: (context) => AlertDialog(
           title: Text(
-            'Thông báo',
+            context.l10n.translate('notification'),
             style: AppTextStyles.heading.copyWith(color: AppColors.text),
           ),
           content: Text(
@@ -75,7 +76,7 @@ class PopupInputPass extends HookConsumerWidget {
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text(
-                'Đóng',
+                context.l10n.translate('close_dialog'),
                 style: AppTextStyles.body.copyWith(color: AppColors.primary),
               ),
             ),
@@ -88,7 +89,7 @@ class PopupInputPass extends HookConsumerWidget {
       final password = controllers.map((controller) => controller.text).join();
 
       if (password.length != 6) {
-        showErrorDialog('Vui lòng nhập đủ 6 số mật khẩu');
+        showErrorDialog(context.l10n.translate('please_enter_6_digit_password'));
         return;
       }
 
@@ -105,7 +106,7 @@ class PopupInputPass extends HookConsumerWidget {
         if (response.code == 200) {
           // Check if result is not null before accessing its properties
           if (response.result == null) {
-            showErrorDialog('Đăng nhập thất bại. Vui lòng thử lại.');
+            showErrorDialog(context.l10n.translate('login_failed_try_again'));
             return;
           }
 
@@ -126,12 +127,12 @@ class PopupInputPass extends HookConsumerWidget {
           String errorMessage = response.message;
           if (errorMessage.isEmpty) {
             errorMessage =
-                'Đăng nhập thất bại. Vui lòng kiểm tra lại mật khẩu.';
+                context.l10n.translate('login_failed_check_password');
           }
           showErrorDialog(errorMessage);
         }
       } catch (e) {
-        String errorMessage = 'Có lỗi xảy ra khi đăng nhập';
+        String errorMessage = context.l10n.translate('error_occurred_login');
 
         // Handle specific error types
         if (e is Exception) {
@@ -142,12 +143,12 @@ class PopupInputPass extends HookConsumerWidget {
           if (exceptionMessage.contains('mật khẩu không đúng') ||
               exceptionMessage.contains('password') ||
               exceptionMessage.contains('401')) {
-            errorMessage = 'Mật khẩu không đúng. Vui lòng thử lại.';
+            errorMessage = context.l10n.translate('incorrect_password');
           } else if (exceptionMessage.contains('timeout') ||
               exceptionMessage.contains('connection')) {
-            errorMessage = 'Kết nối không ổn định. Vui lòng thử lại.';
+            errorMessage = context.l10n.translate('connection_unstable');
           } else if (exceptionMessage.contains('Server trả về dữ liệu')) {
-            errorMessage = 'Lỗi server. Vui lòng thử lại sau.';
+            errorMessage = context.l10n.translate('server_error_try_later');
           } else if (exceptionMessage.isNotEmpty) {
             errorMessage = exceptionMessage;
           }
@@ -177,7 +178,7 @@ class PopupInputPass extends HookConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Nhập mật khẩu',
+                  context.l10n.translate('enter_password_title'),
                   style: AppTextStyles.heading.copyWith(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
@@ -187,7 +188,7 @@ class PopupInputPass extends HookConsumerWidget {
                 ),
                 const SizedBox(height: AppSpacing.md),
                 Text(
-                  'Vui lòng nhập mật khẩu để đăng nhập',
+                  context.l10n.translate('please_enter_password_to_login'),
                   style: AppTextStyles.label.copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -217,7 +218,7 @@ class PopupInputPass extends HookConsumerWidget {
                       flex: 3,
                       child: OutlineButton(
                         height: 48,
-                        text: 'Đăng nhập OTP',
+                        text: context.l10n.translate('login_with_otp'),
                         textStyle: AppTextStyles.button.copyWith(
                           fontSize: 14,
                           color: AppColors.strongSecondary,
@@ -231,7 +232,7 @@ class PopupInputPass extends HookConsumerWidget {
                       flex: 2,
                       child: GradientButton(
                         height: 48,
-                        text: 'Tiếp tục',
+                        text: context.l10n.translate('continue_button'),
                         onPressed: onContinue,
                         disabled: isLoading.value,
                       ),

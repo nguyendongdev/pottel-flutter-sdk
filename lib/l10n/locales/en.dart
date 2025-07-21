@@ -570,4 +570,59 @@ const Map<String, String> enStrings = {
   'service_tab': 'Service',
   'call_tab': 'Calls',
   'history_header': 'History',
+
+  // Login SkyFi Screen
+  'welcome_to_skyfi': 'Welcome to SkyFi',
+  'please_login_to_explore': 'Please login to start exploring',
+  'phone_number_login': 'Phone number',
+  'login_button': 'Login',
+  'enter_phone_number_hint': 'Enter phone number',
+  'required_asterisk': ' *',
+
+  // Login Validation Messages
+  'please_enter_phone_number_login': 'Please enter phone number',
+  'invalid_phone_number': 'Invalid phone number',
+  'password_update_error': 'Error occurred while updating password',
+  'otp_verification_failed': 'OTP verification failed',
+  'error_occurred_login': 'An error occurred',
+  'invalid_otp': 'Invalid or expired OTP code',
+  'unauthorized_access': 'Unauthorized access',
+  'invalid_request': 'Invalid request',
+  'server_connection_error_login': 'Server connection error',
+  'please_enter_6_digit_otp': 'Please enter all 6 OTP digits',
+  'error_resending_otp': 'Error occurred while resending OTP',
+
+  // OTP Dialog
+  'confirm_otp_title': 'Confirm OTP',
+  'otp_sent_message': 'SkyFi has sent a verification OTP code to your phone number {0}.',
+  'enter_otp_to_verify_login': 'Enter OTP code to verify',
+  'resend_otp_countdown': 'Resend OTP ({0})',
+  'resend_otp': 'Resend OTP',
+  'close_dialog': 'Close',
+  'verify_button': 'Verify',
+
+  // Password Input Dialog
+  'enter_password_title': 'Enter Password',
+  'please_enter_password_to_login': 'Please enter password to login',
+  'login_with_otp': 'Login with OTP',
+  'continue_button': 'Continue',
+  'please_enter_6_digit_password': 'Please enter all 6 password digits',
+  'login_failed_try_again': 'Login failed. Please try again.',
+  'login_failed_check_password': 'Login failed. Please check your password.',
+  'incorrect_password': 'Incorrect password. Please try again.',
+  'connection_unstable': 'Connection is unstable. Please try again.',
+  'server_error_try_later': 'Server error. Please try again later.',
+
+  // Password Setting Dialog
+  'set_password_title': 'Set Password',
+  'password_setup_description': 'Just 1 minute to set up a password and from then on you can access the App easily and quickly!',
+  'enter_pin_label': 'Enter PIN code',
+  'confirm_pin_label': 'Confirm PIN code',
+  'skip_button': 'Skip',
+  'set_password_button': 'Set Password',
+  'please_enter_6_digit_pin': 'Please enter all 6 PIN digits',
+  'please_confirm_6_digit_pin': 'Please confirm all 6 PIN digits',
+  'pin_confirmation_not_match': 'PIN confirmation does not match',
+  'pin_no_consecutive_digits': 'PIN cannot contain consecutive digits',
+  'pin_no_repeated_digits': 'PIN cannot contain repeated digits',
 };

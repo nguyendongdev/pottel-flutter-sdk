@@ -18,6 +18,7 @@ import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/gradient_button.dart';
 import '../../core/widgets/outline_button.dart';
+import '../../l10n/localization_extension.dart';
 import '../../network/api.dart';
 import '../../utilities/common.dart';
 import '../cart_skyfi/provider/cart_provider.dart';
@@ -99,7 +100,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                 if (e is Exception) {
                   errorMessage = e.toString().replaceFirst('Exception: ', '');
                 }
-                Modal.showError(title: "Thông báo", message: errorMessage);
+                Modal.showError(title: context.l10n.translate('notification'), message: errorMessage);
               } finally {
                 Common.stopLoading();
               }
@@ -182,7 +183,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
           }
         }
 
-        Modal.showError(title: "Thông báo", message: errorMessage);
+        Modal.showError(title: context.l10n.translate('notification'), message: errorMessage);
       }
     }
 
@@ -192,7 +193,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
           SnackBar(
             backgroundColor: Colors.red,
             content: Text(
-              'Vui lòng nhập đủ 6 số OTP',
+              context.l10n.translate('please_enter_6_digit_otp'),
               style: AppTextStyles.body.copyWith(color: AppColors.white),
             ),
           ),
@@ -212,7 +213,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
           // );
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Có lỗi xảy ra khi gửi lại OTP')),
+            SnackBar(content: Text(context.l10n.translate('error_resending_otp'))),
           );
         }
       }
@@ -245,7 +246,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                'Xác nhận OTP',
+                                context.l10n.translate('confirm_otp_title'),
                                 style: AppTextStyles.heading.copyWith(
                                   color: AppColors.text,
                                   fontWeight: FontWeight.w600,
@@ -266,7 +267,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                         ),
                         const SizedBox(height: AppSpacing.xl),
                         Text(
-                          'SkyFi đã gửi một mã xác thực OTP đến số điện thoại $phone của Bạn.',
+                          context.l10n.translate('otp_sent_message').replaceAll('{0}', phone),
                           style: AppTextStyles.body.copyWith(
                             color: AppColors.text,
                           ),
@@ -285,7 +286,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                         ),
                         const SizedBox(height: AppSpacing.xl),
                         Text(
-                          'Nhập mã OTP để xác thực',
+                          context.l10n.translate('enter_otp_to_verify_login'),
                           style: AppTextStyles.body.copyWith(
                             color: AppColors.text,
                           ),
@@ -303,8 +304,8 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                                     },
                               child: Text(
                                 countdownValue > 0
-                                    ? 'Gửi lại OTP (${formatCountdown(countdownValue)})'
-                                    : 'Gửi lại OTP',
+                                    ? context.l10n.translate('resend_otp_countdown').replaceAll('{0}', formatCountdown(countdownValue))
+                                    : context.l10n.translate('resend_otp'),
                                 style: AppTextStyles.body.copyWith(
                                   color: countdownValue > 0
                                       ? AppColors.placeholder
@@ -332,7 +333,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                                   // close dialog
                                   Navigator.pop(context);
                                 },
-                                text: 'Đóng',
+                                text: context.l10n.translate('close_dialog'),
                                 textStyle: AppTextStyles.body.copyWith(
                                   color: AppColors.primary,
                                 ),
@@ -349,7 +350,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                                     otp: otp.value,
                                   );
                                 },
-                                text: 'Xác thực',
+                                text: context.l10n.translate('verify_button'),
                               ),
                             ),
                           ],
@@ -379,7 +380,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
         startCountdown();
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Có lỗi xảy ra khi gửi OTP')),
+          SnackBar(content: Text(context.l10n.translate('error_resending_otp'))),
         );
       } finally {
         Common.stopLoading();
@@ -436,16 +437,16 @@ class LoginSkyFiScreen extends HookConsumerWidget {
     void onLogInPressed(String phone) async {
       if (phone.isEmpty) {
         Modal.showInfo(
-          title: 'Thông báo',
-          message: 'Vui lòng nhập số điện thoại',
+          title: context.l10n.translate('notification'),
+          message: context.l10n.translate('please_enter_phone_number_login'),
         );
         return;
       }
       // phone start with 077 and length 10
       if (phone.length != 10) {
         Modal.showInfo(
-          title: 'Thông báo',
-          message: 'Số điện thoại không hợp lệ',
+          title: context.l10n.translate('notification'),
+          message: context.l10n.translate('invalid_phone_number'),
         );
         return;
       }
@@ -468,14 +469,14 @@ class LoginSkyFiScreen extends HookConsumerWidget {
           }
         } else {
           Modal.showError(
-              title: "Thông báo", message: checkPasswordResponse.message);
+              title: context.l10n.translate('notification'), message: checkPasswordResponse.message);
         }
       } catch (e) {
-        String errorMessage = 'Có lỗi xảy ra khi kiểm tra thông tin';
+        String errorMessage = context.l10n.translate('error_occurred_login');
         if (e is Exception) {
           errorMessage = e.toString().replaceFirst('Exception: ', '');
         }
-        Modal.showError(title: "Thông báo", message: errorMessage);
+        Modal.showError(title: context.l10n.translate('notification'), message: errorMessage);
       } finally {
         Common.stopLoading();
       }
@@ -521,21 +522,21 @@ class LoginSkyFiScreen extends HookConsumerWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'Chào mừng đến với SkyFi',
+                context.l10n.translate('welcome_to_skyfi'),
                 style: AppTextStyles.title.copyWith(
                   color: AppColors.text,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
-                'Vui lòng đăng nhập để bắt đầu khám phá',
+                context.l10n.translate('please_login_to_explore'),
                 style: AppTextStyles.body.copyWith(
                   color: AppColors.text,
                 ),
               ),
               const SizedBox(height: 36),
               InputPhone(
-                label: 'Số điện thoại',
+                label: context.l10n.translate('phone_number_login'),
                 onChanged: (value) {
                   phone.value = value;
                 },
@@ -548,7 +549,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                 onPressed: () {
                   onLogInPressed(phone.value);
                 },
-                text: 'Đăng nhập',
+                text: context.l10n.translate('login_button'),
               ),
             ],
           ),

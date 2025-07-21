@@ -563,4 +563,59 @@ const Map<String, String> viStrings = {
   'service_tab': 'Dịch vụ',
   'call_tab': 'Cuộc gọi',
   'history_header': 'Lịch sử',
+
+  // Login SkyFi Screen
+  'welcome_to_skyfi': 'Chào mừng đến với SkyFi',
+  'please_login_to_explore': 'Vui lòng đăng nhập để bắt đầu khám phá',
+  'phone_number_login': 'Số điện thoại',
+  'login_button': 'Đăng nhập',
+  'enter_phone_number_hint': 'Nhập số điện thoại',
+  'required_asterisk': ' *',
+
+  // Login Validation Messages
+  'please_enter_phone_number_login': 'Vui lòng nhập số điện thoại',
+  'invalid_phone_number': 'Số điện thoại không hợp lệ',
+  'password_update_error': 'Có lỗi xảy ra khi cập nhật mật khẩu',
+  'otp_verification_failed': 'Xác thực OTP thất bại',
+  'error_occurred_login': 'Đã có lỗi xảy ra',
+  'invalid_otp': 'Mã OTP không hợp lệ hoặc đã hết hạn',
+  'unauthorized_access': 'Không có quyền truy cập',
+  'invalid_request': 'Yêu cầu không hợp lệ',
+  'server_connection_error_login': 'Lỗi kết nối máy chủ',
+  'please_enter_6_digit_otp': 'Vui lòng nhập đủ 6 số OTP',
+  'error_resending_otp': 'Có lỗi xảy ra khi gửi lại OTP',
+
+  // OTP Dialog
+  'confirm_otp_title': 'Xác nhận OTP',
+  'otp_sent_message': 'SkyFi đã gửi một mã xác thực OTP đến số điện thoại {0} của Bạn.',
+  'enter_otp_to_verify_login': 'Nhập mã OTP để xác thực',
+  'resend_otp_countdown': 'Gửi lại OTP ({0})',
+  'resend_otp': 'Gửi lại OTP',
+  'close_dialog': 'Đóng',
+  'verify_button': 'Xác thực',
+
+  // Password Input Dialog
+  'enter_password_title': 'Nhập mật khẩu',
+  'please_enter_password_to_login': 'Vui lòng nhập mật khẩu để đăng nhập',
+  'login_with_otp': 'Đăng nhập OTP',
+  'continue_button': 'Tiếp tục',
+  'please_enter_6_digit_password': 'Vui lòng nhập đủ 6 số mật khẩu',
+  'login_failed_try_again': 'Đăng nhập thất bại. Vui lòng thử lại.',
+  'login_failed_check_password': 'Đăng nhập thất bại. Vui lòng kiểm tra lại mật khẩu.',
+  'incorrect_password': 'Mật khẩu không đúng. Vui lòng thử lại.',
+  'connection_unstable': 'Kết nối không ổn định. Vui lòng thử lại.',
+  'server_error_try_later': 'Lỗi server. Vui lòng thử lại sau.',
+
+  // Password Setting Dialog
+  'set_password_title': 'Cài đặt mật khẩu',
+  'password_setup_description': 'Chỉ cần 1 phút để cài đặt mật khẩu và kể từ sau đó Bạn có thể truy cập App một cách dễ dàng và nhanh chóng!',
+  'enter_pin_label': 'Nhập mã PIN',
+  'confirm_pin_label': 'Xác nhận mã PIN',
+  'skip_button': 'Để sau',
+  'set_password_button': 'Đặt mật khẩu',
+  'please_enter_6_digit_pin': 'Vui lòng nhập đủ 6 số PIN',
+  'please_confirm_6_digit_pin': 'Vui lòng xác nhận đủ 6 số PIN',
+  'pin_confirmation_not_match': 'Mã PIN xác nhận không khớp',
+  'pin_no_consecutive_digits': 'Mã PIN không được chứa số liên tiếp',
+  'pin_no_repeated_digits': 'Mã PIN không được chứa các số giống nhau liên tiếp',
 };

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 
 class InputPhone extends StatelessWidget {
   const InputPhone({
@@ -43,7 +44,7 @@ class InputPhone extends StatelessWidget {
                 ),
               ),
               Text(
-                " *",
+                context.l10n.translate('required_asterisk'),
                 style: AppTextStyles.small.copyWith(
                   color: AppColors.red,
                 ),
@@ -58,14 +59,14 @@ class InputPhone extends StatelessWidget {
             style: AppTextStyles.body.copyWith(
               color: AppColors.textLight,
             ),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.zero,
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
-              hintText: 'Nhập số điện thoại',
-              hintStyle: TextStyle(
+              hintText: context.l10n.translate('enter_phone_number_hint'),
+              hintStyle: const TextStyle(
                 color: AppColors.textLight,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
