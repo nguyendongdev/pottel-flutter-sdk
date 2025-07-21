@@ -234,4 +234,24 @@ const Map<String, String> enStrings = {
   'empty_cart_title': 'No products in cart yet',
   'empty_cart_description': 'You can visit our store and shop.',
   'continue_shopping': 'Continue buying SIM',
+  
+  // Detail Data Usage Screen
+  'days_remaining': 'Remaining {0}',
+  'days_left': 'Remaining {0} days',
+  'call': 'Call',
+  'month': 'Month',
+  'message': 'Message',
+  'minutes_per_month': '{0} minutes/ month',
+  'sms_per_month': '{0} SMS/ month',
+  'hot_packages_detail': 'Hot packages',
+  'discover_packages': 'Discover',
+  'no_hot_packages': 'No hot packages currently available.',
+  
+  // Card Used Rectangle
+  'data_card_title': 'Data',
+  'day_unit': 'day',
+  'daily_package_d3': 'Daily Package D3',
+  'gb_per_day': 'GB/day',
+  'mb_unit': 'MB',
+  'day_count': 'day',
 };

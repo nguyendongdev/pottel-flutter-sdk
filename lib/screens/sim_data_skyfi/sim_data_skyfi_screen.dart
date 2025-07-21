@@ -147,6 +147,9 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
                       onContinueShopping: () {
                         Navigator.of(context).pop();
                       },
+                      title: context.l10n.translate('empty_cart_title'),
+                      description: context.l10n.translate('empty_cart_description'),
+                      titleButton: context.l10n.translate('continue_shopping'),
                     ),
                   if (chooseSim.value?.packages?.isNotEmpty == true)
                     ..._buildDataPackages(

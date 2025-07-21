@@ -234,4 +234,24 @@ const Map<String, String> viStrings = {
   'empty_cart_title': 'Chưa có sản phầm nào trong giỏ',
   'empty_cart_description': 'Bạn có thể ghé thăm cửa hàng của chúng tôi và mua sắm.',
   'continue_shopping': 'Tiếp tục mua SIM',
+  
+  // Detail Data Usage Screen
+  'days_remaining': 'Còn lại {0}',
+  'days_left': 'Còn lại {0} ngày',
+  'call': 'Gọi',
+  'month': 'Tháng',
+  'message': 'Tin nhắn',
+  'minutes_per_month': '{0} phút/ tháng',
+  'sms_per_month': '{0} SMS/ tháng',
+  'hot_packages_detail': 'Gói cước hot',
+  'discover_packages': 'Khám phá',
+  'no_hot_packages': 'Không có gói cước hot hiện tại.',
+  
+  // Card Used Rectangle
+  'data_card_title': 'Data',
+  'day_unit': 'ngày',
+  'daily_package_d3': 'Gói ngày D3',
+  'gb_per_day': 'GB/ngày',
+  'mb_unit': 'MB',
+  'day_count': 'ngày',
 };

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -29,13 +30,13 @@ class CardUsedRectangle extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          'Data',
+                          context.l10n.translate('data_card_title'),
                           style: AppTextStyles.heading.copyWith(
                             color: AppColors.text,
                           ),
                         ),
                         Text(
-                          'ngày',
+                          context.l10n.translate('day_unit'),
                           style: AppTextStyles.body.copyWith(
                             color: AppColors.textGrey,
                           ),
@@ -44,7 +45,7 @@ class CardUsedRectangle extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      'Gói ngày D3',
+                      context.l10n.translate('daily_package_d3'),
                       style: AppTextStyles.heading.copyWith(
                         color: AppColors.text,
                       ),
@@ -61,7 +62,7 @@ class CardUsedRectangle extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '/ngày',
+                      '/${context.l10n.translate('day_unit')}',
                       style: AppTextStyles.body.copyWith(
                         fontWeight: FontWeight.w700,
                         color: AppColors.textGrey,
@@ -81,13 +82,13 @@ class CardUsedRectangle extends StatelessWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: '100MB',
+                            text: '100${context.l10n.translate('mb_unit')}',
                             style: AppTextStyles.smallStrong.copyWith(
                               color: AppColors.text,
                             ),
                           ),
                           TextSpan(
-                            text: '/3072MB',
+                            text: '/3072${context.l10n.translate('mb_unit')}',
                             style: AppTextStyles.small.copyWith(
                               color: AppColors.textGrey,
                             ),
@@ -107,7 +108,7 @@ class CardUsedRectangle extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: '/1 ngày',
+                            text: '/1 ${context.l10n.translate('day_count')}',
                             style: AppTextStyles.small.copyWith(
                               color: AppColors.textGrey,
                             ),

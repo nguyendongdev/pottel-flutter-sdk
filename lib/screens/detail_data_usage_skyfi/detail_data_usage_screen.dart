@@ -8,6 +8,7 @@ import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/screens/detail_data_usage_skyfi/widgets/card_used_square.dart';
 import 'package:skyfi_sdk/screens/home_skyfi/models/current_package.dart';
 import 'package:skyfi_sdk/screens/home_skyfi/provider/login_provider.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -32,12 +33,12 @@ class DetailDataUsageScreen extends HookConsumerWidget {
     }
   }
 
-  String _daysLeftFromDate(String startDate, String toDate) {
+  String _daysLeftFromDate(BuildContext context, String startDate, String toDate) {
     try {
       final parsedStartDate = _convertDate(startDate);
       final parsedToDate = _convertDate(toDate);
       final diff = parsedToDate.difference(parsedStartDate).inDays;
-      return diff > 0 ? '/$diff ngày' : 'hết hạn';
+      return diff > 0 ? '/$diff ${context.l10n.translate('day_unit')}' : context.l10n.translate('expired');
     } catch (_) {
       return '-';
     }
@@ -145,13 +146,14 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                               children: [
                                 TextSpan(
                                   text:
-                                      'Còn lại ${_daysLeft(currentPackage.value?.toDate)}',
+                                      context.l10n.translate('days_remaining').replaceAll('{0}', _daysLeft(currentPackage.value?.toDate)),
                                   style: AppTextStyles.title.copyWith(
                                       fontWeight: FontWeight.w700,
                                       color: AppColors.white),
                                 ),
                                 TextSpan(
                                   text: _daysLeftFromDate(
+                                      context,
                                       currentPackage.value?.fromDate ?? '',
                                       currentPackage.value?.toDate ?? ''),
                                   style: AppTextStyles.title.copyWith(
@@ -184,7 +186,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                           Color.fromARGB(255, 247, 113, 115),
                         ],
                         textTitle:
-                            'Còn lại ${_daysLeft(currentPackage.value?.toDate)} ngày',
+                            context.l10n.translate('days_left').replaceAll('{0}', _daysLeft(currentPackage.value?.toDate)),
                       ),
                       const SizedBox(
                         height: 24,
@@ -201,10 +203,10 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                 currentPackage.value?.totalVoice != '0')
                               Expanded(
                                 child: CardUsedSquare(
-                                  title: 'Gọi',
-                                  date: 'Tháng',
+                                  title: context.l10n.translate('call'),
+                                  date: context.l10n.translate('month'),
                                   description:
-                                      '${currentPackage.value?.totalVoice ?? ''} phút/ tháng',
+                                      context.l10n.translate('minutes_per_month').replaceAll('{0}', currentPackage.value?.totalVoice ?? ''),
                                   used: int.tryParse(
                                           currentPackage.value?.remainVoice ??
                                               '0') ??
@@ -226,10 +228,10 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                 currentPackage.value?.totalSms != '0')
                               Expanded(
                                 child: CardUsedSquare(
-                                  title: 'Tin nhắn',
-                                  date: 'Tháng',
+                                  title: context.l10n.translate('message'),
+                                  date: context.l10n.translate('month'),
                                   description:
-                                      '${currentPackage.value?.totalSms ?? '0'} SMS/ tháng',
+                                      context.l10n.translate('sms_per_month').replaceAll('{0}', currentPackage.value?.totalSms ?? '0'),
                                   used: int.tryParse(
                                           currentPackage.value?.remainSms ??
                                               '0') ??
@@ -266,8 +268,8 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      'Gói cước hot',
+                                    Text(
+                                      context.l10n.translate('hot_packages_detail'),
                                       style: AppTextStyles.heading,
                                     ),
                                     TextButton(
@@ -275,7 +277,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                       child: Row(
                                         children: [
                                           Text(
-                                            'Khám phá',
+                                            context.l10n.translate('discover_packages'),
                                             style:
                                                 AppTextStyles.button.copyWith(
                                               color: AppColors.strongSecondary,
@@ -326,9 +328,9 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                           );
                                         }).toList()
                                       : [
-                                          const Center(
+                                          Center(
                                             child: Text(
-                                                'Không có gói cước hot hiện tại.'),
+                                                context.l10n.translate('no_hot_packages')),
                                           ),
                                         ],
                                 ),
