@@ -190,4 +190,22 @@ const Map<String, String> enStrings = {
   
   // Search Package
   'search_packages': 'Search packages',
+  
+  // Account Detail Screen
+  'account_information': 'Account Information',
+  'full_name': 'Full Name',
+  'gender': 'Gender',
+  'id_number': 'ID Number',
+  'birthday': 'Birthday',
+  'issue_date': 'Issue Date',
+  'expiry_date': 'Expiry Date',
+  'issue_place': 'Issue Place',
+  'address': 'Address',
+  'email': 'Email',
+  'unknown_gender': 'Unknown',
+  'no_email': 'No email',
+  'ministry_public_security': 'Ministry of Public Security',
+  'police_department_residence_management': 'Police Department of Residence Registration Management and National Database on Population',
+  'police_department_administrative_management': 'Police Department of Administrative Management for Social Order',
+  'immigration_department': 'Immigration Department',
 };

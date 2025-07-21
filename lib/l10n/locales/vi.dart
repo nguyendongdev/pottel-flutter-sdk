@@ -190,4 +190,22 @@ const Map<String, String> viStrings = {
   
   // Search Package
   'search_packages': 'Tìm kiếm gói cước',
+  
+  // Account Detail Screen
+  'account_information': 'Thông tin tài khoản',
+  'full_name': 'Họ và tên',
+  'gender': 'Giới tính',
+  'id_number': 'Số giấy tờ',
+  'birthday': 'Ngày sinh',
+  'issue_date': 'Ngày cấp',
+  'expiry_date': 'Ngày hết hạn',
+  'issue_place': 'Nơi cấp',
+  'address': 'Nơi thường trú',
+  'email': 'Email',
+  'unknown_gender': 'Chưa rõ',
+  'no_email': 'Chưa có',
+  'ministry_public_security': 'Bộ Công An',
+  'police_department_residence_management': 'Cục Trưởng Cục Cảnh sát ĐKQL cư trú và DLQG về dân cư',
+  'police_department_administrative_management': 'Cục Trưởng Cục Cảnh sát Quản lý hành chính về trật tự xã hội',
+  'immigration_department': 'Cục quản lý xuất nhập cảnh',
 };

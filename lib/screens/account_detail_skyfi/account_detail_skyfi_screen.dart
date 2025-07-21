@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/screens/home_skyfi/models/user_info.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -11,7 +12,7 @@ import 'widgets/info_field.dart';
 class AccountDetailSkyfiScreen extends HookConsumerWidget {
   const AccountDetailSkyfiScreen({super.key});
 
-  String _convertIssuePlace(String idIssuePlace) {
+  String _convertIssuePlace(BuildContext context, String idIssuePlace) {
 //     BCA  BỘ CÔNG AN
 // CDD  Cục Trưởng Cục Cảnh sát ĐKQL cư trú và DLQG về dân cư
 // CQH  Cục Trưởng Cục Cảnh sát Quản lý hành chính về trật tự xã hội
@@ -19,13 +20,13 @@ class AccountDetailSkyfiScreen extends HookConsumerWidget {
 
     switch (idIssuePlace) {
       case 'BCA':
-        return 'Bộ Công An';
+        return context.l10n.translate('ministry_public_security');
       case 'CDD':
-        return 'Cục Trưởng Cục Cảnh sát ĐKQL cư trú và DLQG về dân cư';
+        return context.l10n.translate('police_department_residence_management');
       case 'CQH':
-        return 'Cục Trưởng Cục Cảnh sát Quản lý hành chính về trật tự xã hội';
+        return context.l10n.translate('police_department_administrative_management');
       case 'CXN':
-        return 'Cục quản lý xuất nhập cảnh';
+        return context.l10n.translate('immigration_department');
       default:
         return idIssuePlace;
     }
@@ -48,7 +49,7 @@ class AccountDetailSkyfiScreen extends HookConsumerWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Thông tin tài khoản',
+          context.l10n.translate('account_information'),
           style: AppTextStyles.title,
         ),
         centerTitle: true,
@@ -58,26 +59,26 @@ class AccountDetailSkyfiScreen extends HookConsumerWidget {
         child: Column(
           children: [
             InfoField(
-              label: 'Họ và tên',
+              label: context.l10n.translate('full_name'),
               value: userInfo.fullName ?? '',
             ),
             InfoField(
-              label: 'Giới tính',
-              value: userInfo.gender ?? 'Chưa rõ',
+              label: context.l10n.translate('gender'),
+              value: userInfo.gender ?? context.l10n.translate('unknown_gender'),
             ),
             InfoField(
-              label: 'Số giấy tờ',
+              label: context.l10n.translate('id_number'),
               value: userInfo.idNumber ?? '',
             ),
             InfoField(
-              label: 'Ngày sinh',
+              label: context.l10n.translate('birthday'),
               value: userInfo.birthday ?? '',
             ),
             Row(
               children: [
                 Expanded(
                   child: InfoField(
-                    label: 'Ngày cấp',
+                    label: context.l10n.translate('issue_date'),
                     value: userInfo.idIssueDate?.substring(0, 10) ?? '',
                     isFullWidth: false,
                   ),
@@ -93,16 +94,16 @@ class AccountDetailSkyfiScreen extends HookConsumerWidget {
               ],
             ),
             InfoField(
-              label: 'Nơi cấp',
-              value: _convertIssuePlace(userInfo.idIssuePlace ?? ''),
+              label: context.l10n.translate('issue_place'),
+              value: _convertIssuePlace(context, userInfo.idIssuePlace ?? ''),
             ),
             InfoField(
-              label: 'Nơi thường trú',
+              label: context.l10n.translate('address'),
               value: userInfo.address ?? '',
             ),
             InfoField(
-              label: 'Email',
-              value: userInfo.email ?? 'Chưa có',
+              label: context.l10n.translate('email'),
+              value: userInfo.email ?? context.l10n.translate('no_email'),
             ),
           ],
         ),
