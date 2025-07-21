@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 
 class DiscountCodeInput extends StatelessWidget {
   const DiscountCodeInput({super.key});
@@ -39,7 +40,7 @@ class DiscountCodeInput extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Áp dụng mã giảm giá',
+                    context.l10n.translate('apply_discount_code'),
                     style: AppTextStyles.body,
                   ),
                   const Icon(

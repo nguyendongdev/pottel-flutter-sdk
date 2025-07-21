@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/spacing.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/core/widgets/Popup_notice.dart';
 import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
 import 'package:skyfi_sdk/network/api.dart';
@@ -75,13 +76,13 @@ class CouponCodeInput extends HookConsumerWidget {
               response.data['result']['description'] ?? '';
 
           showPopupNotice(context,
-              title: 'Thông báo',
-              description:
-                  'Áp dụng mã giảm giá thành công! Bạn được giảm: ${Common.formatCurrency(discount_amount.toString())} VNĐ');
+              title: context.l10n.translate('coupon_success_title'),
+              description: context.l10n.translate('coupon_success_message')
+                  .replaceAll('{0}', Common.formatCurrency(discount_amount.toString())));
           return;
         }
       } catch (e) {
-        errorText.value = "Mã giảm giá không hợp lệ";
+        errorText.value = context.l10n.translate('invalid_coupon');
       }
     }
 
@@ -119,7 +120,7 @@ class CouponCodeInput extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Mã giảm giá',
+                  context.l10n.translate('coupon_code'),
                   style: AppTextStyles.title,
                 ),
                 const SizedBox(height: AppSpacing.sm),
@@ -135,7 +136,7 @@ class CouponCodeInput extends HookConsumerWidget {
                   controller: couponCodeController,
                   style: AppTextStyles.label,
                   decoration: InputDecoration(
-                    hintText: 'Nhập mã giảm giá',
+                    hintText: context.l10n.translate('enter_coupon_code'),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: AppColors.border),
                       borderRadius:
@@ -161,7 +162,7 @@ class CouponCodeInput extends HookConsumerWidget {
                 GradientButton(
                   onPressed: () {
                     if (couponCodeController.text.isEmpty) {
-                      errorText.value = "Mã giảm giá không hợp lệ";
+                      errorText.value = context.l10n.translate('invalid_coupon');
                     } else {
                       errorText.value = "";
                       Future.microtask(() {
@@ -176,8 +177,8 @@ class CouponCodeInput extends HookConsumerWidget {
                   },
                   height: 46,
                   text: isLoading.value
-                      ? "Đang áp dụng..."
-                      : "Áp dụng mã giảm giá",
+                      ? context.l10n.translate('applying_coupon')
+                      : context.l10n.translate('apply_coupon'),
                 ),
               ],
             )
@@ -208,12 +209,11 @@ class CouponCodeInput extends HookConsumerWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       couponCode.value +
-                          " - Giảm giá " +
-                          Common.formatCurrency(ref
-                              .watch(paymentOrderProvider)
-                              .discountAmount
-                              .toString()) +
-                          " VNĐ",
+                          context.l10n.translate('discount_amount')
+                              .replaceAll('{0}', Common.formatCurrency(ref
+                                  .watch(paymentOrderProvider)
+                                  .discountAmount
+                                  .toString())),
                       style:
                           AppTextStyles.small.copyWith(color: AppColors.green),
                     ),

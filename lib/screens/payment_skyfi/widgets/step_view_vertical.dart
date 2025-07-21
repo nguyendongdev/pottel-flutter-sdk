@@ -4,6 +4,7 @@ import 'package:skyfi_sdk/core/constants/colors.dart';
 
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 import '../provider/address_provider.dart';
 
 class StepViewVertical extends HookConsumerWidget {
@@ -21,16 +22,16 @@ class StepViewVertical extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(addressSelectionProvider);
     final step = ref.watch(addressStepProvider);
-    String getTitle() {
+    String getTitle(BuildContext context) {
       switch (currentStep) {
         case 0:
-          return 'Chọn Tỉnh/Thành phố';
+          return context.l10n.translate('select_province_city');
         case 1:
-          return 'Chọn Quận/Huyện';
+          return context.l10n.translate('select_district');
         case 2:
-          return 'Chọn Phường/Xã';
+          return context.l10n.translate('select_ward');
         default:
-          return 'Chọn địa chỉ nhận SIM';
+          return context.l10n.translate('select_sim_address');
       }
     }
 
@@ -110,7 +111,7 @@ class StepViewVertical extends HookConsumerWidget {
                 const SizedBox(width: 8),
                 // Chọn Quận/Huyện
                 Text(
-                  getTitle(),
+                  getTitle(context),
                   style: AppTextStyles.label.copyWith(
                     color: AppColors.primary,
                   ),

@@ -3,6 +3,7 @@ import 'package:skyfi_sdk/utilities/common.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 
 class TransactionSummary extends StatelessWidget {
   const TransactionSummary(
@@ -35,32 +36,32 @@ class TransactionSummary extends StatelessWidget {
               const Icon(Icons.description_outlined, color: AppColors.text),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'Thông tin giao dịch:',
+                context.l10n.translate('transaction_info'),
                 style: AppTextStyles.title,
               ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
           _buildRow(
-            label: 'Mệnh giá',
+            label: context.l10n.translate('face_value'),
             value: Common.formatCurrency(
                 (totalAmountCart - shippingAmount - discountAmount).toString()),
             isTotal: true,
           ),
           const SizedBox(height: AppSpacing.sm),
           _buildRow(
-            label: 'Giảm giá',
+            label: context.l10n.translate('discount_label'),
             value: discountAmount.toString(),
           ),
           const SizedBox(height: AppSpacing.sm),
           _buildRow(
-            label: 'Phí vận chuyển',
+            label: context.l10n.translate('shipping_fee'),
             value: Common.formatCurrency(shippingAmount.toString()),
             showVND: false,
           ),
           const SizedBox(height: AppSpacing.sm),
           _buildRow(
-            label: 'Số lượng',
+            label: context.l10n.translate('quantity_label'),
             value: countItem.toString(),
             showVND: false,
           ),
@@ -69,14 +70,14 @@ class TransactionSummary extends StatelessWidget {
             child: Divider(color: AppColors.border),
           ),
           _buildTotalRow(
-            label: 'Tổng thanh toán',
+            label: context.l10n.translate('total_payment'),
             value: Common.formatCurrency(totalAmountCart.toString()),
           ),
           const SizedBox(height: AppSpacing.xs),
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              'Đã bao gồm VAT',
+              context.l10n.translate('vat_included'),
               style: AppTextStyles.small.copyWith(
                 color: AppColors.textLight,
               ),

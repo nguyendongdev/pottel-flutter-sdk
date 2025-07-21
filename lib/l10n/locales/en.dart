@@ -594,7 +594,8 @@ const Map<String, String> enStrings = {
 
   // OTP Dialog
   'confirm_otp_title': 'Confirm OTP',
-  'otp_sent_message': 'SkyFi has sent a verification OTP code to your phone number {0}.',
+  'otp_sent_message':
+      'SkyFi has sent a verification OTP code to your phone number {0}.',
   'enter_otp_to_verify_login': 'Enter OTP code to verify',
   'resend_otp_countdown': 'Resend OTP ({0})',
   'resend_otp': 'Resend OTP',
@@ -615,7 +616,8 @@ const Map<String, String> enStrings = {
 
   // Password Setting Dialog
   'set_password_title': 'Set Password',
-  'password_setup_description': 'Just 1 minute to set up a password and from then on you can access the App easily and quickly!',
+  'password_setup_description':
+      'Just 1 minute to set up a password and from then on you can access the App easily and quickly!',
   'enter_pin_label': 'Enter PIN code',
   'confirm_pin_label': 'Confirm PIN code',
   'skip_button': 'Skip',
@@ -631,7 +633,7 @@ const Map<String, String> enStrings = {
   'esim_in_use_tab': 'eSIM in use',
   'esim_not_installed_tab': 'eSIM not installed',
   'error_loading_data_manager': 'Error: {0}',
-  
+
   // SIM Active Widget
   'esim_basic_title': 'ESIM BASIC',
   'in_use_status': 'In use',
@@ -642,16 +644,16 @@ const Map<String, String> enStrings = {
   'view_details_sim': 'View details',
   'buy_more_data_sim': 'Buy more data',
   'no_active_esim': 'No active eSIM',
-  
+
   // SIM Not Active Widget
   'esim_not_installed_status': 'eSIM not installed',
   'data_capacity_sim': 'Data capacity',
   'install_now': 'Install now',
   'no_uninstalled_esim': 'No uninstalled eSIM',
-  
+
   // Detail eSIM Screen
   'esim_detail_title': 'eSIM Details',
-  
+
   // SIM Active Detail Screen
   'data_load_error': 'Data loading error: {0}',
   'coverage_area_detail': 'Coverage area',
@@ -664,7 +666,7 @@ const Map<String, String> enStrings = {
   'not_required_detail': 'Not required',
   'iccid_detail': 'ICCID',
   'buy_additional_data': 'Buy additional data',
-  
+
   // SIM Not Active Detail Screen
   'qr_code_install_title': 'eSIM Installation QR Code',
   'scan_qr_to_install': 'Scan the QR code above to install eSIM on your phone',
@@ -675,18 +677,19 @@ const Map<String, String> enStrings = {
   'ios_devices': 'iOS Devices',
   'android_devices': 'Android Devices',
   'installation_guide_title': 'Installation guide for {0}',
-  'installation_guide_content': 'This is a detailed guide for installing eSIM on {0} devices.',
+  'installation_guide_content':
+      'This is a detailed guide for installing eSIM on {0} devices.',
   'close_button_sim': 'Close',
-  
+
   // Data Package Card
   'call_minutes_inter_network_card': 'Call minutes: {0} inter-network minutes',
   'data_prefix': 'Data: {0}',
   'register_button_sim': 'Register',
-  
+
   // Package Register Button
   'package_id_error': 'Error: Cannot determine package ID',
   'registration_error': 'Error: {0}',
-  
+
   // Order Detail Screen
   'order_detail_title': 'Order Details',
   'order_not_found': 'Order not found',
@@ -699,7 +702,7 @@ const Map<String, String> enStrings = {
   'esim_quantity': 'eSIM quantity:',
   'esim_travel_quantity': 'eSIM Travel quantity:',
   'total_amount_order': 'Total Amount:',
-  
+
   // Package Detail Screen
   'package_detail_title': 'Package Details',
   'data_load_error_package': 'Error loading data: ',
@@ -712,7 +715,7 @@ const Map<String, String> enStrings = {
   'register_package': 'Register',
   'per_days_label': '/ {0} days',
   'topup_money_button': 'Top up',
-  
+
   // Payment Method Screen
   'payment_method_title': 'Payment Method',
   'choose_payment_method': 'Choose payment method',
@@ -725,5 +728,80 @@ const Map<String, String> enStrings = {
   'please_choose_payment_method': 'Please choose a payment method',
   'esim_not_support_cod': 'eSIM does not support COD payment',
   'error_general': 'Error',
-};
 
+  // Payment Skyfi Screen
+  'payment_title': 'Payment',
+  'contact_information': 'Contact Information',
+  'email_payment': 'Email',
+  'enter_email': 'Enter email',
+  'phone_number_payment': 'Phone number',
+  'enter_phone_number_payment': 'Enter phone number',
+  'name_payment': 'Name',
+  'enter_name': 'Enter name',
+  'delivery_address_title': 'SIM Delivery Address',
+  'province_district_ward': 'Province/City, District, Ward',
+  'choose_sim_delivery_address': 'Choose SIM delivery address',
+  'detailed_address': 'Detailed address',
+  'enter_detailed_address': 'Enter detailed address',
+  'transaction_info': 'Transaction Information:',
+  'face_value': 'Face value',
+  'discount_label': 'Discount',
+  'shipping_fee': 'Shipping fee',
+  'total_payment': 'Total payment',
+  'vat_included': 'VAT included',
+  'coupon_code': 'Coupon code',
+  'enter_coupon_code': 'Enter coupon code',
+  'apply_coupon': 'Apply coupon code',
+  'applying_coupon': 'Applying...',
+  'invalid_coupon': 'Invalid coupon code',
+  'coupon_success_title': 'Notification',
+  'coupon_success_message':
+      'Coupon applied successfully! You get discount: {0} VND',
+  'discount_amount': ' - Discount {0} VND',
+  'apply_discount_code': 'Apply discount code',
+
+  // Address Selection
+  'select_province': 'Select Province/City',
+  'select_district': 'Select District',
+  'select_ward': 'Select Ward',
+  'selected_area': 'Selected area',
+  'reset_selection': 'Reset',
+  'search_address': 'Search Province/City, District, Ward',
+  'no_results_found': 'No results found',
+
+  // Contact Information Messages
+  'usim_contact_message':
+      'We will send order details to you using the contact information above.',
+  'esim_contact_message':
+      'We will contact and send eSIM activation information to you via the contact information provided above.',
+  'all_contact_message':
+      'We will contact and send eSIM activation information to you via the contact information provided above.',
+
+  // Validation Messages
+  'email_required': 'Email is required',
+  'invalid_email': 'Invalid email',
+  'phone_required': 'Phone number is required',
+  'invalid_phone': 'Invalid phone number',
+  'name_required': 'Name is required',
+  'name_max_length': 'Name must not exceed 70 characters',
+  'city_required': 'Please select city',
+  'district_required': 'Please select district',
+  'ward_required': 'Please select ward',
+  'delivery_address_required': 'Please enter delivery address',
+  'address_required': 'Address is required',
+  'terms_required_skyfi': 'You must agree to the Terms & Conditions of SkyFi',
+  'terms_required_esim': 'You must agree to the Terms & Conditions',
+  'terms_required_general': 'You must agree to the Terms & Conditions',
+  'terms_required_esim_travel':
+      'I agree to the general Terms & Conditions of SkyFi',
+
+  // Bottom Action Bar
+  'device_compatible_esim':
+      'My device is compatible with eSIM. I agree to the Terms & Conditions.',
+  'compatible_with_esim': 'compatible with eSIM',
+  'terms_conditions_transaction': 'Terms & Conditions of transaction',
+  'terms_conditions': 'Terms & Conditions.',
+  'loading_text': 'Loading...',
+  'choose_payment_method_button': 'Choose payment method',
+  'payment_link_error': 'Error getting payment link',
+};

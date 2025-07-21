@@ -10,6 +10,7 @@ import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_checkbox_with_link.dart';
 import '../../../core/widgets/gradient_button.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../../network/api.dart';
 import '../../../routers/routers.dart';
 import '../../../utilities/common.dart';
@@ -75,7 +76,8 @@ class BottomActionBar extends HookConsumerWidget {
             await api.post('/bss/app/create-order', data: orderJson);
         final data = CreateOrder.fromJson(response.data);
         if (response.statusCode == 200 && data.code == 400) {
-          Common.showToast(data.message ?? 'Lỗi', context);
+          Common.showToast(
+              data.message ?? context.l10n.translate('error_message'), context);
           return;
         }
         if (response.statusCode == 200 && data.code == 200) {
@@ -83,7 +85,7 @@ class BottomActionBar extends HookConsumerWidget {
           if (orderID == null) return;
           final link = await getLinkPayment(orderID);
           if (link == null) {
-            showToast('Lỗi khi lấy link thanh toán');
+            showToast(context.l10n.translate('payment_link_error'));
             return;
           }
           context.pushNamed(AppRouter.webviewPaymentSkyfi, extra: link);
@@ -107,56 +109,55 @@ class BottomActionBar extends HookConsumerWidget {
       if (modeUI == "USIM") {
         //  email -> required and format
         if (state.email == null || state.email!.isEmpty) {
-          showToast('Email là bắt buộc');
+          showToast(context.l10n.translate('email_required'));
           return;
         }
         //  check format email
         if (!Common.isValidEmail(state.email!)) {
-          showToast('Email không hợp lệ');
+          showToast(context.l10n.translate('email_invalid'));
           return;
         }
         // phone -> required and format
         if (state.contactPhone == null || state.contactPhone!.isEmpty) {
-          showToast('Số điện thoại là bắt buộc');
+          showToast(context.l10n.translate('phone_required'));
           return;
         }
         // check format phone
         if (!Common.isValidPhone(state.contactPhone!)) {
-          showToast('Số điện thoại không hợp lệ');
+          showToast(context.l10n.translate('phone_invalid'));
           return;
         }
         // name -> required
         if (state.customerName == null || state.customerName!.isEmpty) {
-          showToast('Tên là bắt buộc');
+          showToast(context.l10n.translate('name_required'));
           return;
         }
         // customerName -> max 70 characters
         if (state.customerName!.length > 70) {
-          showToast('Tên không được vượt quá 70 ký tự');
+          showToast(context.l10n.translate('name_max_length'));
           return;
         }
 
         // address -> required
         if (state.cityId == null || state.cityId == 0) {
-          showToast('Vui lòng chọn thành phố');
+          showToast(context.l10n.translate('please_select_city'));
           return;
         }
         if (state.districtId == null || state.districtId == 0) {
-          showToast('Vui lòng chọn quận/huyện');
+          showToast(context.l10n.translate('please_select_district'));
           return;
         }
         if (state.wardId == null || state.districtId == null) {
-          showToast('Vui lòng chọn phường/xã');
+          showToast(context.l10n.translate('please_select_ward'));
           return;
         }
         if (state.deliveryAddress == null || state.deliveryAddress!.isEmpty) {
-          showToast('Vui lòng nhập địa chỉ giao hàng');
+          showToast(context.l10n.translate('please_enter_delivery_address'));
           return;
         }
         // termsAccepted -> required
         if (!termsAccepted.value) {
-          showToast(
-              'Bạn phải đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi');
+          showToast(context.l10n.translate('must_agree_terms_conditions'));
           return;
         }
         context.pushNamed(AppRouter.paymentMethodSkyFi, extra: modeUI);
@@ -166,12 +167,12 @@ class BottomActionBar extends HookConsumerWidget {
       if (modeUI == "ESIM") {
         // email -> required and format
         if (state.email == null || state.email!.isEmpty) {
-          showToast('Email là bắt buộc');
+          showToast(context.l10n.translate('email_required'));
           return;
         }
         // phone -> required and format
         if (state.customerName == null || state.customerName!.isEmpty) {
-          showToast('Tên là bắt buộc');
+          showToast(context.l10n.translate('name_required'));
           return;
         }
         // // check format phone
@@ -181,7 +182,7 @@ class BottomActionBar extends HookConsumerWidget {
         // }
         // termsAcceptedESIM -> required
         if (!termsAcceptedESIM.value) {
-          showToast('Bạn phải đồng ý với Điều kiện & Điều khoản');
+          showToast(context.l10n.translate('terms_required_esim'));
           return;
         }
 
@@ -192,32 +193,32 @@ class BottomActionBar extends HookConsumerWidget {
 
       if (modeUI == "ALL") {
         if (state.email == null || state.email!.isEmpty) {
-          showToast('Email là bắt buộc');
+          showToast(context.l10n.translate('email_required'));
           return;
         }
         //  check format email
         if (!Common.isValidEmail(state.email!)) {
-          showToast('Email không hợp lệ!!');
+          showToast(context.l10n.translate('email_invalid'));
           return;
         }
         // phone -> required and format
         if (state.contactPhone == null || state.contactPhone!.isEmpty) {
-          showToast('Số điện thoại là bắt buộc');
+          showToast(context.l10n.translate('phone_required'));
           return;
         }
         // check format phone
         if (!Common.isValidPhone(state.contactPhone!)) {
-          showToast('Số điện thoại không hợp lệ!');
+          showToast(context.l10n.translate('phone_invalid'));
           return;
         }
         // name -> required
         if (state.customerName == null || state.customerName!.isEmpty) {
-          showToast('Tên là bắt buộc');
+          showToast(context.l10n.translate('name_required'));
           return;
         }
         // customerName -> max 70 characters
         if (state.customerName!.length > 70) {
-          showToast('Tên không được vượt quá 70 ký tự');
+          showToast(context.l10n.translate('name_max_length'));
           return;
         }
         // address -> required
@@ -227,22 +228,21 @@ class BottomActionBar extends HookConsumerWidget {
             state.districtId == 0 ||
             state.wardId == null ||
             state.wardId == 0) {
-          showToast('Địa chỉ là bắt buộc');
+          showToast(context.l10n.translate('address_required'));
           return;
         }
         if (state.deliveryAddress == null || state.deliveryAddress!.isEmpty) {
-          showToast('Vui lòng nhập địa chỉ giao hàng');
+          showToast(context.l10n.translate('delivery_address_required'));
           return;
         }
         // termsAccepted -> required
         if (!termsAccepted.value) {
-          showToast(
-              'Bạn phải đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi');
+          showToast(context.l10n.translate('terms_required_skyfi'));
           return;
         }
         // termsAcceptedESIM -> required
         if (!termsAcceptedESIM.value) {
-          showToast('Bạn phải đồng ý với Điều kiền & Điều khoản');
+          showToast(context.l10n.translate('terms_required_general'));
           return;
         }
 
@@ -293,35 +293,37 @@ class BottomActionBar extends HookConsumerWidget {
               termsAccepted.value = value ?? false;
             },
             text: modeUI == 'ESIM' || modeUI == 'ALL'
-                ? 'Thiết bị của tôi là tương thích với eSIM. Tôi đồng ý với Điều kiện & Điều khoản.'
-                : 'Tôi đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi',
+                ? context.l10n.translate('device_compatible_esim')
+                : context.l10n.translate('terms_required_esim_travel'),
             links: [
               modeUI == 'ESIM' || modeUI == 'ALL'
                   ? LinkData(
-                      text: 'tương thích với eSIM',
+                      text: context.l10n.translate('compatible_with_esim'),
                       onTap: () {
                         onShowDeviceList();
                       },
                     )
                   : LinkData(
-                      text: 'Điều khoản & Điều kiện giao dịch',
+                      text: context.l10n
+                          .translate('terms_conditions_transaction'),
                       onTap: () {
                         WebViewModal.showWebContent(
                           context: context,
                           url:
                               'https://skyfi.pro/vi/terms-and-conditions?src=app',
-                          title: 'Điều khoản & Điều kiện ',
+                          title: context.l10n
+                              .translate('terms_conditions_transaction'),
                         );
                       },
                     ),
               if (modeUI == 'ESIM' || modeUI == 'ALL')
                 LinkData(
-                  text: 'Điều kiện & Điều khoản.',
+                  text: context.l10n.translate('terms_conditions'),
                   onTap: () {
                     WebViewModal.showWebContent(
                       context: context,
                       url: 'https://skyfi.pro/vi/terms-and-conditions?src=app',
-                      title: 'Điều khoản & Điều kiện ',
+                      title: context.l10n.translate('terms_conditions'),
                     );
                   },
                 ),
@@ -334,10 +336,10 @@ class BottomActionBar extends HookConsumerWidget {
               // context.pushNamed(AppRouter.paymentMethodSkyFi);
             },
             text: isLoading.value
-                ? 'Loading...'
+                ? context.l10n.translate('loading_text')
                 : (modeUI == 'USIM'
-                    ? 'Chọn phương thức thanh toán'
-                    : 'Thanh toán'),
+                    ? context.l10n.translate('choose_payment_method_button')
+                    : context.l10n.translate('payment')),
             height: 48,
             disabled: isLoading.value,
             textStyle: AppTextStyles.button.copyWith(

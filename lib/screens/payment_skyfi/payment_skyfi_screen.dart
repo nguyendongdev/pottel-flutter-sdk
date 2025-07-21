@@ -8,6 +8,7 @@ import 'package:skyfi_sdk/screens/payment_skyfi/widgets/coupon_code_input.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
+import '../../l10n/localization_extension.dart';
 import '../sim_data_skyfi/models/create_order/item.dart';
 import 'widgets/address_form.dart';
 import 'widgets/bottom_action_bar.dart';
@@ -52,8 +53,8 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
         surfaceTintColor: AppColors.white,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'Thanh toán',
+        title: Text(
+          context.l10n.translate('payment_title'),
           style: AppTextStyles.heading,
         ),
         leading: IconButton(

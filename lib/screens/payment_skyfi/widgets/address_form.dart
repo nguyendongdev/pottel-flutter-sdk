@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 import '../provider/address_provider.dart';
 import '../provider/payment_order_provider.dart';
 import 'select_address_data.dart';
@@ -26,13 +27,13 @@ class AddressForm extends HookConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Địa chỉ nhận SIM',
+        Text(
+          context.l10n.translate('delivery_address_title'),
           style: AppTextStyles.title,
         ),
         const SizedBox(height: AppSpacing.md),
         _buildDropdownField(
-          label: 'Tỉnh/Thành phố, Quận/ Huyện, Phường/Xã',
+          label: context.l10n.translate('province_district_ward'),
           text: getSelectedAddressText(),
           isSelected: selectedAddress.province != null,
           isRequired: true,
@@ -40,9 +41,9 @@ class AddressForm extends HookConsumerWidget {
         ),
         const SizedBox(height: AppSpacing.sm),
         _buildInputField(
-          label: 'Địa chỉ chi tiết',
+          label: context.l10n.translate('detailed_address'),
           isRequired: true,
-          hintText: 'Nhập địa chỉ chi tiết',
+          hintText: context.l10n.translate('enter_detailed_address'),
           onChanged: (value) {
             // print('addrese->: $value');
             ref.read(paymentOrderProvider.notifier).changeAddress(value);
@@ -102,7 +103,7 @@ class AddressForm extends HookConsumerWidget {
                   Expanded(
                     child: text.isEmpty
                         ? Text(
-                            'Chọn địa chỉ nhận SIM',
+                            context.l10n.translate('choose_sim_delivery_address'),
                             style: AppTextStyles.body.copyWith(
                               color: AppColors.textLight,
                             ),

@@ -8,6 +8,7 @@ import 'package:skyfi_sdk/screens/payment_method_skyfi/models/payment_respone/pa
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
+import '../../l10n/localization_extension.dart';
 import '../../core/widgets/bottom_button.dart';
 import '../../network/api.dart';
 import '../../routers/routers.dart';
@@ -76,7 +77,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
         }
       }
       if (response.statusCode == 200 && data.code == 400) {
-        Common.showToast(data.message ?? 'Lỗi', context);
+        Common.showToast(data.message ?? context.l10n.translate('error_general'), context);
         return;
       }
     }
@@ -104,12 +105,12 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
         // show popup
         Common.showDialogConfirm(
           context,
-          'Thành công',
-          'Đơn hàng đã được tạo thành công',
+          context.l10n.translate('success_title'),
+          context.l10n.translate('order_created_successfully'),
           () => onMoveDetailOrder(orderId),
           onBackSimData,
-          primaryButtonText: 'Xem chi tiết',
-          secondaryButtonText: 'Mua thêm',
+          primaryButtonText: context.l10n.translate('view_details_button'),
+          secondaryButtonText: context.l10n.translate('buy_more_button'),
         );
       }
     }
@@ -117,7 +118,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
     void handlePayment(String paymentMethod) async {
       if (paymentMethod.isEmpty) {
         SnackBarApp.showWarning(context,
-            message: 'Vui lòng chọn phương thức thanh toán');
+            message: context.l10n.translate('please_choose_payment_method'));
         return;
       }
 
@@ -157,7 +158,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
-        title: const Text('Phương thức thanh toán', style: AppTextStyles.title),
+        title: Text(context.l10n.translate('payment_method_title'), style: AppTextStyles.title),
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(Icons.arrow_back_ios),
@@ -174,7 +175,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
               children: [
                 const SizedBox(height: AppSpacing.sm),
                 Text(
-                  'Chọn phương thức thanh toán',
+                  context.l10n.translate('choose_payment_method'),
                   style: AppTextStyles.body.copyWith(
                     fontWeight: FontWeight.w500,
                     color: AppColors.text,
@@ -224,7 +225,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
                                                     .paymentMethod ==
                                                 'COD') {
                                           showToast(
-                                              'ESIM không hỗ trợ thanh toán COD');
+                                              context.l10n.translate('esim_not_support_cod'));
                                           return;
                                         }
                                         ref
@@ -251,8 +252,8 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
                             );
                           },
                         )
-                      : const Center(
-                          child: Text('Không có phương thức thanh toán'),
+                      : Center(
+                          child: Text(context.l10n.translate('no_payment_methods_available')),
                         ),
                 ),
               ],
@@ -271,7 +272,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
                 onPressed: () {
                   handlePayment(isSelected.value);
                 },
-                text: 'Xác nhận',
+                text: context.l10n.translate('confirm_button'),
                 textStyle:
                     AppTextStyles.button.copyWith(color: AppColors.white),
               ),

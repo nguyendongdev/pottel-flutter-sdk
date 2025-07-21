@@ -587,7 +587,8 @@ const Map<String, String> viStrings = {
 
   // OTP Dialog
   'confirm_otp_title': 'Xác nhận OTP',
-  'otp_sent_message': 'SkyFi đã gửi một mã xác thực OTP đến số điện thoại {0} của Bạn.',
+  'otp_sent_message':
+      'SkyFi đã gửi một mã xác thực OTP đến số điện thoại {0} của Bạn.',
   'enter_otp_to_verify_login': 'Nhập mã OTP để xác thực',
   'resend_otp_countdown': 'Gửi lại OTP ({0})',
   'resend_otp': 'Gửi lại OTP',
@@ -601,14 +602,16 @@ const Map<String, String> viStrings = {
   'continue_button': 'Tiếp tục',
   'please_enter_6_digit_password': 'Vui lòng nhập đủ 6 số mật khẩu',
   'login_failed_try_again': 'Đăng nhập thất bại. Vui lòng thử lại.',
-  'login_failed_check_password': 'Đăng nhập thất bại. Vui lòng kiểm tra lại mật khẩu.',
+  'login_failed_check_password':
+      'Đăng nhập thất bại. Vui lòng kiểm tra lại mật khẩu.',
   'incorrect_password': 'Mật khẩu không đúng. Vui lòng thử lại.',
   'connection_unstable': 'Kết nối không ổn định. Vui lòng thử lại.',
   'server_error_try_later': 'Lỗi server. Vui lòng thử lại sau.',
 
   // Password Setting Dialog
   'set_password_title': 'Cài đặt mật khẩu',
-  'password_setup_description': 'Chỉ cần 1 phút để cài đặt mật khẩu và kể từ sau đó Bạn có thể truy cập App một cách dễ dàng và nhanh chóng!',
+  'password_setup_description':
+      'Chỉ cần 1 phút để cài đặt mật khẩu và kể từ sau đó Bạn có thể truy cập App một cách dễ dàng và nhanh chóng!',
   'enter_pin_label': 'Nhập mã PIN',
   'confirm_pin_label': 'Xác nhận mã PIN',
   'skip_button': 'Để sau',
@@ -617,14 +620,15 @@ const Map<String, String> viStrings = {
   'please_confirm_6_digit_pin': 'Vui lòng xác nhận đủ 6 số PIN',
   'pin_confirmation_not_match': 'Mã PIN xác nhận không khớp',
   'pin_no_consecutive_digits': 'Mã PIN không được chứa số liên tiếp',
-  'pin_no_repeated_digits': 'Mã PIN không được chứa các số giống nhau liên tiếp',
+  'pin_no_repeated_digits':
+      'Mã PIN không được chứa các số giống nhau liên tiếp',
 
   // Manager SIM Screen
   'manage_purchased_esim_travel': 'Quản lý eSIM du lịch đã mua',
   'esim_in_use_tab': 'eSIM đang sử dụng',
   'esim_not_installed_tab': 'eSIM chưa cài',
   'error_loading_data_manager': 'Lỗi: {0}',
-  
+
   // SIM Active Widget
   'esim_basic_title': 'ESIM BASIC',
   'in_use_status': 'Đang sử dụng',
@@ -635,16 +639,16 @@ const Map<String, String> viStrings = {
   'view_details_sim': 'Xem chi tiết',
   'buy_more_data_sim': 'Mua thêm data',
   'no_active_esim': 'Không có eSIM đang hoạt động',
-  
+
   // SIM Not Active Widget
   'esim_not_installed_status': 'eSIM chưa cài',
   'data_capacity_sim': 'Dung lượng',
   'install_now': 'Cài đặt ngay',
   'no_uninstalled_esim': 'Không có eSIM chưa cài đặt',
-  
+
   // Detail eSIM Screen
   'esim_detail_title': 'Chi tiết eSIM',
-  
+
   // SIM Active Detail Screen
   'data_load_error': 'Lỗi tải dữ liệu: {0}',
   'coverage_area_detail': 'Phạm vi phủ sóng',
@@ -657,7 +661,7 @@ const Map<String, String> viStrings = {
   'not_required_detail': 'Không bắt buộc',
   'iccid_detail': 'ICCID',
   'buy_additional_data': 'Mua thêm dung lượng',
-  
+
   // SIM Not Active Detail Screen
   'qr_code_install_title': 'Mã QR cài đặt eSIM',
   'scan_qr_to_install': 'Quét mã QR trên để cài đặt eSIM trên điện thoại',
@@ -668,18 +672,19 @@ const Map<String, String> viStrings = {
   'ios_devices': 'Thiết bị IOS',
   'android_devices': 'Thiết bị Android',
   'installation_guide_title': 'Hướng dẫn cài đặt cho {0}',
-  'installation_guide_content': 'Đây là hướng dẫn chi tiết cài đặt eSIM cho thiết bị {0}.',
+  'installation_guide_content':
+      'Đây là hướng dẫn chi tiết cài đặt eSIM cho thiết bị {0}.',
   'close_button_sim': 'Đóng',
-  
+
   // Data Package Card
   'call_minutes_inter_network_card': 'Phút gọi: {0} phút gọi liên mạng',
   'data_prefix': 'Data: {0}',
   'register_button_sim': 'Đăng ký',
-  
+
   // Package Register Button
   'package_id_error': 'Lỗi: Không thể xác định ID gói cước',
   'registration_error': 'Lỗi: {0}',
-  
+
   // Order Detail Screen
   'order_detail_title': 'Chi tiết đơn hàng',
   'order_not_found': 'Không tìm thấy đơn hàng',
@@ -692,7 +697,7 @@ const Map<String, String> viStrings = {
   'esim_quantity': 'Số lượng eSIM:',
   'esim_travel_quantity': 'Số lượng eSIM du lịch:',
   'total_amount_order': 'Tổng tiền:',
-  
+
   // Package Detail Screen
   'package_detail_title': 'Chi tiết gói cước',
   'data_load_error_package': 'Lỗi khi tải dữ liệu: ',
@@ -705,4 +710,94 @@ const Map<String, String> viStrings = {
   'register_package': 'Đăng ký',
   'per_days_label': '/ {0} ngày',
   'topup_money_button': 'Nạp tiền',
+
+  // Payment Method Screen
+  'payment_method_title': 'Phương thức thanh toán',
+  'choose_payment_method': 'Chọn phương thức thanh toán',
+  'no_payment_methods_available': 'Không có phương thức thanh toán',
+  'confirm_button': 'Xác nhận',
+  'success_title': 'Thành công',
+  'order_created_successfully': 'Đơn hàng đã được tạo thành công',
+  'view_details_button': 'Xem chi tiết',
+  'buy_more_button': 'Mua thêm',
+  'please_choose_payment_method': 'Vui lòng chọn phương thức thanh toán',
+  'esim_not_support_cod': 'ESIM không hỗ trợ thanh toán COD',
+  'error_general': 'Lỗi',
+
+  // Payment Skyfi Screen
+  'payment_title': 'Thanh toán',
+  'contact_information': 'Thông tin liên lạc',
+  'email_payment': 'Email',
+  'enter_email': 'Nhập email',
+  'phone_number_payment': 'Số điện thoại',
+  'enter_phone_number_payment': 'Nhập số điện thoại',
+  'name_payment': 'Tên',
+  'enter_name': 'Nhập tên',
+  'delivery_address_title': 'Địa chỉ nhận SIM',
+  'province_district_ward': 'Tỉnh/Thành phố, Quận/ Huyện, Phường/Xã',
+  'choose_sim_delivery_address': 'Chọn địa chỉ nhận SIM',
+  'detailed_address': 'Địa chỉ chi tiết',
+  'enter_detailed_address': 'Nhập địa chỉ chi tiết',
+  'transaction_info': 'Thông tin giao dịch:',
+  'face_value': 'Mệnh giá',
+  'discount_label': 'Giảm giá',
+  'shipping_fee': 'Phí vận chuyển',
+  'total_payment': 'Tổng thanh toán',
+  'vat_included': 'Đã bao gồm VAT',
+  'coupon_code': 'Mã giảm giá',
+  'enter_coupon_code': 'Nhập mã giảm giá',
+  'apply_coupon': 'Áp dụng mã giảm giá',
+  'applying_coupon': 'Đang áp dụng...',
+  'invalid_coupon': 'Mã giảm giá không hợp lệ',
+  'coupon_success_title': 'Thông báo',
+  'coupon_success_message':
+      'Áp dụng mã giảm giá thành công! Bạn được giảm: {0} VNĐ',
+  'discount_amount': ' - Giảm giá {0} VNĐ',
+  'apply_discount_code': 'Áp dụng mã giảm giá',
+
+  // Address Selection
+  'select_province': 'Chọn Tỉnh/Thành phố',
+  'select_district': 'Chọn Quận/Huyện',
+  'select_ward': 'Chọn Phường/Xã',
+  'selected_area': 'Khu vực được chọn',
+  'reset_selection': 'Thiết lập lại',
+  'search_address': 'Tìm kiếm Tỉnh/Thành phố, Quận/Huyện, Phường/Xã',
+  'no_results_found': 'Không tìm thấy kết quả',
+
+  // Contact Information Messages
+  'usim_contact_message':
+      'Chúng tôi sẽ gửi chi tiết đơn hàng đến bạn theo thông tin liên hệ ở trên.',
+  'esim_contact_message':
+      'Chúng tôi sẽ liên hệ và gửi thông tin kích hoạt eSIM đến bạn qua thông tin liên hệ đã cung cấp ở trên.',
+  'all_contact_message':
+      'Chúng tôi sẽ liên hệ và gửi thông tin kích hoạt eSIM đến bạn qua thông tin liên hệ đã cung cấp ở trên.',
+
+  // Validation Messages
+  'email_required': 'Email là bắt buộc',
+  'invalid_email': 'Email không hợp lệ',
+  'phone_required': 'Số điện thoại là bắt buộc',
+  'invalid_phone': 'Số điện thoại không hợp lệ',
+  'name_required': 'Tên là bắt buộc',
+  'name_max_length': 'Tên không được vượt quá 70 ký tự',
+  'city_required': 'Vui lòng chọn thành phố',
+  'district_required': 'Vui lòng chọn quận/huyện',
+  'ward_required': 'Vui lòng chọn phường/xã',
+  'delivery_address_required': 'Vui lòng nhập địa chỉ giao hàng',
+  'address_required': 'Địa chỉ là bắt buộc',
+  'terms_required_skyfi':
+      'Bạn phải đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi',
+  'terms_required_esim': 'Bạn phải đồng ý với Điều kiện & Điều khoản',
+  'terms_required_general': 'Bạn phải đồng ý với Điều kiền & Điều khoản',
+  'terms_required_esim_travel':
+      'Tôi đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi',
+
+  // Bottom Action Bar
+  'device_compatible_esim':
+      'Thiết bị của tôi là tương thích với eSIM. Tôi đồng ý với Điều kiện & Điều khoản.',
+  'compatible_with_esim': 'tương thích với eSIM',
+  'terms_conditions_transaction': 'Điều khoản & Điều kiện giao dịch',
+  'terms_conditions': 'Điều kiện & Điều khoản.',
+  'loading_text': 'Loading...',
+  'choose_payment_method_button': 'Chọn phương thức thanh toán',
+  'payment_link_error': 'Lỗi khi lấy link thanh toán',
 };
