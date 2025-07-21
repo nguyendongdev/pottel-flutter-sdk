@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
+import '../../l10n/localization_extension.dart';
 import 'provider/history_provider.dart';
 import 'widgets/date_header_widget.dart';
 import 'widgets/history_item_widget.dart';
@@ -35,8 +36,8 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
-        title: const Text(
-          'Lịch sử di động',
+        title: Text(
+          context.l10n.translate('mobile_history'),
           style: AppTextStyles.heading,
         ),
         centerTitle: true,
@@ -61,7 +62,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
               children: [
                 _buildTab(
                   context: context,
-                  title: 'Nạp thẻ',
+                  title: context.l10n.translate('topup_tab'),
                   isSelected: selectedTab == HistoryTab.topup,
                   onTap: () => ref
                       .read(selectedHistoryTabProvider.notifier)
@@ -69,7 +70,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
                 ),
                 _buildTab(
                   context: context,
-                  title: 'Dịch vụ',
+                  title: context.l10n.translate('service_tab'),
                   isSelected: selectedTab == HistoryTab.service,
                   onTap: () => ref
                       .read(selectedHistoryTabProvider.notifier)
@@ -77,7 +78,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
                 ),
                 // _buildTab(
                 //   context: context,
-                //   title: 'Cuộc gọi',
+                //   title: context.l10n.translate('call_tab'),
                 //   isSelected: selectedTab == HistoryTab.call,
                 //   onTap: () => ref
                 //       .read(selectedHistoryTabProvider.notifier)
@@ -91,7 +92,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 16),
-                  const DateHeaderWidget(date: 'Lịch sử'),
+                  DateHeaderWidget(date: context.l10n.translate('history_header')),
                   const SizedBox(height: 16),
                   if (selectedTab == HistoryTab.topup)
                     ...topupHistory.map(

@@ -563,4 +563,11 @@ const Map<String, String> enStrings = {
   'video_call_regulation_info':
       'According to regulations of the Ministry of Information and Communications, to complete the registration/update of subscriber information procedures, please make a Video call with an operator.',
   'camera_permission_note': '*Note: grant CAMERA access permission for device',
+
+  // History Mobile SkyFi Screen
+  'mobile_history': 'Mobile History',
+  'topup_tab': 'Top-up',
+  'service_tab': 'Service',
+  'call_tab': 'Calls',
+  'history_header': 'History',
 };

@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
@@ -11,18 +12,16 @@ import '../../core/widgets/snack_bar_app.dart';
 import '../../l10n/localization_extension.dart';
 import '../../network/api.dart';
 import '../../utilities/common.dart';
+import '../change_package_skyfi/models/package_model.dart'
+    as ChangePackageModel;
 import '../change_package_skyfi/widgets/confirmation_dialog.dart';
 import '../home_skyfi/models/outstanding_pakage.dart';
 import '../home_skyfi/provider/login_provider.dart';
-import '../home_skyfi/widgets/package_card.dart';
 import '../home_skyfi/widgets/package_insite.dart';
 import 'widgets/modal_input_otp.dart';
 import 'widgets/modal_input_phone.dart';
-import 'widgets/modal_money_fail.dart';
 import 'widgets/search_package.dart';
 import 'widgets/tab_item.dart';
-import '../change_package_skyfi/models/package_model.dart'
-    as ChangePackageModel;
 
 class ListPackageSkyFiScreen extends HookConsumerWidget {
   const ListPackageSkyFiScreen({super.key});
@@ -88,11 +87,12 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
         if (response.data['code'] == 200) {
           SnackBarApp.showSuccess(context, message: response.data['message']);
         } else {
-          Common.showAlertDialog(
-              context, context.l10n.translate('error'), response.data['message'], null);
+          Common.showAlertDialog(context, context.l10n.translate('error'),
+              response.data['message'], null);
         }
       } catch (e) {
-        Common.showAlertDialog(context, context.l10n.translate('error'), e.toString(), null);
+        Common.showAlertDialog(
+            context, context.l10n.translate('error'), e.toString(), null);
         print(e);
       } finally {
         isLoading.value = false;
@@ -187,10 +187,10 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
                 } else {
                   onPressedContinueOtp(phoneRegister.value);
                 }
-                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               onCancel: () {
-                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               msisdn: phoneRegister.value,
               leftDay: data['result'][0]['toDate'],

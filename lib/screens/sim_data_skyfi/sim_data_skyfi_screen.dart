@@ -10,12 +10,12 @@ import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/widgets/core/tooltip.dart';
 
 import '../../core/constants/colors.dart';
-import '../../l10n/localization_extension.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/app_card.dart';
 import '../../core/widgets/app_cart.dart';
 import '../../core/widgets/gradient_button.dart';
+import '../../l10n/localization_extension.dart';
 import '../../network/api.dart';
 import '../../routers/routers.dart';
 import '../cart_skyfi/provider/cart_provider.dart';
@@ -148,7 +148,8 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
                         Navigator.of(context).pop();
                       },
                       title: context.l10n.translate('empty_cart_title'),
-                      description: context.l10n.translate('empty_cart_description'),
+                      description:
+                          context.l10n.translate('empty_cart_description'),
                       titleButton: context.l10n.translate('continue_shopping'),
                     ),
                   if (chooseSim.value?.packages?.isNotEmpty == true)
@@ -520,7 +521,7 @@ class _DataPackage extends StatelessWidget {
                       GestureDetector(
                         onTap: onTapDetail,
                         child: Text(
-                          'Chi tiết',
+                          context.l10n.translate('detail'),
                           style: AppTextStyles.label.copyWith(
                             color: AppColors.blue,
                             decoration: TextDecoration.underline,
@@ -548,7 +549,9 @@ class _DataPackage extends StatelessWidget {
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Text(
-                        context.l10n.translate('data_gb_per_day').replaceAll('{0}', dataPerDay),
+                        context.l10n
+                            .translate('data_gb_per_day')
+                            .replaceAll('{0}', dataPerDay),
                         style: AppTextStyles.button.copyWith(
                           color: AppColors.text,
                         ),
@@ -574,7 +577,9 @@ class _DataPackage extends StatelessWidget {
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Text(
-                          context.l10n.translate('call_minutes_inter_network').replaceAll('{0}', freeCallMinute),
+                          context.l10n
+                              .translate('call_minutes_inter_network')
+                              .replaceAll('{0}', freeCallMinute),
                           style: AppTextStyles.button.copyWith(
                             color: AppColors.text,
                           ),
@@ -600,7 +605,9 @@ class _DataPackage extends StatelessWidget {
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Text(
-                          context.l10n.translate('sms_intra_network').replaceAll('{0}', freeSms),
+                          context.l10n
+                              .translate('sms_intra_network')
+                              .replaceAll('{0}', freeSms),
                           style: AppTextStyles.button.copyWith(
                             color: AppColors.text,
                           ),
@@ -624,7 +631,9 @@ class _DataPackage extends StatelessWidget {
                 ),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
-                  context.l10n.translate('per_days').replaceAll('{0}', validityDay),
+                  context.l10n
+                      .translate('per_days')
+                      .replaceAll('{0}', validityDay),
                   style:
                       AppTextStyles.small.copyWith(color: AppColors.textGrey),
                 ),

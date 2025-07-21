@@ -556,4 +556,11 @@ const Map<String, String> viStrings = {
   'video_call_regulation_info':
       'Theo quy định của Bộ Thông tin truyền thông, để hoàn tất thủ tục đăng ký/cập nhật thông tin thuê bao, Bạn vui lòng thực hiện cuộc Video với tổng đài viên.',
   'camera_permission_note': '*Lưu ý: cấp quyền truy cập CAMERA cho thiết bị',
+
+  // History Mobile SkyFi Screen
+  'mobile_history': 'Lịch sử di động',
+  'topup_tab': 'Nạp thẻ',
+  'service_tab': 'Dịch vụ',
+  'call_tab': 'Cuộc gọi',
+  'history_header': 'Lịch sử',
 };
