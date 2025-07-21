@@ -216,4 +216,22 @@ const Map<String, String> viStrings = {
   'feature_under_development': 'Tính năng đang phát triển, vui lòng quay lại sau!',
   'login_required_message': 'Bạn cần đăng nhập để sử dụng tính năng này!',
   'logout_confirmation': 'Bạn có chắc chắn muốn đăng xuất không?',
+  
+  // Cart Screen
+  'cart': 'Giỏ hàng',
+  'error_occurred_cart': 'Có lỗi xảy ra: {0}',
+  'products_count': '{0} sản phẩm',
+  'product_label': 'Sản Phẩm',
+  'price_column': 'Giá',
+  'order_summary': 'Tóm tắt đơn hàng',
+  'tax_service_fee': 'Thuế & Phí dịch vụ',
+  'included': 'Đã bao gồm',
+  'total_amount': 'Tổng cộng',
+  'payment_button': 'Thanh toán',
+  'package_prefix': 'Gói {0}',
+  'invalid_quantity_title': 'Số lượng không hợp lệ',
+  'invalid_quantity_message': 'Số lượng phải từ 1 đến 50',
+  'empty_cart_title': 'Chưa có sản phầm nào trong giỏ',
+  'empty_cart_description': 'Bạn có thể ghé thăm cửa hàng của chúng tôi và mua sắm.',
+  'continue_shopping': 'Tiếp tục mua SIM',
 };

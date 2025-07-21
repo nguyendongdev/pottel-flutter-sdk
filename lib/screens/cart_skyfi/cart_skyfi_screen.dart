@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -28,7 +29,7 @@ class CartSkyfiScreen extends ConsumerWidget {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        title: const Text('Giỏ hàng', style: AppTextStyles.heading),
+        title: Text(context.l10n.translate('cart'), style: AppTextStyles.heading),
         centerTitle: true,
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
@@ -41,7 +42,7 @@ class CartSkyfiScreen extends ConsumerWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stack) => Center(
             child: Text(
-              'Có lỗi xảy ra: $error',
+              context.l10n.translate('error_occurred_cart').replaceAll('{0}', error.toString()),
               style: AppTextStyles.body.copyWith(color: AppColors.red),
             ),
           ),
@@ -51,6 +52,9 @@ class CartSkyfiScreen extends ConsumerWidget {
                     // TODO: Navigate to shop
                      Navigator.of(context).pop();
                   },
+                  title: context.l10n.translate('empty_cart_title'),
+                  description: context.l10n.translate('empty_cart_description'),
+                  titleButton: context.l10n.translate('continue_shopping'),
                 )
               : Column(
                   children: [
@@ -66,7 +70,7 @@ class CartSkyfiScreen extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
-                                    '${cart.items.length} sản phẩm | ${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
+                                    '${context.l10n.translate('products_count').replaceAll('{0}', cart.items.length.toString())} | ${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
                                     style: AppTextStyles.title,
                                   ),
                                 ],
@@ -79,8 +83,8 @@ class CartSkyfiScreen extends ConsumerWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
+                                  Padding(
+                                    padding: const EdgeInsets.only(
                                       right: AppSpacing.xl * 4,
                                       bottom: AppSpacing.md,
                                     ),
@@ -88,12 +92,12 @@ class CartSkyfiScreen extends ConsumerWidget {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Sản Phẩm',
+                                            context.l10n.translate('product_label'),
                                             style: AppTextStyles.title,
                                           ),
                                         ),
                                         Text(
-                                          'Giá',
+                                          context.l10n.translate('price_column'),
                                           style: AppTextStyles.title,
                                         ),
                                       ],
@@ -112,8 +116,8 @@ class CartSkyfiScreen extends ConsumerWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  const Text(
-                                    'Tóm tắt đơn hàng',
+                                  Text(
+                                    context.l10n.translate('order_summary'),
                                     style: AppTextStyles.heading,
                                   ),
                                   const SizedBox(height: AppSpacing.lg),
@@ -122,7 +126,7 @@ class CartSkyfiScreen extends ConsumerWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        '${cart.items.length} sản phẩm',
+                                        context.l10n.translate('products_count').replaceAll('{0}', cart.items.length.toString()),
                                         style: AppTextStyles.body,
                                       ),
                                       Text(
@@ -134,16 +138,16 @@ class CartSkyfiScreen extends ConsumerWidget {
                                     ],
                                   ),
                                   const SizedBox(height: AppSpacing.sm),
-                                  const Row(
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Thuế & Phí dịch vụ',
+                                        context.l10n.translate('tax_service_fee'),
                                         style: AppTextStyles.body,
                                       ),
                                       Text(
-                                        'Đã bao gồm',
+                                        context.l10n.translate('included'),
                                         style: AppTextStyles.body,
                                       ),
                                     ],
@@ -160,8 +164,8 @@ class CartSkyfiScreen extends ConsumerWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        'Tổng cộng',
+                                      Text(
+                                        context.l10n.translate('total_amount'),
                                         style: AppTextStyles.heading,
                                       ),
                                       Text(
@@ -235,7 +239,7 @@ class CartSkyfiScreen extends ConsumerWidget {
                           context.pushNamed(AppRouter.paymentSkyFi,
                               extra: paymentItems);
                         },
-                        text: 'Thanh toán',
+                        text: context.l10n.translate('payment_button'),
                         height: 48,
                         textStyle: AppTextStyles.body.copyWith(
                           fontWeight: FontWeight.bold,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/utilities/modal.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -126,7 +127,7 @@ class CartItemWidget extends HookConsumerWidget {
                 const SizedBox(height: AppSpacing.xs),
                 if (item.packCode.isNotEmpty)
                   Text(
-                    '${isTravel ? item.packCode : item.packCode.isEmpty ? '' : 'Gói ${item.packCode}'} ',
+                    '${isTravel ? item.packCode : item.packCode.isEmpty ? '' : context.l10n.translate('package_prefix').replaceAll('{0}', item.packCode)} ',
                     style: AppTextStyles.body.copyWith(
                       color: AppColors.text,
                     ),
@@ -180,8 +181,8 @@ class CartItemWidget extends HookConsumerWidget {
                             textController.text = '1';
 
                             Modal.showError(
-                              title: 'Số lượng không hợp lệ',
-                              message: 'Số lượng phải từ 1 đến 50',
+                              title: context.l10n.translate('invalid_quantity_title'),
+                              message: context.l10n.translate('invalid_quantity_message'),
                             );
                           }
                         },

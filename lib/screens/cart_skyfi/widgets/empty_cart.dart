@@ -9,13 +9,13 @@ class EmptyCart extends StatelessWidget {
   const EmptyCart({
     super.key,
     required this.onContinueShopping,
-    this.title = 'Chưa có sản phầm nào trong giỏ',
-    this.description = 'Bạn có thể ghé thăm cửa hàng của chúng tôi và mua sắm.',
-    this.titleButton = 'Tiếp tục mua SIM',
+    required this.title,
+    required this.description,
+    required this.titleButton,
   });
+  final VoidCallback onContinueShopping;
   final String title;
   final String description;
-  final VoidCallback onContinueShopping;
   final String titleButton;
 
   @override

@@ -216,4 +216,22 @@ const Map<String, String> enStrings = {
   'feature_under_development': 'Feature is under development, please come back later!',
   'login_required_message': 'You need to login to use this feature!',
   'logout_confirmation': 'Are you sure you want to logout?',
+  
+  // Cart Screen
+  'cart': 'Cart',
+  'error_occurred_cart': 'An error occurred: {0}',
+  'products_count': '{0} products',
+  'product_label': 'Product',
+  'price_column': 'Price',
+  'order_summary': 'Order Summary',
+  'tax_service_fee': 'Tax & Service Fee',
+  'included': 'Included',
+  'total_amount': 'Total',
+  'payment_button': 'Payment',
+  'package_prefix': 'Package {0}',
+  'invalid_quantity_title': 'Invalid quantity',
+  'invalid_quantity_message': 'Quantity must be from 1 to 50',
+  'empty_cart_title': 'No products in cart yet',
+  'empty_cart_description': 'You can visit our store and shop.',
+  'continue_shopping': 'Continue buying SIM',
 };
