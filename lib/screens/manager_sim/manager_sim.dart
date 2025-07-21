@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import '../../l10n/localization_extension.dart';
 import 'package:skyfi_sdk/screens/manager_sim/providers/provider_manager_esim.dart';
 import 'package:skyfi_sdk/screens/manager_sim/widgets/sim_active.dart';
 import 'package:skyfi_sdk/screens/manager_sim/widgets/sim_not_active.dart';
@@ -16,8 +17,8 @@ class ManagerSimScreen extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'Quản lý eSIM du lịch đã mua',
+        title: Text(
+          context.l10n.translate('manage_purchased_esim_travel'),
           style: AppTextStyles.title,
         ),
         backgroundColor: Colors.white,
@@ -35,14 +36,16 @@ class ManagerSimScreen extends HookConsumerWidget {
             child: Row(
               children: [
                 _buildTab(
-                  title: 'eSIM đang sử dụng',
+                  context: context,
+                  title: context.l10n.translate('esim_in_use_tab'),
                   isSelected: selectedTab == TabManagerESim.active,
                   onTap: () => ref
                       .read(tabManagerESimNotifierProvider.notifier)
                       .changeTab(TabManagerESim.active),
                 ),
                 _buildTab(
-                  title: 'eSIM chưa cài',
+                  context: context,
+                  title: context.l10n.translate('esim_not_installed_tab'),
                   isSelected: selectedTab == TabManagerESim.notActive,
                   onTap: () => ref
                       .read(tabManagerESimNotifierProvider.notifier)
@@ -60,10 +63,10 @@ class ManagerSimScreen extends HookConsumerWidget {
                           notActiveEsims: data?.result?.esimNotActive?.list));
             },
             error: (error, stackTrace) => Center(
-              child: Text('Lỗi: $error'),
+              child: Text(context.l10n.translate('error_loading_data_manager').replaceAll('{0}', error.toString())),
             ),
-            loading: () => Expanded(
-                child: const Center(child: CircularProgressIndicator())),
+            loading: () => const Expanded(
+                child: Center(child: CircularProgressIndicator())),
           ),
         ],
       ),
@@ -71,6 +74,7 @@ class ManagerSimScreen extends HookConsumerWidget {
   }
 
   Widget _buildTab({
+    required BuildContext context,
     required String title,
     required bool isSelected,
     required VoidCallback onTap,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import '../../l10n/localization_extension.dart';
 import 'package:skyfi_sdk/screens/manager_sim/models/response_package/result_package.dart';
 import 'package:skyfi_sdk/screens/manager_sim/providers/provider_manager_esim.dart';
 import 'package:skyfi_sdk/screens/manager_sim/widgets/data_package_card.dart';
@@ -81,7 +82,7 @@ class _SimActiveDetailState extends ConsumerState<SimActiveDetail> {
               error: (error, stack) {
                 return Center(
                   child: Text(
-                    'Lỗi tải dữ liệu: $error',
+                    context.l10n.translate('data_load_error').replaceAll('{0}', error.toString()),
                     style: AppTextStyles.body.copyWith(color: AppColors.red),
                   ),
                 );
@@ -177,7 +178,7 @@ class _SimActiveDetailState extends ConsumerState<SimActiveDetail> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Còn lại',
+                context.l10n.translate('remaining_data'),
                 style: AppTextStyles.small.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -204,34 +205,41 @@ class _SimActiveDetailState extends ConsumerState<SimActiveDetail> {
     return Column(
       children: [
         _buildDetailItem(
-          label: 'Phạm vi phủ sóng',
+          context: context,
+          label: context.l10n.translate('coverage_area_detail'),
           value: widget.esim.regionName ?? 'Singapore',
         ),
         _buildDetailItem(
-          label: 'Cung cấp bởi',
+          context: context,
+          label: context.l10n.translate('provided_by_detail'),
           value: widget.esim.providerName ?? 'Singtel',
           hasInfo: true,
         ),
         _buildDetailItem(
-          label: 'Dung lượng',
+          context: context,
+          label: context.l10n.translate('data_capacity_sim_detail'),
           value:
               '${widget.esim.dataAmount ?? 8} ${widget.esim.dataUnit ?? 'GB'}',
         ),
         _buildDetailItem(
-          label: 'Loại gói',
-          value: 'Chỉ dữ liệu',
+          context: context,
+          label: context.l10n.translate('package_type_detail'),
+          value: context.l10n.translate('data_only_type'),
           hasInfo: true,
         ),
         _buildDetailItem(
-          label: 'Hiệu lực',
-          value: '${widget.esim.validityDays ?? 30} ngày',
+          context: context,
+          label: context.l10n.translate('validity_sim_detail'),
+          value: '${widget.esim.validityDays ?? 30} ${context.l10n.translate('days_unit_sim')}',
         ),
         _buildDetailItem(
-          label: 'eKYC (Xác minh danh tính)',
-          value: 'Không bắt buộc',
+          context: context,
+          label: context.l10n.translate('ekyc_detail'),
+          value: context.l10n.translate('not_required_detail'),
         ),
         _buildDetailItem(
-          label: 'ICCID',
+          context: context,
+          label: context.l10n.translate('iccid_detail'),
           value: widget.esim.iccid ?? '89840480003232863650',
           isLast: true,
         ),
@@ -240,6 +248,7 @@ class _SimActiveDetailState extends ConsumerState<SimActiveDetail> {
   }
 
   Widget _buildDetailItem({
+    required BuildContext context,
     required String label,
     required String value,
     bool hasInfo = false,
@@ -315,7 +324,7 @@ class _SimActiveDetailState extends ConsumerState<SimActiveDetail> {
         children: [
           // Section Title
           Text(
-            'Mua thêm dung lượng',
+            context.l10n.translate('buy_additional_data'),
             style: AppTextStyles.heading.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.w600,

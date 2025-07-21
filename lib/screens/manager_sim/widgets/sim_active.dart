@@ -5,6 +5,7 @@ import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
 import 'package:skyfi_sdk/core/widgets/circular_progress_gradient.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
+import '../../../l10n/localization_extension.dart';
 
 import '../models/response_manager_esim/item_my_esim.dart';
 
@@ -24,7 +25,7 @@ class SimActive extends ConsumerWidget {
           else
             Center(
               child: Text(
-                'Không có eSIM đang hoạt động',
+                context.l10n.translate('no_active_esim'),
                 style: AppTextStyles.body,
               ),
             ),
@@ -56,8 +57,8 @@ class SimActive extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'ESIM BASIC',
-                style: TextStyle(
+                context.l10n.translate('esim_basic_title'),
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF333333),
@@ -70,8 +71,8 @@ class SimActive extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
-                  'Đang sử dụng',
-                  style: TextStyle(
+                  context.l10n.translate('in_use_status'),
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF00B141),
@@ -93,10 +94,10 @@ class SimActive extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildInfoItem(
-                        'Phạm vi phủ sóng', esim.regionName ?? 'N/A'),
+                        context, context.l10n.translate('coverage_area_sim'), esim.regionName ?? 'N/A'),
                     _buildInfoItem(
-                        'Thời hạn còn', '${esim.validityDays ?? 0} ngày'),
-                    _buildInfoItem('ICCID', esim.iccid ?? 'N/A'),
+                        context, context.l10n.translate('validity_remaining'), '${esim.validityDays ?? 0} ${context.l10n.translate('days_unit_sim')}'),
+                    _buildInfoItem(context, context.l10n.translate('iccid_detail'), esim.iccid ?? 'N/A'),
                   ],
                 ),
               ),
@@ -109,7 +110,7 @@ class SimActive extends ConsumerWidget {
                     total: esim.data?.total?.toDouble() ?? 0,
                     used: esim.data?.remaining?.toDouble() ?? 0,
                     size: 120,
-                    textTitle: 'Còn lại',
+                    textTitle: context.l10n.translate('remaining_data'),
                   )),
             ],
           ),
@@ -134,8 +135,8 @@ class SimActive extends ConsumerWidget {
                     padding: EdgeInsets.symmetric(vertical: 12),
                   ),
                   child: Text(
-                    'Xem chi tiết',
-                    style: TextStyle(
+                    context.l10n.translate('view_details_sim'),
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Color(0xFFFAA61A),
@@ -160,8 +161,8 @@ class SimActive extends ConsumerWidget {
                     padding: EdgeInsets.symmetric(vertical: 12),
                   ),
                   child: Text(
-                    'Mua thêm data',
-                    style: TextStyle(
+                    context.l10n.translate('buy_more_data_sim'),
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -176,7 +177,7 @@ class SimActive extends ConsumerWidget {
     );
   }
 
-  Widget _buildInfoItem(String label, String value) {
+  Widget _buildInfoItem(BuildContext context, String label, String value) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8),
       child: Column(

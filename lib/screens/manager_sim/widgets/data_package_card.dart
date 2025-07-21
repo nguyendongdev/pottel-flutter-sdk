@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 import 'package:skyfi_sdk/screens/manager_sim/models/response_package/result_package.dart';
 import 'package:skyfi_sdk/screens/manager_sim/widgets/package_register_button.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
@@ -33,9 +34,9 @@ class DataPackageCard extends ConsumerWidget {
       ),
       child: Column(
         children: [
-          _buildHeader(),
+          _buildHeader(context),
           const Divider(color: Color(0xFFF1F1F1)),
-          _buildFeatures(),
+          _buildFeatures(context),
           const Divider(color: Color(0xFFF1F1F1)),
           _buildPriceAndRegister(),
         ],
@@ -43,7 +44,7 @@ class DataPackageCard extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -61,7 +62,7 @@ class DataPackageCard extends ConsumerWidget {
             // TODO: Implement view details functionality
           },
           child: Text(
-            'Xem chi tiết',
+            context.l10n.translate('view_details_sim'),
             style: AppTextStyles.button.copyWith(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -73,24 +74,27 @@ class DataPackageCard extends ConsumerWidget {
     );
   }
 
-  Widget _buildFeatures() {
+  Widget _buildFeatures(BuildContext context) {
     return Column(
       children: [
         if (package.data != null)
           _buildFeatureItem(
+            context: context,
             icon: Icons.speed,
-            text: 'Data: ${package.data}',
+            text: context.l10n.translate('data_prefix').replaceAll('{0}', package.data ?? ''),
           ),
         if (package.voice != null)
           _buildFeatureItem(
+            context: context,
             icon: Icons.phone,
-            text: 'Phút gọi: ${package.voice} phút gọi liên mạng',
+            text: context.l10n.translate('call_minutes_inter_network_card').replaceAll('{0}', package.voice?.toString() ?? ''),
           ),
       ],
     );
   }
 
   Widget _buildFeatureItem({
+    required BuildContext context,
     required IconData icon,
     required String text,
   }) {

@@ -625,4 +625,65 @@ const Map<String, String> enStrings = {
   'pin_confirmation_not_match': 'PIN confirmation does not match',
   'pin_no_consecutive_digits': 'PIN cannot contain consecutive digits',
   'pin_no_repeated_digits': 'PIN cannot contain repeated digits',
+
+  // Manager SIM Screen
+  'manage_purchased_esim_travel': 'Manage Purchased eSIM Travel',
+  'esim_in_use_tab': 'eSIM in use',
+  'esim_not_installed_tab': 'eSIM not installed',
+  'error_loading_data_manager': 'Error: {0}',
+  
+  // SIM Active Widget
+  'esim_basic_title': 'ESIM BASIC',
+  'in_use_status': 'In use',
+  'coverage_area_sim': 'Coverage area',
+  'validity_remaining': 'Validity remaining',
+  'days_unit_sim': 'days',
+  'remaining_data': 'Remaining',
+  'view_details_sim': 'View details',
+  'buy_more_data_sim': 'Buy more data',
+  'no_active_esim': 'No active eSIM',
+  
+  // SIM Not Active Widget
+  'esim_not_installed_status': 'eSIM not installed',
+  'data_capacity_sim': 'Data capacity',
+  'install_now': 'Install now',
+  'no_uninstalled_esim': 'No uninstalled eSIM',
+  
+  // Detail eSIM Screen
+  'esim_detail_title': 'eSIM Details',
+  
+  // SIM Active Detail Screen
+  'data_load_error': 'Data loading error: {0}',
+  'coverage_area_detail': 'Coverage area',
+  'provided_by_detail': 'Provided by',
+  'data_capacity_sim_detail': 'Data capacity',
+  'package_type_detail': 'Package type',
+  'data_only_type': 'Data only',
+  'validity_sim_detail': 'Validity',
+  'ekyc_detail': 'eKYC (Identity verification)',
+  'not_required_detail': 'Not required',
+  'iccid_detail': 'ICCID',
+  'buy_additional_data': 'Buy additional data',
+  
+  // SIM Not Active Detail Screen
+  'qr_code_install_title': 'eSIM Installation QR Code',
+  'scan_qr_to_install': 'Scan the QR code above to install eSIM on your phone',
+  'view_installation_guide_sim': 'View eSIM installation guide',
+  'activation_policy_detail': 'Activation policy',
+  'validity_starts_on_install_detail': 'Validity period starts when installed',
+  'price_detail': 'Price',
+  'ios_devices': 'iOS Devices',
+  'android_devices': 'Android Devices',
+  'installation_guide_title': 'Installation guide for {0}',
+  'installation_guide_content': 'This is a detailed guide for installing eSIM on {0} devices.',
+  'close_button_sim': 'Close',
+  
+  // Data Package Card
+  'call_minutes_inter_network_card': 'Call minutes: {0} inter-network minutes',
+  'data_prefix': 'Data: {0}',
+  'register_button_sim': 'Register',
+  
+  // Package Register Button
+  'package_id_error': 'Error: Cannot determine package ID',
+  'registration_error': 'Error: {0}',
 };

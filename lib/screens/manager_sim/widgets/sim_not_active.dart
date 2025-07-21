@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
+import '../../../l10n/localization_extension.dart';
 
 import '../models/response_manager_esim/item_my_esim.dart';
 
@@ -23,7 +24,7 @@ class SimNotActive extends ConsumerWidget {
           else
             Center(
               child: Text(
-                'Không có eSIM chưa cài đặt',
+                context.l10n.translate('no_uninstalled_esim'),
                 style: AppTextStyles.body.copyWith(color: AppColors.textLight),
               ),
             ),
@@ -55,7 +56,7 @@ class SimNotActive extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'ESIM BASIC',
+                context.l10n.translate('esim_basic_title'),
                 style: AppTextStyles.title,
               ),
               Container(
@@ -66,7 +67,7 @@ class SimNotActive extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
-                  'eSIM chưa cài',
+                  context.l10n.translate('esim_not_installed_status'),
                   style: AppTextStyles.label.copyWith(
                     color: AppColors.text,
                     fontSize: 14,
@@ -82,9 +83,9 @@ class SimNotActive extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildInfoItem('Phạm vi phủ sóng', esim.regionName ?? 'N/A'),
-              _buildInfoItem('Dung lượng', _getDataCapacityText(esim)),
-              _buildInfoItem('Thời hạn còn', '${esim.validityDays ?? 0} ngày'),
+              _buildInfoItem(context, context.l10n.translate('coverage_area_sim'), esim.regionName ?? 'N/A'),
+              _buildInfoItem(context, context.l10n.translate('data_capacity_sim'), _getDataCapacityText(esim)),
+              _buildInfoItem(context, context.l10n.translate('validity_remaining'), '${esim.validityDays ?? 0} ${context.l10n.translate('days_unit_sim')}'),
             ],
           ),
           const SizedBox(height: 8),
@@ -109,7 +110,7 @@ class SimNotActive extends ConsumerWidget {
                 elevation: 0,
               ),
               child: Text(
-                'Cài đặt ngay',
+                context.l10n.translate('install_now'),
                 style: AppTextStyles.button.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -122,7 +123,7 @@ class SimNotActive extends ConsumerWidget {
     );
   }
 
-  Widget _buildInfoItem(String label, String value) {
+  Widget _buildInfoItem(BuildContext context, String label, String value) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(

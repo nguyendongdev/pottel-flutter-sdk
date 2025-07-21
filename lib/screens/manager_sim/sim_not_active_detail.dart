@@ -5,6 +5,7 @@ import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
+import '../../l10n/localization_extension.dart';
 
 import 'models/response_manager_esim/item_my_esim.dart';
 
@@ -20,12 +21,12 @@ class SimNotActiveDetail extends ConsumerWidget {
       child: Column(
         children: [
           // QR Code Installation Section
-          _buildQRCodeSection(),
+          _buildQRCodeSection(context),
 
           SizedBox(height: 16),
 
           // Detailed Information Section
-          _buildDetailSection(),
+          _buildDetailSection(context),
 
           SizedBox(height: 32),
         ],
@@ -33,7 +34,7 @@ class SimNotActiveDetail extends ConsumerWidget {
     );
   }
 
-  Widget _buildQRCodeSection() {
+  Widget _buildQRCodeSection(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(20),
@@ -51,7 +52,7 @@ class SimNotActiveDetail extends ConsumerWidget {
       child: Column(
         children: [
           Text(
-            'Mã QR cài đặt eSIM',
+            context.l10n.translate('qr_code_install_title'),
             style: AppTextStyles.heading.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -76,7 +77,7 @@ class SimNotActiveDetail extends ConsumerWidget {
           SizedBox(height: 16),
 
           Text(
-            'Quét mã QR trên để cài đặt eSIM trên điện thoại',
+            context.l10n.translate('scan_qr_to_install'),
             style: AppTextStyles.body,
             textAlign: TextAlign.center,
           ),
@@ -93,7 +94,7 @@ class SimNotActiveDetail extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  'Xem hướng dẫn cài đặt eSIM',
+                  context.l10n.translate('view_installation_guide_sim'),
                   style: AppTextStyles.button.copyWith(
                     color: AppColors.blue,
                     fontSize: 14,
@@ -132,7 +133,7 @@ class SimNotActiveDetail extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'Thiết bị IOS',
+                      context.l10n.translate('ios_devices'),
                       style: AppTextStyles.body.copyWith(
                         fontWeight: FontWeight.w500,
                       ),
@@ -172,7 +173,7 @@ class SimNotActiveDetail extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'Thiết bị Android',
+                      context.l10n.translate('android_devices'),
                       style: AppTextStyles.body.copyWith(
                         fontWeight: FontWeight.w500,
                       ),
@@ -192,7 +193,7 @@ class SimNotActiveDetail extends ConsumerWidget {
     );
   }
 
-  Widget _buildDetailSection() {
+  Widget _buildDetailSection(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(20),
@@ -212,7 +213,7 @@ class SimNotActiveDetail extends ConsumerWidget {
         children: [
           // Title
           Text(
-            'ESIM BASIC',
+            context.l10n.translate('esim_basic_title'),
             style: AppTextStyles.heading.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -223,33 +224,39 @@ class SimNotActiveDetail extends ConsumerWidget {
 
           // Detail Information Items
           _buildDetailItem(
-            label: 'Phạm vi phủ sóng',
+            context,
+            label: context.l10n.translate('coverage_area_detail'),
             value: esim.regionName ?? 'Singapore',
           ),
 
           _buildDetailItem(
-            label: 'Cung cấp bởi',
+            context,
+            label: context.l10n.translate('provided_by_detail'),
             value: esim.providerName ?? 'Singtel',
             hasInfo: true,
           ),
 
           _buildDetailItem(
-            label: 'Chính sách kích hoạt',
-            value: 'Thời hạn hiệu lực sẽ bắt đầu lúc cài',
+            context,
+            label: context.l10n.translate('activation_policy_detail'),
+            value: context.l10n.translate('validity_starts_on_install_detail'),
           ),
 
           _buildDetailItem(
-            label: 'Dung lượng',
+            context,
+            label: context.l10n.translate('data_capacity_sim_detail'),
             value: '${esim.dataAmount ?? 3} ${esim.dataUnit ?? 'GB'}',
           ),
 
           _buildDetailItem(
-            label: 'Hiệu lực ',
-            value: '${esim.validityDays ?? 5} ngày',
+            context,
+            label: context.l10n.translate('validity_sim_detail'),
+            value: '${esim.validityDays ?? 5} ${context.l10n.translate('days_unit_sim')}',
           ),
 
           _buildDetailItem(
-            label: 'Giá',
+            context,
+            label: context.l10n.translate('price_detail'),
             value: Common.formatCurrency(
                   esim.sellingPrice.toString() ?? '0',
                 ) +
@@ -257,14 +264,16 @@ class SimNotActiveDetail extends ConsumerWidget {
           ),
 
           _buildDetailItem(
-            label: 'Loại gói',
-            value: 'Chỉ dữ liệu',
+            context,
+            label: context.l10n.translate('package_type_detail'),
+            value: context.l10n.translate('data_only_type'),
             hasInfo: true,
           ),
 
           _buildDetailItem(
-            label: 'eKYC (Xác minh danh tính)',
-            value: 'Không bắt buộc',
+            context,
+            label: context.l10n.translate('ekyc_detail'),
+            value: context.l10n.translate('not_required_detail'),
             isLast: true,
           ),
         ],
@@ -272,7 +281,8 @@ class SimNotActiveDetail extends ConsumerWidget {
     );
   }
 
-  Widget _buildDetailItem({
+  Widget _buildDetailItem(
+    BuildContext context, {
     required String label,
     required String value,
     bool hasInfo = false,
@@ -338,7 +348,7 @@ class SimNotActiveDetail extends ConsumerWidget {
       AppRouter.webviewTermsSkyfi,
       extra: {
         'url': 'https://skyfi.vn/vi/esimGuide?src=app',
-        'title': 'Hướng dẫn cài đặt eSIM',
+        'title': context.l10n.translate('view_installation_guide_sim'),
         'isCheckbox': false,
       },
     );
@@ -348,13 +358,12 @@ class SimNotActiveDetail extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Hướng dẫn cài đặt cho $deviceType'),
-        content: Text(
-            'Đây là hướng dẫn chi tiết cài đặt eSIM cho thiết bị $deviceType.'),
+        title: Text(context.l10n.translate('installation_guide_title').replaceAll('{0}', deviceType)),
+        content: Text(context.l10n.translate('installation_guide_content').replaceAll('{0}', deviceType)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Đóng'),
+            child: Text(context.l10n.translate('close_button_sim')),
           ),
         ],
       ),

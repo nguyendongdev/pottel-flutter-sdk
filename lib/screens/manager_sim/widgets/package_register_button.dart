@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 import 'package:skyfi_sdk/screens/manager_sim/models/response_package/result_package.dart';
 import 'package:skyfi_sdk/screens/manager_sim/providers/provider_manager_esim.dart';
 import 'package:skyfi_sdk/utilities/modal.dart';
@@ -25,7 +26,7 @@ class PackageRegisterButton extends HookConsumerWidget {
   ) async {
     if (packageId.isEmpty) {
       Modal.showError(
-          title: "Thông báo", message: 'Lỗi: Không thể xác định ID gói cước');
+          title: context.l10n.translate('notification'), message: context.l10n.translate('package_id_error'));
       return;
     }
 
@@ -37,7 +38,7 @@ class PackageRegisterButton extends HookConsumerWidget {
           .addDataAndNavigateToPayment(packageId, iccid, context);
     } catch (e) {
       if (context.mounted) {
-        Modal.showError(title: "Thông báo", message: 'Lỗi: ${e.toString()}');
+        Modal.showError(title: context.l10n.translate('notification'), message: context.l10n.translate('registration_error').replaceAll('{0}', e.toString()));
       }
     } finally {
       if (context.mounted) {
@@ -75,7 +76,7 @@ class PackageRegisterButton extends HookConsumerWidget {
               ),
             )
           : Text(
-              'Đăng ký',
+              context.l10n.translate('register_button_sim'),
               style: AppTextStyles.button.copyWith(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,

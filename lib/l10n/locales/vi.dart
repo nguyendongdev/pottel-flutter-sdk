@@ -618,4 +618,65 @@ const Map<String, String> viStrings = {
   'pin_confirmation_not_match': 'Mã PIN xác nhận không khớp',
   'pin_no_consecutive_digits': 'Mã PIN không được chứa số liên tiếp',
   'pin_no_repeated_digits': 'Mã PIN không được chứa các số giống nhau liên tiếp',
+
+  // Manager SIM Screen
+  'manage_purchased_esim_travel': 'Quản lý eSIM du lịch đã mua',
+  'esim_in_use_tab': 'eSIM đang sử dụng',
+  'esim_not_installed_tab': 'eSIM chưa cài',
+  'error_loading_data_manager': 'Lỗi: {0}',
+  
+  // SIM Active Widget
+  'esim_basic_title': 'ESIM BASIC',
+  'in_use_status': 'Đang sử dụng',
+  'coverage_area_sim': 'Phạm vi phủ sóng',
+  'validity_remaining': 'Thời hạn còn',
+  'days_unit_sim': 'ngày',
+  'remaining_data': 'Còn lại',
+  'view_details_sim': 'Xem chi tiết',
+  'buy_more_data_sim': 'Mua thêm data',
+  'no_active_esim': 'Không có eSIM đang hoạt động',
+  
+  // SIM Not Active Widget
+  'esim_not_installed_status': 'eSIM chưa cài',
+  'data_capacity_sim': 'Dung lượng',
+  'install_now': 'Cài đặt ngay',
+  'no_uninstalled_esim': 'Không có eSIM chưa cài đặt',
+  
+  // Detail eSIM Screen
+  'esim_detail_title': 'Chi tiết eSIM',
+  
+  // SIM Active Detail Screen
+  'data_load_error': 'Lỗi tải dữ liệu: {0}',
+  'coverage_area_detail': 'Phạm vi phủ sóng',
+  'provided_by_detail': 'Cung cấp bởi',
+  'data_capacity_sim_detail': 'Dung lượng',
+  'package_type_detail': 'Loại gói',
+  'data_only_type': 'Chỉ dữ liệu',
+  'validity_sim_detail': 'Hiệu lực',
+  'ekyc_detail': 'eKYC (Xác minh danh tính)',
+  'not_required_detail': 'Không bắt buộc',
+  'iccid_detail': 'ICCID',
+  'buy_additional_data': 'Mua thêm dung lượng',
+  
+  // SIM Not Active Detail Screen
+  'qr_code_install_title': 'Mã QR cài đặt eSIM',
+  'scan_qr_to_install': 'Quét mã QR trên để cài đặt eSIM trên điện thoại',
+  'view_installation_guide_sim': 'Xem hướng dẫn cài đặt eSIM',
+  'activation_policy_detail': 'Chính sách kích hoạt',
+  'validity_starts_on_install_detail': 'Thời hạn hiệu lực sẽ bắt đầu lúc cài',
+  'price_detail': 'Giá',
+  'ios_devices': 'Thiết bị IOS',
+  'android_devices': 'Thiết bị Android',
+  'installation_guide_title': 'Hướng dẫn cài đặt cho {0}',
+  'installation_guide_content': 'Đây là hướng dẫn chi tiết cài đặt eSIM cho thiết bị {0}.',
+  'close_button_sim': 'Đóng',
+  
+  // Data Package Card
+  'call_minutes_inter_network_card': 'Phút gọi: {0} phút gọi liên mạng',
+  'data_prefix': 'Data: {0}',
+  'register_button_sim': 'Đăng ký',
+  
+  // Package Register Button
+  'package_id_error': 'Lỗi: Không thể xác định ID gói cước',
+  'registration_error': 'Lỗi: {0}',
 };
