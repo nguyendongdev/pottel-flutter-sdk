@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:signature/signature.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -41,7 +42,7 @@ class SignatureBox extends StatelessWidget {
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
-                  'Chữ ký khách hàng',
+                  context.l10n.translate('customer_signature'),
                   style: AppTextStyles.title.copyWith(
                     color: AppColors.text,
                   ),

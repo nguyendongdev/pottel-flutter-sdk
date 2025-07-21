@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:skyfi_sdk/routers/routers.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -19,10 +22,10 @@ class CaptureOverlay extends StatelessWidget {
     String title;
     switch (type) {
       case EkycType.cartFront:
-        title = 'Mặt trước';
+        title = context.l10n.translate('front_side');
         break;
       case EkycType.cartBack:
-        title = 'Mặt sau';
+        title = context.l10n.translate('back_side');
         break;
       case EkycType.selfie:
         title = '';
@@ -135,7 +138,8 @@ class CaptureOverlayPainter extends CustomPainter {
       canvas.drawOval(ovalRect, borderPaint);
 
       // Draw guide text
-      const guideText = 'Đặt khuôn mặt vào trong khung hình';
+      final guideText =
+          NavigatorService.context!.l10n.translate('place_face_in_frame');
       final textPainter = TextPainter(
         text: TextSpan(
           text: guideText,

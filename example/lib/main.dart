@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
                           phone: '+84707654160',
                           env: SkyfiEnv.dev,
                           initialLocation: SkyfiRoute.home.path,
-                          locale: AppLocale.vi,
+                          locale: AppLocale.en,
                         ),
                       ),
                     );

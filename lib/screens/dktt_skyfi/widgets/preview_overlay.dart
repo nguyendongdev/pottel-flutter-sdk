@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/outline_button.dart';
+import '../../../l10n/localization_extension.dart';
 import '../provider/ekyc_provider.dart';
 
 class PreviewOverlay extends StatelessWidget {
@@ -20,12 +22,12 @@ class PreviewOverlay extends StatelessWidget {
   final EkycType type;
   final bool loading;
   final bool canNext;
-  String _getTitle() {
+  String _getTitleWithContext(BuildContext context) {
     if (type == EkycType.cartFront) {
-      return 'Mặt trước';
+      return context.l10n.translate('front_side');
     }
     if (type == EkycType.cartBack) {
-      return 'Mặt sau';
+      return context.l10n.translate('back_side');
     }
     if (type == EkycType.selfie) {
       return '';
@@ -50,7 +52,7 @@ class PreviewOverlay extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 title: Text(
-                  'Chụp ảnh CCCD',
+                  context.l10n.translate('take_cccd_photo'),
                   style: AppTextStyles.heading.copyWith(
                     color: AppColors.white,
                   ),
@@ -65,7 +67,7 @@ class PreviewOverlay extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                _getTitle(),
+                _getTitleWithContext(context),
                 style: AppTextStyles.heading.copyWith(
                   color: AppColors.white,
                 ),
@@ -75,7 +77,7 @@ class PreviewOverlay extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
                 child: Text(
-                  'Hãy đảm bảo hình ảnh GTTT của bạn không bị mờ, chói loá',
+                  context.l10n.translate('ensure_clear_id_image'),
                   style: AppTextStyles.body.copyWith(
                     color: AppColors.white,
                   ),
@@ -93,7 +95,7 @@ class PreviewOverlay extends StatelessWidget {
                       height: 48,
                       disabled: loading,
                       onPressed: onBack,
-                      text: 'Chụp lại',
+                      text: context.l10n.translate('retake_photo_action'),
                       textStyle: AppTextStyles.button.copyWith(
                         color: loading ? AppColors.textGrey : AppColors.primary,
                       ),
@@ -104,7 +106,7 @@ class PreviewOverlay extends StatelessWidget {
                       height: 48,
                       disabled: !canNext,
                       onPressed: onNext,
-                      text: 'Chọn',
+                      text: context.l10n.translate('select_action_button'),
                       textStyle: AppTextStyles.button.copyWith(
                         color: AppColors.text,
                       ),

@@ -4,6 +4,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/spacing.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/network/api.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/models/save_log_respone/save_log_respone.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
@@ -29,7 +30,8 @@ class VerifyOtpScreen extends HookConsumerWidget {
 
     void saveLog() async {
       try {
-        Common.startLoadingDialog(context, 'Đang lưu thông tin...');
+        Common.startLoadingDialog(
+            context, context.l10n.translate('saving_information_progress'));
         isLoading.value = true;
         final response = await api.post(
           '/bss/videocall/save-log-video-call',
@@ -44,7 +46,8 @@ class VerifyOtpScreen extends HookConsumerWidget {
           return;
         } else {
           // SnackBarApp.showError(context, message: data.message ?? '');
-          throw Exception(data.message ?? 'Lỗi');
+          throw Exception(
+              data.message ?? context.l10n.translate('error_title'));
         }
       } catch (e) {
         print("error: $e");
@@ -108,14 +111,15 @@ class VerifyOtpScreen extends HookConsumerWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Thông báo',
+                        context.l10n.translate('notification_title'),
                         style: AppTextStyles.heading.copyWith(
                           color: AppColors.text,
                         ),
                       ),
                       const SizedBox(height: AppSpacing.md),
                       Text(
-                        'Bạn xác nhận KHÔNG SỬ DỤNG Số TB SkyFi nào trong danh sách. Nếu chọn "Đồng ý" các số thuê bao gợi ý sẽ được đưa vào danh sách cần cập nhật lại TTTB.',
+                        context.l10n
+                            .translate('confirm_not_using_skyfi_numbers'),
                         style: AppTextStyles.body.copyWith(
                           color: AppColors.text,
                         ),
@@ -127,7 +131,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
                           OutlineButton(
                             height: 50,
                             width: 140,
-                            text: 'Hủy bỏ',
+                            text: context.l10n.translate('cancel_action'),
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -138,7 +142,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
                           GradientButton(
                             height: 50,
                             width: 140,
-                            text: 'Đồng ý',
+                            text: context.l10n.translate('agree_action'),
                             onPressed: () {
                               Navigator.pop(context);
                               saveLog();
@@ -179,7 +183,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Xác nhận OTP',
+                    context.l10n.translate('otp_confirmation'),
                     style: AppTextStyles.heading.copyWith(
                       color: AppColors.text,
                       fontWeight: FontWeight.w600,
@@ -188,7 +192,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
                   ),
                   const SizedBox(height: AppSpacing.xl),
                   Text(
-                    'Vui lòng nhập mã OTP được gửi',
+                    context.l10n.translate('enter_otp_instruction'),
                     style: AppTextStyles.body.copyWith(
                       color: AppColors.text,
                     ),
@@ -263,14 +267,14 @@ class VerifyOtpScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Xác thực OTP đăng ký/ cập nhật thông tin',
+                context.l10n.translate('otp_verification_registration'),
                 style: AppTextStyles.title.copyWith(
                   color: AppColors.text,
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
               Text(
-                'Lưu ý: Giấy tờ Bạn đang sử dụng để Đăng ký/Cập nhật thông tin thuê bao đang đứng tên cho từ 02 số thuê bao SkyFi trở lên. Vui lòng chọn 1 trong 2 trường hợp sau:',
+                context.l10n.translate('multiple_subscriber_warning'),
                 style: AppTextStyles.body.copyWith(
                   color: AppColors.text,
                 ),
@@ -289,14 +293,14 @@ class VerifyOtpScreen extends HookConsumerWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: 'Trường hợp 1: ',
+                              text: context.l10n.translate('case_1'),
                               style: AppTextStyles.title.copyWith(
                                 color: AppColors.text,
                               ),
                             ),
                             TextSpan(
                               text:
-                                  'Chọn 1 số thuê bao Bạn đang sử dụng, bấm nút "Gửi OTP"',
+                                  context.l10n.translate('case_1_instruction'),
                               style: AppTextStyles.body.copyWith(
                                 color: AppColors.text,
                               ),
@@ -336,14 +340,14 @@ class VerifyOtpScreen extends HookConsumerWidget {
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: 'Trường hợp 2: ',
+                                text: context.l10n.translate('case_2'),
                                 style: AppTextStyles.title.copyWith(
                                   color: AppColors.text,
                                 ),
                               ),
                               TextSpan(
-                                text:
-                                    'Nếu Bạn không sở hữu số thuê bao nào ở Trường hợp bên trên, bấm “Tiếp tục"',
+                                text: context.l10n
+                                    .translate('case_2_instruction'),
                                 style: AppTextStyles.body.copyWith(
                                   color: AppColors.text,
                                 ),
@@ -355,7 +359,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
                       const SizedBox(width: AppSpacing.md),
                       GradientButton(
                         width: 100,
-                        text: 'Tiếp tục',
+                        text: context.l10n.translate('continue'),
                         onPressed: () {
                           onShowAlert();
                         },

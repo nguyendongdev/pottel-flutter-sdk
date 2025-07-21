@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:signature/signature.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/ekyc_provider.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
 
@@ -17,7 +18,6 @@ import '../../core/widgets/bottom_button.dart';
 import '../../core/widgets/snack_bar_app.dart';
 import '../../network/api.dart';
 import '../../routers/routers.dart';
-import '../../utilities/common.dart';
 import 'models/save_log_respone/save_log_respone.dart';
 import 'widgets/step_indicator.dart';
 
@@ -59,13 +59,15 @@ class PreviewContactScreen extends HookConsumerWidget {
         if (ing4 != null) {
           context.pushNamed(AppRouter.contactDetail, extra: ing4);
         } else {
-          SnackBarApp.showError(context, message: 'Lỗi xem thông tin hợp đồng');
+          SnackBarApp.showError(context,
+              message: context.l10n.translate('contract_info_error'));
         }
         // Common.stopLoadingDialog(context);
       } catch (e) {
         isLoading.value = false;
         // Common.stopLoadingDialog(context);
-        SnackBarApp.showError(context, message: 'Lỗi xem thông tin hợp đồng');
+        SnackBarApp.showError(context,
+            message: context.l10n.translate('contract_view_error'));
       }
     }
 
@@ -86,7 +88,7 @@ class PreviewContactScreen extends HookConsumerWidget {
           return;
         } else {
           // SnackBarApp.showError(context, message: data.message ?? '');
-          throw Exception(data.message ?? 'Lỗi');
+          throw Exception(data.message ?? context.l10n.translate('error_dktt'));
         }
       } catch (e) {
         print("error: $e");
@@ -129,7 +131,7 @@ class PreviewContactScreen extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ký hợp đồng',
+                    context.l10n.translate('sign_contract'),
                     style: AppTextStyles.title.copyWith(
                       color: AppColors.text,
                       fontSize: 22,
@@ -141,7 +143,7 @@ class PreviewContactScreen extends HookConsumerWidget {
                     onChanged: (value) {
                       isAgree.value = value ?? false;
                     },
-                    text: 'Tôi hiểu và đồng ý với các điều kiện dưới đây:',
+                    text: context.l10n.translate('agree_to_terms'),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -151,7 +153,8 @@ class PreviewContactScreen extends HookConsumerWidget {
                     ),
                     Expanded(
                       child: Text(
-                        'Việc đăng ký thông tin thuê bao trên hệ thống sẽ chỉ được thực hiện sau khi cung cấp đầy đủ các giấy tờ, thông tin theo quy định của pháp luật.',
+                        context.l10n
+                            .translate('subscription_registration_info'),
                         style: AppTextStyles.small.copyWith(
                           color: AppColors.text,
                           fontWeight: FontWeight.w400,
@@ -167,7 +170,7 @@ class PreviewContactScreen extends HookConsumerWidget {
                     ),
                     Expanded(
                       child: Text(
-                        'Trong quá trình chờ và sau khi hoàn thành đăng ký thông tin trên hệ thống, nếu có xảy ra bất kỳ khiếu kiện, tranh chấp nào liên quan đến số thuê bao trên, tôi đồng ý để SkyFi thu hồi số thuê bao để giải quyết khiếu nại, đồng thời tôi cam kết sẽ phối hợp SkyFi để giải quyết và chịu hoàn toàn trách nhiệm trước pháp luật.',
+                        context.l10n.translate('dispute_resolution_agreement'),
                         style: AppTextStyles.small.copyWith(
                           color: AppColors.text,
                           fontWeight: FontWeight.w400,
@@ -183,7 +186,7 @@ class PreviewContactScreen extends HookConsumerWidget {
                     ),
                     Expanded(
                       child: Text(
-                        'Các thông tin và chữ ký của bạn sẽ được tự đồng điền vào Phiếu xác nhận thông tin thuê bao dưới đây.',
+                        context.l10n.translate('auto_fill_info_notice'),
                         style: AppTextStyles.small.copyWith(
                           color: AppColors.text,
                           fontWeight: FontWeight.w400,
@@ -201,14 +204,14 @@ class PreviewContactScreen extends HookConsumerWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                              text:
-                                  'Vui lòng ký tên của bạn tại phía dưới cùng của hợp đồng và kiểm tra lại thông tin hợp đồng',
+                              text: context.l10n
+                                  .translate('sign_and_check_contract'),
                               style: AppTextStyles.label.copyWith(
                                 color: AppColors.text,
                                 fontWeight: FontWeight.w400,
                               )),
                           TextSpan(
-                              text: ' Tại đây!',
+                              text: context.l10n.translate('here_link'),
                               style: AppTextStyles.label.copyWith(
                                 color: AppColors.blue,
                                 fontWeight: FontWeight.w400,
@@ -252,7 +255,7 @@ class PreviewContactScreen extends HookConsumerWidget {
                           ),
                           const SizedBox(width: AppSpacing.sm),
                           Text(
-                            'Chữ ký khách hàng',
+                            context.l10n.translate('customer_signature'),
                             style: AppTextStyles.title.copyWith(
                               color: AppColors.text,
                             ),
@@ -283,12 +286,13 @@ class PreviewContactScreen extends HookConsumerWidget {
                   final image = await _controller.toPngBytes();
                   if (image == null) {
                     SnackBarApp.showWarning(context,
-                        message: 'Vui lòng ký vào ô chữ ký');
+                        message: context.l10n.translate('please_sign_in_box'));
                     return;
                   }
                   if (!isAgree.value) {
                     SnackBarApp.showWarning(context,
-                        message: 'Vui lòng đọc và đồng ý với các điều kiện');
+                        message:
+                            context.l10n.translate('please_read_and_agree'));
                     return;
                   }
                   final base64 = base64Encode(image!);
@@ -302,8 +306,9 @@ class PreviewContactScreen extends HookConsumerWidget {
                     return;
                   }
                 },
-                text:
-                    numberIdRegis == 0 ? 'Bắt đầu cuộc gọi Video' : 'Tiếp tục',
+                text: numberIdRegis == 0
+                    ? context.l10n.translate('start_video_call')
+                    : context.l10n.translate('continue_dktt'),
                 textStyle: AppTextStyles.button.copyWith(
                   color: AppColors.white,
                 ),

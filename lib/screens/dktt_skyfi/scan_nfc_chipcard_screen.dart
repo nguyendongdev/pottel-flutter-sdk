@@ -14,6 +14,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -367,7 +368,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
     try {
       // 1. Tắt NFC task chooser dialog bằng cách set system flags
       await _suppressNfcTaskChooserDialog();
-      
+
       // 2. Delay ngắn để đảm bảo NFC operation đã hoàn tất
       await Future.delayed(const Duration(milliseconds: 200));
 
@@ -375,7 +376,6 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
 
       // 3. Đảm bảo app ở foreground
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-      
     } catch (e) {
       _log.warning("Android: Lỗi khi suppress NFC dialog: $e");
     }
@@ -386,7 +386,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
    */
   Future<void> _suppressNfcTaskChooserDialog() async {
     if (!Platform.isAndroid) return;
-    
+
     try {
       const platform = MethodChannel('nfc.skyfi.suppressor');
       await platform.invokeMethod('suppressNfcDialog');
@@ -471,18 +471,26 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
     print('can: ${_can.text}');
     print('pace: ${_checkBoxPACE}');
     print("Button pressed");
+
+    // Cache translations to avoid BuildContext async gaps
+    final expiryDateRequired = context.l10n.translate('expiry_date_required');
+    final birthDateRequired = context.l10n.translate('birth_date_required');
+    final citizenIdRequired = context.l10n.translate('citizen_id_required');
+    final citizenId6DigitsRequired =
+        context.l10n.translate('citizen_id_6_digits_required');
+
     //Check on what tab we are
     if (Platform.isIOS) {
       //DBA tab
       String errorText = "";
       if (_doe.text.isEmpty) {
-        errorText += "Vui lòng nhập ngày hết hạn!\n";
+        errorText += expiryDateRequired;
       }
       if (_dob.text.isEmpty) {
-        errorText += "Vui lòng nhập ngày sinh!\n";
+        errorText += birthDateRequired;
       }
       if (_docNumber.text.isEmpty) {
-        errorText += "Vui lòng nhập số thẻ căn cước công dân!";
+        errorText += citizenIdRequired;
       }
 
       setState(() {
@@ -498,9 +506,9 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
       //PACE tab
       String errorText = "";
       if (_can.text.isEmpty) {
-        errorText = "Vui lòng nhập số thẻ căn cước công dân!";
+        errorText = citizenIdRequired;
       } else if (_can.text.length != 6) {
-        errorText = "Số thẻ căn cước công dân phải có đúng 6 chữ số cuối!";
+        errorText = citizenId6DigitsRequired;
       }
 
       setState(() {
@@ -516,24 +524,48 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
 
   void _readMRTD({required AccessKey accessKey, bool isPace = false}) async {
     try {
+      // Cache translations to avoid BuildContext async gaps
+      final waitingForCardMsg = context.l10n.translate('waiting_for_card');
+      final placePhoneNearCardMsg =
+          context.l10n.translate('place_phone_near_card_instruction');
+      final readingCardMsg = context.l10n.translate('reading_card');
+      final readingCardAccessMsg =
+          context.l10n.translate('reading_ef_cardaccess_detail');
+      final readingCardSecurityMsg =
+          context.l10n.translate('reading_ef_cardsecurity_detail');
+      final initializingPaceMsg =
+          context.l10n.translate('initializing_pace_session_detail');
+      final readingComMsg = context.l10n.translate('reading_ef_com_detail');
+      final readingDataGroupsMsg =
+          context.l10n.translate('reading_data_groups_detail');
+      final doingAAMsg = context.l10n.translate('doing_aa');
+      final readingSodMsg = context.l10n.translate('reading_ef_sod_detail');
+      final cardReadErrorMsg =
+          context.l10n.translate('card_read_general_error_detail');
+      final cardInitErrorMsg = context.l10n.translate('card_init_error_detail');
+      final cardTimeoutMsg = context.l10n.translate('card_read_timeout_detail');
+      final cardLostMsg = context.l10n.translate('card_lost_error_detail');
+      final cardReadErrorDetailMsg =
+          context.l10n.translate('card_read_error_detail');
+      final cardReadSuccessMsg =
+          context.l10n.translate('card_read_success_detail');
+
       setState(() {
         _mrtdData = null;
-        _alertMessage = "Đang đợi thẻ căn cước công dân ...";
+        _alertMessage = waitingForCardMsg;
         _isReading = true;
       });
       try {
         bool demo = false;
-        if (!demo)
-          await _nfc.connect(
-              iosAlertMessage: "Đặt điện thoại gần thẻ căn cước công dân");
+        if (!demo) await _nfc.connect(iosAlertMessage: placePhoneNearCardMsg);
 
         final passport = Passport(_nfc);
 
         setState(() {
-          _alertMessage = "Đang đọc thẻ căn cước công dân ...";
+          _alertMessage = readingCardMsg;
         });
 
-        _nfc.setIosAlertMessage("Đang đọc EF.CardAccess ...");
+        _nfc.setIosAlertMessage(readingCardAccessMsg);
         final mrtdData = MrtdData();
 
         try {
@@ -542,7 +574,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
           //if (e.code != StatusWord.fileNotFound) rethrow;
         }
 
-        _nfc.setIosAlertMessage("Đang đọc EF.CardSecurity ...");
+        _nfc.setIosAlertMessage(readingCardSecurityMsg);
 
         try {
           //mrtdData.cardSecurity = await passport.readEfCardSecurity();
@@ -550,7 +582,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
           //if (e.code != StatusWord.fileNotFound) rethrow;
         }
 
-        _nfc.setIosAlertMessage("Đang khởi tạo phiên PACE...");
+        _nfc.setIosAlertMessage(initializingPaceMsg);
         //set MrtdData
         mrtdData.isPACE = isPace;
         mrtdData.isDBA = accessKey.PACE_REF_KEY_TAG == 0x01 ? true : false;
@@ -563,11 +595,10 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
           await passport.startSession(accessKey as DBAKey);
         }
 
-        _nfc.setIosAlertMessage(formatProgressMsg("Đang đọc EF.COM ...", 0));
+        _nfc.setIosAlertMessage(formatProgressMsg(readingComMsg, 0));
         mrtdData.com = await passport.readEfCOM();
 
-        _nfc.setIosAlertMessage(
-            formatProgressMsg("Đang đọc Data Groups ...", 20));
+        _nfc.setIosAlertMessage(formatProgressMsg(readingDataGroupsMsg, 20));
 
         if (mrtdData.com!.dgTags.contains(EfDG1.TAG)) {
           mrtdData.dg1 = await passport.readEfDG1();
@@ -628,7 +659,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
 
         if (mrtdData.com!.dgTags.contains(EfDG15.TAG)) {
           mrtdData.dg15 = await passport.readEfDG15();
-          _nfc.setIosAlertMessage(formatProgressMsg("Doing AA ...", 60));
+          _nfc.setIosAlertMessage(formatProgressMsg(doingAAMsg, 60));
           mrtdData.aaSig = await passport.activeAuthenticate(Uint8List(8));
         }
 
@@ -636,7 +667,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
           mrtdData.dg16 = await passport.readEfDG16();
         }
 
-        _nfc.setIosAlertMessage(formatProgressMsg("Đang đọc EF.SOD ...", 80));
+        _nfc.setIosAlertMessage(formatProgressMsg(readingSodMsg, 80));
         mrtdData.sod = await passport.readEfSOD();
 
         setState(() {
@@ -660,11 +691,10 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         setState(() {
           _isReading = false;
         });
-        String alertMsg = "Đã xảy ra lỗi khi đọc thẻ căn cước công dân!";
+        String alertMsg = cardReadErrorMsg;
         if (e is PassportError) {
           if (se.contains("security status not satisfied")) {
-            alertMsg =
-                "Không thể khởi tạo phiên với thẻ căn cước công dân.\nKiểm tra dữ liệu đầu vào!";
+            alertMsg = cardInitErrorMsg;
           }
           _log.error("PassportError: ${e.message}");
         } else {
@@ -673,9 +703,9 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         }
 
         if (se.contains('timeout')) {
-          alertMsg = "Thời gian chờ đã hết, vui lòng thử lại";
+          alertMsg = cardTimeoutMsg;
         } else if (se.contains("tag was lost")) {
-          alertMsg = "Thẻ đã bị mất, vui lòng thử lại";
+          alertMsg = cardLostMsg;
         } else if (se.contains("invalidated by user")) {
           alertMsg = "";
         }
@@ -693,8 +723,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
            */
           await _suppressNfcDialogAndEnsureForeground();
 
-          SnackBarApp.showWarning(context,
-              message: "Lỗi khi đọc thẻ, Vui lòng thử lại");
+          SnackBarApp.showWarning(context, message: cardReadErrorDetailMsg);
           setState(() {
             _isReading = false;
           });
@@ -711,7 +740,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
            */
           await _suppressNfcDialogAndEnsureForeground();
 
-          SnackBarApp.showSuccess(context, message: "Đọc thẻ thành công");
+          SnackBarApp.showSuccess(context, message: cardReadSuccessMsg);
           setState(() {
             _isReading = false;
           });
@@ -750,7 +779,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
               children: <Widget>[
                 const SizedBox(height: AppSpacing.xxl),
                 Text(
-                  'Chuẩn bị quét thông tin CCCD',
+                  context.l10n.translate('prepare_scan_citizen_id_title'),
                   style: AppTextStyles.title
                       .copyWith(color: AppColors.text, fontSize: 22),
                 ),
@@ -761,7 +790,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
                     _openTutorialVideo();
                   },
                   child: Text(
-                    'Xem video hướng dẫn',
+                    context.l10n.translate('watch_tutorial_video_link'),
                     style: AppTextStyles.title.copyWith(
                       color: AppColors.blue,
                       fontSize: 18,
@@ -831,7 +860,9 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
                 GradientButton(
                   height: 50,
                   onPressed: _buttonPressed,
-                  text: _isReading ? 'Đang đọc ...' : 'Tôi đã sẵn sàng',
+                  text: _isReading
+                      ? context.l10n.translate('reading_progress')
+                      : context.l10n.translate('im_ready_button'),
                   textStyle: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -839,11 +870,14 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
                 ),
                 SizedBox(height: 20),
                 Row(children: <Widget>[
-                  Text('NFC có sẵn:',
+                  Text(context.l10n.translate('nfc_available_label'),
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold)),
                   SizedBox(width: 4),
-                  Text(_isNfcAvailable ? "Có" : "Không",
+                  Text(
+                      _isNfcAvailable
+                          ? context.l10n.translate('yes_nfc')
+                          : context.l10n.translate('no_nfc'),
                       style: TextStyle(fontSize: 18.0))
                 ]),
                 SizedBox(height: 15),

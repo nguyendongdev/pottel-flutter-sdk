@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 
 class PhoneDisplayField extends StatelessWidget {
   const PhoneDisplayField({
@@ -61,14 +62,14 @@ class PhoneDisplayField extends StatelessWidget {
               style: AppTextStyles.body.copyWith(
                 color: AppColors.textLight,
               ),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
-                hintText: 'Nhập số thuê bao cần kích hoạt',
-                hintStyle: TextStyle(
+                hintText: context.l10n.translate('enter_subscriber_to_activate'),
+                hintStyle: const TextStyle(
                   color: AppColors.textLight,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'widgets/scan_overlay.dart';
 
 class ScanBarcodeScreen extends StatefulWidget {
@@ -65,8 +66,8 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
         } else {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Không tìm thấy mã vạch trong ảnh'),
+              SnackBar(
+                content: Text(context.l10n.translate('barcode_not_found')),
                 backgroundColor: Colors.red,
               ),
             );
@@ -77,7 +78,7 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Lỗi khi đọc ảnh: $e'),
+            content: Text(context.l10n.translate('image_read_error').replaceAll('{0}', e.toString())),
             backgroundColor: Colors.red,
           ),
         );

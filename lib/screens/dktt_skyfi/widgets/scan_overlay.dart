@@ -3,6 +3,7 @@ import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/gradient_button.dart';
+import '../../../l10n/localization_extension.dart';
 
 class ScanOverlay extends StatelessWidget {
   const ScanOverlay({
@@ -39,7 +40,7 @@ class ScanOverlay extends StatelessWidget {
               ),
               // const Spacer(),
               Text(
-                'Quét mã QR trên thân thẻ',
+                context.l10n.translate('scan_qr_on_card_widget'),
                 style: AppTextStyles.heading.copyWith(
                   color: AppColors.white,
                 ),
@@ -48,7 +49,7 @@ class ScanOverlay extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
                 child: Text(
-                  'Đối với SIM vật lý: Quét mã trên thẻ SIM\nĐối với eSIM: Quét mã QR đã gửi về email',
+                  context.l10n.translate('sim_qr_scanning_instructions'),
                   textAlign: TextAlign.center,
                   style: AppTextStyles.body.copyWith(
                     color: AppColors.white,
@@ -78,7 +79,7 @@ class ScanOverlay extends StatelessWidget {
                           size: 24,
                         ),
                         Text(
-                          'Tải mã QR',
+                          context.l10n.translate('upload_qr_code'),
                           style: AppTextStyles.heading.copyWith(
                             color: AppColors.white,
                           ),
@@ -99,7 +100,7 @@ class ScanOverlay extends StatelessWidget {
                     color: AppColors.white,
                   ),
                   onPressed: onManualInput,
-                  text: 'Nhập số serial',
+                  text: context.l10n.translate('enter_serial_number_action'),
                 ),
               ),
               const SizedBox(height: AppSpacing.xxl),

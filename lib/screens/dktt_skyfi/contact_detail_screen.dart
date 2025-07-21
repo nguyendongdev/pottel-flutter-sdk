@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../core/constants/colors.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 class ContactDetailScreen extends StatefulWidget {
   final String ing4;
@@ -34,9 +35,9 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
           },
           icon: const Icon(Icons.arrow_back_ios_new),
         ),
-        title: const Text(
-          'Xem phiếu',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        title: Text(
+          context.l10n.translate('view_document'),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(

@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
@@ -41,8 +43,7 @@ class InfoRegisScreen extends HookConsumerWidget {
       } else {
         // The permission was denied, either just once or permanently.
         Common.showToast(
-            'Vui lòng cấp quyền truy cập camera để sử dụng tính năng này',
-            context);
+            context.l10n.translate('camera_permission_required'), context);
       }
     }
 
@@ -82,11 +83,12 @@ class InfoRegisScreen extends HookConsumerWidget {
           // If status code is not 200, create error response
           return CodeErrorHandle(
             code: statusCode,
-            message: 'Lỗi kết nối server',
+            message: context.l10n.translate('server_connection_error'),
           );
         }
       } catch (e) {
-        Common.showToast('Đã có lỗi xảy ra', context);
+        Common.showToast(
+            context.l10n.translate('general_error_occurred'), context);
         return null;
       } finally {
         // Hide loading
@@ -117,7 +119,8 @@ class InfoRegisScreen extends HookConsumerWidget {
             // This is a CodeErrorHandle (error case)
             final errorHandle = infoFromIccid;
             Common.showToast(
-                errorHandle.message ?? 'Lỗi khi lấy thông tin từ ICCID',
+                errorHandle.message ??
+                    context.l10n.translate('iccid_info_error'),
                 context);
           }
         }
@@ -141,8 +144,10 @@ class InfoRegisScreen extends HookConsumerWidget {
           if (response.result?.checkExist == true) {
             Common.showDialogConfirm(
               context,
-              'Thông báo',
-              'Số thuê bao ${msisdnController.text} đang tiến hành đến bược gọi tổng đài. Bạn có thể đi thẳng tới bước gọi tổng đài hoặc thực hiện lại từ đầu từ bước chụp ảnh giấy tờ',
+              context.l10n.translate('notification_dktt'),
+              context.l10n
+                  .translate('phone_in_process_message')
+                  .replaceAll('{0}', msisdnController.text),
               () {
                 context.pop();
                 // open start video call
@@ -164,8 +169,8 @@ class InfoRegisScreen extends HookConsumerWidget {
                 context.pop();
                 context.pushNamed(AppRouter.prepareChipCard);
               },
-              primaryButtonText: 'Gọi lại',
-              secondaryButtonText: 'Chụp lại',
+              primaryButtonText: context.l10n.translate('call_again'),
+              secondaryButtonText: context.l10n.translate('retake_photo'),
             );
             return;
           }
@@ -181,10 +186,13 @@ class InfoRegisScreen extends HookConsumerWidget {
               .setSeri(response.result?.iccid);
           context.pushNamed(AppRouter.prepareChipCard);
         } else {
-          Common.showToast(response.message ?? 'Lỗi khi kiểm tra sim', context);
+          Common.showToast(
+              response.message ?? context.l10n.translate('sim_check_error'),
+              context);
         }
       } catch (e) {
-        Common.showToast('Đã có lỗi xảy ra', context);
+        Common.showToast(
+            context.l10n.translate('general_error_occurred'), context);
       } finally {
         isLoading.value = false;
         // Common.stopLoading();
@@ -206,7 +214,7 @@ class InfoRegisScreen extends HookConsumerWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(
-            'Kích hoạt SIM',
+            context.l10n.translate('activate_sim_dktt'),
             style: AppTextStyles.title.copyWith(
               color: AppColors.text,
             ),
@@ -224,21 +232,22 @@ class InfoRegisScreen extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Thông tin SIM',
+                        context.l10n.translate('sim_information'),
                         style: AppTextStyles.heading.copyWith(
                           color: AppColors.text,
                         ),
                       ),
                       const SizedBox(height: AppSpacing.lg),
                       Text(
-                        'Lưu ý: Bạn có tối đa 10 lần nhập/quét số Serial SIM cho 1 số thuê bao trong 1 ngày. Vượt quá số lần quy định, vui lòng thử lại sau 24 giờ.',
+                        context.l10n.translate('sim_limit_warning'),
                         style: AppTextStyles.label.copyWith(
                           color: AppColors.text,
                         ),
                       ),
                       const SizedBox(height: AppSpacing.lg),
                       PhoneDisplayField(
-                        label: 'Số thuê bao cần kích hoạt',
+                        label:
+                            context.l10n.translate('phone_number_to_activate'),
                         controller: msisdnController,
                         isEditable: isUpdateMsisdn.value,
                         onChanged: (value) {
@@ -269,16 +278,22 @@ class InfoRegisScreen extends HookConsumerWidget {
           child: BottomButton(
             onPressed: () {
               if (msisdnController.text.length != 10) {
-                Common.showToast('Số thuê bao phải có 10 chữ số', context);
+                Common.showToast(
+                    context.l10n.translate('phone_number_must_be_10_digits'),
+                    context);
                 return;
               }
               if (serialController.text.length != 16) {
-                Common.showToast('Số serial phải có 16 chữ số', context);
+                Common.showToast(
+                    context.l10n.translate('serial_number_must_be_16_digits'),
+                    context);
                 return;
               }
               _onCheckSim();
             },
-            text: isLoading.value ? 'Đang xử lý...' : 'Tiếp tục',
+            text: isLoading.value
+                ? context.l10n.translate('processing_dktt')
+                : context.l10n.translate('continue_dktt'),
             textStyle: AppTextStyles.button.copyWith(color: AppColors.white),
             isLoading: isLoading.value,
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -45,7 +46,7 @@ class PrepareChipCardScreen extends HookConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             child: Text(
-              'Thông tin giấy tờ tuỳ thân',
+              context.l10n.translate('id_document_info'),
               style: AppTextStyles.heading.copyWith(
                 fontSize: 22,
               ),
@@ -69,7 +70,7 @@ class PrepareChipCardScreen extends HookConsumerWidget {
             context.pushNamed(AppRouter.captureChipCard,
                 extra: EkycType.cartFront);
           },
-          text: 'Chụp ảnh',
+          text: context.l10n.translate('take_photo'),
           textStyle: AppTextStyles.button.copyWith(
             fontSize: 16,
             color: AppColors.white,

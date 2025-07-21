@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
@@ -40,7 +41,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
           children: [
             const SizedBox(height: AppSpacing.xxl),
             Text(
-              'Chụp ảnh xác thực khuôn mặt',
+              context.l10n.translate('face_authentication_photo'),
               style: AppTextStyles.heading.copyWith(
                 color: AppColors.text,
                 fontSize: 22,
@@ -57,7 +58,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                 ),
                 const SizedBox(width: AppSpacing.lg),
                 Text(
-                  'Đảm bảo ánh sáng tốt.',
+                  context.l10n.translate('ensure_good_lighting'),
                   style: AppTextStyles.body.copyWith(
                     color: AppColors.text,
                     fontWeight: FontWeight.w500,
@@ -77,7 +78,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                 const SizedBox(width: AppSpacing.lg),
                 Expanded(
                   child: Text(
-                    'Không đội mũ, đeo kính hoặc khẩu trang.',
+                    context.l10n.translate('no_hat_glasses_mask'),
                     style: AppTextStyles.body.copyWith(
                       color: AppColors.text,
                       fontWeight: FontWeight.w500,
@@ -98,7 +99,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                 ),
                 const SizedBox(width: AppSpacing.lg),
                 Text(
-                  'Giữ mặt ở giữa khung hình.',
+                  context.l10n.translate('keep_face_centered'),
                   style: AppTextStyles.body.copyWith(
                     color: AppColors.text,
                     fontWeight: FontWeight.w500,
@@ -119,7 +120,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
             context.pushNamed(AppRouter.captureChipCard,
                 extra: EkycType.selfie);
           },
-          text: 'Chụp ảnh',
+          text: context.l10n.translate('take_photo'),
           textStyle: AppTextStyles.button.copyWith(
             color: AppColors.white,
           ),

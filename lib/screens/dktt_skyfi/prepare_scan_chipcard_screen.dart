@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -50,13 +51,13 @@ class PrepareScanChipCardScreen extends HookConsumerWidget {
           children: [
             const SizedBox(height: AppSpacing.xxl),
             Text(
-              'Chuẩn bị quét thông tin CCCD',
+              context.l10n.translate('prepare_scan_citizen_id'),
               style: AppTextStyles.title
                   .copyWith(color: AppColors.text, fontSize: 22),
             ),
             const SizedBox(height: AppSpacing.xxl),
             Text(
-              'Xem video hướng dẫn',
+              context.l10n.translate('watch_tutorial_video'),
               style: AppTextStyles.title.copyWith(
                 color: AppColors.blue,
                 fontSize: 18,
@@ -75,7 +76,7 @@ class PrepareScanChipCardScreen extends HookConsumerWidget {
         ),
         child: BottomButton(
           onPressed: () {},
-          text: 'Tôi đã sẵn sàng',
+          text: context.l10n.translate('im_ready'),
           textStyle: AppTextStyles.button.copyWith(
             color: AppColors.text,
           ),

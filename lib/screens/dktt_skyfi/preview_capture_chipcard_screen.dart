@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/models/get_number_id_regis/get_number_id_regis.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/utilities/ekyc_helper.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/models/code_error_handle/code_error_handle.dart';
 import '../../core/widgets/snack_bar_app.dart';
@@ -100,10 +101,9 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
           final isCanRegister = await checkIsCanRegister(idnumber ?? '');
           if (!isCanRegister) {
             return SnackBarApp.showError(context,
-                message:
-                    'Giấy tờ này đã đăng ký thông tin vượt quá số lượng TB cho phép. Vui lòng kiểm tra lại!');
+                message: context.l10n.translate('document_limit_exceeded'));
           }
-          SnackBarApp.showSuccess(context, message: 'Thành công!');
+          SnackBarApp.showSuccess(context, message: context.l10n.translate('success_dktt'));
           // loading true = disable button next
           isCanNext.value = true;
           print('base64FrontImage : ${response.data}');
@@ -143,7 +143,7 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
                 message: EkycHelper.getMessageErrorOcr(response.data['code']));
           }
 
-          SnackBarApp.showSuccess(context, message: 'Thành công!');
+          SnackBarApp.showSuccess(context, message: context.l10n.translate('success_dktt'));
           isCanNext.value = true;
           ref
               .read(saveLogDkttNotifierProvider.notifier)

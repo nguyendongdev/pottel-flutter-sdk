@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/screens/video_call/RecordVideoScreen.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 
@@ -37,8 +38,8 @@ class StartVideoCallScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
         ),
         elevation: 0,
-        title: const Text(
-          'Hướng dẫn video call',
+        title: Text(
+          context.l10n.translate('video_call_guide'),
           style: AppTextStyles.title,
         ),
       ),
@@ -64,7 +65,7 @@ class StartVideoCallScreen extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.md),
             Text(
-              'Hướng dẫn thực hiện cuộc gọi Video',
+              context.l10n.translate('video_call_instructions'),
               style: AppTextStyles.title.copyWith(
                 fontSize: 16,
                 color: AppColors.black,
@@ -81,7 +82,7 @@ class StartVideoCallScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    'Thiết bị đang sử dụng có CAMERA ĐƯỢC CẤP QUYỀN',
+                    context.l10n.translate('camera_permission_granted'),
                     style: AppTextStyles.body.copyWith(
                       fontSize: 14,
                       color: AppColors.black,
@@ -101,7 +102,7 @@ class StartVideoCallScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    'Theo quy định của Bộ Thông tin truyền thông, để hoàn tất thủ tục đăng ký/cập nhật thông tin thuê bao, Bạn vui lòng thực hiện cuộc Video với tổng đài viên.',
+                    context.l10n.translate('video_call_regulation_info'),
                     style: AppTextStyles.body.copyWith(
                       fontSize: 14,
                       color: AppColors.black,
@@ -113,7 +114,7 @@ class StartVideoCallScreen extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.xxl),
             Text(
-              '*Lưu ý: cấp quyền truy cập CAMERA cho thiết bị',
+              context.l10n.translate('camera_permission_note'),
               style: AppTextStyles.body.copyWith(
                 fontSize: 14,
                 color: AppColors.red,
@@ -127,7 +128,7 @@ class StartVideoCallScreen extends StatelessWidget {
               children: [
                 OutlineButton(
                   height: 48,
-                  text: 'Về trang chủ',
+                  text: context.l10n.translate('go_to_homepage'),
                   textStyle: AppTextStyles.button.copyWith(
                     color: AppColors.primary,
                   ),
@@ -138,7 +139,7 @@ class StartVideoCallScreen extends StatelessWidget {
                 const SizedBox(height: AppSpacing.md),
                 GradientButton(
                   height: 48,
-                  text: 'Bắt đầu cuộc gọi Video',
+                  text: context.l10n.translate('start_video_call'),
                   onPressed: () async {
                     final result =
                         await context.push('/video-call-jitsi', extra: {
@@ -160,8 +161,9 @@ class StartVideoCallScreen extends StatelessWidget {
 
                           Common.showDialogConfirm(
                             context,
-                            'Thông báo',
-                            result['message'] ?? 'Không có teller nào rảnh',
+                            context.l10n.translate('notification_dktt'),
+                            result['message'] ??
+                                context.l10n.translate('no_available_teller'),
                             () {
                               // context.pop();
                               context.pushNamed(AppRouter.recordVideo, extra: {
@@ -173,8 +175,10 @@ class StartVideoCallScreen extends StatelessWidget {
                             () {
                               // context.pop();
                             },
-                            primaryButtonText: 'Quay Video',
-                            secondaryButtonText: 'Đóng',
+                            primaryButtonText:
+                                context.l10n.translate('record_video'),
+                            secondaryButtonText:
+                                context.l10n.translate('close_dktt'),
                           );
                           return;
                         }
@@ -183,21 +187,23 @@ class StartVideoCallScreen extends StatelessWidget {
                         if (context.mounted) {
                           SnackBarApp.showWarning(context,
                               message: result['message'] ??
-                                  'Đang kết nối với teller...');
+                                  context.l10n
+                                      .translate('connecting_to_teller'));
                         }
                       } else if (status == 'admin-stop-call') {
                         // Xử lý khi admin dừng cuộc gọi
                         if (context.mounted) {
                           SnackBarApp.showError(context,
-                              message:
-                                  result['message'] ?? 'Cuộc gọi đã được tắt');
+                              message: result['message'] ??
+                                  context.l10n
+                                      .translate('call_has_been_turned_off'));
                         }
                       } else if (status == 'client-end-call') {
                         // Xử lý khi client kết thúc cuộc gọi
                         if (context.mounted) {
                           SnackBarApp.showSuccess(context,
-                              message:
-                                  result['message'] ?? 'Cuộc gọi đã kết thúc');
+                              message: result['message'] ??
+                                  context.l10n.translate('call_has_ended'));
                         }
                       }
                     }

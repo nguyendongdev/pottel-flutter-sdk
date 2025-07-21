@@ -4,6 +4,7 @@ import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/gradient_button.dart';
+import '../../../l10n/localization_extension.dart';
 
 class ItemSendOtp extends StatelessWidget {
   const ItemSendOtp({super.key, required this.phone, required this.onPressed});
@@ -29,7 +30,7 @@ class ItemSendOtp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Số thuê bao',
+                    context.l10n.translate('subscriber_number'),
                     style: AppTextStyles.small.copyWith(
                       color: AppColors.black,
                     ),
@@ -48,7 +49,7 @@ class ItemSendOtp extends StatelessWidget {
               onPressed: () {
                 onPressed();
               },
-              text: 'Gửi OTP',
+              text: context.l10n.translate('send_otp_action'),
               textStyle: AppTextStyles.button.copyWith(
                 color: AppColors.white,
               ),

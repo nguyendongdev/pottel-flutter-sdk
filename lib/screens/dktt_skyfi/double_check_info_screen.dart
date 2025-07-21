@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/constants/colors.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/app_input.dart';
@@ -45,39 +46,39 @@ class DoubleCheckInfoScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Kiểm tra lại thông tin',
+                context.l10n.translate('check_info_again'),
                 style: AppTextStyles.title.copyWith(
                   color: AppColors.text,
                   fontSize: 22,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
-              InfoDisplay(title: 'Họ và tên', value: saveLog.fullName ?? ''),
+              InfoDisplay(title: context.l10n.translate('full_name_dktt'), value: saveLog.fullName ?? ''),
               const SizedBox(height: AppSpacing.sm),
-              InfoDisplay(title: 'Giới tính', value: saveLog.gender ?? ''),
+              InfoDisplay(title: context.l10n.translate('gender_dktt'), value: saveLog.gender ?? ''),
               const SizedBox(height: AppSpacing.sm),
               InfoDisplay(
-                  title: 'Số Căn cước công dân', value: saveLog.idNumber ?? ''),
+                  title: context.l10n.translate('citizen_id_number'), value: saveLog.idNumber ?? ''),
               const SizedBox(height: AppSpacing.sm),
               Row(
                 children: [
                   Expanded(
                     child: InfoDisplay(
-                        title: 'Ngày cấp', value: saveLog.issueDate ?? ''),
+                        title: context.l10n.translate('issue_date_dktt'), value: saveLog.issueDate ?? ''),
                   ),
                   Expanded(
                     child: InfoDisplay(
-                        title: 'Ngày hết hạn', value: saveLog.expireDate ?? ''),
+                        title: context.l10n.translate('expiry_date_dktt'), value: saveLog.expireDate ?? ''),
                   ),
                 ],
               ),
               const SizedBox(height: AppSpacing.sm),
-              InfoDisplay(title: 'Ngày sinh', value: saveLog.birthDay ?? ''),
+              InfoDisplay(title: context.l10n.translate('date_of_birth'), value: saveLog.birthDay ?? ''),
               const SizedBox(height: AppSpacing.sm),
-              InfoDisplay(title: 'Nơi cấp', value: saveLog.issuePlace ?? ''),
+              InfoDisplay(title: context.l10n.translate('place_of_issue_dktt'), value: saveLog.issuePlace ?? ''),
               const SizedBox(height: AppSpacing.sm),
               InfoDisplay(
-                  title: 'Nơi thường trú', value: saveLog.address ?? ''),
+                  title: context.l10n.translate('permanent_address'), value: saveLog.address ?? ''),
               const SizedBox(height: AppSpacing.sm),
             ],
           ),
@@ -93,12 +94,12 @@ class DoubleCheckInfoScreen extends HookConsumerWidget {
           onPressed: () {
             if (sod?.isNotEmpty ?? false) {
               SnackBarApp.showSuccess(context,
-                  message: 'Số đối chiếu đã được lưu');
+                  message: context.l10n.translate('reference_number_saved'));
               ref.read(saveLogDkttNotifierProvider.notifier).setSob(sod);
             }
             context.pushNamed(AppRouter.previewContact);
           },
-          text: 'Tiếp tục',
+          text: context.l10n.translate('continue_dktt'),
           textStyle: AppTextStyles.button.copyWith(
             color: AppColors.white,
           ),

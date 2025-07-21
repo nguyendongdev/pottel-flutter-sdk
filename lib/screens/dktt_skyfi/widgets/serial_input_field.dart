@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../l10n/localization_extension.dart';
 
 class SerialInputField extends StatelessWidget {
   const SerialInputField({
@@ -40,7 +41,7 @@ class SerialInputField extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Serial',
+                      context.l10n.translate('serial_label_widget'),
                       style: AppTextStyles.small.copyWith(
                         color: AppColors.textGrey,
                       ),
@@ -59,14 +60,14 @@ class SerialInputField extends StatelessWidget {
                   style: AppTextStyles.body.copyWith(
                     color: AppColors.textLight,
                   ),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
-                    hintText: 'Nhập serial SIM hoặc quét mã',
-                    hintStyle: TextStyle(
+                    hintText: context.l10n.translate('enter_serial_or_scan'),
+                    hintStyle: const TextStyle(
                       color: AppColors.textLight,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
