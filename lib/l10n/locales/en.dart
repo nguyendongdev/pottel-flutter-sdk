@@ -208,4 +208,12 @@ const Map<String, String> enStrings = {
   'police_department_residence_management': 'Police Department of Residence Registration Management and National Database on Population',
   'police_department_administrative_management': 'Police Department of Administrative Management for Social Order',
   'immigration_department': 'Immigration Department',
+  
+  // Account Info Screen
+  'account_info_title': 'Account Information',
+  'subscription_history': 'Subscription History',
+  'customer_support': 'Customer Support',
+  'feature_under_development': 'Feature is under development, please come back later!',
+  'login_required_message': 'You need to login to use this feature!',
+  'logout_confirmation': 'Are you sure you want to logout?',
 };

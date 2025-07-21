@@ -5,6 +5,7 @@ import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
 import 'package:skyfi_sdk/screens/account_info_skyfi/widgets/menu_item.dart';
 import 'package:skyfi_sdk/utilities/modal.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/widgets/PopupCenterCard.dart';
 import '../../core/widgets/Popup_notice.dart';
@@ -33,17 +34,17 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
 
     void popupMaintaining() {
       showPopupNotice(context,
-          title: 'Thông báo',
-          description: 'Tính năng đang phát triển, vui lòng quay lại sau!');
+          title: context.l10n.translate('notification'),
+          description: context.l10n.translate('feature_under_development'));
     }
 
     void checkLoginStatus(Function onNext) {
       if (!isLogin) {
         Modal.show(
-            title: 'Thông báo',
-            message: 'Bạn cần đăng nhập để sử dụng tính năng này!',
-            confirmText: 'Đăng nhập',
-            closeText: "Hủy",
+            title: context.l10n.translate('notification'),
+            message: context.l10n.translate('login_required_message'),
+            confirmText: context.l10n.translate('login'),
+            closeText: context.l10n.translate('cancel'),
             onConfirm: () {
               context.pushNamed(AppRouter.loginSkyFi);
             });
@@ -58,8 +59,8 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
         backgroundColor: AppColors.white,
         elevation: 0,
         centerTitle: false,
-        title: const Text(
-          'Cá nhân',
+        title: Text(
+          context.l10n.translate('personal'),
           style: AppTextStyles.heading,
         ),
         actions: const [
@@ -82,7 +83,7 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
               //   },
               // ),
               MenuItem(
-                title: 'Thông tin tài khoản',
+                title: context.l10n.translate('account_info_title'),
                 iconPath: 'assets/icons/info_circle.svg',
                 onTap: () {
                   checkLoginStatus(() {
@@ -91,7 +92,7 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                 },
               ),
               MenuItem(
-                title: 'Lịch sử thuê bao',
+                title: context.l10n.translate('subscription_history'),
                 iconPath: 'assets/icons/clock_fast_forward.svg',
                 onTap: () {
                   checkLoginStatus(() {
@@ -100,7 +101,7 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                 },
               ),
               MenuItem(
-                title: 'Kích hoạt SIM',
+                title: context.l10n.translate('activate_sim'),
                 iconPath: 'assets/icons/simcard.svg',
                 onTap: () {
                   context.pushNamed(AppRouter.infoRegis);
@@ -108,7 +109,7 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
               ),
 
               MenuItem(
-                title: 'Hỗ trợ khách hàng',
+                title: context.l10n.translate('customer_support'),
                 iconPath: 'assets/icons/headphones.svg',
                 onTap: () {
                   // TODO: Navigate to customer support
@@ -116,7 +117,7 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                 },
               ),
               MenuItem(
-                title: isLogin ? 'Đăng xuất' : 'Đăng nhập',
+                title: isLogin ? context.l10n.translate('logout') : context.l10n.translate('login'),
                 iconPath: 'assets/icons/log_out.svg',
                 onTap: () {
                   if (isLogin) {
@@ -131,10 +132,10 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                           context.goNamed(AppRouter.homeSkyFiNew),
                         },
                         onSecondaryButtonTap: () => Navigator.of(context).pop(),
-                        title: 'Thông báo',
-                        description: 'Bạn có chắc chắn muốn đăng xuất không?',
-                        primaryButtonText: 'Đăng xuất',
-                        secondaryButtonText: 'Hủy',
+                        title: context.l10n.translate('notification'),
+                        description: context.l10n.translate('logout_confirmation'),
+                        primaryButtonText: context.l10n.translate('logout'),
+                        secondaryButtonText: context.l10n.translate('cancel'),
                       ),
                     );
                   } else {

@@ -208,4 +208,12 @@ const Map<String, String> viStrings = {
   'police_department_residence_management': 'Cục Trưởng Cục Cảnh sát ĐKQL cư trú và DLQG về dân cư',
   'police_department_administrative_management': 'Cục Trưởng Cục Cảnh sát Quản lý hành chính về trật tự xã hội',
   'immigration_department': 'Cục quản lý xuất nhập cảnh',
+  
+  // Account Info Screen
+  'account_info_title': 'Thông tin tài khoản',
+  'subscription_history': 'Lịch sử thuê bao',
+  'customer_support': 'Hỗ trợ khách hàng',
+  'feature_under_development': 'Tính năng đang phát triển, vui lòng quay lại sau!',
+  'login_required_message': 'Bạn cần đăng nhập để sử dụng tính năng này!',
+  'logout_confirmation': 'Bạn có chắc chắn muốn đăng xuất không?',
 };
