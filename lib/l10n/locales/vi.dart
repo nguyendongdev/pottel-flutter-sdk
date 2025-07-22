@@ -545,7 +545,7 @@ const Map<String, String> viStrings = {
   'auto_fill_info_notice':
       'Các thông tin và chữ ký của bạn sẽ được tự đồng điền vào Phiếu xác nhận thông tin thuê bao dưới đây.',
   'sign_and_check_contract':
-      'Vui lòng ký tên của bạn tại phía dưới cùng của hợp đồng và kiểm tra lại thông tin hợp đồng',
+      'Vui lòng ký tên của bạn tại phía dưới cùng của hợp đồng và kiểm tra lại thông tin hợp đồng ',
   'here_link': 'tại đây',
   'please_sign_in_box': 'Vui lòng ký vào ô chữ ký',
   'please_read_and_agree': 'Vui lòng đọc và đồng ý với các điều kiện',

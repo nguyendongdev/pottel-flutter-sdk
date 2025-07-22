@@ -552,7 +552,7 @@ const Map<String, String> enStrings = {
   'auto_fill_info_notice':
       'Your information and signature will be automatically filled into the Subscriber Information Confirmation Form below.',
   'sign_and_check_contract':
-      'Please sign your name at the bottom of the contract and check the contract information',
+      'Please sign your name at the bottom of the contract and check the contract information ',
   'here_link': 'here',
   'please_sign_in_box': 'Please sign in the signature box',
   'please_read_and_agree': 'Please read and agree to the terms and conditions',

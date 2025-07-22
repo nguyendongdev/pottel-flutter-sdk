@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/screens/payment_skyfi/provider/address_provider.dart';
 import 'package:skyfi_sdk/screens/payment_skyfi/provider/payment_order_provider.dart';
@@ -64,7 +65,8 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
             ref.read(addressSelectionProvider.notifier).reset();
             // reset shipping amount
             ref.read(paymentOrderProvider.notifier).changeShippingAmount(0);
-            Navigator.of(context).pop();
+            ref.read(paymentOrderProvider.notifier).changeDiscountAmount(0);
+            context.pop();
           },
         ),
       ),
@@ -93,8 +95,8 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
                   totalAmountCart: totalAmountCart ?? 0,
                   fee: totalFee.value,
                   countItem: items.length,
-                 discountAmount:
-                        ref.watch(paymentOrderProvider).discountAmount ?? 0,
+                  discountAmount:
+                      ref.watch(paymentOrderProvider).discountAmount ?? 0,
                   shippingAmount:
                       ref.watch(paymentOrderProvider).shippingAmount ?? 0,
                 ),

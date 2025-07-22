@@ -89,7 +89,14 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
       return null;
     }, []);
 
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          // ref.read(selectedPackageProvider.notifier).changeSelectedPackage('');
+        }
+      },
+      child: Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         surfaceTintColor: AppColors.white,
@@ -171,7 +178,7 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 
   List<Widget> _buildDataPackages(

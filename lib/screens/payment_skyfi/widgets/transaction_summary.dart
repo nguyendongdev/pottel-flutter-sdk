@@ -51,7 +51,7 @@ class TransactionSummary extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           _buildRow(
             label: context.l10n.translate('discount_label'),
-            value: discountAmount.toString(),
+            value: Common.formatCurrency(discountAmount.toString()),
           ),
           const SizedBox(height: AppSpacing.sm),
           _buildRow(

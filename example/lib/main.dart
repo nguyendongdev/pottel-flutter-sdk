@@ -39,11 +39,14 @@ class _MyAppState extends State<MyApp> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => SkyfiSdk(
-                          phone: '+84999999999',
-                          env: SkyfiEnv.dev,
-                          initialLocation: SkyfiRoute.home.path,
-                          locale: AppLocale.vi,
+                        builder: (_) => PopScope(
+                          canPop: false,
+                          child: SkyfiSdk(
+                            phone: '+84999999999',
+                            env: SkyfiEnv.dev,
+                            initialLocation: SkyfiRoute.home.path,
+                            locale: AppLocale.vi,
+                          ),
                         ),
                       ),
                     );
@@ -56,11 +59,14 @@ class _MyAppState extends State<MyApp> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => SkyfiSdk.toScreen(
-                          initialLocation: SkyfiRoute.infoRegis.path,
-                          locale: AppLocale.vi,
-                          phone: '+84999999999',
-                          env: SkyfiEnv.dev, 
+                        builder: (_) => PopScope(
+                          canPop: false,
+                          child: SkyfiSdk.toScreen(
+                            initialLocation: SkyfiRoute.infoRegis.path,
+                            locale: AppLocale.vi,
+                            phone: '+84999999999',
+                            env: SkyfiEnv.dev,
+                          ),
                         ),
                       ),
                     );
@@ -73,10 +79,13 @@ class _MyAppState extends State<MyApp> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => SkyfiSdk.toScreen(
-                          initialLocation: SkyfiRoute.topupSkyFi.path,
-                          phone: '+84999999999',
-                          locale: AppLocale.vi,
+                        builder: (_) => PopScope(
+                          canPop: false,
+                          child: SkyfiSdk.toScreen(
+                            initialLocation: SkyfiRoute.topupSkyFi.path,
+                            phone: '+84999999999',
+                            locale: AppLocale.vi,
+                          ),
                         ),
                       ),
                     );
@@ -87,15 +96,17 @@ class _MyAppState extends State<MyApp> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => SkyfiSdk.toScreen(
-                          initialLocation: SkyfiRoute.detailDataUsage.path,
-                          phone: '+84999999999',
-                          locale: AppLocale.vi,
-                        ),
-                      ),
-                    );
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PopScope(
+                            canPop: false,
+                            child: SkyfiSdk.toScreen(
+                              initialLocation: SkyfiRoute.detailDataUsage.path,
+                              phone: '+84999999999',
+                              locale: AppLocale.vi,
+                            ),
+                          ),
+                        ));
                   },
                   child: const Text('Mở màn thông tin gói cước'),
                 ),
