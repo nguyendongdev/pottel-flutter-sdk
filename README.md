@@ -191,6 +191,31 @@ flutter:
 import 'package:skyfi_sdk/skyfi_sdk.dart';
 ```
 
+### Sử dụng PopScope để chặn hành động back/swipe
+
+Để ngăn người dùng thoát khỏi SDK bằng cách vuốt từ trái sang phải hoặc nhấn nút back, hãy sử dụng `PopScope` với `canPop: false`:
+
+```dart
+PopScope(
+  canPop: false, // Chặn hành động back/swipe
+  child: SkyfiSdk(
+    phone: '0707040618',
+    env: SkyfiEnv.dev,
+    locale: AppLocale.vi,
+  ),
+)
+```
+
+**Lưu ý quan trọng:**
+- `PopScope` chỉ hoạt động trên **Flutter 3.12+**
+- Đối với Flutter cũ hơn, sử dụng `WillPopScope` thay thế:
+  ```dart
+  WillPopScope(
+    onWillPop: () async => false, // Chặn hành động back
+    child: SkyfiSdk(...),
+  )
+  ```
+
 ### 2. Khởi tạo SDK đơn giản
 
 ```dart
@@ -215,10 +240,13 @@ class MyApp extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => SkyfiSdk(
-                    phone: '0707040618', // Số điện thoại cần thiết
-                    env: SkyfiEnv.dev, // Môi trường: dev hoặc prod
-                    locale: AppLocale.vi, // Ngôn ngữ: vi hoặc en
+                  builder: (_) => PopScope(
+                    canPop: false, // Chặn hành động back/swipe
+                    child: SkyfiSdk(
+                      phone: '0707040618', // Số điện thoại cần thiết
+                      env: SkyfiEnv.dev, // Môi trường: dev hoặc prod
+                      locale: AppLocale.vi, // Ngôn ngữ: vi hoặc en
+                    ),
                   ),
                 ),
               );
@@ -287,11 +315,14 @@ SkyfiSdk(
 Navigator.push(
   context,
   MaterialPageRoute(
-    builder: (_) => SkyfiSdk.toScreen(
-      initialLocation: SkyfiRoute.infoRegis.path,
-      phone: '0707991197', // Số điện thoại cần thiết
-      env: SkyfiEnv.dev, // Môi trường phát triển
-      locale: AppLocale.vi, // Tiếng Việt
+    builder: (_) => PopScope(
+      canPop: false, // Chặn hành động back/swipe
+      child: SkyfiSdk.toScreen(
+        initialLocation: SkyfiRoute.infoRegis.path,
+        phone: '0707991197', // Số điện thoại cần thiết
+        env: SkyfiEnv.dev, // Môi trường phát triển
+        locale: AppLocale.vi, // Tiếng Việt
+      ),
     ),
   ),
 );
@@ -300,11 +331,14 @@ Navigator.push(
 Navigator.push(
   context,
   MaterialPageRoute(
-    builder: (_) => SkyfiSdk.toScreen(
-      initialLocation: SkyfiRoute.topupSkyFi.path,
-      phone: '0807991197', // Số điện thoại cần thiết
-      env: SkyfiEnv.prod, // Môi trường sản xuất
-      locale: AppLocale.en, // English
+    builder: (_) => PopScope(
+      canPop: false, // Chặn hành động back/swipe
+      child: SkyfiSdk.toScreen(
+        initialLocation: SkyfiRoute.topupSkyFi.path,
+        phone: '0807991197', // Số điện thoại cần thiết
+        env: SkyfiEnv.prod, // Môi trường sản xuất
+        locale: AppLocale.en, // English
+      ),
     ),
   ),
 );
@@ -313,11 +347,14 @@ Navigator.push(
 Navigator.push(
   context,
   MaterialPageRoute(
-    builder: (_) => SkyfiSdk.toScreen(
-      initialLocation: SkyfiRoute.home.path,
-      phone: '+84707654160',
-      // env: SkyfiEnv.dev (mặc định)
-      // locale: AppLocale.vi (mặc định)
+    builder: (_) => PopScope(
+      canPop: false, // Chặn hành động back/swipe
+      child: SkyfiSdk.toScreen(
+        initialLocation: SkyfiRoute.home.path,
+        phone: '+84707654160',
+        // env: SkyfiEnv.dev (mặc định)
+        // locale: AppLocale.vi (mặc định)
+      ),
     ),
   ),
 );
@@ -426,9 +463,12 @@ class _SkyfiIntegrationState extends State<SkyfiIntegration> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => SkyfiSdk.toScreen(
-          initialLocation: SkyfiRoute.topupSkyFi.path,
-          phone: '0707040618', // Số điện thoại cần thiết
+        builder: (_) => PopScope(
+          canPop: false, // Chặn hành động back/swipe
+          child: SkyfiSdk.toScreen(
+            initialLocation: SkyfiRoute.topupSkyFi.path,
+            phone: '0707040618', // Số điện thoại cần thiết
+          ),
         ),
       ),
     ).then((result) {
@@ -662,9 +702,12 @@ class HomeScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => SkyfiSdk.toScreen(
-          initialLocation: initialLocation,
-          phone: '0707040618', // Số điện thoại cần thiết
+        builder: (_) => PopScope(
+          canPop: false, // Chặn hành động back/swipe
+          child: SkyfiSdk.toScreen(
+            initialLocation: initialLocation,
+            phone: '0707040618', // Số điện thoại cần thiết
+          ),
         ),
       ),
     );
