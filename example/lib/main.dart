@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
                       context,
                       MaterialPageRoute(
                         builder: (_) => SkyfiSdk(
-                          phone: '+84707654160',
+                          phone: '+84707654169',
                           env: SkyfiEnv.dev,
                           initialLocation: SkyfiRoute.home.path,
                           locale: AppLocale.en,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../core/constants/colors.dart';
 import '../core/constants/text_styles.dart';
@@ -142,18 +143,18 @@ class Common {
         .trim();
   }
 
-  static String getGreetingMessage() {
+  static String getGreetingMessage(BuildContext context) {
     final now = DateTime.now();
     final hour = now.hour;
 
     if (hour >= 0 && hour < 12) {
-      return 'Chào buổi sáng';
+      return context.l10n.translate('good_morning');
     } else if (hour >= 12 && hour < 14) {
-      return 'Chào buổi trưa';
+      return context.l10n.translate('good_afternoon');
     } else if (hour >= 14 && hour < 18) {
-      return 'Chào buổi chiều';
+      return context.l10n.translate('good_evening');
     } else {
-      return 'Chào buổi tối';
+      return context.l10n.translate('good_night');
     }
   }
 
@@ -249,7 +250,7 @@ class Common {
       builder: (context) => PopupNotice(
         onButtonTap: () {
           onConfirm?.call();
-           Navigator.of(context).pop();
+          Navigator.of(context).pop();
         },
         title: title,
         description: description,

@@ -825,10 +825,12 @@ const Map<String, String> viStrings = {
   'video_step_4_complete': ' để hoàn tất ',
   'register_update_info': 'Đăng ký/cập nhật TTTB',
   'connecting': 'Đang kết nối...',
-  'registration_success': 'SkyFi đã tiếp nhận hồ sơ đăng ký/ cập nhật TTTB thành công! Cảm ơn Bạn vì đã tin tưởng và lựa chọn dịch vụ của SkyFi!',
+  'registration_success':
+      'SkyFi đã tiếp nhận hồ sơ đăng ký/ cập nhật TTTB thành công! Cảm ơn Bạn vì đã tin tưởng và lựa chọn dịch vụ của SkyFi!',
   'call_ended_message': 'Cuộc gọi đã kết thúc',
   'video_call_ended': 'Cuộc gọi đã kết thúc',
-  'no_free_teller_message': 'Rất tiếc, không có tổng đài viên nào đang rảnh, Bạn vui lòng bấm vào \'Quay video\' để được hoản tất quá trình Đăng ký thông tin',
+  'no_free_teller_message':
+      'Rất tiếc, không có tổng đài viên nào đang rảnh, Bạn vui lòng bấm vào \'Quay video\' để được hoản tất quá trình Đăng ký thông tin',
 
   // WebView Screen
   'webview_default_title': 'WebView',
@@ -843,9 +845,12 @@ const Map<String, String> viStrings = {
   // Modal Components
   'close_button': 'Đóng',
   'ok_button': 'OK',
-  'modal_required_service_condition': 'Đây là điều kiện bắt buộc để sử dụng dịch vụ của SkyFi.',
-  'please_agree_terms_conditions': 'Vui lòng đồng ý với các điều khoản và điều kiện.',
-  'agree_terms_conditions_skyfi': 'Tôi đồng ý với các điều khoản và điều kiện của SkyFi',
+  'modal_required_service_condition':
+      'Đây là điều kiện bắt buộc để sử dụng dịch vụ của SkyFi.',
+  'please_agree_terms_conditions':
+      'Vui lòng đồng ý với các điều khoản và điều kiện.',
+  'agree_terms_conditions_skyfi':
+      'Tôi đồng ý với các điều khoản và điều kiện của SkyFi',
   'agree_button': 'Đồng ý',
   'terms_conditions_title': 'Điều khoản & Điều kiện',
 };

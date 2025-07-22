@@ -133,6 +133,18 @@ class TabSimData extends HookConsumerWidget {
                                         children: [
                                           Row(
                                             children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context,
+                                                          rootNavigator: true)
+                                                      .pop();
+                                                },
+                                                child: const Icon(
+                                                  Icons.arrow_back_ios_new,
+                                                  color: AppColors.white,
+                                                  size: 25,
+                                                ),
+                                              ),
                                               Icon(
                                                 Common.getIconSunOnline(),
                                                 color: AppColors.white,
@@ -141,7 +153,8 @@ class TabSimData extends HookConsumerWidget {
                                               const SizedBox(
                                                   width: AppSpacing.xs),
                                               Text(
-                                                Common.getGreetingMessage(),
+                                                Common.getGreetingMessage(
+                                                    context),
                                                 style: AppTextStyles.button
                                                     .copyWith(
                                                   color: AppColors.white,
@@ -205,6 +218,18 @@ class TabSimData extends HookConsumerWidget {
                                           const SizedBox(height: AppSpacing.sm),
                                           Row(
                                             children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context,
+                                                          rootNavigator: true)
+                                                      .pop();
+                                                },
+                                                child: const Icon(
+                                                  Icons.arrow_back_ios_new,
+                                                  color: AppColors.white,
+                                                  size: 25,
+                                                ),
+                                              ),
                                               // Icon sun online
                                               Icon(
                                                 Common.getIconSunOnline(),
@@ -219,7 +244,7 @@ class TabSimData extends HookConsumerWidget {
                                                     children: [
                                                       TextSpan(
                                                         text:
-                                                            '${Common.getGreetingMessage()},',
+                                                            '${Common.getGreetingMessage(context)},',
                                                         style: AppTextStyles
                                                             .body
                                                             .copyWith(
@@ -249,7 +274,8 @@ class TabSimData extends HookConsumerWidget {
                                                 ),
                                               ),
 
-                                              AppCart(color: AppColors.white),
+                                              const AppCart(
+                                                  color: AppColors.white),
                                             ],
                                           ),
                                           Text(
@@ -305,14 +331,16 @@ class TabSimData extends HookConsumerWidget {
 
                                           const SizedBox(height: AppSpacing.md),
                                           Text(
-                                            context.l10n.translate('do_you_have_skyfi_sim'),
+                                            context.l10n.translate(
+                                                'do_you_have_skyfi_sim'),
                                             style:
                                                 AppTextStyles.heading.copyWith(
                                               color: AppColors.text,
                                             ),
                                           ),
                                           Text(
-                                            context.l10n.translate('choose_buy_sim_description'),
+                                            context.l10n.translate(
+                                                'choose_buy_sim_description'),
                                             style: AppTextStyles.body.copyWith(
                                               color: AppColors.text,
                                             ),
@@ -328,7 +356,8 @@ class TabSimData extends HookConsumerWidget {
                                                     context.pushNamed(
                                                         AppRouter.infoRegis);
                                                   },
-                                                  text: context.l10n.translate('activate_sim'),
+                                                  text: context.l10n.translate(
+                                                      'activate_sim'),
                                                   textStyle: AppTextStyles
                                                       .button
                                                       .copyWith(
@@ -345,7 +374,8 @@ class TabSimData extends HookConsumerWidget {
                                                     context.pushNamed(
                                                         AppRouter.simDataSkyFi);
                                                   },
-                                                  text: context.l10n.translate('buy_sim'),
+                                                  text: context.l10n
+                                                      .translate('buy_sim'),
                                                 ),
                                               ),
                                             ],
@@ -386,7 +416,8 @@ class TabSimData extends HookConsumerWidget {
                                       child: FeatureCard(
                                         // icon: 'assets/icons/feat_support.svg',
                                         icon: 'assets/icons/nav_sim_data.svg',
-                                        label: context.l10n.translate('buy_sim'),
+                                        label:
+                                            context.l10n.translate('buy_sim'),
                                       ),
                                     ),
                                     GestureDetector(
@@ -396,7 +427,8 @@ class TabSimData extends HookConsumerWidget {
                                       },
                                       child: FeatureCard(
                                         icon: 'assets/icons/feat_history.svg',
-                                        label: context.l10n.translate('packages'),
+                                        label:
+                                            context.l10n.translate('packages'),
                                       ),
                                     ),
                                     GestureDetector(
@@ -421,7 +453,8 @@ class TabSimData extends HookConsumerWidget {
                                       child: FeatureCard(
                                         // icon: 'assets/icons/feat_gift.svg',
                                         icon: 'assets/icons/nav_travel.svg',
-                                        label: context.l10n.translate('esim_travel'),
+                                        label: context.l10n
+                                            .translate('esim_travel'),
                                       ),
                                     ),
                                   ],
