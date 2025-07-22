@@ -46,6 +46,8 @@ mixin _$Package {
   @JsonKey(name: 'sale_price')
   double get salePrice => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_default')
+  int? get isDefault => throw _privateConstructorUsedError;
 
   /// Serializes this Package to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -79,7 +81,8 @@ abstract class $PackageCopyWith<$Res> {
       double? discountPercent,
       int index,
       @JsonKey(name: 'sale_price') double salePrice,
-      int id});
+      int id,
+      @JsonKey(name: 'is_default') int? isDefault});
 }
 
 /// @nodoc
@@ -114,6 +117,7 @@ class _$PackageCopyWithImpl<$Res, $Val extends Package>
     Object? index = null,
     Object? salePrice = null,
     Object? id = null,
+    Object? isDefault = freezed,
   }) {
     return _then(_value.copyWith(
       code: null == code
@@ -184,6 +188,10 @@ class _$PackageCopyWithImpl<$Res, $Val extends Package>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      isDefault: freezed == isDefault
+          ? _value.isDefault
+          : isDefault // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -213,7 +221,8 @@ abstract class _$$PackageImplCopyWith<$Res> implements $PackageCopyWith<$Res> {
       double? discountPercent,
       int index,
       @JsonKey(name: 'sale_price') double salePrice,
-      int id});
+      int id,
+      @JsonKey(name: 'is_default') int? isDefault});
 }
 
 /// @nodoc
@@ -246,6 +255,7 @@ class __$$PackageImplCopyWithImpl<$Res>
     Object? index = null,
     Object? salePrice = null,
     Object? id = null,
+    Object? isDefault = freezed,
   }) {
     return _then(_$PackageImpl(
       code: null == code
@@ -316,6 +326,10 @@ class __$$PackageImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      isDefault: freezed == isDefault
+          ? _value.isDefault
+          : isDefault // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -340,7 +354,8 @@ class _$PackageImpl implements _Package {
       @JsonKey(name: 'discount_percent', defaultValue: 0) this.discountPercent,
       required this.index,
       @JsonKey(name: 'sale_price') required this.salePrice,
-      required this.id})
+      required this.id,
+      @JsonKey(name: 'is_default') this.isDefault})
       : _description = description;
 
   factory _$PackageImpl.fromJson(Map<String, dynamic> json) =>
@@ -395,10 +410,13 @@ class _$PackageImpl implements _Package {
   final double salePrice;
   @override
   final int id;
+  @override
+  @JsonKey(name: 'is_default')
+  final int? isDefault;
 
   @override
   String toString() {
-    return 'Package(code: $code, name: $name, description: $description, cycle: $cycle, isMain: $isMain, price: $price, brief: $brief, validityDay: $validityDay, dataPerDay: $dataPerDay, dataPerMonth: $dataPerMonth, isOutstanding: $isOutstanding, freeCallMinute: $freeCallMinute, freeSms: $freeSms, discountPercent: $discountPercent, index: $index, salePrice: $salePrice, id: $id)';
+    return 'Package(code: $code, name: $name, description: $description, cycle: $cycle, isMain: $isMain, price: $price, brief: $brief, validityDay: $validityDay, dataPerDay: $dataPerDay, dataPerMonth: $dataPerMonth, isOutstanding: $isOutstanding, freeCallMinute: $freeCallMinute, freeSms: $freeSms, discountPercent: $discountPercent, index: $index, salePrice: $salePrice, id: $id, isDefault: $isDefault)';
   }
 
   @override
@@ -430,7 +448,9 @@ class _$PackageImpl implements _Package {
             (identical(other.index, index) || other.index == index) &&
             (identical(other.salePrice, salePrice) ||
                 other.salePrice == salePrice) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.isDefault, isDefault) ||
+                other.isDefault == isDefault));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -453,7 +473,8 @@ class _$PackageImpl implements _Package {
       discountPercent,
       index,
       salePrice,
-      id);
+      id,
+      isDefault);
 
   /// Create a copy of Package
   /// with the given fields replaced by the non-null parameter values.
@@ -491,7 +512,8 @@ abstract class _Package implements Package {
       final double? discountPercent,
       required final int index,
       @JsonKey(name: 'sale_price') required final double salePrice,
-      required final int id}) = _$PackageImpl;
+      required final int id,
+      @JsonKey(name: 'is_default') final int? isDefault}) = _$PackageImpl;
 
   factory _Package.fromJson(Map<String, dynamic> json) = _$PackageImpl.fromJson;
 
@@ -538,6 +560,9 @@ abstract class _Package implements Package {
   double get salePrice;
   @override
   int get id;
+  @override
+  @JsonKey(name: 'is_default')
+  int? get isDefault;
 
   /// Create a copy of Package
   /// with the given fields replaced by the non-null parameter values.
