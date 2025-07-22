@@ -152,7 +152,7 @@ class BottomActionBar extends HookConsumerWidget {
           return;
         }
         if (state.deliveryAddress == null || state.deliveryAddress!.isEmpty) {
-          showToast(context.l10n.translate('please_enter_delivery_address'));
+          showToast(context.l10n.translate('delivery_address_required'));
           return;
         }
         // termsAccepted -> required

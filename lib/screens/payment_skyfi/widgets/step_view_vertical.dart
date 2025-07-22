@@ -25,7 +25,7 @@ class StepViewVertical extends HookConsumerWidget {
     String getTitle(BuildContext context) {
       switch (currentStep) {
         case 0:
-          return context.l10n.translate('select_province_city');
+          return context.l10n.translate('select_province');
         case 1:
           return context.l10n.translate('select_district');
         case 2:
