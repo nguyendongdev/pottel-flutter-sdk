@@ -67,6 +67,63 @@ Thêm các permissions vào `ios/Runner/Info.plist`:
 <string>Ứng dụng cần quyền truy cập thư viện ảnh</string>
 ```
 
+#### Cấu hình NFC cho iOS
+
+Để sử dụng tính năng đọc chip CCCD trên iOS, cần thêm cấu hình NFC:
+
+1. **Thêm NFC capability vào `ios/Runner/Runner.entitlements`:**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.nfc.readersession.formats</key>
+    <array>
+        <string>NDEF</string>
+        <string>TAG</string>
+    </array>
+    <key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+    <array>
+        <string>A0000002471001</string>
+        <string>A0000002472001</string>
+        <string>00000000000000</string>
+    </array>
+</dict>
+</plist>
+```
+
+**Giải thích cấu hình:**
+
+- `com.apple.developer.nfc.readersession.formats`: Định nghĩa các định dạng NFC được hỗ trợ
+  - `NDEF`: Near Field Communication Data Exchange Format
+  - `TAG`: Các tag NFC khác
+  
+- `com.apple.developer.nfc.readersession.iso7816.select-identifiers`: Danh sách Application Identifier (AID) cho thẻ ISO7816
+  - `A0000002471001`: AID cho ứng dụng CCCD Việt Nam
+  - `A0000002472001`: AID cho ứng dụng phụ CCCD
+  - `00000000000000`: AID mặc định cho thẻ chip khác
+
+2. **Thêm NFC usage description vào `ios/Runner/Info.plist`:**
+
+```xml
+<key>NFCReaderUsageDescription</key>
+<string>Ứng dụng cần quyền truy cập NFC để đọc thông tin chip CCCD</string>
+```
+
+3. **Cấu hình Xcode project:**
+   - Mở file `ios/Runner.xcworkspace` trong Xcode
+   - Chọn target Runner
+   - Vào tab "Signing & Capabilities"
+   - Thêm capability "Near Field Communication Tag Reading"
+   - Đảm bảo App ID đã được cấu hình NFC capability trên Apple Developer Portal
+
+**Lưu ý:** Tính năng NFC chỉ hoạt động trên:
+- iPhone 7 trở lên
+- iOS 11.0 trở lên  
+- Thiết bị thật (không hoạt động trên simulator)
+- App được ký với certificate hợp lệ
+
 ### 5. Cấu hình môi trường (Tùy chọn)
 
 SDK sử dụng cấu hình mặc định, bạn có thể tùy chỉnh bằng cách tạo file `.env` trong thư mục root của project:
@@ -122,6 +179,8 @@ class MyApp extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (_) => SkyfiSdk(
                     phone: '0707040618', // Số điện thoại cần thiết
+                    env: SkyfiEnv.dev, // Môi trường: dev hoặc prod
+                    locale: AppLocale.vi, // Ngôn ngữ: vi hoặc en
                   ),
                 ),
               );
@@ -135,27 +194,92 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+#### Các tham số khởi tạo SDK
+
+| Tham số | Kiểu dữ liệu | Mặc định | Mô tả |
+|---------|-------------|----------|-------|
+| `phone` | `String?` | `null` | Số điện thoại để tự động đăng nhập |
+| `initialLocation` | `String?` | `null` | Màn hình khởi tạo ban đầu |
+| `env` | `SkyfiEnv` | `SkyfiEnv.dev` | Môi trường triển khai |
+| `locale` | `AppLocale` | `AppLocale.vi` | Ngôn ngữ hiển thị |
+
+#### Môi trường triển khai (SkyfiEnv)
+
+- **`SkyfiEnv.dev`**: Môi trường phát triển
+  - API: `https://bss-api.skyfi.network/api`
+  - EKYC: `https://ocr-api-uat.ekyc.solutions/api`
+  - Socket: `https://socket.skyfi.network/`
+  - Jitsi: `https://meet.skyfi.network/`
+
+- **`SkyfiEnv.prod`**: Môi trường sản xuất
+  - API: `https://bss-api.skyfi.pro/api`
+  - EKYC: `https://ocr-api.ekyc.solutions/api`
+  - Socket: `https://socket.skyfi.pro/`
+  - Jitsi: `https://meet.skyfi.pro/`
+
+#### Ngôn ngữ hiển thị (AppLocale)
+
+- **`AppLocale.vi`**: Tiếng Việt 🇻🇳
+- **`AppLocale.en`**: English 🇺🇸
+
+#### Ví dụ khởi tạo với các tùy chọn
+
+```dart
+// Khởi tạo với môi trường sản xuất và tiếng Anh
+SkyfiSdk(
+  phone: '+84707654160',
+  env: SkyfiEnv.prod,
+  locale: AppLocale.en,
+  initialLocation: SkyfiRoute.home.path,
+)
+
+// Khởi tạo với môi trường phát triển và tiếng Việt
+SkyfiSdk(
+  phone: '0707040618',
+  env: SkyfiEnv.dev,
+  locale: AppLocale.vi,
+  initialLocation: SkyfiRoute.topupSkyFi.path,
+)
+```
+
 ### 3. Mở màn hình cụ thể
 
 ```dart
-// Mở màn hình đăng ký thông tin
+// Mở màn hình đăng ký thông tin với môi trường dev và tiếng Việt
 Navigator.push(
   context,
   MaterialPageRoute(
     builder: (_) => SkyfiSdk.toScreen(
       initialLocation: SkyfiRoute.infoRegis.path,
       phone: '0707991197', // Số điện thoại cần thiết
+      env: SkyfiEnv.dev, // Môi trường phát triển
+      locale: AppLocale.vi, // Tiếng Việt
     ),
   ),
 );
 
-// Mở màn hình nạp tiền
+// Mở màn hình nạp tiền với môi trường prod và tiếng Anh
 Navigator.push(
   context,
   MaterialPageRoute(
     builder: (_) => SkyfiSdk.toScreen(
       initialLocation: SkyfiRoute.topupSkyFi.path,
       phone: '0807991197', // Số điện thoại cần thiết
+      env: SkyfiEnv.prod, // Môi trường sản xuất
+      locale: AppLocale.en, // English
+    ),
+  ),
+);
+
+// Mở màn hình trang chủ với cấu hình mặc định
+Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (_) => SkyfiSdk.toScreen(
+      initialLocation: SkyfiRoute.home.path,
+      phone: '+84707654160',
+      // env: SkyfiEnv.dev (mặc định)
+      // locale: AppLocale.vi (mặc định)
     ),
   ),
 );
