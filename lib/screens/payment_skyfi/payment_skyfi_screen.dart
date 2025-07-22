@@ -93,7 +93,8 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
                   totalAmountCart: totalAmountCart ?? 0,
                   fee: totalFee.value,
                   countItem: items.length,
-                  discountAmount: discountAmount.value,
+                 discountAmount:
+                        ref.watch(paymentOrderProvider).discountAmount ?? 0,
                   shippingAmount:
                       ref.watch(paymentOrderProvider).shippingAmount ?? 0,
                 ),
