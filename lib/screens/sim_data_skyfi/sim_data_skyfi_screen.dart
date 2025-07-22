@@ -360,7 +360,7 @@ class _SimTypeSection extends ConsumerWidget {
             BaseTooltip(
               message: context.l10n.translate('price_includes_note'),
               triggerMode: TooltipTriggerMode.tap,
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.only(left: 4.0),
                 child: Icon(Icons.info, color: AppColors.textLight),
               ),
@@ -521,7 +521,7 @@ class _DataPackage extends StatelessWidget {
                       GestureDetector(
                         onTap: onTapDetail,
                         child: Text(
-                          context.l10n.translate('detail'),
+                          context.l10n.translate('details'),
                           style: AppTextStyles.label.copyWith(
                             color: AppColors.blue,
                             decoration: TextDecoration.underline,

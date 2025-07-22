@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +7,7 @@ import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/screens/cart_skyfi/provider/cart_provider.dart';
+import 'package:skyfi_sdk/screens/esim_travel_skyfi/compatible_devices_screen.dart';
 import 'package:skyfi_sdk/screens/esim_travel_skyfi/widgets/modalContris.dart';
 import 'package:skyfi_sdk/screens/payment_skyfi/provider/payment_order_provider.dart';
 import 'package:skyfi_sdk/screens/sim_data_skyfi/models/create_order/item.dart';
@@ -522,12 +524,36 @@ class DetailEsimContent extends HookConsumerWidget {
             ],
           ),
           const SizedBox(height: 4),
-          Text(
-            context.l10n.translate('esim_device_support_note'),
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: neutral0,
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text:
+                      '${context.l10n.translate('esim_device_support_note').split('. ')[0]}. ',
+                  style: AppTextStyles.label.copyWith(
+                    color: AppColors.text,
+                  ),
+                ),
+                TextSpan(
+                  text: context.l10n
+                      .translate('esim_device_support_note')
+                      .split('. ')[1],
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: AppColors.white,
+                        builder: (context) => const CompatibleDevicesScreen(),
+                      );
+                    },
+                  style: AppTextStyles.label.copyWith(
+                    color: AppColors.blue,
+                    decoration: TextDecoration.underline,
+                    decorationColor: AppColors.blue,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
