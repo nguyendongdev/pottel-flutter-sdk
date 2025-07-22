@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skyfi_sdk/l10n/app_localization.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
-
-import '../../../l10n/localization_extension.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -16,10 +15,12 @@ class ModalInputPhone extends HookConsumerWidget {
     super.key,
     required this.onPressedContinue,
     this.phone = "",
+    required this.l10n,
   });
 
   final Function(String) onPressedContinue;
   final String phone;
+  final AppLocalization l10n;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,16 +35,17 @@ class ModalInputPhone extends HookConsumerWidget {
       padding: const EdgeInsets.all(AppSpacing.xl),
       child: Column(
         children: [
-          Text(context.l10n.translate('notification'),
+          Text(l10n.translate('notification'),
               style: AppTextStyles.title.copyWith(fontSize: AppSpacing.xl)),
           const SizedBox(height: AppSpacing.sm),
-          Text(context.l10n.translate('phone_register_message'),
+          Text(l10n.translate('phone_register_message'),
               style: AppTextStyles.label),
           const SizedBox(height: AppSpacing.sm),
           // TEXT LEFT
           Row(
             children: [
-              Text("${context.l10n.translate('phone_number')} ", style: AppTextStyles.title),
+              Text("${l10n.translate('phone_number')} ",
+                  style: AppTextStyles.title),
               Text("*",
                   style: AppTextStyles.title.copyWith(color: AppColors.red)),
             ],
@@ -59,7 +61,7 @@ class ModalInputPhone extends HookConsumerWidget {
                   color: AppColors.border,
                 ),
               ),
-              hintText: context.l10n.translate('enter_phone_number'),
+              hintText: l10n.translate('enter_phone_number'),
             ),
             keyboardType: TextInputType.phone,
           ),
@@ -72,7 +74,7 @@ class ModalInputPhone extends HookConsumerWidget {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  text: context.l10n.translate('cancel'),
+                  text: l10n.translate('cancel'),
                   textStyle: AppTextStyles.button.copyWith(
                     color: AppColors.primary,
                   ),
@@ -84,7 +86,8 @@ class ModalInputPhone extends HookConsumerWidget {
                   height: 48,
                   onPressed: () {
                     if (controller.text.isEmpty) {
-                      Common.showToast(context.l10n.translate('please_enter_phone_number'), context);
+                      Common.showToast(
+                          l10n.translate('please_enter_phone_number'), context);
                     } else {
                       onPressedContinue(
                         controller.text,
@@ -92,7 +95,7 @@ class ModalInputPhone extends HookConsumerWidget {
                     }
                     Navigator.of(context).pop();
                   },
-                  text: context.l10n.translate('continue'),
+                  text: l10n.translate('continue'),
                   textStyle: AppTextStyles.button.copyWith(
                     color: AppColors.white,
                   ),

@@ -280,15 +280,16 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
                             ),
                             scrollDirection: Axis.vertical,
                             itemCount: packages.value.length,
-                            itemBuilder: (context, index) => Column(
+                            itemBuilder: (_, index) => Column(
                               children: [
                                 PackageInsite(
                                   package: packages.value[index],
                                   onTapRegister: () {
                                     showDialog(
                                       context: context,
-                                      builder: (context) => Dialog(
+                                      builder: (_) => Dialog(
                                         child: ModalInputPhone(
+                                          l10n: context.l10n,
                                           phone: phoneRegister.value,
                                           onPressedContinue: (phone) {
                                             packSelected.value =

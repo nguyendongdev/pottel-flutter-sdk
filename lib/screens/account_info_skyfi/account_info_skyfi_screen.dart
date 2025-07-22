@@ -117,14 +117,16 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                 },
               ),
               MenuItem(
-                title: isLogin ? context.l10n.translate('logout') : context.l10n.translate('login'),
+                title: isLogin
+                    ? context.l10n.translate('logout')
+                    : context.l10n.translate('login'),
                 iconPath: 'assets/icons/log_out.svg',
                 onTap: () {
                   if (isLogin) {
                     // show confirm dialog
                     showDialog(
                       context: context,
-                      builder: (context) => PopupCenterCard(
+                      builder: (_) => PopupCenterCard(
                         onPrimaryButtonTap: () => {
                           onLogout(),
                           Navigator.of(context)
@@ -133,7 +135,8 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                         },
                         onSecondaryButtonTap: () => Navigator.of(context).pop(),
                         title: context.l10n.translate('notification'),
-                        description: context.l10n.translate('logout_confirmation'),
+                        description:
+                            context.l10n.translate('logout_confirmation'),
                         primaryButtonText: context.l10n.translate('logout'),
                         secondaryButtonText: context.l10n.translate('cancel'),
                       ),

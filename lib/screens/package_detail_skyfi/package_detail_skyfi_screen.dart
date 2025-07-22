@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
 import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
 import 'package:skyfi_sdk/network/api.dart';
 import 'package:skyfi_sdk/screens/package_detail_skyfi/models/package_model_detail/result.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
-import '../../l10n/localization_extension.dart';
 import '../../core/widgets/PopupCenterCard.dart';
 import '../../core/widgets/snack_bar_app.dart';
+import '../../l10n/localization_extension.dart';
 import '../../routers/routers.dart';
 import '../../utilities/common.dart';
+import '../change_package_skyfi/models/package_model.dart'
+    as ChangePackageModel;
 import '../change_package_skyfi/widgets/confirmation_dialog.dart';
 import '../home_skyfi/provider/login_provider.dart';
 import '../list_package_skyfi/widgets/modal_input_otp.dart';
 import '../list_package_skyfi/widgets/modal_input_phone.dart';
 import 'provider/package_detail_provider.dart';
 import 'widgets/package_benefit_item.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import '../change_package_skyfi/models/package_model.dart'
-    as ChangePackageModel;
 
 class PackageDetailSkyfiScreen extends HookConsumerWidget {
   final int packageId;
@@ -60,11 +60,12 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
           SnackBarApp.showSuccess(context, message: response.data['message']);
         } else {
           // SnackBarApp.showError(context, message: response.data['message']);
-          Common.showAlertDialog(
-              context, context.l10n.translate('error_title'), response.data['message'], null);
+          Common.showAlertDialog(context, context.l10n.translate('error_title'),
+              response.data['message'], null);
         }
       } catch (e) {
-        Common.showAlertDialog(context, context.l10n.translate('error_title'), e.toString(), () {});
+        Common.showAlertDialog(context, context.l10n.translate('error_title'),
+            e.toString(), () {});
         print(e);
       } finally {
         isLoading.value = false;
@@ -100,7 +101,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                       onPressedContinue: (otp) {
                         onRegisterPackage(phoneRegister.value, packageCode,
                             otp: otp);
-                         Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
                       onPressedResendOtp: () async {
                         await onPressedContinueOtp(
@@ -162,10 +163,10 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                 isLogin
                     ? onRegisterPackage(phone, packageCode)
                     : onPressedContinueOtp(phone, packageCode);
-                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               onCancel: () {
-                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               msisdn: phone,
               leftDay: data['result'][0]['toDate'],
@@ -303,9 +304,9 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                 color: Color(0xFF181818),
               ),
             ),
-            Text(
+            const Text(
               ' - ',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFF181818),
@@ -347,7 +348,8 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
             icon: "assets/icons/message-home.svg",
             iconColor: const Color(0xFFB40005),
             title: context.l10n.translate('free_label'),
-            subtitle: '${packageDetail.freeSms?.toString() ?? '0'} ${context.l10n.translate('sms_unit')}',
+            subtitle:
+                '${packageDetail.freeSms?.toString() ?? '0'} ${context.l10n.translate('sms_unit')}',
           ),
         ),
 
@@ -359,7 +361,8 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
             icon: "assets/icons/phone-home.svg",
             iconColor: const Color(0xFFB40005),
             title: context.l10n.translate('free_label'),
-            subtitle: '${packageDetail.freeCallMinute?.toString() ?? '0'} ${context.l10n.translate('minutes_unit')}',
+            subtitle:
+                '${packageDetail.freeCallMinute?.toString() ?? '0'} ${context.l10n.translate('minutes_unit')}',
           ),
         ),
       ],
@@ -407,8 +410,9 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                       ),
                     ),
                     Text(
-                      context.l10n.translate('per_days_label').replaceAll('{0}', packageDetail.validityDay.toString()),
-                      style: TextStyle(
+                      context.l10n.translate('per_days_label').replaceAll(
+                          '{0}', packageDetail.validityDay.toString()),
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Color(0xFF5C5C5C),
@@ -421,9 +425,10 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                         onPressed: () {
                           showDialog(
                             context: context,
-                            builder: (context) => Dialog(
+                            builder: (_) => Dialog(
                               child: ModalInputPhone(
                                 phone: phoneRegister,
+                                l10n: context.l10n,
                                 onPressedContinue: (phone) {
                                   onPressedContinue(
                                       phone, packageDetail.code ?? '');
