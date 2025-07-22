@@ -8,6 +8,7 @@ import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 import '../core/constants/colors.dart';
 import '../core/constants/spacing.dart';
 import '../core/constants/text_styles.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 class WebViewPopup extends HookWidget {
   final String url;
@@ -37,9 +38,9 @@ class WebViewPopup extends HookWidget {
       } else {
         checkbox.value = false;
         Modal.showConfirmation(
-          title: 'Thông báo',
+          title: context.l10n.translate('notification'),
           showBothButtons: false,
-          message: 'Đây là điều kiện bắt buộc để sử dụng dịch vụ của SkyFi.',
+          message: context.l10n.translate('modal_required_service_condition'),
           onConfirm: () {
             checkbox.value = true;
           },
@@ -57,8 +58,8 @@ class WebViewPopup extends HookWidget {
     void onAccept() {
       if (isCheckbox && !checkbox.value) {
         Modal.showInfo(
-          title: 'Thông báo',
-          message: 'Vui lòng đồng ý với các điều khoản và điều kiện.',
+          title: context.l10n.translate('notification'),
+          message: context.l10n.translate('please_agree_terms_conditions'),
         );
         return;
       }
@@ -206,7 +207,7 @@ class WebViewPopup extends HookWidget {
                 ),
                 Expanded(
                   child: Text(
-                    title ?? 'WebView',
+                    title ?? context.l10n.translate('webview_default_title'),
                     style:
                         AppTextStyles.heading.copyWith(color: AppColors.black),
                     textAlign: TextAlign.center,
@@ -266,7 +267,7 @@ class WebViewPopup extends HookWidget {
                       ),
                       Expanded(
                         child: Text(
-                          'Tôi đồng ý với các điều khoản và điều kiện của SkyFi',
+                          context.l10n.translate('agree_terms_conditions_skyfi'),
                           style: AppTextStyles.body
                               .copyWith(color: AppColors.black),
                         ),
@@ -286,7 +287,7 @@ class WebViewPopup extends HookWidget {
                             ),
                           ),
                           child: Text(
-                            'Hủy',
+                            context.l10n.translate('cancel'),
                             style: AppTextStyles.button.copyWith(
                               color: AppColors.primary,
                             ),
@@ -304,7 +305,7 @@ class WebViewPopup extends HookWidget {
                             ),
                           ),
                           child: Text(
-                            'Đồng ý',
+                            context.l10n.translate('agree_button'),
                             style: AppTextStyles.button.copyWith(
                               color: AppColors.white,
                             ),
@@ -355,14 +356,14 @@ class WebViewModal {
   static Future<bool?> showTermsAndConditions({
     required BuildContext context,
     String? termsUrl,
-    String title = 'Điều khoản & Điều kiện',
+    String? title,
     VoidCallback? onAccepted,
     VoidCallback? onClosed,
   }) {
     return show(
       context: context,
       url: termsUrl ?? 'https://skyfi.network/vi/terms-and-conditions?src=app',
-      title: title,
+      title: title ?? context.l10n.translate('terms_conditions_title'),
       isCheckbox: true,
       onAccepted: onAccepted,
       onClosed: onClosed,

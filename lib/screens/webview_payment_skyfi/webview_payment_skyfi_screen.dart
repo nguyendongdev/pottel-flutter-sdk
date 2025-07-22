@@ -10,6 +10,7 @@ import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../payment_skyfi/provider/payment_order_provider.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 class WebviewPaymentSkyfiScreen extends HookConsumerWidget {
   const WebviewPaymentSkyfiScreen({super.key, required this.url});
@@ -105,7 +106,7 @@ class WebviewPaymentSkyfiScreen extends HookConsumerWidget {
         elevation: 0,
         surfaceTintColor: AppColors.white,
         title: Text(
-          'Thanh toán',
+          context.l10n.translate('payment_title'),
           style: AppTextStyles.title.copyWith(
             color: AppColors.text,
           ),
@@ -149,9 +150,9 @@ class WebviewPaymentSkyfiScreen extends HookConsumerWidget {
                     SelectableText.rich(
                       TextSpan(
                         children: [
-                          const TextSpan(
-                            text: 'Đã xảy ra lỗi\n',
-                            style: TextStyle(
+                          TextSpan(
+                            text: '${context.l10n.translate('payment_error_occurred')}\n',
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -170,7 +171,7 @@ class WebviewPaymentSkyfiScreen extends HookConsumerWidget {
                         hasError.value = false;
                         controller.value?.reload();
                       },
-                      child: const Text('Thử lại'),
+                      child: Text(context.l10n.translate('retry_button')),
                     ),
                   ],
                 ),
@@ -186,7 +187,7 @@ class WebviewPaymentSkyfiScreen extends HookConsumerWidget {
                 ),
                 child: Column(children: [
                   Text(
-                    'Thanh toán thành công',
+                    context.l10n.translate('payment_successful'),
                     style: AppTextStyles.title.copyWith(
                       color: AppColors.text,
                     ),
@@ -200,11 +201,11 @@ class WebviewPaymentSkyfiScreen extends HookConsumerWidget {
                     package: 'skyfi_sdk',
                   ),
                   const SizedBox(height: 16),
-                  Text('Mã đơn hàng: ${orderId.value}'),
+                  Text(context.l10n.translate('order_code_label').replaceFirst('{0}', orderId.value ?? '')),
                   const Spacer(),
                   // button Xem lại đơn hàng
                   GradientButton(
-                    text: 'Xem đơn hàng',
+                    text: context.l10n.translate('view_order'),
                     height: 48,
                     onPressed: () {
                       // print('Xem đơn hàng id: ${orderId.value}');

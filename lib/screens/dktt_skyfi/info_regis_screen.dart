@@ -35,7 +35,7 @@ class InfoRegisScreen extends HookConsumerWidget {
     final isUpdateMsisdn = useState(true);
     final api = API();
 
-    Future<void> _checkPermissionCamera() async {
+    Future<void> checkPermissionCamera() async {
       final permission = await Permission.camera.request();
       if (permission.isGranted) {
         print('permission camera granted');
@@ -96,7 +96,7 @@ class InfoRegisScreen extends HookConsumerWidget {
       }
     }
 
-    Future<void> _onScanBarcode() async {
+    Future<void> onScanBarcode() async {
       isUpdateMsisdn.value = true;
       final result = await context.pushNamed<String>(AppRouter.scanBarcode);
       print("result $result");
@@ -128,7 +128,7 @@ class InfoRegisScreen extends HookConsumerWidget {
       print("serialController.text ${serialController.text}");
     }
 
-    Future<void> _onCheckSim() async {
+    Future<void> onCheckSim() async {
       try {
         isLoading.value = true;
         final result = await api.post(
@@ -258,7 +258,7 @@ class InfoRegisScreen extends HookConsumerWidget {
                       const SizedBox(height: AppSpacing.lg),
                       SerialInputField(
                         controller: serialController,
-                        onScanTap: _onScanBarcode,
+                        onScanTap: onScanBarcode,
                         onChanged: (value) {
                           serialController.text = value;
                         },
@@ -285,11 +285,11 @@ class InfoRegisScreen extends HookConsumerWidget {
               }
               if (serialController.text.length != 16) {
                 Common.showToast(
-                    context.l10n.translate('serial_number_must_be_16_digits'),
+                    context.l10n.translate('serial_16_digits_required'),
                     context);
                 return;
               }
-              _onCheckSim();
+              onCheckSim();
             },
             text: isLoading.value
                 ? context.l10n.translate('processing_dktt')

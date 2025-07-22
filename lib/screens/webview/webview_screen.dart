@@ -4,6 +4,7 @@ import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 class WebViewScreen extends HookWidget {
   final String url;
@@ -106,7 +107,7 @@ class WebViewScreen extends HookWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          title ?? 'WebView',
+          title ?? context.l10n.translate('webview_default_title'),
           style: AppTextStyles.heading.copyWith(color: AppColors.black),
         ),
         centerTitle: true,

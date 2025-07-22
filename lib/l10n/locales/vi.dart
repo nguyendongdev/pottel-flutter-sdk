@@ -556,6 +556,8 @@ const Map<String, String> viStrings = {
   'video_call_regulation_info':
       'Theo quy định của Bộ Thông tin truyền thông, để hoàn tất thủ tục đăng ký/cập nhật thông tin thuê bao, Bạn vui lòng thực hiện cuộc Video với tổng đài viên.',
   'camera_permission_note': '*Lưu ý: cấp quyền truy cập CAMERA cho thiết bị',
+  'successful_connection': 'Kết nối thành công {0}',
+  'call_terminated_by_admin': 'Cuộc gọi đã được tắt',
 
   // History Mobile SkyFi Screen
   'mobile_history': 'Lịch sử di động',
@@ -800,4 +802,50 @@ const Map<String, String> viStrings = {
   'loading_text': 'Loading...',
   'choose_payment_method_button': 'Chọn phương thức thanh toán',
   'payment_link_error': 'Lỗi khi lấy link thanh toán',
+
+  // Video Call & Recording Screens
+  'start_recording': 'Bắt đầu quay',
+  'go_home': 'Về trang chủ',
+  'retry': 'Thực hiện lại',
+  'send_video': 'Gửi video',
+  'stop_recording': 'Dừng quay',
+  'recording': 'Đang ghi hình 00:{0}',
+  'video_instructions_title': 'Bạn vui lòng thực hiện theo hướng dẫn sau:',
+  'video_step_1': 'Bước 1:',
+  'video_step_1_desc': ' Để khuôn mặt vào giữa khung hình và bấm ',
+  'video_step_1_button': ' Bắt đầu quay',
+  'video_step_2': 'Bước 2: ',
+  'video_step_2_desc': 'Thực hiện quay trái và quay phải',
+  'video_step_3': 'Bước 3: ',
+  'video_step_3_desc': 'Đọc số thuê bao đang thực hiện Đăng ký/Cập nhật',
+  'your_phone_number': 'Số thuê bao của Bạn là ',
+  'video_step_4': 'Bước 4:',
+  'video_step_4_desc': ' Bấm ',
+  'video_step_4_button': 'Gửi Video',
+  'video_step_4_complete': ' để hoàn tất ',
+  'register_update_info': 'Đăng ký/cập nhật TTTB',
+  'connecting': 'Đang kết nối...',
+  'registration_success': 'SkyFi đã tiếp nhận hồ sơ đăng ký/ cập nhật TTTB thành công! Cảm ơn Bạn vì đã tin tưởng và lựa chọn dịch vụ của SkyFi!',
+  'call_ended_message': 'Cuộc gọi đã kết thúc',
+  'video_call_ended': 'Cuộc gọi đã kết thúc',
+  'no_free_teller_message': 'Rất tiếc, không có tổng đài viên nào đang rảnh, Bạn vui lòng bấm vào \'Quay video\' để được hoản tất quá trình Đăng ký thông tin',
+
+  // WebView Screen
+  'webview_default_title': 'WebView',
+
+  // WebView Payment Screen
+  'payment_error_occurred': 'Đã xảy ra lỗi',
+  'retry_button': 'Thử lại',
+  'payment_successful': 'Thanh toán thành công',
+  'order_code_label': 'Mã đơn hàng: {0}',
+  'view_order': 'Xem đơn hàng',
+
+  // Modal Components
+  'close_button': 'Đóng',
+  'ok_button': 'OK',
+  'modal_required_service_condition': 'Đây là điều kiện bắt buộc để sử dụng dịch vụ của SkyFi.',
+  'please_agree_terms_conditions': 'Vui lòng đồng ý với các điều khoản và điều kiện.',
+  'agree_terms_conditions_skyfi': 'Tôi đồng ý với các điều khoản và điều kiện của SkyFi',
+  'agree_button': 'Đồng ý',
+  'terms_conditions_title': 'Điều khoản & Điều kiện',
 };

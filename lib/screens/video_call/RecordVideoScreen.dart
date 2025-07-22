@@ -12,6 +12,7 @@ import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/utilities/security.dart';
 import 'package:video_player/video_player.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 enum EnumStatusRecord { open, progress, finish }
 
@@ -47,7 +48,7 @@ class VerticalButtons extends StatelessWidget {
             ),
             onPressed: onRecord,
             child: Text(
-              'Bắt đầu quay',
+              context.l10n.translate('start_recording'),
               style: AppTextStyles.label.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AppColors.white,
@@ -73,7 +74,7 @@ class VerticalButtons extends StatelessWidget {
             ),
             onPressed: onGoHome,
             child: Text(
-              'Về trang chủ',
+              context.l10n.translate('go_home'),
               style: AppTextStyles.label.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AppColors.primary,
@@ -112,7 +113,7 @@ class HorizontalButtons extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Thực hiện lại',
+                context.l10n.translate('retry'),
                 style: AppTextStyles.label.copyWith(
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary,
@@ -134,7 +135,7 @@ class HorizontalButtons extends StatelessWidget {
                 ),
               ),
               onPressed: onSendVideo,
-              child: const Text('Gửi video'),
+              child: Text(context.l10n.translate('send_video')),
             ))
       ],
     );
@@ -164,7 +165,7 @@ class RecordingControls extends StatelessWidget {
             ),
             onPressed: onStop,
             child: Text(
-              'Dừng quay',
+              context.l10n.translate('stop_recording'),
               style: AppTextStyles.label.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AppColors.white,
@@ -235,7 +236,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   textAlign: TextAlign.right,
-                  'Đang ghi hình 00:${twoDigits(duration.inSeconds)}',
+                  context.l10n.translate('recording').replaceFirst('{0}', twoDigits(duration.inSeconds)),
                   style: const TextStyle(color: Colors.white),
                 ),
               )
@@ -256,7 +257,7 @@ class RecordDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-        'Bạn vui lòng thực hiện theo hướng dẫn sau:',
+        context.l10n.translate('video_instructions_title'),
         style: AppTextStyles.title.copyWith(
           color: AppColors.black,
         ),
@@ -266,18 +267,18 @@ class RecordDescription extends StatelessWidget {
       ),
       Text.rich(TextSpan(children: [
         TextSpan(
-            text: 'Bước 1:',
+            text: context.l10n.translate('video_step_1'),
             style: AppTextStyles.label.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.black,
             )),
         TextSpan(
-            text: ' Để khuôn mặt vào giữa khung hình và bấm ',
+            text: context.l10n.translate('video_step_1_desc'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.black,
             )),
         TextSpan(
-            text: ' Bắt đầu quay',
+            text: context.l10n.translate('video_step_1_button'),
             style: AppTextStyles.label.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.primary,
@@ -288,13 +289,13 @@ class RecordDescription extends StatelessWidget {
       ),
       Text.rich(TextSpan(children: [
         TextSpan(
-            text: 'Bước 2: ',
+            text: context.l10n.translate('video_step_2'),
             style: AppTextStyles.label.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.black,
             )),
         TextSpan(
-            text: 'Thực hiện quay trái và quay phải',
+            text: context.l10n.translate('video_step_2_desc'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.black,
             )),
@@ -304,20 +305,20 @@ class RecordDescription extends StatelessWidget {
       ),
       Text.rich(TextSpan(children: [
         TextSpan(
-            text: 'Bước 3: ',
+            text: context.l10n.translate('video_step_3'),
             style: AppTextStyles.label.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.black,
             )),
         TextSpan(
-            text: 'Đọc số thuê bao đang thực hiện Đăng ký/Cập nhật',
+            text: context.l10n.translate('video_step_3_desc'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.black,
             )),
       ])),
       Text.rich(TextSpan(children: [
         TextSpan(
-            text: 'Số thuê bao của Bạn là ',
+            text: context.l10n.translate('your_phone_number'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.black,
             )),
@@ -356,24 +357,24 @@ class RecordDescription extends StatelessWidget {
       //     ]))),
       Text.rich(TextSpan(children: [
         TextSpan(
-            text: 'Bước 4:',
+            text: context.l10n.translate('video_step_4'),
             style: AppTextStyles.label.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.black,
             )),
         TextSpan(
-            text: ' Bấm ',
+            text: context.l10n.translate('video_step_4_desc'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.black,
             )),
         TextSpan(
-            text: 'Gửi Video',
+            text: context.l10n.translate('video_step_4_button'),
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: AppColors.primary)),
         TextSpan(
-            text: ' để hoàn tất ',
+            text: context.l10n.translate('video_step_4_complete'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.black,
             )),
@@ -485,8 +486,8 @@ class _RecordVideoScreenState extends State<RecordVideoScreen> {
       });
       print(response);
       if (response.data['code'] == 200) {
-        Common.showAlertDialog(context, 'Thông báo',
-            'SkyFi đã tiếp nhận hồ sơ đăng ký/ cập nhật TTTB thành công! Cảm ơn Bạn vì đã tin tưởng và lựa chọn dịch vụ của SkyFi!',
+        Common.showAlertDialog(context, context.l10n.translate('notification'),
+            context.l10n.translate('registration_success'),
             () {
           context.goNamed(AppRouter.homeSkyFiNew);
         });
@@ -572,7 +573,7 @@ class _RecordVideoScreenState extends State<RecordVideoScreen> {
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
         ),
         title: Text(
-          'Đăng ký/cập nhật TTTB',
+          context.l10n.translate('register_update_info'),
           style: AppTextStyles.title.copyWith(
             color: AppColors.black,
           ),

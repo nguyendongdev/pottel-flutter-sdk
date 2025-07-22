@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
 import 'package:skyfi_sdk/skyfi_sdk_config.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
@@ -47,7 +48,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
     // Pass data về màn trước
     context.pop({
       "status": "client-end-call",
-      "message": "Cuộc gọi đã kết thúc",
+      "message": context.l10n.translate('call_ended_message'),
       "tellerId": tellerId
     });
 
@@ -154,13 +155,13 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
     //   "data": {}
     // });
 
-    Common.showToast('Cuộc gọi đã được tắt', context);
+    Common.showToast(context.l10n.translate('call_terminated_by_admin'), context);
     //  Navigator.of(context).pop();
   }
 
   _eventRegisterResult(data) {
     print("onRegisterResult: $data");
-    Common.showToast('Kết nối thành công ${data['phone']}', context);
+    Common.showToast(context.l10n.translate('successful_connection').replaceFirst('{0}', data['phone']), context);
     print(data);
     //  Navigator.of(context).pop();
   }
@@ -198,7 +199,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
       Future.delayed(const Duration(seconds: 5), () {
         Navigator.of(context).pop({
           "status": "no-free-teller",
-          "message": "Rất tiếc, không có tổng đài viên nào đang rảnh, Bạn vui lòng bấm vào 'Quay video' để được hoản tất quá trình Đăng ký thông tin",
+          "message": context.l10n.translate('no_free_teller_message'),
           "data": data
         });
       });
@@ -291,7 +292,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
               ),
               const SizedBox(height: 20),
               Text(
-                'Đang kết nối...',
+                context.l10n.translate('connecting'),
                 style: AppTextStyles.body.copyWith(
                   color: AppColors.white,
                 ),

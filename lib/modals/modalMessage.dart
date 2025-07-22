@@ -4,6 +4,7 @@ import 'package:skyfi_sdk/core/constants/spacing.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
 import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
 import 'package:skyfi_sdk/core/widgets/outline_button.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 class ModalMessage extends StatelessWidget {
   const ModalMessage({
@@ -90,7 +91,7 @@ class ModalMessage extends StatelessWidget {
                           Navigator.of(context).pop(false);
                           onClose?.call();
                         },
-                        text: closeText ?? 'Đóng',
+                        text: closeText ?? context.l10n.translate('close_button'),
                         height: 48,
                         textStyle: AppTextStyles.button.copyWith(
                           color: AppColors.primary,
@@ -104,7 +105,7 @@ class ModalMessage extends StatelessWidget {
                           Navigator.of(context).pop(true);
                           onConfirm?.call();
                         },
-                        text: confirmText ?? 'Xác nhận',
+                        text: confirmText ?? context.l10n.translate('confirm'),
                         height: 48,
                         textStyle: AppTextStyles.button.copyWith(
                           color: AppColors.white,
@@ -121,7 +122,7 @@ class ModalMessage extends StatelessWidget {
                       Navigator.of(context).pop(true);
                       onConfirm?.call();
                     },
-                    text: confirmText ?? 'OK',
+                    text: confirmText ?? context.l10n.translate('ok_button'),
                     height: 48,
                     textStyle: AppTextStyles.button.copyWith(
                       color: AppColors.white,

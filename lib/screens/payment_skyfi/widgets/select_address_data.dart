@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/gradient_button.dart';
-import '../../../network/api.dart';
 import '../models/address_model.dart';
 import '../provider/address_provider.dart';
 import '../provider/payment_order_provider.dart';
@@ -130,9 +131,9 @@ class SelectAddressData extends HookConsumerWidget {
             padding: const EdgeInsets.all(AppSpacing.lg),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
-                    'Chọn địa chỉ nhận SIM',
+                    context.l10n.translate('choose_sim_delivery_address'),
                     style: AppTextStyles.heading,
                   ),
                 ),
@@ -148,8 +149,8 @@ class SelectAddressData extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             child: Row(
               children: [
-                const Text(
-                  'Khu vực được chọn',
+                Text(
+                  context.l10n.translate('selected_area'),
                   style: AppTextStyles.label,
                 ),
                 const Spacer(),
@@ -159,7 +160,7 @@ class SelectAddressData extends HookConsumerWidget {
                     ref.read(addressStepProvider.notifier).setStep(0);
                   },
                   child: Text(
-                    'Thiết lập lại',
+                    context.l10n.translate('reset_selection'),
                     style: AppTextStyles.title.copyWith(
                       color: AppColors.strongSecondary,
                     ),
@@ -186,7 +187,7 @@ class SelectAddressData extends HookConsumerWidget {
             child: TextField(
               controller: searchController,
               decoration: InputDecoration(
-                hintText: 'Tìm kiếm Tỉnh/Thành phố, Quận/Huyện, Phường/Xã',
+                hintText: context.l10n.translate('search_address'),
                 hintStyle: AppTextStyles.body.copyWith(
                   color: AppColors.textLight,
                 ),
@@ -306,7 +307,7 @@ class SelectAddressData extends HookConsumerWidget {
                     Navigator.of(context).pop();
                   });
                 },
-                text: 'Xác nhận',
+                text: context.l10n.translate('confirm_button'),
                 height: 48,
               ),
             ),

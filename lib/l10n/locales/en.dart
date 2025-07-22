@@ -563,6 +563,8 @@ const Map<String, String> enStrings = {
   'video_call_regulation_info':
       'According to regulations of the Ministry of Information and Communications, to complete the registration/update of subscriber information procedures, please make a Video call with an operator.',
   'camera_permission_note': '*Note: grant CAMERA access permission for device',
+  'successful_connection': 'Successfully connected to {0}',
+  'call_terminated_by_admin': 'Call terminated',
 
   // History Mobile SkyFi Screen
   'mobile_history': 'Mobile History',
@@ -804,4 +806,50 @@ const Map<String, String> enStrings = {
   'loading_text': 'Loading...',
   'choose_payment_method_button': 'Choose payment method',
   'payment_link_error': 'Error getting payment link',
+
+  // Video Call & Recording Screens
+  'start_recording': 'Start Recording',
+  'go_home': 'Go Home',
+  'retry': 'Retry',
+  'send_video': 'Send Video',
+  'stop_recording': 'Stop Recording',
+  'recording': 'Recording 00:{0}',
+  'video_instructions_title': 'Please follow these instructions:',
+  'video_step_1': 'Step 1:',
+  'video_step_1_desc': ' Position your face in the center of the frame and press ',
+  'video_step_1_button': ' Start Recording',
+  'video_step_2': 'Step 2: ',
+  'video_step_2_desc': 'Turn your head left and right',
+  'video_step_3': 'Step 3: ',
+  'video_step_3_desc': 'Read the phone number for registration/update',
+  'your_phone_number': 'Your phone number is ',
+  'video_step_4': 'Step 4:',
+  'video_step_4_desc': ' Press ',
+  'video_step_4_button': 'Send Video',
+  'video_step_4_complete': ' to complete ',
+  'register_update_info': 'Register/Update Information',
+  'connecting': 'Connecting...',
+  'registration_success': 'SkyFi has successfully received your registration/update request! Thank you for trusting and choosing SkyFi services!',
+  'call_ended_message': 'Call ended',
+  'video_call_ended': 'Call ended',
+  'no_free_teller_message': 'Sorry, no operators are currently available. Please press \'Record Video\' to complete your registration/update process',
+
+  // WebView Screen
+  'webview_default_title': 'WebView',
+
+  // WebView Payment Screen
+  'payment_error_occurred': 'An error occurred',
+  'retry_button': 'Try again',
+  'payment_successful': 'Payment successful',
+  'order_code_label': 'Order code: {0}',
+  'view_order': 'View order',
+
+  // Modal Components
+  'close_button': 'Close',
+  'ok_button': 'OK',
+  'modal_required_service_condition': 'This is a mandatory condition to use SkyFi services.',
+  'please_agree_terms_conditions': 'Please agree to the terms and conditions.',
+  'agree_terms_conditions_skyfi': 'I agree to the terms and conditions of SkyFi',
+  'agree_button': 'Agree',
+  'terms_conditions_title': 'Terms & Conditions',
 };
