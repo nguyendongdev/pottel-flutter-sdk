@@ -27,6 +27,7 @@ _$PackageImpl _$$PackageImplFromJson(Map<String, dynamic> json) =>
       index: (json['index'] as num).toInt(),
       salePrice: (json['sale_price'] as num).toDouble(),
       id: (json['id'] as num).toInt(),
+      isDefault: (json['is_default'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PackageImplToJson(_$PackageImpl instance) =>
@@ -48,4 +49,5 @@ Map<String, dynamic> _$$PackageImplToJson(_$PackageImpl instance) =>
       'index': instance.index,
       'sale_price': instance.salePrice,
       'id': instance.id,
+      'is_default': instance.isDefault,
     };

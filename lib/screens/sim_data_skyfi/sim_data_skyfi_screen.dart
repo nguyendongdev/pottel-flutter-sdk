@@ -46,9 +46,12 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
       final response = await api.get('/bss/app/get-random-msisdn');
       final simNumber = ChooseSim.fromJson(response.data);
       if (simNumber.code == 200) {
-        chooseSim.value = simNumber.result?.first;
-        ref.read(selectedPackageProvider.notifier).changeSelectedPackage(
-              chooseSim.value?.packages?.first.name ?? '',
+      chooseSim.value = simNumber.result?.first;
+       ref.read(selectedPackageProvider.notifier).changeSelectedPackage(
+              chooseSim.value?.packages
+                      ?.firstWhere((element) => element.isDefault == 1)
+                      .name ??
+                  '',
             );
       }
     }

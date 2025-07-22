@@ -23,6 +23,7 @@ class Package with _$Package {
     required int index,
     @JsonKey(name: 'sale_price') required double salePrice,
     required int id,
+    @JsonKey(name: 'is_default') int? isDefault,
   }) = _Package;
 
   factory Package.fromJson(Map<String, dynamic> json) =>
