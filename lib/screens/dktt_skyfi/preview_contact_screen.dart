@@ -302,7 +302,8 @@ class PreviewContactScreen extends HookConsumerWidget {
                   if (numberIdRegis == 0) {
                     saveLog();
                   } else {
-                    Navigator.of(context).pushNamed(AppRouter.verifyOtp);
+                    // Navigator.of(context).pushNamed(AppRouter.verifyOtp);
+                    context.pushNamed(AppRouter.verifyOtp);
                     return;
                   }
                 },

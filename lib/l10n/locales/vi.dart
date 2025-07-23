@@ -853,4 +853,8 @@ const Map<String, String> viStrings = {
       'Tôi đồng ý với các điều khoản và điều kiện của SkyFi',
   'agree_button': 'Đồng ý',
   'terms_conditions_title': 'Điều khoản & Điều kiện',
+
+  // Verify OTP Screen
+  'confirm_not_using_skyfi_numbers':
+      'Bạn xác nhận KHÔNG SỬ DỤNG Số TB SkyFi nào trong danh sách. Nếu chọn "Đồng ý" các số thuê bao gợi ý sẽ được đưa vào danh sách cần cập nhật lại TTTB?',
 };

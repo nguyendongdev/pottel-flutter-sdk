@@ -852,4 +852,8 @@ const Map<String, String> enStrings = {
   'agree_terms_conditions_skyfi': 'I agree to the terms and conditions of SkyFi',
   'agree_button': 'Agree',
   'terms_conditions_title': 'Terms & Conditions',
+
+  //confirm_not_using_skyfi_numbers
+  'confirm_not_using_skyfi_numbers':
+      'You confirm that you do not use any SkyFi numbers in the list. If you select "Agree", the suggested subscriber numbers will be added to the list that needs to be updated.',
 };

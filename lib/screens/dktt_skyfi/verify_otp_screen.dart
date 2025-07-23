@@ -28,10 +28,10 @@ class VerifyOtpScreen extends HookConsumerWidget {
     final phones = useState<List<dynamic>>([]);
     API api = API();
 
-    void saveLog() async {
+    Future<void> saveLog() async {
       try {
-        Common.startLoadingDialog(
-            context, context.l10n.translate('saving_information_progress'));
+        // Common.startLoadingDialog(
+        //     context, context.l10n.translate('saving_information_progress'));
         isLoading.value = true;
         final response = await api.post(
           '/bss/videocall/save-log-video-call',
@@ -39,7 +39,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
         );
         final data = SaveLogRespone.fromJson(response.data);
         if (data.code == 200) {
-          context.pushNamed(AppRouter.startVideoCall, extra: {
+          await context.pushNamed(AppRouter.startVideoCall, extra: {
             'id': data.result?.id,
             'phone': data.result?.phone,
           });
@@ -54,7 +54,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
         SnackBarApp.showError(context, message: e.toString());
       } finally {
         isLoading.value = false;
-        Common.stopLoadingDialog(context);
+        // Common.stopLoadingDialog(context);
       }
     }
 
@@ -73,7 +73,8 @@ class VerifyOtpScreen extends HookConsumerWidget {
     }
 
     ///api/bss/videocall/check-otp-dktt-update/{phone}/{otp}
-    void checkOtpDkttUpdate(String otp, String phoneNumber) async {
+    void checkOtpDkttUpdate(
+        String otp, String phoneNumber) async {
       try {
         final response = await api
             .post('/bss/videocall/check-otp-dktt-update/$phoneNumber/$otp');
@@ -81,7 +82,9 @@ class VerifyOtpScreen extends HookConsumerWidget {
         print('data check otp:  $data');
         if (data['code'] == 200) {
           print('data check otp:  $data');
-          saveLog();
+          // context.pop();
+          // Navigator.pop(_);
+          await saveLog();
           return;
         } else {
           SnackBarApp.showError(context, message: data['message']);
@@ -91,10 +94,10 @@ class VerifyOtpScreen extends HookConsumerWidget {
       }
     }
 
-    void onShowAlert() {
+    void onShowAlert(BuildContext context) {
       showDialog(
           context: context,
-          builder: (context) => AlertDialog(
+          builder: (_) => AlertDialog(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -133,7 +136,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
                             width: 140,
                             text: context.l10n.translate('cancel_action'),
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pop(_);
                             },
                             textStyle: AppTextStyles.button.copyWith(
                               color: AppColors.primary,
@@ -143,9 +146,9 @@ class VerifyOtpScreen extends HookConsumerWidget {
                             height: 50,
                             width: 140,
                             text: context.l10n.translate('agree_action'),
-                            onPressed: () {
-                              Navigator.pop(context);
-                              saveLog();
+                            onPressed: () async {
+                              Navigator.pop(_);
+                              await saveLog();
                             },
                             textStyle: AppTextStyles.button.copyWith(
                               color: AppColors.white,
@@ -162,7 +165,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
     Future<String?> onPressedContinue(String phoneNumber) async {
       showDialog(
         context: context,
-        builder: (context) => Dialog(
+        builder: (_) => Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -201,7 +204,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
                   OtpTextField(
                     onSubmit: (value) {
                       if (value.length == 6) {
-                        Navigator.pop(context, value);
+                        Navigator.pop(_, value);
                       }
                     },
                     showFieldAsBox: true,
@@ -361,7 +364,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
                         width: 100,
                         text: context.l10n.translate('continue'),
                         onPressed: () {
-                          onShowAlert();
+                          onShowAlert(context);
                         },
                         textStyle: AppTextStyles.button.copyWith(
                           color: AppColors.white,
