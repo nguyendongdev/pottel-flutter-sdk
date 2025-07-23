@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:signature/signature.dart';
 import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:skyfi_sdk/modals/modalWebview.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/ekyc_provider.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
 
@@ -185,11 +187,81 @@ class PreviewContactScreen extends HookConsumerWidget {
                       style: AppTextStyles.small,
                     ),
                     Expanded(
-                      child: Text(
-                        context.l10n.translate('auto_fill_info_notice'),
-                        style: AppTextStyles.small.copyWith(
-                          color: AppColors.text,
-                          fontWeight: FontWeight.w400,
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: context.l10n
+                                  .translate('agree_terms_conditions')
+                                  .split('#')[0],
+                              style: AppTextStyles.small.copyWith(
+                                color: AppColors.text,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            TextSpan(
+                              text: context.l10n
+                                  .translate('agree_terms_conditions')
+                                  .split('#')[1],
+                              style: AppTextStyles.small.copyWith(
+                                  color: AppColors.red,
+                                  fontWeight: FontWeight.w400,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: AppColors.red),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  WebViewModal.showWebContent(
+                                    context: context,
+                                    url:
+                                        'https://skyfi.vn/vi/terms-and-conditions?src=app',
+                                    title: 'Điều khoản & Điều kiện ',
+                                  );
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ]),
+                  const SizedBox(height: AppSpacing.md),
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    const Text(
+                      '● ',
+                      style: AppTextStyles.small,
+                    ),
+                    Expanded(
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: context.l10n
+                                  .translate('auto_fill_info_notice')
+                                  .split('#')[0],
+                              style: AppTextStyles.small.copyWith(
+                                color: AppColors.text,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            TextSpan(
+                              text: context.l10n
+                                  .translate('auto_fill_info_notice')
+                                  .split('#')[1],
+                              style: AppTextStyles.small.copyWith(
+                                  color: AppColors.blue,
+                                  fontWeight: FontWeight.w400,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: AppColors.blue),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // showPdfViewer(
+                                  //   context,
+                                  //   'https://skyfi.vn/assets/document/dktt/GT_Chap_thuan_xu_ly_du_lieu_ca_nhan.pdf',
+                                  //   title:
+                                  //       'Giấy tờ chấp thuận xử lý dữ liệu cá nhân',
+                                  // );
+                                },
+                            ),
+                          ],
                         ),
                       ),
                     ),

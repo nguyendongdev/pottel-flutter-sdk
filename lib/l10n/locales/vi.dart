@@ -543,7 +543,9 @@ const Map<String, String> viStrings = {
   'dispute_resolution_agreement':
       'Trong quá trình chờ và sau khi hoàn thành đăng ký thông tin trên hệ thống, nếu có xảy ra bất kỳ khiếu kiện, tranh chấp nào liên quan đến số thuê bao trên, tôi đồng ý để SkyFi thu hồi số thuê bao để giải quyết khiếu nại, đồng thời tôi cam kết sẽ phối hợp SkyFi để giải quyết và chịu hoàn toàn trách nhiệm trước pháp luật.',
   'auto_fill_info_notice':
-      'Các thông tin và chữ ký của bạn sẽ được tự đồng điền vào Phiếu xác nhận thông tin thuê bao dưới đây.',
+      'Các thông tin và chữ ký của bạn sẽ được tự đồng điền vào Phiếu xác nhận thông tin thuê bao.# Chấp thuận xử lý và bảo vệ dữ liệu cá nhân',
+  'agree_terms_conditions':
+      'Tôi đã đọc hiểu và đồng ý để SkyFi xử lý dữ liệu cá nhân của tôi theo# Chính sách bảo mật ',
   'sign_and_check_contract':
       'Vui lòng ký tên của bạn tại phía dưới cùng của hợp đồng và kiểm tra lại thông tin hợp đồng ',
   'here_link': 'tại đây',

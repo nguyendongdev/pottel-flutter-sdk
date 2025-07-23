@@ -550,7 +550,9 @@ const Map<String, String> enStrings = {
   'dispute_resolution_agreement':
       'During the waiting period and after completing information registration on the system, if any complaints or disputes arise related to the above subscriber number, I agree to let SkyFi reclaim the subscriber number to resolve complaints, and I commit to cooperate with SkyFi to resolve and take full responsibility before the law.',
   'auto_fill_info_notice':
-      'Your information and signature will be automatically filled into the Subscriber Information Confirmation Form below.',
+      'Your information and signature will be automatically filled in the Subscriber Information Confirmation Form.# Consent to process and protect personal data',
+  'agree_terms_conditions':
+      'I have read, understood, and agree to let SkyFi process my personal data according to the# Privacy Policy',
   'sign_and_check_contract':
       'Please sign your name at the bottom of the contract and check the contract information ',
   'here_link': 'here',
@@ -816,7 +818,8 @@ const Map<String, String> enStrings = {
   'recording': 'Recording 00:{0}',
   'video_instructions_title': 'Please follow these instructions:',
   'video_step_1': 'Step 1:',
-  'video_step_1_desc': ' Position your face in the center of the frame and press ',
+  'video_step_1_desc':
+      ' Position your face in the center of the frame and press ',
   'video_step_1_button': ' Start Recording',
   'video_step_2': 'Step 2: ',
   'video_step_2_desc': 'Turn your head left and right',
@@ -829,10 +832,12 @@ const Map<String, String> enStrings = {
   'video_step_4_complete': ' to complete ',
   'register_update_info': 'Register/Update Information',
   'connecting': 'Connecting...',
-  'registration_success': 'SkyFi has successfully received your registration/update request! Thank you for trusting and choosing SkyFi services!',
+  'registration_success':
+      'SkyFi has successfully received your registration/update request! Thank you for trusting and choosing SkyFi services!',
   'call_ended_message': 'Call ended',
   'video_call_ended': 'Call ended',
-  'no_free_teller_message': 'Sorry, no operators are currently available. Please press \'Record Video\' to complete your registration/update process',
+  'no_free_teller_message':
+      'Sorry, no operators are currently available. Please press \'Record Video\' to complete your registration/update process',
 
   // WebView Screen
   'webview_default_title': 'WebView',
@@ -847,9 +852,11 @@ const Map<String, String> enStrings = {
   // Modal Components
   'close_button': 'Close',
   'ok_button': 'OK',
-  'modal_required_service_condition': 'This is a mandatory condition to use SkyFi services.',
+  'modal_required_service_condition':
+      'This is a mandatory condition to use SkyFi services.',
   'please_agree_terms_conditions': 'Please agree to the terms and conditions.',
-  'agree_terms_conditions_skyfi': 'I agree to the terms and conditions of SkyFi',
+  'agree_terms_conditions_skyfi':
+      'I agree to the terms and conditions of SkyFi',
   'agree_button': 'Agree',
   'terms_conditions_title': 'Terms & Conditions',
 
