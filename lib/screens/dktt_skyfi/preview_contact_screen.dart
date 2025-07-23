@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:signature/signature.dart';
 import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/modals/modalWebview.dart';
+import 'package:skyfi_sdk/screens/account_info_skyfi/account_list_pdf.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/ekyc_provider.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
 
@@ -253,12 +254,12 @@ class PreviewContactScreen extends HookConsumerWidget {
                                   decorationColor: AppColors.blue),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  // showPdfViewer(
-                                  //   context,
-                                  //   'https://skyfi.vn/assets/document/dktt/GT_Chap_thuan_xu_ly_du_lieu_ca_nhan.pdf',
-                                  //   title:
-                                  //       'Giấy tờ chấp thuận xử lý dữ liệu cá nhân',
-                                  // );
+                                  showPdfViewer(
+                                    context,
+                                    'https://skyfi.vn/assets/document/dktt/GT_Chap_thuan_xu_ly_du_lieu_ca_nhan.pdf',
+                                    title:
+                                        'Giấy tờ chấp thuận xử lý dữ liệu cá nhân',
+                                  );
                                 },
                             ),
                           ],
