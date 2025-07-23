@@ -314,6 +314,26 @@ class _CaptureChipCardScreenState extends State<CaptureChipCardScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          'Chụp ảnh CCCD',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      extendBodyBehindAppBar: true,
       body: _isReady && _cameraController != null
           ? SizedBox(
               width: MediaQuery.of(context).size.width,

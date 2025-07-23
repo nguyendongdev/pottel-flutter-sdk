@@ -43,34 +43,20 @@ class CaptureOverlay extends StatelessWidget {
         SafeArea(
           child: Column(
             children: [
-              AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                title: Text(
-                  'Chụp ảnh CCCD',
-                  style: AppTextStyles.heading.copyWith(
-                    color: AppColors.white,
+              const Spacer(flex: 1),
+              // Label positioned above scan area
+              if (title.isNotEmpty)
+                Center(
+                  child: Text(
+                    title,
+                    style: AppTextStyles.heading.copyWith(
+                      color: AppColors.white,
+                    ),
                   ),
                 ),
-                leading: IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.white,
-                  ),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ),
-              const Spacer(),
-              Text(
-                title,
-                style: AppTextStyles.heading.copyWith(
-                  color: AppColors.white,
-                ),
-              ),
-              const SizedBox(height: 300),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(AppSpacing.lg),
+              const Spacer(flex: 4),
+              // Capture button at bottom
+              Center(
                 child: InkWell(
                   onTap: onCapture,
                   child: SvgPicture.asset(
