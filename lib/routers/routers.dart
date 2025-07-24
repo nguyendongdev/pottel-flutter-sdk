@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skyfi_sdk/screens/account_info_skyfi/account_list_pdf.dart';
+import 'package:skyfi_sdk/screens/account_info_skyfi/account_term_policy.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/contact_detail_screen.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/double_check_info_screen.dart';
 import 'package:skyfi_sdk/screens/manager_sim/detail_eSim.dart';
@@ -100,6 +102,8 @@ class AppRouter {
   static const String contactDetail = 'contact-detail';
   static const String managerSim = 'manager-sim';
   static const String recordVideo = 'record-video';
+  static const String accountListPdf = 'account-list-pdf';
+  static const String accountTermPolicy = 'account-term-policy';
 
   static const String managerSimDetail = 'manager-sim-detail';
 
@@ -418,6 +422,22 @@ class AppRouter {
                 idCall: data['idCall'] as String,
                 phoneNumber: data['phoneNumber'] as String,
                 type: data['type'] as EnumServiceSim,
+              );
+            },
+          ),
+          GoRoute(
+            path: accountTermPolicy,
+            name: accountTermPolicy,
+            builder: (context, state) => const AccountTermPolicy(),
+          ),
+          GoRoute(
+            path: accountListPdf,
+            name: accountListPdf,
+            builder: (context, state) {
+              final data = state.extra as Map<String, dynamic>;
+              return AccountListPDF(
+                items: data['items'] as List<ItemPdf>,
+                title: data['title'] as String? ?? 'Danh sách PDF',
               );
             },
           ),
