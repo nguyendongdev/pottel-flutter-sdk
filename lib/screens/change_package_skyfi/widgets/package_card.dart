@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -53,7 +55,10 @@ class PackageCard extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.sm),
             _buildFeatureRow(
-                'Data tốc độ cao: ${package.dataPerDay.toInt()}GB/ngày'),
+              context.l10n
+                  .translate('high_speed_data')
+                  .replaceAll('{0}', package.dataPerDay.toString()),
+            ),
             const SizedBox(height: AppSpacing.sm),
             for (final description in package.description) ...[
               _buildFeatureRow(description),
@@ -83,7 +88,7 @@ class PackageCard extends StatelessWidget {
                 ),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
-                  '/ THÁNG',
+                  context.l10n.translate('per_month'),
                   style: AppTextStyles.label,
                 ),
               ],

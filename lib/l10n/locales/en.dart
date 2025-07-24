@@ -21,6 +21,11 @@ const Map<String, String> enStrings = {
   'time_remaining': 'Time remaining',
   'change_package': 'Change Package',
   'expired': 'Expired',
+  'skip': 'Skip',
+  'confirmation_message':
+      'You currently have the package {0} (HSD:  {1}). By clicking "Continue", you agree to extend your current package to register for a new package.',
+  'high_speed_data': 'Data speed: {0}GB/day',
+  'per_month': '/ MONTH',
 
   // eSIM Travel
   'esim_in_use': 'eSIM in use',

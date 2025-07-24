@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
@@ -32,14 +34,17 @@ class ConfirmationDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Đổi gói cước',
+            Text(
+              context.l10n.translate('change_package'),
               style: AppTextStyles.heading,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSpacing.md),
             Text(
-              'Bạn đang có gói cước ${package.name} (HSD:  $leftDay). Bằng việc bấm "Tiếp tục", bạn đồng ý gia hạn gói cước hiện tại để đăng ký gói cước mới.',
+              context.l10n
+                  .translate('confirmation_message')
+                  .replaceAll('{0}', package.name)
+                  .replaceAll('{1}', leftDay ?? '0'),
               style: AppTextStyles.body.copyWith(
                 color: AppColors.textGrey,
               ),
@@ -60,7 +65,7 @@ class ConfirmationDialog extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'Bỏ qua',
+                          context.l10n.translate('skip'),
                           style: AppTextStyles.heading.copyWith(
                             color: AppColors.primary,
                           ),
@@ -73,7 +78,7 @@ class ConfirmationDialog extends StatelessWidget {
                 Expanded(
                   child: GradientButton(
                     onPressed: onConfirm,
-                    text: 'Tiếp tục',
+                    text: context.l10n.translate('continue'),
                     height: 48,
                     textStyle: AppTextStyles.heading.copyWith(
                       color: AppColors.white,

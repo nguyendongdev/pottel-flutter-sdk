@@ -21,7 +21,11 @@ const Map<String, String> viStrings = {
   'time_remaining': 'Thời hạn còn',
   'change_package': 'Đổi gói cước',
   'expired': 'Hết hạn',
-
+  'skip': 'Bỏ qua',
+  'confirmation_message':
+      'Bạn đang có gói cước {0} (HSD:  {1}). Bằng việc bấm "Tiếp tục", bạn đồng ý gia hạn gói cước hiện tại để đăng ký gói cước mới.',
+  'high_speed_data': 'Data tốc độ cao: {0}GB/ngày',
+  'per_month': '/THÁNG',
   // eSIM Travel
   'esim_in_use': 'eSIM đang sử dụng',
   'esim_not_installed': 'eSIM chưa cài',
