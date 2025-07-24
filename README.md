@@ -36,15 +36,17 @@ flutter pub get
 Thêm các permissions cần thiết vào `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.NFC" />
-<uses-permission android:name="android.permission.RECORD_AUDIO" />
-<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <!-- Jitsi Meet permissions -->
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+  <uses-permission android:name="android.permission.BLUETOOTH" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
 
 <uses-feature
     android:name="android.hardware.camera"
@@ -52,6 +54,12 @@ Thêm các permissions cần thiết vào `android/app/src/main/AndroidManifest.
 <uses-feature
     android:name="android.hardware.nfc"
     android:required="false" />
+<uses-feature
+    android:name="android.hardware.camera"
+    android:required="false" />
+ <uses-feature
+    android:name="android.hardware.microphone"
+    android:required="false" />    
 ```
 
 ### 4. Cấu hình iOS
