@@ -1,16 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/screens/esim_travel_skyfi/models/region_model.dart';
 
-import '../../l10n/localization_extension.dart';
-
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/app_cart.dart';
+import '../../l10n/localization_extension.dart';
 import 'compatible_devices_screen.dart';
 import 'provider/region_provider.dart';
 import 'widgets/region_list.dart';
@@ -30,6 +30,13 @@ class EsimTravelSkyfiScreen extends HookConsumerWidget {
     } else if (selectedTab == 2) {
       subTitle = context.l10n.translate('global_data_packages');
     }
+
+    useEffect(() {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        ref.read(searchQueryProvider.notifier).state = '';
+      });
+      return null;
+    }, []);
 
     void onShowDeviceList() {
       showModalBottomSheet(
@@ -119,14 +126,14 @@ class EsimTravelSkyfiScreen extends HookConsumerWidget {
                           TextSpan(
                             children: [
                               TextSpan(
-                                text:
-                                    context.l10n.translate('esim_note_long'),
+                                text: context.l10n.translate('esim_note_long'),
                                 style: AppTextStyles.label.copyWith(
                                   color: AppColors.text,
                                 ),
                               ),
                               TextSpan(
-                                text: ' ${context.l10n.translate('view_device_list')}',
+                                text:
+                                    ' ${context.l10n.translate('view_device_list')}',
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     onShowDeviceList();

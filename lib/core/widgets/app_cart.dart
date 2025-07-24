@@ -15,7 +15,9 @@ class AppCart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartProvider);
-    final cartCount = cart.value?.items.length ?? 0;
+    final cartCount = cart.value?.items
+            .fold(0, (previous, item) => previous + item.quantity) ??
+        0;
     return Stack(
       children: [
         IconButton(
@@ -34,7 +36,7 @@ class AppCart extends ConsumerWidget {
         Positioned(
           right: 4,
           top: 4,
-          child: cartCount != null && cartCount > 0
+          child: cartCount > 0
               ? Container(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   decoration: const BoxDecoration(
@@ -47,7 +49,7 @@ class AppCart extends ConsumerWidget {
                   ),
                   child: Center(
                     child: Text(
-                      cartCount?.toString() ?? '0',
+                      cartCount.toString() ?? '0',
                       style: AppTextStyles.small.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.w600,

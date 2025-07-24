@@ -96,6 +96,6 @@ class Cart extends _$Cart {
   int get itemCount {
     final cart = state.valueOrNull;
     if (cart == null) return 0;
-    return cart.items.length;
+    return cart.items.fold(0, (total, item) => total + item.quantity);
   }
 }

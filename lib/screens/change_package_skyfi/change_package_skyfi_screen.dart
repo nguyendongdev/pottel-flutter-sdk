@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
@@ -27,8 +29,8 @@ class ChangePackageSkyFiScreen extends ConsumerWidget {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.white,
-        title: const Text(
-          'Đổi gói cước',
+        title: Text(
+          context.l10n.translate('change_package'),
           style: AppTextStyles.title,
         ),
       ),
@@ -84,23 +86,24 @@ class ChangePackageSkyFiScreen extends ConsumerWidget {
                 if (value['code'] == 400) {
                   showDialog(
                     context: context,
-                    builder: (context) => PopupCenterCard(
+                    builder: (_) => PopupCenterCard(
                       onPrimaryButtonTap: () => {
                         Navigator.of(context).pop(),
                         context.pushNamed(AppRouter.topupSkyFi),
                       },
-                      onSecondaryButtonTap: () => Navigator.of(context).pop(),
-                      title: 'Thông báo',
+                      onSecondaryButtonTap: () {},
+                      title: context.l10n.translate('notification'),
                       description: value['message'],
-                      primaryButtonText: 'Nạp tiền',
-                      secondaryButtonText: 'Đóng',
+                      primaryButtonText: context.l10n.translate('topup'),
+                      secondaryButtonText:
+                          context.l10n.translate('close_button'),
                     ),
                   );
                 } else if (value['code'] == 201) {
                   print("value: ${value.toString()}");
                   showDialog(
                     context: context,
-                    builder: (context) => ConfirmationDialog(
+                    builder: (_) => ConfirmationDialog(
                       package: selectedPackage,
                       onConfirm: () {
                         ref
@@ -113,7 +116,7 @@ class ChangePackageSkyFiScreen extends ConsumerWidget {
                           if (value['code'] == 200) {
                             SnackBarApp.showSuccess(context,
                                 message: value['message']);
-                             Navigator.of(context).pop();
+                            Navigator.of(context).pop();
                           } else {
                             SnackBarApp.showError(context,
                                 message: value['message']);
@@ -132,7 +135,7 @@ class ChangePackageSkyFiScreen extends ConsumerWidget {
               });
             }
           },
-          text: 'Đổi gói',
+          text: context.l10n.translate('change_package'),
           height: 48,
           disabled: selectedPackage?.isSelected == false,
           textStyle: AppTextStyles.button.copyWith(

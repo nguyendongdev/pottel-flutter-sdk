@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:skyfi_sdk/utilities/common.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -29,7 +29,8 @@ class CartSkyfiScreen extends ConsumerWidget {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        title: Text(context.l10n.translate('cart'), style: AppTextStyles.heading),
+        title:
+            Text(context.l10n.translate('cart'), style: AppTextStyles.heading),
         centerTitle: true,
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
@@ -42,7 +43,9 @@ class CartSkyfiScreen extends ConsumerWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stack) => Center(
             child: Text(
-              context.l10n.translate('error_occurred_cart').replaceAll('{0}', error.toString()),
+              context.l10n
+                  .translate('error_occurred_cart')
+                  .replaceAll('{0}', error.toString()),
               style: AppTextStyles.body.copyWith(color: AppColors.red),
             ),
           ),
@@ -50,7 +53,7 @@ class CartSkyfiScreen extends ConsumerWidget {
               ? EmptyCart(
                   onContinueShopping: () {
                     // TODO: Navigate to shop
-                     Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   },
                   title: context.l10n.translate('empty_cart_title'),
                   description: context.l10n.translate('empty_cart_description'),
@@ -70,7 +73,7 @@ class CartSkyfiScreen extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
-                                    '${context.l10n.translate('products_count').replaceAll('{0}', cart.items.length.toString())} | ${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
+                                    '${context.l10n.translate('products_count').replaceAll('{0}', ref.watch(cartProvider.notifier).itemCount.toString())} | ${Common.formatCurrency(ref.watch(cartProvider.notifier).totalAmount.toInt().toString())} VND',
                                     style: AppTextStyles.title,
                                   ),
                                 ],
@@ -92,12 +95,14 @@ class CartSkyfiScreen extends ConsumerWidget {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            context.l10n.translate('product_label'),
+                                            context.l10n
+                                                .translate('product_label'),
                                             style: AppTextStyles.title,
                                           ),
                                         ),
                                         Text(
-                                          context.l10n.translate('price_column'),
+                                          context.l10n
+                                              .translate('price_column'),
                                           style: AppTextStyles.title,
                                         ),
                                       ],
@@ -126,7 +131,15 @@ class CartSkyfiScreen extends ConsumerWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        context.l10n.translate('products_count').replaceAll('{0}', cart.items.length.toString()),
+                                        context.l10n
+                                            .translate('products_count')
+                                            .replaceAll(
+                                                '{0}',
+                                                ref
+                                                    .watch(
+                                                        cartProvider.notifier)
+                                                    .itemCount
+                                                    .toString()),
                                         style: AppTextStyles.body,
                                       ),
                                       Text(
@@ -143,7 +156,8 @@ class CartSkyfiScreen extends ConsumerWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        context.l10n.translate('tax_service_fee'),
+                                        context.l10n
+                                            .translate('tax_service_fee'),
                                         style: AppTextStyles.body,
                                       ),
                                       Text(

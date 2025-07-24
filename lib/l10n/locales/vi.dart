@@ -49,6 +49,7 @@ const Map<String, String> viStrings = {
   'activate_sim': 'Kích hoạt SIM',
   'buy_sim': 'Mua SIM',
   'login': 'Đăng nhập',
+  'logout': 'Đăng xuất',
   'packages': 'Gói cước',
   'topup': 'Nạp tiền',
   'esim_travel': 'eSIM Du lịch',
@@ -120,7 +121,7 @@ const Map<String, String> viStrings = {
   // Compatible Devices Screen
   'mobile_devices_support_esim': 'Thiết bị di động có hỗ trợ eSIM',
   'esim_electronic_note':
-      'Lưu ý: eSIM là một loại eSIM điện tử (sử dụng mã QR) và không phải là thẻ eSIM vật lý lắp vào điện thoại, eSIM không dùng cho các loại đồng hồ thông minh',
+      'Lưu ý: eSIM là một loại sim điện tử (sử dụng mã QR) và không phải là thẻ sim vật lý lắp vào điện thoại, eSIM không dùng cho các loại đồng hồ thông minh',
   'device_search_hint': 'Nhập tên máy (ví dụ Iphone 15, SS Galaxy...)',
 
   // Detail eSIM Content
@@ -560,6 +561,7 @@ const Map<String, String> viStrings = {
   'camera_permission_note': '*Lưu ý: cấp quyền truy cập CAMERA cho thiết bị',
   'successful_connection': 'Kết nối thành công {0}',
   'call_terminated_by_admin': 'Cuộc gọi đã được tắt',
+  'record_video': 'Quay video',
 
   // History Mobile SkyFi Screen
   'mobile_history': 'Lịch sử di động',

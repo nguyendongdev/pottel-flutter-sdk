@@ -3,12 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../l10n/localization_extension.dart';
-
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/gradient_button.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../../routers/routers.dart';
 import '../../../utilities/common.dart';
 import '../../cart_skyfi/provider/cart_provider.dart';
@@ -115,7 +114,14 @@ class PreviewCart extends HookConsumerWidget {
                                   AppSpacing.buttonRadius),
                             ),
                           ),
-                          child: Text(context.l10n.translate('view_cart').replaceAll('{0}', cart.items.length.toString())),
+                          child: Text(context.l10n
+                              .translate('view_cart')
+                              .replaceAll(
+                                  '{0}',
+                                  ref
+                                      .watch(cartProvider.notifier)
+                                      .itemCount
+                                      .toString())),
                         ),
                       ),
                       const SizedBox(width: AppSpacing.lg),

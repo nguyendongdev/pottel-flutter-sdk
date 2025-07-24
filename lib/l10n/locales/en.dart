@@ -49,6 +49,7 @@ const Map<String, String> enStrings = {
   'activate_sim': 'Activate SIM',
   'buy_sim': 'Buy SIM',
   'login': 'Login',
+  'logout': 'Logout',
   'packages': 'Packages',
   'topup': 'Top up',
   'esim_travel': 'eSIM Travel',
@@ -567,6 +568,7 @@ const Map<String, String> enStrings = {
   'camera_permission_note': '*Note: grant CAMERA access permission for device',
   'successful_connection': 'Successfully connected to {0}',
   'call_terminated_by_admin': 'Call terminated',
+  'record_video': 'Record Video',
 
   // History Mobile SkyFi Screen
   'mobile_history': 'Mobile History',

@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
                         builder: (_) => PopScope(
                           canPop: false,
                           child: SkyfiSdk(
-                            phone: '+84999999999',
+                            phone: '0707040618',
                             env: SkyfiEnv.dev,
                             initialLocation: SkyfiRoute.home.path,
                             locale: AppLocale.vi,

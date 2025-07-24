@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/screens/account_info_skyfi/widgets/menu_item.dart';
 import 'package:skyfi_sdk/utilities/modal.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/widgets/PopupCenterCard.dart';
 import '../../core/widgets/Popup_notice.dart';
@@ -27,7 +27,7 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
     void onLogout() {
       ref.read(isLoginProvider.notifier).setIsLogin(false);
       ref.read(currentPhoneProvider.notifier).setCurrentPhone('');
-      ref.read(userInfoProviderProvider.notifier).setUserInfo(UserInfo());
+      ref.read(userInfoProviderProvider.notifier).setUserInfo(const UserInfo());
       StoreClient.setToken('');
       StoreClient.setPhone('');
     }
@@ -133,7 +133,7 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                               .popUntil((route) => route.isFirst),
                           context.goNamed(AppRouter.homeSkyFiNew),
                         },
-                        onSecondaryButtonTap: () => Navigator.of(context).pop(),
+                        onSecondaryButtonTap: () {},
                         title: context.l10n.translate('notification'),
                         description:
                             context.l10n.translate('logout_confirmation'),
