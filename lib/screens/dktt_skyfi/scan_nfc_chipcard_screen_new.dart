@@ -553,6 +553,7 @@ class _ScanNfcChipcardScreenNewState extends State<ScanNfcChipcardScreenNew>
             duration: Duration(milliseconds: 500), curve: Curves.ease);
       } on Exception catch (e) {
         final se = e.toString().toLowerCase();
+        print("(9) se: $se");
         String alertMsg = "An error has occurred while reading Passport!";
         if (e is PassportError) {
           if (se.contains("security status not satisfied")) {
@@ -560,9 +561,11 @@ class _ScanNfcChipcardScreenNewState extends State<ScanNfcChipcardScreenNew>
                 "Failed to initiate session with passport.\nCheck input data!";
           }
           _log.error("PassportError: ${e.message}");
+          print("(7) PassportError: ${e.message}");
         } else {
           _log.error(
               "An exception was encountered while trying to read Passport: $e");
+          print("(8) An exception was encountered while trying to read Passport: $e");
         }
 
         if (se.contains('timeout')) {
@@ -599,6 +602,7 @@ class _ScanNfcChipcardScreenNewState extends State<ScanNfcChipcardScreenNew>
       }
     } on Exception catch (e) {
       _log.error("Read MRTD error: $e");
+      print("(6) Read MRTD error: $e");
     }
   }
 
@@ -1074,7 +1078,7 @@ class _ScanNfcChipcardScreenNewState extends State<ScanNfcChipcardScreenNew>
                     ),
                     SizedBox(height: 12),
                     TextFormField(
-                        enabled: !_disabledInput(),
+                        enabled: true,
                         controller: _dob,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
@@ -1087,26 +1091,27 @@ class _ScanNfcChipcardScreenNewState extends State<ScanNfcChipcardScreenNew>
                           }
                           return null;
                         },
-                        onTap: () async {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          // Can pick date which dates 15 years back or more
-                          final now = DateTime.now();
-                          final firstDate =
-                              DateTime(now.year - 90, now.month, now.day);
-                          final lastDate =
-                              DateTime(now.year - 15, now.month, now.day);
-                          final initDate = _getDOBDate();
-                          final date = await _pickDate(context, firstDate,
-                              initDate ?? lastDate, lastDate);
+                        // onTap: () async {
+                        //   FocusScope.of(context).requestFocus(FocusNode());
+                        //   // Can pick date which dates 15 years back or more
+                        //   final now = DateTime.now();
+                        //   final firstDate =
+                        //       DateTime(now.year - 90, now.month, now.day);
+                        //   final lastDate =
+                        //       DateTime(now.year - 15, now.month, now.day);
+                        //   final initDate = _getDOBDate();
+                        //   final date = await _pickDate(context, firstDate,
+                        //       initDate ?? lastDate, lastDate);
 
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          if (date != null) {
-                            _dob.text = date;
-                          }
-                        }),
+                        //   FocusScope.of(context).requestFocus(FocusNode());
+                        //   if (date != null) {
+                        //     _dob.text = date;
+                        //   }
+                        // }
+                        ),
                     SizedBox(height: 12),
                     TextFormField(
-                        enabled: !_disabledInput(),
+                        enabled: true,
                         controller: _doe,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
@@ -1119,23 +1124,24 @@ class _ScanNfcChipcardScreenNewState extends State<ScanNfcChipcardScreenNew>
                           }
                           return null;
                         },
-                        onTap: () async {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          // Can pick date from tomorrow and up to 10 years
-                          final now = DateTime.now();
-                          final firstDate =
-                              DateTime(now.year, now.month, now.day + 1);
-                          final lastDate =
-                              DateTime(now.year + 10, now.month + 6, now.day);
-                          final initDate = _getDOEDate();
-                          final date = await _pickDate(context, firstDate,
-                              initDate ?? firstDate, lastDate);
+                        // onTap: () async {
+                        //   FocusScope.of(context).requestFocus(FocusNode());
+                        //   // Can pick date from tomorrow and up to 10 years
+                        //   final now = DateTime.now();
+                        //   final firstDate =
+                        //       DateTime(now.year, now.month, now.day + 1);
+                        //   final lastDate =
+                        //       DateTime(now.year + 10, now.month + 6, now.day);
+                        //   final initDate = _getDOEDate();
+                        //   final date = await _pickDate(context, firstDate,
+                        //       initDate ?? firstDate, lastDate);
 
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          if (date != null) {
-                            _doe.text = date;
-                          }
-                        }),
+                        //   FocusScope.of(context).requestFocus(FocusNode());
+                        //   if (date != null) {
+                        //     _doe.text = date;
+                        //   }
+                        // }
+                        ),
                     SizedBox(height: 12),
                     CheckboxListTile(
                       title: Text('DBA with PACE'),

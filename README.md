@@ -350,6 +350,21 @@ Navigator.push(
     ),
   ),
 );
+// Mở màn hình NFC example
+Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (_) => PopScope(
+      canPop: false, // Chặn hành động back/swipe
+      child: SkyfiSdk.toScreen(
+        initialLocation: SkyfiRoute.scanNfcChipcardNew.path,
+        phone: '0807991197', // Số điện thoại cần thiết
+        env: SkyfiEnv.dev, // Môi trường sản xuất
+        locale: AppLocale.vi,
+      ),
+    ),
+  ),
+);
 
 // Mở màn hình trang chủ với cấu hình mặc định
 Navigator.push(

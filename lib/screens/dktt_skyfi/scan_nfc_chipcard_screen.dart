@@ -501,6 +501,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
 
       final bacKeySeed = DBAKey(_docNumber.text, _getDOBDate()!, _getDOEDate()!,
           paceMode: _checkBoxPACE);
+      print("(10) go with IOS");
       _readMRTD(accessKey: bacKeySeed, isPace: _checkBoxPACE);
     } else {
       //PACE tab
@@ -518,6 +519,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
       if (errorText.isNotEmpty) return;
 
       final canKeySeed = CanKey(_can.text);
+      print("(11) go with Android");
       _readMRTD(accessKey: canKeySeed, isPace: true);
     }
   }
@@ -687,6 +689,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         // _scrollController.animateTo(300.0,
         //     duration: Duration(milliseconds: 500), curve: Curves.ease);
       } on Exception catch (e) {
+        print("(1) Exception Error: $e");
         final se = e.toString().toLowerCase();
         setState(() {
           _isReading = false;
@@ -696,8 +699,11 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
           if (se.contains("security status not satisfied")) {
             alertMsg = cardInitErrorMsg;
           }
+          print("(2) PassportError: ${e.message}");
           _log.error("PassportError: ${e.message}");
+          print("(3) PassportError: ${e.message}");
         } else {
+          print("(4) An exception was encountered while trying to read Passport: $e");
           _log.error(
               "An exception was encountered while trying to read Passport: $e");
         }
@@ -750,6 +756,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         }
       }
     } on Exception catch (e) {
+      print("(5) Read MRTD error: $e");
       _log.error("Read MRTD error: $e");
     }
   }
