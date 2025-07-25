@@ -1,25 +1,18 @@
 // Created by Crt Vavros, copyright © 2022 ZeroPass. All rights reserved.
 // ignore_for_file: prefer_adjacent_string_concatenation, prefer_interpolation_to_compose_strings
 
-import 'package:dmrtd/internal.dart';
-import 'package:expandable/expandable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'dart:async';
-import 'dart:convert';
-import 'dart:typed_data';
 import 'dart:io'; // Thêm import để check platform
 
 import 'package:dmrtd/dmrtd.dart';
 import 'package:dmrtd/extensions.dart';
+import 'package:dmrtd/src/proto/can_key.dart';
+import 'package:expandable/expandable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:logging/logging.dart';
-import 'package:dmrtd/src/proto/can_key.dart';
 import 'package:intl/intl.dart';
-
-import 'package:dmrtd/src/proto/ecdh_pace.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/scan_nfc_chipcard_screen.dart';
+import 'package:logging/logging.dart';
 
 class MrtdData {
   EfCardAccess? cardAccess;

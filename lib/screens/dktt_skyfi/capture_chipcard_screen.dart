@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image/image.dart' as img;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 
 import '../../routers/routers.dart';
 import '../../utilities/ekyc_helper.dart';
@@ -325,8 +326,8 @@ class _CaptureChipCardScreenState extends State<CaptureChipCardScreen>
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Chụp ảnh CCCD',
-          style: TextStyle(
+          context.l10n.translate('take_citizen_id_photo'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.w600,

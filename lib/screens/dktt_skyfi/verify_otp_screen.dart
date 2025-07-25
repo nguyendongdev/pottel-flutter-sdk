@@ -8,7 +8,6 @@ import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/network/api.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/models/save_log_respone/save_log_respone.dart';
 import 'package:skyfi_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
@@ -73,8 +72,7 @@ class VerifyOtpScreen extends HookConsumerWidget {
     }
 
     ///api/bss/videocall/check-otp-dktt-update/{phone}/{otp}
-    void checkOtpDkttUpdate(
-        String otp, String phoneNumber) async {
+    void checkOtpDkttUpdate(String otp, String phoneNumber) async {
       try {
         final response = await api
             .post('/bss/videocall/check-otp-dktt-update/$phoneNumber/$otp');

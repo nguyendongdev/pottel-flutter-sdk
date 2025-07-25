@@ -103,7 +103,8 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
             return SnackBarApp.showError(context,
                 message: context.l10n.translate('document_limit_exceeded'));
           }
-          SnackBarApp.showSuccess(context, message: context.l10n.translate('success_dktt'));
+          SnackBarApp.showSuccess(context,
+              message: context.l10n.translate('success_dktt'));
           // loading true = disable button next
           isCanNext.value = true;
           print('base64FrontImage : ${response.data}');
@@ -143,7 +144,8 @@ class PreviewCaptureChipCardScreen extends HookConsumerWidget {
                 message: EkycHelper.getMessageErrorOcr(response.data['code']));
           }
 
-          SnackBarApp.showSuccess(context, message: context.l10n.translate('success_dktt'));
+          SnackBarApp.showSuccess(context,
+              message: context.l10n.translate('success_dktt'));
           isCanNext.value = true;
           ref
               .read(saveLogDkttNotifierProvider.notifier)

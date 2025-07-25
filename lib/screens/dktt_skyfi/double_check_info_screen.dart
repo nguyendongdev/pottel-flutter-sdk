@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
-import '../../core/widgets/app_input.dart';
 import '../../core/widgets/bottom_button.dart';
 import '../../core/widgets/snack_bar_app.dart';
 import '../../routers/routers.dart';
@@ -34,7 +33,7 @@ class DoubleCheckInfoScreen extends HookConsumerWidget {
         ),
         leading: IconButton(
           onPressed: () {
-             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -53,32 +52,44 @@ class DoubleCheckInfoScreen extends HookConsumerWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
-              InfoDisplay(title: context.l10n.translate('full_name_dktt'), value: saveLog.fullName ?? ''),
-              const SizedBox(height: AppSpacing.sm),
-              InfoDisplay(title: context.l10n.translate('gender_dktt'), value: saveLog.gender ?? ''),
+              InfoDisplay(
+                  title: context.l10n.translate('full_name_dktt'),
+                  value: saveLog.fullName ?? ''),
               const SizedBox(height: AppSpacing.sm),
               InfoDisplay(
-                  title: context.l10n.translate('citizen_id_number'), value: saveLog.idNumber ?? ''),
+                  title: context.l10n.translate('gender_dktt'),
+                  value: saveLog.gender ?? ''),
+              const SizedBox(height: AppSpacing.sm),
+              InfoDisplay(
+                  title: context.l10n.translate('citizen_id_number'),
+                  value: saveLog.idNumber ?? ''),
               const SizedBox(height: AppSpacing.sm),
               Row(
                 children: [
                   Expanded(
                     child: InfoDisplay(
-                        title: context.l10n.translate('issue_date_dktt'), value: saveLog.issueDate ?? ''),
+                        title: context.l10n.translate('issue_date_dktt'),
+                        value: saveLog.issueDate ?? ''),
                   ),
                   Expanded(
                     child: InfoDisplay(
-                        title: context.l10n.translate('expiry_date_dktt'), value: saveLog.expireDate ?? ''),
+                        title: context.l10n.translate('expiry_date_dktt'),
+                        value: saveLog.expireDate ?? ''),
                   ),
                 ],
               ),
               const SizedBox(height: AppSpacing.sm),
-              InfoDisplay(title: context.l10n.translate('date_of_birth'), value: saveLog.birthDay ?? ''),
-              const SizedBox(height: AppSpacing.sm),
-              InfoDisplay(title: context.l10n.translate('place_of_issue_dktt'), value: saveLog.issuePlace ?? ''),
+              InfoDisplay(
+                  title: context.l10n.translate('date_of_birth'),
+                  value: saveLog.birthDay ?? ''),
               const SizedBox(height: AppSpacing.sm),
               InfoDisplay(
-                  title: context.l10n.translate('permanent_address'), value: saveLog.address ?? ''),
+                  title: context.l10n.translate('place_of_issue_dktt'),
+                  value: saveLog.issuePlace ?? ''),
+              const SizedBox(height: AppSpacing.sm),
+              InfoDisplay(
+                  title: context.l10n.translate('permanent_address'),
+                  value: saveLog.address ?? ''),
               const SizedBox(height: AppSpacing.sm),
             ],
           ),

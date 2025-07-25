@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:skyfi_sdk/l10n/localization_extension.dart';
+
 import 'widgets/scan_overlay.dart';
 
 class ScanBarcodeScreen extends StatefulWidget {
@@ -44,8 +45,6 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
     controller.stop();
   }
 
-  
-
   void _onManualInput() {
     context.pop();
   }
@@ -54,10 +53,10 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-      
+
       if (image != null) {
         final result = await controller.analyzeImage(image.path);
-        
+
         if (result != null && result.barcodes.isNotEmpty) {
           final barcode = result.barcodes.first.rawValue;
           if (barcode != null && mounted) {
@@ -78,7 +77,9 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(context.l10n.translate('image_read_error').replaceAll('{0}', e.toString())),
+            content: Text(context.l10n
+                .translate('image_read_error')
+                .replaceAll('{0}', e.toString())),
             backgroundColor: Colors.red,
           ),
         );
