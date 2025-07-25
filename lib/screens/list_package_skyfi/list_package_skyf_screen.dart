@@ -157,7 +157,7 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
         if (data['code'] == 400) {
           showDialog(
             context: context,
-            builder: (context) => PopupCenterCard(
+            builder: (_) => PopupCenterCard(
               title: context.l10n.translate('notification'),
               description: data['message'],
               secondaryButtonText: context.l10n.translate('topup_money_action'),

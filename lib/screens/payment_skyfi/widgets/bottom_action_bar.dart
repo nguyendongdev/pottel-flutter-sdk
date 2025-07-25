@@ -72,6 +72,7 @@ class BottomActionBar extends HookConsumerWidget {
         final itemsJson = items?.map((item) => item.toJson()).toList();
         final orderJson = order.toJson();
         orderJson['items'] = itemsJson;
+        orderJson['source'] = 'SDK';
         final response =
             await api.post('/bss/app/create-order', data: orderJson);
         final data = CreateOrder.fromJson(response.data);

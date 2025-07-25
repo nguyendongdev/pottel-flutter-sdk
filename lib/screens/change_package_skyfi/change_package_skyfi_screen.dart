@@ -91,8 +91,8 @@ class ChangePackageSkyFiScreen extends ConsumerWidget {
                         Navigator.of(_).pop(),
                         context.pushNamed(AppRouter.topupSkyFi),
                       },
-                      onSecondaryButtonTap: () => Navigator.of(_).pop(),
-                      title: context.l10n.translate('notification'),
+                      onSecondaryButtonTap: () => Navigator.of(context).pop(),
+                      title: 'Thông báo',
                       description: value['message'],
                       primaryButtonText: context.l10n.translate('topup'),
                       secondaryButtonText:
@@ -116,7 +116,7 @@ class ChangePackageSkyFiScreen extends ConsumerWidget {
                           if (value['code'] == 200) {
                             SnackBarApp.showSuccess(_,
                                 message: value['message']);
-                            Navigator.of(_).pop();
+                            Navigator.of(context).pop();
                           } else {
                             SnackBarApp.showError(_, message: value['message']);
                           }

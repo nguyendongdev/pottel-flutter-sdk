@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
                         builder: (_) => PopScope(
                           canPop: false,
                           child: SkyfiSdk(
-                            phone: '+84999999999',
+                            phone: '0707040618',
                             env: SkyfiEnv.dev,
                             initialLocation: SkyfiRoute.home.path,
                             locale: AppLocale.vi,
@@ -109,6 +109,26 @@ class _MyAppState extends State<MyApp> {
                         ));
                   },
                   child: const Text('Mở màn thông tin gói cước'),
+                ),
+                // Mở màn hình NFC
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => PopScope(
+                          canPop: false,
+                          child: SkyfiSdk.toScreen(
+                            initialLocation: SkyfiRoute.scanNfcChipcardNew.path,
+                            phone: '+84999999999',
+                            locale: AppLocale.vi,
+                            env: SkyfiEnv.dev,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Mở màn hình NFC'),
                 ),
               ],
             ),

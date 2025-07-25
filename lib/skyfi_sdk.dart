@@ -300,8 +300,9 @@ enum SkyfiRoute {
   infoRegis('/info-regis'),
   topupSkyFi('/topup-skyfi'),
   infoRegisSkyFi('/info-regis'),
-  detailDataUsage('/detail-data-usage');
-
+  detailDataUsage('/detail-data-usage'),
+  scanNfcChipcardNew('/scan-nfc-chipcard-new');
+  
   const SkyfiRoute(this.path);
   final String path;
 }
