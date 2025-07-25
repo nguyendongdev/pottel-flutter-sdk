@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
-
-import '../../../l10n/localization_extension.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/gradient_button.dart';
 import '../../../core/widgets/outline_button.dart';
+import '../../../l10n/localization_extension.dart';
 
 class ModalInputMoneyFail extends HookConsumerWidget {
   ModalInputMoneyFail({
@@ -35,8 +31,7 @@ class ModalInputMoneyFail extends HookConsumerWidget {
           Text(context.l10n.translate('notification'),
               style: AppTextStyles.title.copyWith(fontSize: AppSpacing.xl)),
           const SizedBox(height: AppSpacing.sm),
-          Text(
-              context.l10n.translate('insufficient_balance_message'),
+          Text(context.l10n.translate('insufficient_balance_message'),
               style: AppTextStyles.label.copyWith(
                 color: AppColors.text,
               )),
@@ -48,7 +43,7 @@ class ModalInputMoneyFail extends HookConsumerWidget {
                 child: OutlineButton(
                   height: 48,
                   onPressed: () {
-                     Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   },
                   text: context.l10n.translate('cancel'),
                   textStyle: AppTextStyles.button.copyWith(

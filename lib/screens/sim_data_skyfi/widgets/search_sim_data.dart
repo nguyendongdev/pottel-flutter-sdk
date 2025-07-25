@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/screens/sim_data_skyfi/provider/simType_provider.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 import 'package:skyfi_sdk/utilities/search_sim.dart';
-
-import '../../../l10n/localization_extension.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/gradient_button.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../../network/api.dart';
 import '../models/list_sims/list_sims.dart';
 import '../models/list_sims/result.dart';
@@ -208,11 +205,12 @@ class SearchSimData extends HookConsumerWidget {
         children: [
           Row(
             children: [
-              Text(context.l10n.translate('choose_another_number_title'), style: AppTextStyles.heading),
+              Text(context.l10n.translate('choose_another_number_title'),
+                  style: AppTextStyles.heading),
               const Spacer(),
               IconButton(
                 onPressed: () {
-                   Navigator.of(context).pop();
+                  Navigator.of(context).pop();
                 },
                 icon: const Icon(Icons.close),
               ),
@@ -283,7 +281,7 @@ class SearchSimData extends HookConsumerWidget {
                         element.msisdn == ref.watch(chooseSimSearchProvider),
                   ),
                 );
-                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               text: context.l10n.translate('confirm'),
               height: 48,

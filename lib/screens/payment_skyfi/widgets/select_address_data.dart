@@ -35,13 +35,13 @@ class SelectAddressData extends HookConsumerWidget {
     String getTitle() {
       switch (step) {
         case 0:
-          return 'Chọn Tỉnh/Thành phố';
+          return context.translate('select_province');
         case 1:
-          return 'Chọn Quận/Huyện';
+          return context.translate('select_district');
         case 2:
-          return 'Chọn Phường/Xã';
+          return context.translate('select_ward');
         default:
-          return 'Chọn địa chỉ nhận SIM';
+          return context.translate('choose_sim_delivery_address');
       }
     }
 

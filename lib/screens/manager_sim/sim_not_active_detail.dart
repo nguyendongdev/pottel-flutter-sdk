@@ -251,7 +251,8 @@ class SimNotActiveDetail extends ConsumerWidget {
           _buildDetailItem(
             context,
             label: context.l10n.translate('validity_sim_detail'),
-            value: '${esim.validityDays ?? 5} ${context.l10n.translate('days_unit_sim')}',
+            value:
+                '${esim.validityDays ?? 5} ${context.l10n.translate('days_unit_sim')}',
           ),
 
           _buildDetailItem(
@@ -357,9 +358,13 @@ class SimNotActiveDetail extends ConsumerWidget {
   void _showDeviceGuide(String deviceType, BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.l10n.translate('installation_guide_title').replaceAll('{0}', deviceType)),
-        content: Text(context.l10n.translate('installation_guide_content').replaceAll('{0}', deviceType)),
+      builder: (_) => AlertDialog(
+        title: Text(context.l10n
+            .translate('installation_guide_title')
+            .replaceAll('{0}', deviceType)),
+        content: Text(context.l10n
+            .translate('installation_guide_content')
+            .replaceAll('{0}', deviceType)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

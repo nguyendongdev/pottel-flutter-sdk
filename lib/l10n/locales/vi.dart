@@ -26,6 +26,7 @@ const Map<String, String> viStrings = {
       'Bạn đang có gói cước {0} (HSD:  {1}). Bằng việc bấm "Tiếp tục", bạn đồng ý gia hạn gói cước hiện tại để đăng ký gói cước mới.',
   'high_speed_data': 'Data tốc độ cao: {0}GB/ngày',
   'per_month': '/THÁNG',
+
   // eSIM Travel
   'esim_in_use': 'eSIM đang sử dụng',
   'esim_not_installed': 'eSIM chưa cài',
@@ -39,6 +40,7 @@ const Map<String, String> viStrings = {
   // Package cards
   'details': 'Chi tiết',
   'data_per_day': 'Data: {0}GB/ngày',
+  'data_never_expire': 'Data: không giới hạn',
   'call_minutes': 'Phút gọi: {0} phút gọi liên mạng',
   'sms_messages': 'SMS: {0} tin nhắn nội mạng',
   'register': 'Đăng ký',
@@ -53,12 +55,12 @@ const Map<String, String> viStrings = {
   'activate_sim': 'Kích hoạt SIM',
   'buy_sim': 'Mua SIM',
   'login': 'Đăng nhập',
-  'logout': 'Đăng xuất',
   'packages': 'Gói cước',
   'topup': 'Nạp tiền',
   'esim_travel': 'eSIM Du lịch',
   'hot_packages': 'Gói cước hot',
   'explore': 'Khám phá',
+  'top_up_now': 'Nạp ngay',
 
   // Wallet card
   'main_account': 'Tài khoản chính',
@@ -125,7 +127,7 @@ const Map<String, String> viStrings = {
   // Compatible Devices Screen
   'mobile_devices_support_esim': 'Thiết bị di động có hỗ trợ eSIM',
   'esim_electronic_note':
-      'Lưu ý: eSIM là một loại sim điện tử (sử dụng mã QR) và không phải là thẻ sim vật lý lắp vào điện thoại, eSIM không dùng cho các loại đồng hồ thông minh',
+      'Lưu ý: eSIM là một loại eSIM điện tử (sử dụng mã QR) và không phải là thẻ eSIM vật lý lắp vào điện thoại, eSIM không dùng cho các loại đồng hồ thông minh',
   'device_search_hint': 'Nhập tên máy (ví dụ Iphone 15, SS Galaxy...)',
 
   // Detail eSIM Content
@@ -230,6 +232,7 @@ const Map<String, String> viStrings = {
   'price_policy': 'Điều khoản và chính sách',
   'version': 'Phiên bản',
   'manage_esim': 'Quản lý eSIM du lịch đã mua',
+  'logout': 'Đăng xuất',
   'personal_data_protection_policy': 'Chính sách bảo vệ dữ liệu cá nhân',
   'refund_policy': 'Chính sách hoàn tiền',
   'payment_policy': 'Chính sách thanh toán',
@@ -323,6 +326,8 @@ const Map<String, String> viStrings = {
   'general_error_occurred': 'Đã có lỗi xảy ra',
   'iccid_info_error': 'Lỗi khi lấy thông tin từ ICCID',
   'sim_check_error': 'Lỗi khi kiểm tra sim',
+  'contract_detail_loading': 'Đang lấy thông tin hợp đồng...',
+  'contract_detail_saving': 'Đang lưu thông tin...',
   'contract_info_error': 'Lỗi xem thông tin hợp đồng',
   'barcode_not_found': 'Không tìm thấy mã vạch trong ảnh',
   'image_read_error': 'Lỗi khi đọc ảnh: {0}',
@@ -388,6 +393,7 @@ const Map<String, String> viStrings = {
   'reading_in_progress': 'Đang đọc ...',
   'connecting_to_teller': 'Đang kết nối với teller...',
   'saving_information': 'Đang lưu thông tin...',
+  'request_in_progress': 'Đang xử lý yêu cầu...',
 
   // Button Labels
   'take_photo': 'Chụp ảnh',
@@ -586,7 +592,6 @@ const Map<String, String> viStrings = {
   'successful_connection': 'Kết nối thành công {0}',
   'call_terminated_by_admin': 'Cuộc gọi đã được tắt',
   'record_video': 'Quay video',
-
   // History Mobile SkyFi Screen
   'mobile_history': 'Lịch sử di động',
   'topup_tab': 'Nạp thẻ',
@@ -753,6 +758,7 @@ const Map<String, String> viStrings = {
   'please_choose_payment_method': 'Vui lòng chọn phương thức thanh toán',
   'esim_not_support_cod': 'ESIM không hỗ trợ thanh toán COD',
   'error_general': 'Lỗi',
+  'creating_order': 'Đang tạo đơn hàng...',
 
   // Payment Skyfi Screen
   'payment_title': 'Thanh toán',
@@ -806,6 +812,8 @@ const Map<String, String> viStrings = {
   'email_required': 'Email là bắt buộc',
   'invalid_email': 'Email không hợp lệ',
   'phone_required': 'Số điện thoại là bắt buộc',
+  'phone_starts_with_070': 'Số điện thoại phải bắt đầu bằng 070',
+  'order_creation_failed': 'Lỗi: Không thể tạo đơn hàng',
   'invalid_phone': 'Số điện thoại không hợp lệ',
   'name_required': 'Tên là bắt buộc',
   'name_max_length': 'Tên không được vượt quá 70 ký tự',
@@ -885,4 +893,6 @@ const Map<String, String> viStrings = {
   // Verify OTP Screen
   'confirm_not_using_skyfi_numbers':
       'Bạn xác nhận KHÔNG SỬ DỤNG Số TB SkyFi nào trong danh sách. Nếu chọn "Đồng ý" các số thuê bao gợi ý sẽ được đưa vào danh sách cần cập nhật lại TTTB?',
+
+  'update': 'Cập nhật',
 };

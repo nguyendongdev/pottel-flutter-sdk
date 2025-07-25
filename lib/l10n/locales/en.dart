@@ -31,6 +31,7 @@ const Map<String, String> enStrings = {
   'esim_in_use': 'eSIM in use',
   'esim_not_installed': 'eSIM not installed',
   'countries': 'Countries',
+  'data_never_expire': 'Data never expire',
   'coverage_area': 'Coverage area',
   'singapore': 'Singapore',
   'iccid': 'ICCID',
@@ -54,12 +55,12 @@ const Map<String, String> enStrings = {
   'activate_sim': 'Activate SIM',
   'buy_sim': 'Buy SIM',
   'login': 'Login',
-  'logout': 'Logout',
   'packages': 'Packages',
   'topup': 'Top up',
   'esim_travel': 'eSIM Travel',
   'hot_packages': 'Hot packages',
   'explore': 'Explore',
+  'top_up_now': 'Top up now',
 
   // Wallet card
   'main_account': 'Main account',
@@ -231,6 +232,7 @@ const Map<String, String> enStrings = {
   'price_policy': 'Terms and Policies',
   'version': 'Version',
   'manage_esim': 'Manage purchased travel eSIM',
+  'logout': 'Logout',
   'personal_data_protection_policy': 'Personal Data Protection Policy',
   'refund_policy': 'Refund Policy',
   'payment_policy': 'Payment Policy',
@@ -328,6 +330,8 @@ const Map<String, String> enStrings = {
   'general_error_occurred': 'An error has occurred',
   'iccid_info_error': 'Error getting information from ICCID',
   'sim_check_error': 'Error checking SIM',
+  'contract_detail_loading': 'Loading contract information...',
+  'contract_detail_saving': 'Saving contract information...',
   'contract_info_error': 'Error viewing contract information',
   'barcode_not_found': 'No barcode found in image',
   'image_read_error': 'Error reading image: {0}',
@@ -394,6 +398,7 @@ const Map<String, String> enStrings = {
   'reading_in_progress': 'Reading ...',
   'connecting_to_teller': 'Connecting to teller...',
   'saving_information': 'Saving information...',
+  'request_in_progress': 'Processing request...',
 
   // Button Labels
   'take_photo': 'Take Photo',
@@ -598,7 +603,6 @@ const Map<String, String> enStrings = {
   'camera_permission_note': '*Note: grant CAMERA access permission for device',
   'successful_connection': 'Successfully connected to {0}',
   'call_terminated_by_admin': 'Call terminated',
-  'record_video': 'Record Video',
 
   // History Mobile SkyFi Screen
   'mobile_history': 'Mobile History',
@@ -759,6 +763,7 @@ const Map<String, String> enStrings = {
   'confirm_button': 'Confirm',
   'success_title': 'Success',
   'order_created_successfully': 'Order created successfully',
+  'creating_order': 'Creating order...',
   'view_details_button': 'View Details',
   'buy_more_button': 'Buy More',
   'please_choose_payment_method': 'Please choose a payment method',
@@ -817,6 +822,8 @@ const Map<String, String> enStrings = {
   'email_required': 'Email is required',
   'invalid_email': 'Invalid email',
   'phone_required': 'Phone number is required',
+  'phone_starts_with_070': 'Phone number must start with 070',
+  'order_creation_failed': 'Order creation failed',
   'invalid_phone': 'Invalid phone number',
   'name_required': 'Name is required',
   'name_max_length': 'Name must not exceed 70 characters',
@@ -895,4 +902,6 @@ const Map<String, String> enStrings = {
   //confirm_not_using_skyfi_numbers
   'confirm_not_using_skyfi_numbers':
       'You confirm that you do not use any SkyFi numbers in the list. If you select "Agree", the suggested subscriber numbers will be added to the list that needs to be updated.',
+
+  'update': 'Update',
 };

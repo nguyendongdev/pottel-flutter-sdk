@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 import 'package:skyfi_sdk/screens/topup_skyfi/repositorty/topup_repository.dart';
 
 import '../../core/constants/colors.dart';
@@ -61,9 +62,9 @@ class TopupSkyFiScreen extends HookConsumerWidget {
         isValidPhone.value =
             phone.length == 10 && RegExp(r'^(070)(\d{7})$').hasMatch(phone);
         if (phone.length != 10) {
-          textError.value = 'Số điện thoại không hợp lệ';
+          textError.value = context.translate('invalid_phone');
         } else if (!RegExp(r'^(070)(\d{7})$').hasMatch(phone)) {
-          textError.value = 'Số điện thoại phải bắt đầu bằng 070';
+          textError.value = context.translate('phone_starts_with_070');
         } else {
           textError.value = null;
         }
@@ -95,7 +96,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
             return;
           }
           SnackBarApp.showError(context,
-              message: 'Lỗi: Không thể tạo đơn hàng');
+              message: context.translate('order_creation_failed'));
 
           // Clear selections
           // ref.read(selectedAmountNotifierProvider.notifier).clearSelection();
@@ -116,15 +117,15 @@ class TopupSkyFiScreen extends HookConsumerWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text(
-          'Nạp tiền',
+        title: Text(
+          context.translate('topup'),
           style: AppTextStyles.heading,
         ),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.text),
           onPressed: () {
-             Navigator.of(context).pop();
+            context.pop();
           },
         ),
       ),
@@ -172,7 +173,6 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                         'assets/icons/feat_sim_global.svg',
                         width: 20,
                         height: 20,
-                        package: 'skyfi_sdk',
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -181,7 +181,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Số điện thoại',
+                            context.translate('phone_number'),
                             style: AppTextStyles.label.copyWith(
                               color: AppColors.textGrey,
                             ),
@@ -191,13 +191,15 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                             style: AppTextStyles.heading,
                             keyboardType: TextInputType.phone,
                             maxLength: 10, // 10 digits + 2 spaces
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
-                              hintText: 'Nhập số điện thoại SkyFi',
+                              hintText:
+                                  context.translate('enter_phone_number') +
+                                      ' SkyFi',
                               counterText: '', // Hide character counter
                             ),
                           ),
@@ -225,7 +227,9 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                     error: (error, stack) => Center(
                       child: SelectableText.rich(
                         TextSpan(
-                          text: 'Lỗi: ${error.toString()}',
+                          text: context
+                              .translate('error_loading_data_manager')
+                              .replaceAll('{error}', error.toString()),
                           style: AppTextStyles.body.copyWith(color: Colors.red),
                         ),
                       ),
@@ -233,9 +237,9 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                     loading: () =>
                         const Center(child: CircularProgressIndicator()),
                     data: (data) => data == null || data.isEmpty
-                        ? const Center(
+                        ? Center(
                             child: Text(
-                              'Không có dữ liệu',
+                              context.translate('no_data'),
                               style: AppTextStyles.body,
                             ),
                           )
@@ -286,7 +290,9 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                     color: isButtonEnabled ? AppColors.white : AppColors.text,
                   ),
                   onPressed: () => handleTopup(),
-                  text: isCreatingOrder ? 'Đang xử lý...' : 'Nạp ngay',
+                  text: isCreatingOrder
+                      ? context.translate('processing')
+                      : context.translate('top_up_now'),
                 ),
               ),
             ],
@@ -295,7 +301,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
           if (isCreatingOrder)
             Container(
               color: Colors.black.withValues(alpha: 0.3),
-              child: const Center(
+              child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -305,7 +311,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                     ),
                     SizedBox(height: 16),
                     Text(
-                      'Đang xử lý yêu cầu...',
+                      context.translate('request_in_progress'),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
