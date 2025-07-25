@@ -27,8 +27,8 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NFCReaderUsageDescription</key>
-	<string>SkyFiSdk need access to your NFC to read data from your card</string>
-	<key>NSCalendarsUsageDescription</key>
+	<!-- <string>SkyFiSdk need access to your NFC to read data from your card</string>
+	<key>NSCalendarsUsageDescription</key> -->
 	<string>SkyFiSdk need access to your calendar to save events</string>
 	<key>NSCameraUsageDescription</key>
 	<string>SkyFiSdk need access to your camera to scan QR codes</string>
@@ -55,7 +55,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>com.apple.developer.nfc.readersession.formats</key>
+	<!-- <key>com.apple.developer.nfc.readersession.formats</key>
 	<array>
 		<string>NFCISO7816</string>
 	</array>
@@ -103,6 +103,6 @@
 		<string>A0000002480200</string>
 		<string>A0000002480300</string>
 		<string>A00000045645444C2D3031</string>
-	</array>
+	</array> -->
 </dict>
 </plist>
