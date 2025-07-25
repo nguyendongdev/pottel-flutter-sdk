@@ -8,6 +8,7 @@ import 'package:skyfi_sdk/modals/modalMessage.dart';
 import 'package:skyfi_sdk/network/store.dart';
 import 'package:skyfi_sdk/skyfi_sdk_auth.dart';
 import 'package:skyfi_sdk/skyfi_sdk_config.dart';
+import 'package:skyfi_sdk/utilities/common.dart';
 
 import 'data/configs/app_configs.dart';
 import 'routers/routers.dart';
@@ -48,6 +49,16 @@ class SkyfiSdk extends StatefulWidget {
       initialLocation: initialLocation,
       phone: phone,
       env: env,
+      locale: locale,
+    );
+  }
+
+  // open Common.openSkyFiApp();
+  static openRegisSkyFi({
+    SkyfiEnv env = SkyfiEnv.dev,
+    AppLocale locale = AppLocale.vi,
+  }) async {
+    await Common.openRegisSkyFiApp(
       locale: locale,
     );
   }
@@ -302,7 +313,7 @@ enum SkyfiRoute {
   infoRegisSkyFi('/info-regis'),
   detailDataUsage('/detail-data-usage'),
   scanNfcChipcardNew('/scan-nfc-chipcard-new');
-  
+
   const SkyfiRoute(this.path);
   final String path;
 }

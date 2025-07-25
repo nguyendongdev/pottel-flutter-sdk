@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skyfi_sdk/utilities/common.dart';
 
 import '../../routers/routers.dart';
 
@@ -42,8 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 child: const Text('SDK SkyFi Home')),
             ElevatedButton(
                 onPressed: () {
-                  // navigate to login screen
-                  context.pushNamed(AppRouter.infoRegis);
+                   Common.openRegisSkyFiApp();
                 },
                 child: const Text('SDK SkyFi DKTT')),
             ElevatedButton(
