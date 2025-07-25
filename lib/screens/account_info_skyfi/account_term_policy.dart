@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/network/api.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/screens/account_info_skyfi/account_list_pdf.dart';
@@ -14,7 +15,7 @@ class AccountTermPolicy extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final api = API();
-
+    String languageCode = context.l10n.locale.languageCode;
     checkTermAndCondition() async {
       try {
         final response = await api.get('/bss/app/confirm-terms-policy');
@@ -28,8 +29,8 @@ class AccountTermPolicy extends HookConsumerWidget {
         backgroundColor: AppColors.white,
         elevation: 0,
         centerTitle: false,
-        title: const Text(
-          'Điều khoản và chính sách',
+        title: Text(
+          context.translate('price_policy'),
           style: AppTextStyles.heading,
         ),
         leading: IconButton(
@@ -43,7 +44,7 @@ class AccountTermPolicy extends HookConsumerWidget {
           child: Column(
             children: [
               MenuItem(
-                title: 'Chính sách bảo vệ dữ liệu cá nhân',
+                title: context.translate('personal_data_protection_policy'),
                 iconPath: 'assets/icons/file-edit.svg',
                 onTap: () {
                   checkTermAndCondition();
@@ -51,64 +52,69 @@ class AccountTermPolicy extends HookConsumerWidget {
                     AppRouter.webviewTermsSkyfi,
                     extra: {
                       'url':
-                          'https://skyfi.vn/vi/personal-data-protection-policy?src=app',
-                      'title': 'Chính sách bảo vệ dữ liệu cá nhân',
+                          'https://skyfi.vn/${languageCode}/personal-data-protection-policy?src=app',
+                      'title':
+                          context.translate('personal_data_protection_policy'),
                       'isCheckbox': true,
                     },
                   );
                 },
               ),
               MenuItem(
-                title: 'Chính sách hoàn tiền',
+                title: context.translate('refund_policy'),
                 iconPath: 'assets/icons/file-edit.svg',
                 onTap: () {
                   context.pushNamed(
                     AppRouter.webviewTermsSkyfi,
                     extra: {
-                      'url': 'https://skyfi.vn/vi/refund-policy?src=app',
-                      'title': 'Chính sách hoàn tiền',
+                      'url':
+                          'https://skyfi.vn/${languageCode}/refund-policy?src=app',
+                      'title': context.translate('refund_policy'),
                       'isCheckbox': false,
                     },
                   );
                 },
               ),
               MenuItem(
-                title: 'Chính sách thanh toán',
+                title: context.translate('payment_policy'),
                 iconPath: 'assets/icons/file-edit.svg',
                 onTap: () {
                   context.pushNamed(
                     AppRouter.webviewTermsSkyfi,
                     extra: {
-                      'url': 'https://skyfi.vn/vi/payment-policy?src=app',
-                      'title': 'Chính sách thanh toán',
+                      'url':
+                          'https://skyfi.vn/${languageCode}/payment-policy?src=app',
+                      'title': context.translate('payment_policy'),
                       'isCheckbox': false,
                     },
                   );
                 },
               ),
               MenuItem(
-                title: 'Điều khoản giao dịch chung',
+                title: context.translate('general_transaction_terms'),
                 iconPath: 'assets/icons/file-edit.svg',
                 onTap: () {
                   context.pushNamed(
                     AppRouter.webviewTermsSkyfi,
                     extra: {
-                      'url': 'https://skyfi.vn/vi/terms-and-conditions?src=app',
-                      'title': 'Điều khoản giao dịch chung',
+                      'url':
+                          'https://skyfi.vn/${languageCode}/terms-and-conditions?src=app',
+                      'title': context.translate('general_transaction_terms'),
                       'isCheckbox': false,
                     },
                   );
                 },
               ),
               MenuItem(
-                title: 'Chính sách bảo mật và Cookies',
+                title: context.translate('cookies_policy'),
                 iconPath: 'assets/icons/file-edit.svg',
                 onTap: () {
                   context.pushNamed(
                     AppRouter.webviewTermsSkyfi,
                     extra: {
-                      'url': 'https://skyfi.vn/vi/cookies-policy?src=app',
-                      'title': 'Chính sách bảo mật và Cookies',
+                      'url':
+                          'https://skyfi.vn/${languageCode}/cookies-policy?src=app',
+                      'title': context.translate('cookies_policy'),
                       'isCheckbox': false,
                     },
                   );
@@ -116,7 +122,7 @@ class AccountTermPolicy extends HookConsumerWidget {
                 showDivider: false,
               ),
               MenuItem(
-                title: 'Hợp đồng mẫu',
+                title: context.translate('sample_contract'),
                 iconPath: 'assets/icons/file-edit.svg',
                 onTap: () {
                   context.pushNamed(
@@ -124,43 +130,39 @@ class AccountTermPolicy extends HookConsumerWidget {
                     extra: {
                       'items': [
                         ItemPdf(
-                          title:
-                              'Bản xác nhận thông tin thuê bao đăng ký dịch vụ viên thông di động mặt đất',
+                          title: context.translate('contract_1'),
                           link:
                               'https://skyfi.vn/assets/document/sample-contract/BAN_XAC_NHAN_THONG_TIN_THUE_BAO.pdf',
                         ),
                         ItemPdf(
-                          title:
-                              'Hợp đồng cung cấp và sử dụng DV viên thông di động mặt đất',
+                          title: context.translate('contract_2'),
                           link:
                               'https://skyfi.vn/assets/document/sample-contract/HOP_DONG_CUNG_CAP_VA_SU_DUNG_DICH_VU.pdf',
                         ),
                         ItemPdf(
-                          title:
-                              'BM01-Danh sách thuê bao đăng ký sử dụng DV viên thông',
+                          title: context.translate('contract_3'),
                           link:
                               'https://skyfi.vn/assets/document/sample-contract/BIEU_MAU_01_DANH_SACH_THUE_BAO_KH_CA_NHAN_TU_THUE_BAO_THU_4_TRO.pdf',
                         ),
                         ItemPdf(
-                          title:
-                              'BM02-Danh sách thuê bao đăng ký sử dụng DV viên thông',
+                          title: context.translate('contract_4'),
                           link:
                               'https://skyfi.vn/assets/document/sample-contract/BIEU_MAU_02_DANH_SACH_CA_NHAN_DUOC_GIAO_SU_DUNG_SO_THUE_BAO_KH.pdf',
                         ),
                         ItemPdf(
-                          title: 'Biên bản chuyển quyền sử dụng DV viên thông',
+                          title: context.translate('contract_5'),
                           link:
                               'https://skyfi.vn/assets/document/sample-contract/BIEN_BAN_CHUYEN_QUYEN_SU_DUNG.pdf',
                         ),
                       ],
-                      'title': 'Hợp đồng mẫu',
+                      'title': context.translate('sample_contract'),
                     },
                   );
                 },
                 showDivider: false,
               ),
               MenuItem(
-                title: 'Quản lý chất lượng dịch vụ',
+                title: context.translate('service_quality_management'),
                 iconPath: 'assets/icons/file-edit.svg',
                 onTap: () {
                   context.pushNamed(
@@ -168,30 +170,27 @@ class AccountTermPolicy extends HookConsumerWidget {
                     extra: {
                       'items': [
                         ItemPdf(
-                          title: 'Công bố CLDV_DV điện thoại trên mạng VTDĐ',
+                          title: context.translate('service_1'),
                           link:
                               'https://skyfi.vn/assets/document/service-quality-management/38_2025_Cong_bo_CLDV_DV_dien_thoai_tren_mang_VTDD.pdf',
                         ),
                         ItemPdf(
-                          title:
-                              'Công bố CLDV_Truy cập internet WCDMA, LTE, LTE',
+                          title: context.translate('service_2'),
                           link:
                               'https://skyfi.vn/assets/document/service-quality-management/39_2025_Cong_bo_CLDV_Truy_cap_internet_WCDMA_LTE_LTE_A.pdf',
                         ),
                         ItemPdf(
-                          title:
-                              'BAN TIEP NHAN CONG BO CLDV INTERNET DI DONG 2025',
+                          title: context.translate('service_3'),
                           link:
                               'https://skyfi.vn/assets/document/service-quality-management/BAN_TIEP_NHAN_CONG_BO_CLDV_INTERNET_DI_DONG_2025.pdf',
                         ),
                         ItemPdf(
-                          title:
-                              'BAN TIEP NHAN CONG BO CLDV THOAI DI DONG 2025',
+                          title: context.translate('service_4'),
                           link:
                               'https://skyfi.vn/assets/document/service-quality-management/BAN_TIEP_NHAN_CONG_BO_CLDV_THOAI_DI_DONG_2025.pdf',
                         ),
                       ],
-                      'title': 'Quản lý chất lượng dịch vụ',
+                      'title': context.translate('service_quality_management'),
                     },
                   );
                 },

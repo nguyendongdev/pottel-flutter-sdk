@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
@@ -57,22 +58,39 @@ class _BrandSectionState extends State<BrandSection> {
           ),
         ),
         _isExpanded
-            ? ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: widget.brandDevices.devices.length,
-                itemBuilder: (context, index) {
-                  final device = widget.brandDevices.devices[index];
-                  return Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Text(
-                      device.name,
-                      style: AppTextStyles.body.copyWith(
-                        color: AppColors.text,
-                      ),
-                    ),
-                  );
-                },
+            ? Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: widget.brandDevices.devices.length,
+                    itemBuilder: (context, index) {
+                      final device = widget.brandDevices.devices[index];
+                      return Container(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: Text(
+                          device.name,
+                          style: AppTextStyles.body.copyWith(
+                            color: AppColors.text,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  widget.brandDevices.note != null
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Text(
+                            context.l10n.locale.languageCode == 'vi'
+                                ? widget.brandDevices.noteVi!
+                                : widget.brandDevices.note!,
+                            style: AppTextStyles.body.copyWith(
+                              color: AppColors.text,
+                            ),
+                          ),
+                        )
+                      : SizedBox(),
+                ],
               )
             : SizedBox(),
       ],

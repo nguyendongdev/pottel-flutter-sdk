@@ -117,6 +117,13 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                 },
               ),
               MenuItem(
+                title: context.l10n.translate('price_policy'),
+                iconPath: 'assets/icons/file-edit.svg',
+                onTap: () {
+                  context.pushNamed(AppRouter.accountTermPolicy);
+                },
+              ),
+              MenuItem(
                 title: isLogin
                     ? context.l10n.translate('logout')
                     : context.l10n.translate('login'),

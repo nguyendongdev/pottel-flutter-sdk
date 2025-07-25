@@ -22,6 +22,8 @@ class BrandDevices with _$BrandDevices {
   const factory BrandDevices({
     @JsonKey(name: 'brand') required String brand,
     @JsonKey(name: 'devices') required List<Device> devices,
+    String? note,
+    @JsonKey(name: 'note_vi') String? noteVi,
   }) = _BrandDevices;
 
   factory BrandDevices.fromJson(Map<String, dynamic> json) =>

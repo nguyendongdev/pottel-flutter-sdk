@@ -288,6 +288,9 @@ mixin _$BrandDevices {
   String get brand => throw _privateConstructorUsedError;
   @JsonKey(name: 'devices')
   List<Device> get devices => throw _privateConstructorUsedError;
+  String? get note => throw _privateConstructorUsedError;
+  @JsonKey(name: 'note_vi')
+  String? get noteVi => throw _privateConstructorUsedError;
 
   /// Serializes this BrandDevices to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -307,7 +310,9 @@ abstract class $BrandDevicesCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'brand') String brand,
-      @JsonKey(name: 'devices') List<Device> devices});
+      @JsonKey(name: 'devices') List<Device> devices,
+      String? note,
+      @JsonKey(name: 'note_vi') String? noteVi});
 }
 
 /// @nodoc
@@ -327,6 +332,8 @@ class _$BrandDevicesCopyWithImpl<$Res, $Val extends BrandDevices>
   $Res call({
     Object? brand = null,
     Object? devices = null,
+    Object? note = freezed,
+    Object? noteVi = freezed,
   }) {
     return _then(_value.copyWith(
       brand: null == brand
@@ -337,6 +344,14 @@ class _$BrandDevicesCopyWithImpl<$Res, $Val extends BrandDevices>
           ? _value.devices
           : devices // ignore: cast_nullable_to_non_nullable
               as List<Device>,
+      note: freezed == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
+      noteVi: freezed == noteVi
+          ? _value.noteVi
+          : noteVi // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -351,7 +366,9 @@ abstract class _$$BrandDevicesImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'brand') String brand,
-      @JsonKey(name: 'devices') List<Device> devices});
+      @JsonKey(name: 'devices') List<Device> devices,
+      String? note,
+      @JsonKey(name: 'note_vi') String? noteVi});
 }
 
 /// @nodoc
@@ -369,6 +386,8 @@ class __$$BrandDevicesImplCopyWithImpl<$Res>
   $Res call({
     Object? brand = null,
     Object? devices = null,
+    Object? note = freezed,
+    Object? noteVi = freezed,
   }) {
     return _then(_$BrandDevicesImpl(
       brand: null == brand
@@ -379,6 +398,14 @@ class __$$BrandDevicesImplCopyWithImpl<$Res>
           ? _value._devices
           : devices // ignore: cast_nullable_to_non_nullable
               as List<Device>,
+      note: freezed == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
+      noteVi: freezed == noteVi
+          ? _value.noteVi
+          : noteVi // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -388,7 +415,9 @@ class __$$BrandDevicesImplCopyWithImpl<$Res>
 class _$BrandDevicesImpl implements _BrandDevices {
   const _$BrandDevicesImpl(
       {@JsonKey(name: 'brand') required this.brand,
-      @JsonKey(name: 'devices') required final List<Device> devices})
+      @JsonKey(name: 'devices') required final List<Device> devices,
+      this.note,
+      @JsonKey(name: 'note_vi') this.noteVi})
       : _devices = devices;
 
   factory _$BrandDevicesImpl.fromJson(Map<String, dynamic> json) =>
@@ -407,8 +436,14 @@ class _$BrandDevicesImpl implements _BrandDevices {
   }
 
   @override
+  final String? note;
+  @override
+  @JsonKey(name: 'note_vi')
+  final String? noteVi;
+
+  @override
   String toString() {
-    return 'BrandDevices(brand: $brand, devices: $devices)';
+    return 'BrandDevices(brand: $brand, devices: $devices, note: $note, noteVi: $noteVi)';
   }
 
   @override
@@ -417,13 +452,15 @@ class _$BrandDevicesImpl implements _BrandDevices {
         (other.runtimeType == runtimeType &&
             other is _$BrandDevicesImpl &&
             (identical(other.brand, brand) || other.brand == brand) &&
-            const DeepCollectionEquality().equals(other._devices, _devices));
+            const DeepCollectionEquality().equals(other._devices, _devices) &&
+            (identical(other.note, note) || other.note == note) &&
+            (identical(other.noteVi, noteVi) || other.noteVi == noteVi));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, brand, const DeepCollectionEquality().hash(_devices));
+  int get hashCode => Object.hash(runtimeType, brand,
+      const DeepCollectionEquality().hash(_devices), note, noteVi);
 
   /// Create a copy of BrandDevices
   /// with the given fields replaced by the non-null parameter values.
@@ -443,9 +480,10 @@ class _$BrandDevicesImpl implements _BrandDevices {
 
 abstract class _BrandDevices implements BrandDevices {
   const factory _BrandDevices(
-          {@JsonKey(name: 'brand') required final String brand,
-          @JsonKey(name: 'devices') required final List<Device> devices}) =
-      _$BrandDevicesImpl;
+      {@JsonKey(name: 'brand') required final String brand,
+      @JsonKey(name: 'devices') required final List<Device> devices,
+      final String? note,
+      @JsonKey(name: 'note_vi') final String? noteVi}) = _$BrandDevicesImpl;
 
   factory _BrandDevices.fromJson(Map<String, dynamic> json) =
       _$BrandDevicesImpl.fromJson;
@@ -456,6 +494,11 @@ abstract class _BrandDevices implements BrandDevices {
   @override
   @JsonKey(name: 'devices')
   List<Device> get devices;
+  @override
+  String? get note;
+  @override
+  @JsonKey(name: 'note_vi')
+  String? get noteVi;
 
   /// Create a copy of BrandDevices
   /// with the given fields replaced by the non-null parameter values.

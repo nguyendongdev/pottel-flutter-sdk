@@ -34,12 +34,16 @@ _$BrandDevicesImpl _$$BrandDevicesImplFromJson(Map<String, dynamic> json) =>
       devices: (json['devices'] as List<dynamic>)
           .map((e) => Device.fromJson(e as Map<String, dynamic>))
           .toList(),
+      note: json['note'] as String?,
+      noteVi: json['note_vi'] as String?,
     );
 
 Map<String, dynamic> _$$BrandDevicesImplToJson(_$BrandDevicesImpl instance) =>
     <String, dynamic>{
       'brand': instance.brand,
       'devices': instance.devices,
+      'note': instance.note,
+      'note_vi': instance.noteVi,
     };
 
 _$DeviceImpl _$$DeviceImplFromJson(Map<String, dynamic> json) => _$DeviceImpl(

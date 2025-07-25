@@ -228,6 +228,31 @@ const Map<String, String> enStrings = {
       'Feature is under development, please come back later!',
   'login_required_message': 'You need to login to use this feature!',
   'logout_confirmation': 'Are you sure you want to logout?',
+  'price_policy': 'Terms and Policies',
+  'version': 'Version',
+  'manage_esim': 'Manage purchased travel eSIM',
+  'personal_data_protection_policy': 'Personal Data Protection Policy',
+  'refund_policy': 'Refund Policy',
+  'payment_policy': 'Payment Policy',
+  'general_transaction_terms': 'General Transaction Terms',
+  'cookies_policy': 'Privacy and Cookies Policy',
+  'sample_contract': 'Sample Contract',
+  'contract_1':
+      'Subscriber information confirmation for terrestrial mobile telecommunications service registration',
+  'contract_2':
+      'Contract for provision and use of terrestrial mobile telecommunications services',
+  'contract_3':
+      'BM01-List of subscribers registered to use terrestrial mobile telecommunications services',
+  'contract_4':
+      'BM02-List of subscribers registered to use terrestrial mobile telecommunications services',
+  'contract_5':
+      'Minutes of transfer of terrestrial mobile telecommunications service usage rights',
+  'service_quality_management': 'Service Quality Management',
+  'service_1':
+      'Service quality announcement_Phone service on terrestrial mobile network',
+  'service_2': 'Service quality announcement_WCDMA, LTE internet access',
+  'service_3': 'MOBILE INTERNET SERVICE QUALITY ANNOUNCEMENT RECEIPT 2025',
+  'service_4': 'MOBILE PHONE SERVICE QUALITY ANNOUNCEMENT RECEIPT 2025',
 
   // Cart Screen
   'cart': 'Cart',
