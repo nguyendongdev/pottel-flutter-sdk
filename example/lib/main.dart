@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:skyfi_sdk/utilities/common.dart' as SkyFiSDK;
 
 void main() {
   runApp(const MyApp());
@@ -56,79 +57,9 @@ class _MyAppState extends State<MyApp> {
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => PopScope(
-                          canPop: false,
-                          child: SkyfiSdk.toScreen(
-                            initialLocation: SkyfiRoute.infoRegis.path,
-                            locale: AppLocale.vi,
-                            phone: '+84999999999',
-                            env: SkyfiEnv.dev,
-                          ),
-                        ),
-                      ),
-                    );
+                    SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
                   },
                   child: const Text('Mở màn hình đăng ký'),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => PopScope(
-                          canPop: false,
-                          child: SkyfiSdk.toScreen(
-                            initialLocation: SkyfiRoute.topupSkyFi.path,
-                            phone: '+84999999999',
-                            locale: AppLocale.vi,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  child: const Text('Mở màn nạp tiền'),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => PopScope(
-                            canPop: false,
-                            child: SkyfiSdk.toScreen(
-                              initialLocation: SkyfiRoute.detailDataUsage.path,
-                              phone: '+84999999999',
-                              locale: AppLocale.vi,
-                            ),
-                          ),
-                        ));
-                  },
-                  child: const Text('Mở màn thông tin gói cước'),
-                ),
-                // Mở màn hình NFC
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => PopScope(
-                          canPop: false,
-                          child: SkyfiSdk.toScreen(
-                            initialLocation: SkyfiRoute.scanNfcChipcardNew.path,
-                            phone: '+84999999999',
-                            locale: AppLocale.vi,
-                            env: SkyfiEnv.dev,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  child: const Text('Mở màn hình NFC'),
                 ),
               ],
             ),

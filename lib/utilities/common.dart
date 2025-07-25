@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../core/constants/colors.dart';
 import '../core/constants/text_styles.dart';
@@ -14,6 +15,7 @@ import '../core/widgets/PopupCenterCard.dart';
 import '../core/widgets/Popup_notice.dart';
 import '../core/widgets/global_loading.dart';
 import '../routers/routers.dart';
+import '../skyfi_sdk.dart';
 // import '../network/store.dart';
 
 class Common {
@@ -262,5 +264,76 @@ class Common {
     showPopupNotice(context,
         title: 'Thông báo',
         description: 'Tính năng đang phát triển, vui lòng quay lại sau!');
+  }
+
+  static Future<void> openSkyFiApp({AppLocale locale = AppLocale.vi}) async {
+    String deepLink = 'skyfi://home-skyfi-new?locale=${locale.code.toString()}';
+    print('deeplink: $deepLink');
+    const String androidStoreUrl =
+        'https://play.google.com/store/apps/details?id=vn.galaxytelecom.skyfi';
+    const String iosStoreUrl =
+        'https://apps.apple.com/us/app/skyfi/id6747164804';
+
+    try {
+      // Try to launch the deeplink first
+      final Uri deepLinkUri = Uri.parse(deepLink);
+      if (await canLaunchUrl(deepLinkUri)) {
+        await launchUrl(deepLinkUri, mode: LaunchMode.externalApplication);
+      } else {
+        // If deeplink fails, open appropriate store based on platform
+        final String storeUrl =
+            Platform.isAndroid ? androidStoreUrl : iosStoreUrl;
+        final Uri storeUri = Uri.parse(storeUrl);
+        await launchUrl(storeUri, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      print('Error opening SkyFi app: $e');
+      // Fallback to store URL if deeplink fails
+      final String storeUrl =
+          Platform.isAndroid ? androidStoreUrl : iosStoreUrl;
+      final Uri storeUri = Uri.parse(storeUrl);
+      try {
+        await launchUrl(storeUri, mode: LaunchMode.externalApplication);
+      } catch (storeError) {
+        print('Error opening store: $storeError');
+      }
+    }
+  }
+
+  static Future<void> openRegisSkyFiApp({
+    AppLocale locale = AppLocale.vi,
+  }) async {
+    final String deepLink =
+        'skyfi://scan-barcode?locale=${locale.code.toString()}';
+    print('deeplink: $deepLink');
+    const String androidStoreUrl =
+        'https://play.google.com/store/apps/details?id=vn.galaxytelecom.skyfi';
+    const String iosStoreUrl =
+        'https://apps.apple.com/us/app/skyfi/id6747164804';
+
+    try {
+      // Try to launch the deeplink first
+      final Uri deepLinkUri = Uri.parse(deepLink);
+      if (await canLaunchUrl(deepLinkUri)) {
+        await launchUrl(deepLinkUri, mode: LaunchMode.externalApplication);
+      } else {
+        // If deeplink fails, open appropriate store based on platform
+        final String storeUrl =
+            Platform.isAndroid ? androidStoreUrl : iosStoreUrl;
+        final Uri storeUri = Uri.parse(storeUrl);
+        await launchUrl(storeUri, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      print('Error opening SkyFi registration: $e');
+      // Fallback to store URL if deeplink fails
+      final String storeUrl =
+          Platform.isAndroid ? androidStoreUrl : iosStoreUrl;
+      final Uri storeUri = Uri.parse(storeUrl);
+      try {
+        await launchUrl(storeUri, mode: LaunchMode.externalApplication);
+      } catch (storeError) {
+        print('Error opening store: $storeError');
+      }
+    }
   }
 }

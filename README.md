@@ -2,7 +2,7 @@
 
 ## Giới thiệu
 
-SkyFi SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, nạp tiền, đăng ký thông tin thuê bao và các dịch vụ viễn thông khác. SDK được xây dựng với Flutter 3.29.0 và sử dụng các công nghệ hiện đại như Riverpod, GoRouter, và Flutter Hooks.
+SkyFi SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, nạp tiền, đăng ký thông tin thuê bao và các dịch vụ viễn thông khác.
 
 ## Yêu cầu hệ thống
 
@@ -21,11 +21,9 @@ dependencies:
     git:
       url: https://github.com/skyfi2024/new_sdk_SkyFi.git
       ref: main
-    # Hoặc nếu sử dụng local path trong development
-    # path: ../skyfi_sdk
 ```
 
-### 2. Cài đặt các dependencies cần thiết
+### 2. Cài đặt dependencies
 
 ```bash
 flutter pub get
@@ -33,742 +31,160 @@ flutter pub get
 
 ### 3. Cấu hình Android
 
-Thêm các permissions cần thiết vào `android/app/src/main/AndroidManifest.xml`:
+Thêm permissions vào `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
-  <!-- Jitsi Meet permissions -->
+  <!-- Camera permissions -->
   <uses-permission android:name="android.permission.CAMERA" />
-  <uses-permission android:name="android.permission.RECORD_AUDIO" />
-  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-  <uses-permission android:name="android.permission.BLUETOOTH" />
-  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
 
 <uses-feature
     android:name="android.hardware.camera"
     android:required="false" />
-<uses-feature
-    android:name="android.hardware.nfc"
-    android:required="false" />
-<uses-feature
-    android:name="android.hardware.camera"
-    android:required="false" />
- <uses-feature
-    android:name="android.hardware.microphone"
-    android:required="false" />    
 ```
 
 ### 4. Cấu hình iOS
 
-Thêm các permissions vào `ios/Runner/Info.plist`:
+Thêm permissions vào `ios/Runner/Info.plist`:
 
 ```xml
 <key>NSCameraUsageDescription</key>
 <string>Ứng dụng cần quyền truy cập camera để chụp ảnh CCCD và eKYC</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>Ứng dụng cần quyền truy cập microphone cho video call</string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Ứng dụng cần quyền truy cập thư viện ảnh</string>
 ```
 
-#### Cấu hình NFC cho iOS
+## Sử dụng
 
-Để sử dụng tính năng đọc chip CCCD trên iOS, cần thêm cấu hình NFC:
-
-1. **Thêm NFC capability vào `ios/Runner/Runner.entitlements`:**
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>com.apple.developer.nfc.readersession.formats</key>
-	<array>
-		<string>NFCISO7816</string>
-	</array>
-	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
-	<array>
-		<string>A0000000041010</string>
-		<string>A0000000042010</string>
-		<string>A0000000043060</string>
-		<string>A0000000031010</string>
-		<string>A000000003101001</string>
-		<string>A000000003101002</string>
-		<string>A0000000032010</string>
-		<string>A0000000651010</string>
-		<string>A0000000250000</string>
-		<string>A0000001523010</string>
-		<string>A0000000046000</string>
-		<string>A0000006723010</string>
-		<string>A0000000042203</string>
-		<string>A0000002471001</string>
-		<string>E80704007F00070302</string>
-		<string>A0000002472001</string>
-		<string>A00000024710</string>
-		<string>D4100000030001</string>
-		<string>D2760000850100</string>
-		<string>D2760000850101</string>
-		<string>A000000529101</string>
-		<string>A0000003974349445F01</string>
-		<string>F849524153204149442056</string>
-		<string>A0000000871002</string>
-		<string>A0000000871004</string>
-		<string>A0000000871006</string>
-		<string>A0000000871008</string>
-		<string>A000000308</string>
-		<string>D27600012401</string>
-		<string>A000000167455349474E</string>
-		<string>A0000001510000</string>
-		<string>A0000001810001</string>
-		<string>A0000005591010</string>
-		<string>D156000005</string>
-		<string>E828BD080FD25372456339206F6</string>
-		<string>A0000002280000</string>
-		<string>D2760000012401</string>
-		<string>A0000003082E68BF</string>
-		<string>A0000002480100</string>
-		<string>A0000002480200</string>
-		<string>A0000002480300</string>
-		<string>A00000045645444C2D3031</string>
-	</array>
-</dict>
-</plist>
-```
-
-**Giải thích cấu hình:**
-
-- `com.apple.developer.nfc.readersession.formats`: Định nghĩa các định dạng NFC được hỗ trợ
-  - `NDEF`: Near Field Communication Data Exchange Format
-  - `TAG`: Các tag NFC khác
-  
-- `com.apple.developer.nfc.readersession.iso7816.select-identifiers`: Danh sách Application Identifier (AID) cho thẻ ISO7816
-  - `A0000002471001`: AID cho ứng dụng CCCD Việt Nam
-  - `A0000002472001`: AID cho ứng dụng phụ CCCD
-  - `00000000000000`: AID mặc định cho thẻ chip khác
-
-2. **Thêm NFC usage description vào `ios/Runner/Info.plist`:**
-
-```xml
-<key>NFCReaderUsageDescription</key>
-<string>Ứng dụng cần quyền truy cập NFC để đọc thông tin chip CCCD</string>
-```
-
-3. **Cấu hình Xcode project:**
-   - Mở file `ios/Runner.xcworkspace` trong Xcode
-   - Chọn target Runner
-   - Vào tab "Signing & Capabilities"
-   - Thêm capability "Near Field Communication Tag Reading"
-   - Đảm bảo App ID đã được cấu hình NFC capability trên Apple Developer Portal
-
-**Lưu ý:** Tính năng NFC chỉ hoạt động trên:
-- iPhone 7 trở lên
-- iOS 11.0 trở lên  
-- Thiết bị thật (không hoạt động trên simulator)
-- App được ký với certificate hợp lệ
-
-### 5. Cấu hình môi trường (Tùy chọn)
-
-SDK sử dụng cấu hình mặc định, bạn có thể tùy chỉnh bằng cách tạo file `.env` trong thư mục root của project:
-
-```env
-# API Configuration (Tùy chọn)
-API_BASE_URL=https://your-api-endpoint.com
-API_KEY=your-api-key
-
-# Other configurations
-DEBUG_MODE=true
-```
-
-Thêm file `.env` vào `pubspec.yaml` nếu có:
-
-```yaml
-flutter:
-  assets:
-    - .env
-```
-
-## Sử dụng cơ bản
-
-### 1. Import SDK
-
-```dart
-import 'package:skyfi_sdk/skyfi_sdk.dart';
-```
-
-### Sử dụng PopScope để chặn hành động back/swipe
-
-Để ngăn người dùng thoát khỏi SDK bằng cách vuốt từ trái sang phải hoặc nhấn nút back, hãy sử dụng `PopScope` với `canPop: false`:
-
-```dart
-PopScope(
-  canPop: false, // Chặn hành động back/swipe
-  child: SkyfiSdk(
-    phone: '0707040618',
-    env: SkyfiEnv.dev,
-    locale: AppLocale.vi,
-  ),
-)
-```
-
-**Lưu ý quan trọng:**
-- `PopScope` chỉ hoạt động trên **Flutter 3.12+**
-- Đối với Flutter cũ hơn, sử dụng `WillPopScope` thay thế:
-  ```dart
-  WillPopScope(
-    onWillPop: () async => false, // Chặn hành động back
-    child: SkyfiSdk(...),
-  )
-  ```
-
-### 2. Khởi tạo SDK đơn giản
+### Import SDK
 
 ```dart
 import 'package:flutter/material.dart';
 import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:skyfi_sdk/utilities/common.dart' as SkyFiSDK;
+```
+
+### Ví dụ hoàn chỉnh
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:skyfi_sdk/utilities/common.dart' as SkyFiSDK;
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('My App')),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => PopScope(
-                    canPop: false, // Chặn hành động back/swipe
-                    child: SkyfiSdk(
-                      phone: '0707040618', // Số điện thoại cần thiết
-                      env: SkyfiEnv.dev, // Môi trường: dev hoặc prod
-                      locale: AppLocale.vi, // Ngôn ngữ: vi hoặc en
-                    ),
-                  ),
+      home: Builder(
+        builder: (BuildContext context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Plugin example app'),
+            ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Center(
+                  child: Text('SkyFi SDK Example App'),
                 ),
-              );
-            },
-            child: const Text('Mở SkyFi SDK'),
-          ),
-        ),
+                const SizedBox(height: 20),
+                
+                // 1. Mở SkyFi SDK đầy đủ
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => PopScope(
+                          canPop: false,
+                          child: SkyfiSdk(
+                            phone: '0707040618',
+                            env: SkyfiEnv.dev,
+                            initialLocation: SkyfiRoute.home.path,
+                            locale: AppLocale.vi,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Mở SkyFi SDK'),
+                ),
+                
+                const SizedBox(height: 16),
+                
+                // 2. Mở màn hình đăng ký cụ thể
+                ElevatedButton(
+                  onPressed: () {
+                    SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
+                  },
+                  child: const Text('Mở màn hình đăng ký'),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
 }
 ```
 
-#### Các tham số khởi tạo SDK
+## Hai cách sử dụng chính
+
+### 1. Mở SkyFi SDK đầy đủ
+
+Sử dụng `SkyfiSdk()` để mở toàn bộ ứng dụng SDK với đầy đủ tính năng:
+
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (_) => PopScope(
+      canPop: false, // Chặn hành động back/swipe
+      child: SkyfiSdk(
+        phone: '0707040618',           // Số điện thoại
+        env: SkyfiEnv.dev,            // Môi trường: dev hoặc prod
+        initialLocation: SkyfiRoute.home.path, // Màn hình khởi tạo
+        locale: AppLocale.vi,         // Ngôn ngữ: vi hoặc en
+      ),
+    ),
+  ),
+);
+```
+
+### 2. Mở màn hình đăng ký trực tiếp
+
+Sử dụng `SkyFiSDK.Common.openRegisSkyFiApp()` để mở trực tiếp màn hình đăng ký:
+
+```dart
+SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
+```
+
+## Tham số cấu hình
 
 | Tham số | Kiểu dữ liệu | Mặc định | Mô tả |
 |---------|-------------|----------|-------|
 | `phone` | `String?` | `null` | Số điện thoại để tự động đăng nhập |
+| `env` | `SkyfiEnv` | `SkyfiEnv.dev` | Môi trường: `dev` hoặc `prod` |
+| `locale` | `AppLocale` | `AppLocale.vi` | Ngôn ngữ: `vi` hoặc `en` |
 | `initialLocation` | `String?` | `null` | Màn hình khởi tạo ban đầu |
-| `env` | `SkyfiEnv` | `SkyfiEnv.dev` | Môi trường triển khai |
-| `locale` | `AppLocale` | `AppLocale.vi` | Ngôn ngữ hiển thị |
 
-#### Môi trường triển khai (SkyfiEnv)
+## Môi trường triển khai
 
 - **`SkyfiEnv.dev`**: Môi trường phát triển
-  - API: `https://bss-api.skyfi.network/api`
-  - EKYC: `https://ocr-api-uat.ekyc.solutions/api`
-  - Socket: `https://socket.skyfi.network/`
-  - Jitsi: `https://meet.skyfi.network/`
-
 - **`SkyfiEnv.prod`**: Môi trường sản xuất
-  - API: `https://bss-api.skyfi.pro/api`
-  - EKYC: `https://ocr-api.ekyc.solutions/api`
-  - Socket: `https://socket.skyfi.pro/`
-  - Jitsi: `https://meet.skyfi.pro/`
 
-#### Ngôn ngữ hiển thị (AppLocale)
+## Ngôn ngữ hỗ trợ
 
 - **`AppLocale.vi`**: Tiếng Việt 🇻🇳
 - **`AppLocale.en`**: English 🇺🇸
-
-#### Ví dụ khởi tạo với các tùy chọn
-
-```dart
-// Khởi tạo với môi trường sản xuất và tiếng Anh
-SkyfiSdk(
-  phone: '+84707654160',
-  env: SkyfiEnv.prod,
-  locale: AppLocale.en,
-  initialLocation: SkyfiRoute.home.path,
-)
-
-// Khởi tạo với môi trường phát triển và tiếng Việt
-SkyfiSdk(
-  phone: '0707040618',
-  env: SkyfiEnv.dev,
-  locale: AppLocale.vi,
-  initialLocation: SkyfiRoute.topupSkyFi.path,
-)
-```
-
-### 3. Mở màn hình cụ thể
-
-```dart
-// Mở màn hình đăng ký thông tin với môi trường dev và tiếng Việt
-Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (_) => PopScope(
-      canPop: false, // Chặn hành động back/swipe
-      child: SkyfiSdk.toScreen(
-        initialLocation: SkyfiRoute.infoRegis.path,
-        phone: '0707991197', // Số điện thoại cần thiết
-        env: SkyfiEnv.dev, // Môi trường phát triển
-        locale: AppLocale.vi, // Tiếng Việt
-      ),
-    ),
-  ),
-);
-
-// Mở màn hình nạp tiền với môi trường prod và tiếng Anh
-Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (_) => PopScope(
-      canPop: false, // Chặn hành động back/swipe
-      child: SkyfiSdk.toScreen(
-        initialLocation: SkyfiRoute.topupSkyFi.path,
-        phone: '0807991197', // Số điện thoại cần thiết
-        env: SkyfiEnv.prod, // Môi trường sản xuất
-        locale: AppLocale.en, // English
-      ),
-    ),
-  ),
-);
-// Mở màn hình NFC example
-Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (_) => PopScope(
-      canPop: false, // Chặn hành động back/swipe
-      child: SkyfiSdk.toScreen(
-        initialLocation: SkyfiRoute.scanNfcChipcardNew.path,
-        phone: '0807991197', // Số điện thoại cần thiết
-        env: SkyfiEnv.dev, // Môi trường sản xuất
-        locale: AppLocale.vi,
-      ),
-    ),
-  ),
-);
-
-// Mở màn hình trang chủ với cấu hình mặc định
-Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (_) => PopScope(
-      canPop: false, // Chặn hành động back/swipe
-      child: SkyfiSdk.toScreen(
-        initialLocation: SkyfiRoute.home.path,
-        phone: '+84707654160',
-        // env: SkyfiEnv.dev (mặc định)
-        // locale: AppLocale.vi (mặc định)
-      ),
-    ),
-  ),
-);
-```
-
-## Các màn hình có sẵn
-
-SDK cung cấp các route sau:
-
-| Route | Path | Mô tả |
-|-------|------|-------|
-| `SkyfiRoute.home` | `/` | Màn hình chính |
-| `SkyfiRoute.topup` | `/topup-skyfi` | Màn hình nạp tiền |
-| `SkyfiRoute.infoRegis` | `/info-regis` | Màn hình đăng ký thông tin |
-| `SkyfiRoute.topupSkyFi` | `/topup-skyfi` | Màn hình nạp tiền SkyFi |
-| `SkyfiRoute.infoRegisSkyFi` | `/info-regis` | Màn hình đăng ký SkyFi |
-
-### Các màn hình khác có sẵn:
-
-- **Quản lý SIM**: `/manager-sim`
-- **Lịch sử giao dịch**: `/history-mobile-skyfi`
-- **Thông tin tài khoản**: `/account-info-skyfi`
-- **Chi tiết tài khoản**: `/account-detail-skyfi`
-- **Đổi gói cước**: `/change-package-skyfi`
-- **Giỏ hàng**: `/cart-skyfi`
-- **Thanh toán**: `/payment-skyfi`
-- **eSIM du lịch**: `/esim-travel-skyfi`
-- **Đăng nhập**: `/login-skyfi`
-
-## Tích hợp nâng cao
-
-### 1. Sử dụng với GoRouter
-
-```dart
-import 'package:go_router/go_router.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
-
-final GoRouter _router = GoRouter(
-  routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const HomeScreen(),
-    ),
-    GoRoute(
-      path: '/skyfi',
-      builder: (context, state) => const SkyfiSdk(),
-    ),
-    GoRoute(
-      path: '/skyfi/:route',
-      builder: (context, state) {
-        final route = state.pathParameters['route'];
-        return SkyfiSdk.toScreen(initialLocation: '/$route');
-      },
-    ),
-  ],
-);
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
-    );
-  }
-}
-```
-
-### 2. Tích hợp với Riverpod
-
-```dart
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
-
-void main() {
-  runApp(
-    ProviderScope(
-      child: MyApp(),
-    ),
-  );
-}
-
-class MyApp extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      home: Scaffold(
-        body: SkyfiSdk.toScreen(
-          phone: '0707040618', // Số điện thoại cần thiết
-        ),
-      ),
-    );
-  }
-}
-```
-
-### 3. Xử lý callback và navigation
-
-```dart
-class SkyfiIntegration extends StatefulWidget {
-  @override
-  _SkyfiIntegrationState createState() => _SkyfiIntegrationState();
-}
-
-class _SkyfiIntegrationState extends State<SkyfiIntegration> {
-  void _openSkyfiWithCallback() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => PopScope(
-          canPop: false, // Chặn hành động back/swipe
-          child: SkyfiSdk.toScreen(
-            initialLocation: SkyfiRoute.topupSkyFi.path,
-            phone: '0707040618', // Số điện thoại cần thiết
-          ),
-        ),
-      ),
-    ).then((result) {
-      // Xử lý kết quả trả về từ SDK
-      if (result != null) {
-        print('Kết quả từ SkyFi SDK: $result');
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: _openSkyfiWithCallback,
-          child: Text('Mở SkyFi với callback'),
-        ),
-      ),
-    );
-  }
-}
-```
-
-## Tùy chỉnh giao diện
-
-SDK sử dụng theme mặc định, bạn có thể tùy chỉnh bằng cách:
-
-### 1. Sử dụng Theme wrapper
-
-```dart
-MaterialApp(
-  theme: ThemeData(
-    primarySwatch: Colors.blue,
-    fontFamily: 'KoHo', // SDK hỗ trợ font KoHo và Inter
-  ),
-  home: SkyfiSdk.toScreen(
-    phone: '0707040618', // Số điện thoại cần thiết
-  ),
-)
-```
-
-### 2. Tùy chỉnh màu sắc
-
-```dart
-ThemeData(
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.deepPurple,
-  ),
-  useMaterial3: true,
-)
-```
-
-## Xử lý lỗi
-
-### 1. Xử lý lỗi camera
-
-```dart
-try {
-  final cameras = await availableCameras();
-  if (cameras.isEmpty) {
-    // Xử lý khi không có camera
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('Lỗi'),
-        content: Text('Thiết bị không có camera'),
-      ),
-    );
-  }
-} catch (e) {
-  print('Lỗi khởi tạo camera: $e');
-}
-```
-
-### 2. Xử lý lỗi network
-
-```dart
-// SDK tự động xử lý lỗi network và hiển thị thông báo
-// Bạn có thể lắng nghe trạng thái network nếu cần
-```
-
-## Permissions
-
-SDK yêu cầu các quyền sau:
-
-- **Camera**: Chụp ảnh CCCD, eKYC
-- **Microphone**: Video call xác thực
-- **Storage**: Lưu trữ ảnh tạm thời
-- **Network**: Kết nối API
-- **NFC**: Đọc thông tin chip CCCD
-- **Phone**: Đọc thông tin thiết bị
-
-### Xử lý permissions runtime
-
-```dart
-import 'package:permission_handler/permission_handler.dart';
-
-Future<void> requestPermissions() async {
-  Map<Permission, PermissionStatus> statuses = await [
-    Permission.camera,
-    Permission.microphone,
-    Permission.storage,
-  ].request();
-
-  if (statuses[Permission.camera] != PermissionStatus.granted) {
-    // Xử lý khi không có quyền camera
-  }
-}
-```
-
-## Debugging
-
-### 1. Bật debug mode
-
-```env
-DEBUG_MODE=true
-```
-
-### 2. Xem logs
-
-```dart
-// SDK sử dụng network_logger để log API calls
-// Logs sẽ hiển thị trong debug console
-```
-
-### 3. Test trên thiết bị thật
-
-Một số tính năng như NFC, camera chỉ hoạt động trên thiết bị thật:
-
-```bash
-flutter run --release
-```
-
-## Ví dụ hoàn chỉnh
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
-
-void main() {
-  runApp(
-    ProviderScope(
-      child: MyApp(),
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SkyFi Integration Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Inter',
-      ),
-      home: const HomeScreen(),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('SkyFi Integration Demo'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'Chọn tính năng SkyFi:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            _buildFeatureButton(
-              context,
-              'Trang chủ SkyFi',
-              'Truy cập trang chủ với đầy đủ tính năng',
-              Icons.home,
-              () => _navigateToSkyfi(context, SkyfiRoute.home.path),
-            ),
-            const SizedBox(height: 12),
-            _buildFeatureButton(
-              context,
-              'Đăng ký thông tin',
-              'Đăng ký thông tin thuê bao mới',
-              Icons.person_add,
-              () => _navigateToSkyfi(context, SkyfiRoute.infoRegis.path),
-            ),
-            const SizedBox(height: 12),
-            _buildFeatureButton(
-              context,
-              'Nạp tiền',
-              'Nạp tiền vào tài khoản SkyFi',
-              Icons.account_balance_wallet,
-              () => _navigateToSkyfi(context, SkyfiRoute.topupSkyFi.path),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFeatureButton(
-    BuildContext context,
-    String title,
-    String subtitle,
-    IconData icon,
-    VoidCallback onPressed,
-  ) {
-    return Card(
-      child: ListTile(
-        leading: Icon(icon, size: 32),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(subtitle),
-        trailing: const Icon(Icons.arrow_forward_ios),
-        onTap: onPressed,
-      ),
-    );
-  }
-
-  void _navigateToSkyfi(BuildContext context, String initialLocation) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => PopScope(
-          canPop: false, // Chặn hành động back/swipe
-          child: SkyfiSdk.toScreen(
-            initialLocation: initialLocation,
-            phone: '0707040618', // Số điện thoại cần thiết
-          ),
-        ),
-      ),
-    );
-  }
-}
-```
-
-## Troubleshooting
-
-### Lỗi thường gặp
-
-1. **"Camera not available"**
-   - Kiểm tra permissions trong AndroidManifest.xml và Info.plist
-   - Test trên thiết bị thật
-
-2. **"Network error"**
-   - Kiểm tra cấu hình .env
-   - Kiểm tra kết nối internet
-
-3. **"Build failed"**
-   - Chạy `flutter clean && flutter pub get`
-   - Kiểm tra version Flutter và Dart
-
-4. **"NFC not working"**
-   - Chỉ hoạt động trên thiết bị thật có NFC
-   - Kiểm tra NFC đã được bật
-
-### Liên hệ hỗ trợ
-
-- Email: support@skyfi.vn
-- Documentation: [Link to docs]
-- Issues: [Link to GitHub issues]
-
-## Changelog
-
-### Version 0.0.1
-- Phiên bản đầu tiên
-- Hỗ trợ đăng ký thông tin thuê bao
-- Tính năng nạp tiền
-- eKYC với camera và NFC
-- Video call xác thực 

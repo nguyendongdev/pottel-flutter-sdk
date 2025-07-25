@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
+import 'package:skyfi_sdk/skyfi_sdk.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -353,8 +354,18 @@ class TabSimData extends HookConsumerWidget {
                                                 child: OutlineButton(
                                                   height: 48,
                                                   onPressed: () {
-                                                    context.pushNamed(
-                                                        AppRouter.infoRegis);
+                                                    context.l10n.locale ==
+                                                            AppLocale.vi
+                                                        ? Common
+                                                            .openRegisSkyFiApp(
+                                                                locale:
+                                                                    AppLocale
+                                                                        .vi)
+                                                        : Common
+                                                            .openRegisSkyFiApp(
+                                                                locale:
+                                                                    AppLocale
+                                                                        .en);
                                                   },
                                                   text: context.l10n.translate(
                                                       'activate_sim'),
