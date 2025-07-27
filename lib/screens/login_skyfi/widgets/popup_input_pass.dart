@@ -11,7 +11,6 @@ import '../../../core/widgets/outline_button.dart';
 import '../../../l10n/localization_extension.dart';
 import '../../../network/store.dart';
 import '../../../routers/routers.dart';
-import '../../../utilities/common.dart';
 import '../repository/auth_service.dart';
 
 class PopupInputPass extends HookConsumerWidget {
@@ -63,7 +62,7 @@ class PopupInputPass extends HookConsumerWidget {
     void showErrorDialog(String message) {
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
+        builder: (_) => AlertDialog(
           title: Text(
             context.l10n.translate('notification'),
             style: AppTextStyles.heading.copyWith(color: AppColors.text),
@@ -74,7 +73,7 @@ class PopupInputPass extends HookConsumerWidget {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(_).pop(),
               child: Text(
                 context.l10n.translate('close_dialog'),
                 style: AppTextStyles.body.copyWith(color: AppColors.primary),
@@ -89,14 +88,15 @@ class PopupInputPass extends HookConsumerWidget {
       final password = controllers.map((controller) => controller.text).join();
 
       if (password.length != 6) {
-        showErrorDialog(context.l10n.translate('please_enter_6_digit_password'));
+        showErrorDialog(
+            context.l10n.translate('please_enter_6_digit_password'));
         return;
       }
 
       isLoading.value = true;
 
       try {
-        Common.startLoading(context);
+        // Common.startLoading(context);
 
         final response = await authService.loginWithPassword(
           msisdn: phone,
@@ -157,7 +157,7 @@ class PopupInputPass extends HookConsumerWidget {
         debugPrint('Login error: $e');
         showErrorDialog(errorMessage);
       } finally {
-        Common.stopLoading();
+        // Common.stopLoading();
         isLoading.value = false;
       }
     }

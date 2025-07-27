@@ -46,8 +46,8 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
       final response = await api.get('/bss/app/get-random-msisdn');
       final simNumber = ChooseSim.fromJson(response.data);
       if (simNumber.code == 200) {
-      chooseSim.value = simNumber.result?.first;
-       ref.read(selectedPackageProvider.notifier).changeSelectedPackage(
+        chooseSim.value = simNumber.result?.first;
+        ref.read(selectedPackageProvider.notifier).changeSelectedPackage(
               chooseSim.value?.packages
                       ?.firstWhere((element) => element.isDefault == 1)
                       .name ??
@@ -90,95 +90,96 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
     }, []);
 
     return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        if (didPop) {
-          // ref.read(selectedPackageProvider.notifier).changeSelectedPackage('');
-        }
-      },
-      child: Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: AppBar(
-        surfaceTintColor: AppColors.white,
-        backgroundColor: AppColors.white,
-        title: Text(
-          context.l10n.translate('choose_number_and_package'),
-          style: AppTextStyles.title,
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.text),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        actions: const [
-          AppCart(),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(AppSpacing.screenPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _SimNumberSection(
-                    simNumber: chooseSim.value?.msisdn ?? '',
-                    onChangeSimNumber: () {
-                      // open action sheet
-                      showModalBottomSheet(
-                        backgroundColor: AppColors.white,
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (context) => SearchSimData(
-                          onChoosedNumber: (number) {
-                            chooseSim.value = chooseSim.value?.copyWith(
-                              msisdn: number.msisdn,
-                              msisdnId: number.msisdnId,
-                              productId: number.productId,
-                              usimPrice: number.usimPrice,
-                              esimPrice: number.esimPrice,
-                              variantId: number.variantId,
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: AppSpacing.xxl),
-                  _SimTypeSection(
-                    chooseSim: chooseSim.value ?? Result(),
-                  ),
-                  const SizedBox(height: AppSpacing.xxl),
-                  // show empty state if no packages
-                  if (chooseSim.value?.packages?.isEmpty == true)
-                    EmptyCart(
-                      onContinueShopping: () {
-                        Navigator.of(context).pop();
-                      },
-                      title: context.l10n.translate('empty_cart_title'),
-                      description:
-                          context.l10n.translate('empty_cart_description'),
-                      titleButton: context.l10n.translate('continue_shopping'),
-                    ),
-                  if (chooseSim.value?.packages?.isNotEmpty == true)
-                    ..._buildDataPackages(
-                        ref, context, chooseSim.value?.packages ?? []),
-                ],
-              ),
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) {
+            // ref.read(selectedPackageProvider.notifier).changeSelectedPackage('');
+          }
+        },
+        child: Scaffold(
+          backgroundColor: AppColors.white,
+          appBar: AppBar(
+            surfaceTintColor: AppColors.white,
+            backgroundColor: AppColors.white,
+            title: Text(
+              context.l10n.translate('choose_number_and_package'),
+              style: AppTextStyles.title,
             ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: AppColors.text),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            actions: const [
+              AppCart(),
+            ],
           ),
-          _BottomBar(
-            totalPrice: totalPrice.value,
-            chooseSim: chooseSim.value,
-            simType: simType,
-            packPrice: packPrice.value,
-            simPrice: simPriceState.value,
+          body: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(AppSpacing.screenPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _SimNumberSection(
+                        simNumber: chooseSim.value?.msisdn ?? '',
+                        onChangeSimNumber: () {
+                          // open action sheet
+                          showModalBottomSheet(
+                            backgroundColor: AppColors.white,
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (context) => SearchSimData(
+                              onChoosedNumber: (number) {
+                                chooseSim.value = chooseSim.value?.copyWith(
+                                  msisdn: number.msisdn,
+                                  msisdnId: number.msisdnId,
+                                  productId: number.productId,
+                                  usimPrice: number.usimPrice,
+                                  esimPrice: number.esimPrice,
+                                  variantId: number.variantId,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: AppSpacing.xxl),
+                      _SimTypeSection(
+                        chooseSim: chooseSim.value ?? Result(),
+                      ),
+                      const SizedBox(height: AppSpacing.xxl),
+                      // show empty state if no packages
+                      if (chooseSim.value?.packages?.isEmpty == true)
+                        EmptyCart(
+                          onContinueShopping: () {
+                            Navigator.of(context).pop();
+                          },
+                          title: context.l10n.translate('empty_cart_title'),
+                          description:
+                              context.l10n.translate('empty_cart_description'),
+                          titleButton:
+                              context.l10n.translate('continue_shopping'),
+                        ),
+                      if (chooseSim.value?.packages?.isNotEmpty == true)
+                        ..._buildDataPackages(
+                            ref, context, chooseSim.value?.packages ?? []),
+                    ],
+                  ),
+                ),
+              ),
+              _BottomBar(
+                totalPrice: totalPrice.value,
+                chooseSim: chooseSim.value,
+                simType: simType,
+                packPrice: packPrice.value,
+                simPrice: simPriceState.value,
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 
   List<Widget> _buildDataPackages(
@@ -196,18 +197,11 @@ class SimDataSkyFiScreen extends HookConsumerWidget {
               originalPrice: package.price.toString(),
               isSelected: ref.watch(selectedPackageProvider) == package.name,
               onTap: () {
-                // uncheck when double tap
-                if (ref.watch(selectedPackageProvider) == package.name) {
-                  ref
-                      .read(selectedPackageProvider.notifier)
-                      .changeSelectedPackage('');
-                } else {
-                  ref
-                      .read(selectedPackageProvider.notifier)
-                      .changeSelectedPackage(
-                        package.name ?? '',
-                      );
-                }
+                ref
+                    .read(selectedPackageProvider.notifier)
+                    .changeSelectedPackage(
+                      package.name,
+                    );
               },
               onTapDetail: () {
                 // show detail

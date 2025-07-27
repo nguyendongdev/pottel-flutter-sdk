@@ -173,6 +173,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                         'assets/icons/feat_sim_global.svg',
                         width: 20,
                         height: 20,
+                        package: 'skyfi_sdk',
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -198,8 +199,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               hintText:
-                                  context.translate('enter_phone_number') +
-                                      ' SkyFi',
+                                  '${context.translate('enter_phone_number')} SkyFi',
                               counterText: '', // Hide character counter
                             ),
                           ),
@@ -305,14 +305,14 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    CircularProgressIndicator(
+                    const CircularProgressIndicator(
                       valueColor:
                           AlwaysStoppedAnimation<Color>(AppColors.primary),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       context.translate('request_in_progress'),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

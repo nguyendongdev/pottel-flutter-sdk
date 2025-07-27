@@ -88,7 +88,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
           showDialog(
               context: context,
               barrierDismissible: true,
-              builder: (context) => Dialog(
+              builder: (_) => Dialog(
                     insetPadding: const EdgeInsets.symmetric(
                       horizontal: AppSpacing.sm,
                     ),
@@ -101,7 +101,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                       onPressedContinue: (otp) {
                         onRegisterPackage(phoneRegister.value, packageCode,
                             otp: otp);
-                        Navigator.of(context).pop();
+                        Navigator.of(_).pop();
                       },
                       onPressedResendOtp: () async {
                         await onPressedContinueOtp(
@@ -139,7 +139,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
               title: context.l10n.translate('notification_title'),
               description: data['message'],
               secondaryButtonText: context.l10n.translate('topup_money_button'),
-              onPrimaryButtonTap: () => Navigator.of(context).pop(),
+              onPrimaryButtonTap: () {},
               onSecondaryButtonTap: () =>
                   {context.pushNamed(AppRouter.topupSkyFi)},
             ),

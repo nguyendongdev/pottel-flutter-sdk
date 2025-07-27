@@ -127,7 +127,7 @@ const Map<String, String> viStrings = {
   // Compatible Devices Screen
   'mobile_devices_support_esim': 'Thiết bị di động có hỗ trợ eSIM',
   'esim_electronic_note':
-      'Lưu ý: eSIM là một loại eSIM điện tử (sử dụng mã QR) và không phải là thẻ eSIM vật lý lắp vào điện thoại, eSIM không dùng cho các loại đồng hồ thông minh',
+      'Lưu ý: eSIM là một loại sim điện tử (sử dụng mã QR) và không phải là thẻ sim vật lý lắp vào điện thoại, eSIM không dùng cho các loại đồng hồ thông minh',
   'device_search_hint': 'Nhập tên máy (ví dụ Iphone 15, SS Galaxy...)',
 
   // Detail eSIM Content

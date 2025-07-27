@@ -100,7 +100,9 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                 if (e is Exception) {
                   errorMessage = e.toString().replaceFirst('Exception: ', '');
                 }
-                Modal.showError(title: context.l10n.translate('notification'), message: errorMessage);
+                Modal.showError(
+                    title: context.l10n.translate('notification'),
+                    message: errorMessage);
               } finally {
                 Common.stopLoading();
               }
@@ -183,7 +185,9 @@ class LoginSkyFiScreen extends HookConsumerWidget {
           }
         }
 
-        Modal.showError(title: context.l10n.translate('notification'), message: errorMessage);
+        Modal.showError(
+            title: context.l10n.translate('notification'),
+            message: errorMessage);
       }
     }
 
@@ -213,7 +217,8 @@ class LoginSkyFiScreen extends HookConsumerWidget {
           // );
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.l10n.translate('error_resending_otp'))),
+            SnackBar(
+                content: Text(context.l10n.translate('error_resending_otp'))),
           );
         }
       }
@@ -221,7 +226,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
       showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) {
+          builder: (_) {
             return Dialog(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -256,7 +261,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                Navigator.pop(context);
+                                Navigator.pop(_);
                               },
                               icon: const Icon(
                                 Icons.close,
@@ -267,7 +272,9 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                         ),
                         const SizedBox(height: AppSpacing.xl),
                         Text(
-                          context.l10n.translate('otp_sent_message').replaceAll('{0}', phone),
+                          context.l10n
+                              .translate('otp_sent_message')
+                              .replaceAll('{0}', phone),
                           style: AppTextStyles.body.copyWith(
                             color: AppColors.text,
                           ),
@@ -294,7 +301,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                         // button send otp
                         ValueListenableBuilder<int>(
                           valueListenable: countdown,
-                          builder: (context, countdownValue, child) {
+                          builder: (_, countdownValue, child) {
                             return TextButton(
                               onPressed: countdownValue > 0
                                   ? null
@@ -304,7 +311,10 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                                     },
                               child: Text(
                                 countdownValue > 0
-                                    ? context.l10n.translate('resend_otp_countdown').replaceAll('{0}', formatCountdown(countdownValue))
+                                    ? context.l10n
+                                        .translate('resend_otp_countdown')
+                                        .replaceAll('{0}',
+                                            formatCountdown(countdownValue))
                                     : context.l10n.translate('resend_otp'),
                                 style: AppTextStyles.body.copyWith(
                                   color: countdownValue > 0
@@ -364,7 +374,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
 
     void onSendOtp() async {
       try {
-        Common.startLoading(context);
+        // Common.startLoading(context);
         final resLogin = await loginRepository.sendOtp(phone.value);
 
         if (resLogin.code == 200) {
@@ -380,10 +390,11 @@ class LoginSkyFiScreen extends HookConsumerWidget {
         startCountdown();
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.translate('error_resending_otp'))),
+          SnackBar(
+              content: Text(context.l10n.translate('error_resending_otp'))),
         );
       } finally {
-        Common.stopLoading();
+        // Common.stopLoading();
       }
     }
 
@@ -465,18 +476,21 @@ class LoginSkyFiScreen extends HookConsumerWidget {
           } else {
             print("User does not have password set, sending OTP");
             // User doesn't have password, send OTP
-            // onSendOtp();
+            onSendOtp();
           }
         } else {
           Modal.showError(
-              title: context.l10n.translate('notification'), message: checkPasswordResponse.message);
+              title: context.l10n.translate('notification'),
+              message: checkPasswordResponse.message);
         }
       } catch (e) {
         String errorMessage = context.l10n.translate('error_occurred_login');
         if (e is Exception) {
           errorMessage = e.toString().replaceFirst('Exception: ', '');
         }
-        Modal.showError(title: context.l10n.translate('notification'), message: errorMessage);
+        Modal.showError(
+            title: context.l10n.translate('notification'),
+            message: errorMessage);
       } finally {
         Common.stopLoading();
       }
@@ -487,7 +501,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
         backgroundColor: AppColors.transparent,
         leading: IconButton(
           onPressed: () {
-             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
           icon: const Icon(Icons.close, color: AppColors.text),
         ),

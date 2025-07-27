@@ -112,7 +112,7 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
           showDialog(
               context: context,
               barrierDismissible: true,
-              builder: (context) => Dialog(
+              builder: (_) => Dialog(
                     insetPadding: const EdgeInsets.symmetric(
                       horizontal: AppSpacing.sm,
                     ),
@@ -161,7 +161,7 @@ class ListPackageSkyFiScreen extends HookConsumerWidget {
               title: context.l10n.translate('notification'),
               description: data['message'],
               secondaryButtonText: context.l10n.translate('topup_money_action'),
-              onPrimaryButtonTap: () => Navigator.of(context).pop(),
+              onPrimaryButtonTap: () {},
               onSecondaryButtonTap: () =>
                   {context.pushNamed(AppRouter.topupSkyFi)},
             ),

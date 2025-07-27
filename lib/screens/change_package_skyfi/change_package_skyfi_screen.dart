@@ -88,11 +88,10 @@ class ChangePackageSkyFiScreen extends ConsumerWidget {
                     context: context,
                     builder: (_) => PopupCenterCard(
                       onPrimaryButtonTap: () => {
-                        Navigator.of(_).pop(),
                         context.pushNamed(AppRouter.topupSkyFi),
                       },
-                      onSecondaryButtonTap: () => Navigator.of(context).pop(),
-                      title: 'Thông báo',
+                      onSecondaryButtonTap: () {},
+                      title: context.l10n.translate('notificatio'),
                       description: value['message'],
                       primaryButtonText: context.l10n.translate('topup'),
                       secondaryButtonText:

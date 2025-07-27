@@ -3,12 +3,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:skyfi_sdk/l10n/localization_extension.dart';
 import 'package:skyfi_sdk/network/api.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/screens/detail_data_usage_skyfi/widgets/card_used_square.dart';
 import 'package:skyfi_sdk/screens/home_skyfi/models/current_package.dart';
 import 'package:skyfi_sdk/screens/home_skyfi/provider/login_provider.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -33,12 +33,15 @@ class DetailDataUsageScreen extends HookConsumerWidget {
     }
   }
 
-  String _daysLeftFromDate(BuildContext context, String startDate, String toDate) {
+  String _daysLeftFromDate(
+      BuildContext context, String startDate, String toDate) {
     try {
       final parsedStartDate = _convertDate(startDate);
       final parsedToDate = _convertDate(toDate);
       final diff = parsedToDate.difference(parsedStartDate).inDays;
-      return diff > 0 ? '/$diff ${context.l10n.translate('day_unit')}' : context.l10n.translate('expired');
+      return diff > 0
+          ? '/$diff ${context.l10n.translate('day_unit')}'
+          : context.l10n.translate('expired');
     } catch (_) {
       return '-';
     }
@@ -80,15 +83,15 @@ class DetailDataUsageScreen extends HookConsumerWidget {
         if (data.code == 200 &&
             data.result != null &&
             data.result!.isNotEmpty) {
-          final _currentPackage =
+          final currentPackage0 =
               data.result!.firstWhere((pkg) => pkg.isMain == 1, orElse: () {
             return data.result!.first;
           });
-          currentPackage.value = _currentPackage;
+          currentPackage.value = currentPackage0;
           final remainValue =
-              double.tryParse(_currentPackage.remainData ?? '0') ?? 0.0;
+              double.tryParse(currentPackage0.remainData ?? '0') ?? 0.0;
           final totalValue =
-              double.tryParse(_currentPackage.totalData ?? '0') ?? 0.0;
+              double.tryParse(currentPackage0.totalData ?? '0') ?? 0.0;
 
           // Ensure values are valid numbers
           remain.value = remainValue.isFinite ? remainValue : 0.0;
@@ -101,7 +104,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
     }
 
     // Helper function to calculate safe progress
-    double _getSafeProgress() {
+    double getSafeProgress() {
       if (total.value <= 0 || !remain.value.isFinite || !total.value.isFinite) {
         return 0.0;
       }
@@ -145,8 +148,12 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                             TextSpan(
                               children: [
                                 TextSpan(
-                                  text:
-                                      context.l10n.translate('days_remaining').replaceAll('{0}', _daysLeft(currentPackage.value?.toDate)),
+                                  text: context.l10n
+                                      .translate('days_remaining')
+                                      .replaceAll(
+                                          '{0}',
+                                          _daysLeft(
+                                              currentPackage.value?.toDate)),
                                   style: AppTextStyles.title.copyWith(
                                       fontWeight: FontWeight.w700,
                                       color: AppColors.white),
@@ -173,7 +180,7 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                       ),
                       CircularProgressGradient(
                         size: 180,
-                        progress: _getSafeProgress(),
+                        progress: getSafeProgress(),
                         total: total.value,
                         used: remain.value,
                         backStrokeWidth: 20,
@@ -185,8 +192,10 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                           Color(0xFFF3B71A),
                           Color.fromARGB(255, 247, 113, 115),
                         ],
-                        textTitle:
-                            context.l10n.translate('days_left').replaceAll('{0}', _daysLeft(currentPackage.value?.toDate)),
+                        textTitle: context.l10n
+                            .translate('days_left')
+                            .replaceAll(
+                                '{0}', _daysLeft(currentPackage.value?.toDate)),
                       ),
                       const SizedBox(
                         height: 24,
@@ -205,8 +214,12 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                 child: CardUsedSquare(
                                   title: context.l10n.translate('call'),
                                   date: context.l10n.translate('month'),
-                                  description:
-                                      context.l10n.translate('minutes_per_month').replaceAll('{0}', currentPackage.value?.totalVoice ?? ''),
+                                  description: context.l10n
+                                      .translate('minutes_per_month')
+                                      .replaceAll(
+                                          '{0}',
+                                          currentPackage.value?.totalVoice ??
+                                              ''),
                                   used: int.tryParse(
                                           currentPackage.value?.remainVoice ??
                                               '0') ??
@@ -230,8 +243,12 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                 child: CardUsedSquare(
                                   title: context.l10n.translate('message'),
                                   date: context.l10n.translate('month'),
-                                  description:
-                                      context.l10n.translate('sms_per_month').replaceAll('{0}', currentPackage.value?.totalSms ?? '0'),
+                                  description: context.l10n
+                                      .translate('sms_per_month')
+                                      .replaceAll(
+                                          '{0}',
+                                          currentPackage.value?.totalSms ??
+                                              '0'),
                                   used: int.tryParse(
                                           currentPackage.value?.remainSms ??
                                               '0') ??
@@ -269,15 +286,20 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      context.l10n.translate('hot_packages_detail'),
+                                      context.l10n
+                                          .translate('hot_packages_detail'),
                                       style: AppTextStyles.heading,
                                     ),
                                     TextButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        context.pushNamed(
+                                            AppRouter.listPackageSkyFi);
+                                      },
                                       child: Row(
                                         children: [
                                           Text(
-                                            context.l10n.translate('discover_packages'),
+                                            context.l10n
+                                                .translate('discover_packages'),
                                             style:
                                                 AppTextStyles.button.copyWith(
                                               color: AppColors.strongSecondary,
@@ -329,8 +351,8 @@ class DetailDataUsageScreen extends HookConsumerWidget {
                                         }).toList()
                                       : [
                                           Center(
-                                            child: Text(
-                                                context.l10n.translate('no_hot_packages')),
+                                            child: Text(context.l10n
+                                                .translate('no_hot_packages')),
                                           ),
                                         ],
                                 ),

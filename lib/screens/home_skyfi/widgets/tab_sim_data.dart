@@ -538,6 +538,7 @@ class TabSimData extends HookConsumerWidget {
                                             'packageId': listOutStandingPackage
                                                 .value[index].id
                                                 .toInt(),
+                                            'isRegister': true,
                                           });
                                     },
                                     onTapRegister: () {
