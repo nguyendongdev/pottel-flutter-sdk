@@ -275,19 +275,11 @@ class Common {
         'https://apps.apple.com/us/app/skyfi/id6747164804';
 
     try {
-      // Try to launch the deeplink first
+      // Try to launch the deeplink directly
       final Uri deepLinkUri = Uri.parse(deepLink);
-      if (await canLaunchUrl(deepLinkUri)) {
-        await launchUrl(deepLinkUri, mode: LaunchMode.externalApplication);
-      } else {
-        // If deeplink fails, open appropriate store based on platform
-        final String storeUrl =
-            Platform.isAndroid ? androidStoreUrl : iosStoreUrl;
-        final Uri storeUri = Uri.parse(storeUrl);
-        await launchUrl(storeUri, mode: LaunchMode.externalApplication);
-      }
+      await launchUrl(deepLinkUri, mode: LaunchMode.externalApplication);
     } catch (e) {
-      print('Error opening SkyFi app: $e');
+      print('Error opening SkyFi app with deeplink: $e');
       // Fallback to store URL if deeplink fails
       final String storeUrl =
           Platform.isAndroid ? androidStoreUrl : iosStoreUrl;
@@ -312,19 +304,11 @@ class Common {
         'https://apps.apple.com/us/app/skyfi/id6747164804';
 
     try {
-      // Try to launch the deeplink first
+      // Try to launch the deeplink directly
       final Uri deepLinkUri = Uri.parse(deepLink);
-      if (await canLaunchUrl(deepLinkUri)) {
-        await launchUrl(deepLinkUri, mode: LaunchMode.externalApplication);
-      } else {
-        // If deeplink fails, open appropriate store based on platform
-        final String storeUrl =
-            Platform.isAndroid ? androidStoreUrl : iosStoreUrl;
-        final Uri storeUri = Uri.parse(storeUrl);
-        await launchUrl(storeUri, mode: LaunchMode.externalApplication);
-      }
+      await launchUrl(deepLinkUri, mode: LaunchMode.externalApplication);
     } catch (e) {
-      print('Error opening SkyFi registration: $e');
+      print('Error opening SkyFi registration with deeplink: $e');
       // Fallback to store URL if deeplink fails
       final String storeUrl =
           Platform.isAndroid ? androidStoreUrl : iosStoreUrl;
