@@ -895,4 +895,7 @@ const Map<String, String> viStrings = {
       'Bạn xác nhận KHÔNG SỬ DỤNG Số TB SkyFi nào trong danh sách. Nếu chọn "Đồng ý" các số thuê bao gợi ý sẽ được đưa vào danh sách cần cập nhật lại TTTB?',
 
   'update': 'Cập nhật',
+  'supported_countries': 'Quốc gia được hỗ trợ',
+  'enter_country_name': 'Nhập tên quốc gia',
+  'buy_package': 'Mua gói cước',
 };

@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 
 import '../../../network/api.dart';
 import '../../payment_method_skyfi/models/payment_respone/payment_respone.dart';
@@ -42,9 +44,12 @@ class TopupRepository {
     }
   }
 
-  Future<String> getLinkPayment(String orderID) async {
+  Future<String> getLinkPayment(String orderID, BuildContext context) async {
     final response = await _api.post('/bss/payment/gateways/GALAXYPAY/redirect',
-        data: {'orderNumber': orderID});
+        data: {
+          'orderNumber': orderID,
+          'locale': context.l10n.locale.languageCode
+        });
     final data = PaymentRespone.fromJson(response.data);
     if (response.statusCode == 200 && data.code == 200) {
       final link = data.result?.redirectUrl;

@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skyfi_sdk/core/constants/colors.dart';
 import 'package:skyfi_sdk/core/constants/spacing.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 import 'package:skyfi_sdk/screens/esim_travel_skyfi/models/esim_package_model.dart';
 import 'package:skyfi_sdk/utilities/modal.dart';
 
@@ -70,10 +71,10 @@ class EsimListContris extends HookConsumerWidget {
             ),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
-                    'Quốc gia được hỗ trợ',
-                    style: TextStyle(
+                    context.translate('supported_countries'),
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: AppColors.text,
@@ -109,14 +110,14 @@ class EsimListContris extends HookConsumerWidget {
             ),
             child: TextField(
               controller: searchController,
-              decoration: const InputDecoration(
-                hintText: 'Nhập tên quốc gia',
-                hintStyle: TextStyle(
+              decoration: InputDecoration(
+                hintText: context.translate('enter_country_name'),
+                hintStyle: const TextStyle(
                   color: AppColors.textLight,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.search,
                   color: AppColors.textGrey,
                   size: 20,
@@ -213,7 +214,9 @@ class _CountryListItem extends StatelessWidget {
       return ClipRRect(
         borderRadius: BorderRadius.circular(15),
         child: Image.network(
-          country.image,
+          country.image.contains('https')
+              ? country.image
+              : 'https://flagcdn.com/w80/${country.countryCode.toLowerCase()}.png',
           width: 30,
           height: 30,
           fit: BoxFit.cover,

@@ -89,8 +89,9 @@ class TopupSkyFiScreen extends HookConsumerWidget {
       if (result != null && context.mounted) {
         if (result['success'] == true) {
           final orderId = result['data'];
-          final link =
-              await ref.read(topupRepositoryProvider).getLinkPayment(orderId);
+          final link = await ref
+              .read(topupRepositoryProvider)
+              .getLinkPayment(orderId, context);
           if (link.isNotEmpty) {
             context.pushNamed(AppRouter.webviewPaymentSkyfi, extra: link);
             return;

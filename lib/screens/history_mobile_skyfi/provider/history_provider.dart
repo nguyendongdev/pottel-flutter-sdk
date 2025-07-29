@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 import 'package:skyfi_sdk/screens/history_mobile_skyfi/services/historyService.dart';
 import 'package:skyfi_sdk/utilities/common.dart';
 
@@ -32,12 +34,12 @@ class TopupHistory extends _$TopupHistory {
     return formatter.format(dateTime);
   }
 
-  Future<void> getTopupHistory() async {
+  Future<void> getTopupHistory(BuildContext context) async {
     try {
       final history = await Historyservice().getHistory();
       state = history.map((item) {
         return HistoryItem(
-          title: 'Nạp tiền ',
+          title: context.translate('topup'),
           dateTime:
               _formattedDate(item.transactionDate?.toString() ?? 'Unknown'),
           amount: '+${Common.formatCurrency(item.amount.toString())} VND',
@@ -60,12 +62,12 @@ class ServiceHistory extends _$ServiceHistory {
     return ' ${date.hour}:${date.minute} ${date.day}/${date.month}/${date.year}';
   }
 
-  Future<void> getServiceHistory() async {
+  Future<void> getServiceHistory(BuildContext context) async {
     try {
       final history = await Historyservice().getPackageHistory();
       state = history.map((item) {
         return HistoryItem(
-          title: 'Mua gói cước ${item.packCode}',
+          title: '${context.translate('buy_package')} ${item.packCode}',
           dateTime: _formatDateTime(item.transactionDate!),
           amount: '-${Common.formatCurrency(item.price.toString())} VND',
         );

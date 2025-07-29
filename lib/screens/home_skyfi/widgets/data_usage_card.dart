@@ -140,6 +140,7 @@ class DataUsageCard extends HookConsumerWidget {
                             progress: remain / total * 100,
                             total: total,
                             used: remain,
+                            textTitle: context.translate('remaining_data'),
                           ),
                         ],
                       ),

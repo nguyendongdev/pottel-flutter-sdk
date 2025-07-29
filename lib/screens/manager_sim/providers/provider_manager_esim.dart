@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:skyfi_sdk/l10n/l10n.dart';
 import 'package:skyfi_sdk/network/api.dart';
 import 'package:skyfi_sdk/routers/routers.dart';
 import 'package:skyfi_sdk/screens/manager_sim/models/response_add_data/response_add_data.dart';
@@ -55,7 +56,10 @@ class ServiceManagerESim {
   void getLinkPayment(String orderID, BuildContext context) async {
     // isLoading.value = true;
     final response = await _api.post('/bss/payment/gateways/GALAXYPAY/redirect',
-        data: {'orderNumber': orderID});
+        data: {
+          'orderNumber': orderID,
+          'locale': context.l10n.locale.languageCode
+        });
     // isLoading.value = false;
     final data = PaymentRespone.fromJson(response.data);
     if (response.statusCode == 200 && data.code == 200 && context.mounted) {

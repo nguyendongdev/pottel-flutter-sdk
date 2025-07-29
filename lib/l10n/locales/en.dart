@@ -904,4 +904,7 @@ const Map<String, String> enStrings = {
       'You confirm that you do not use any SkyFi numbers in the list. If you select "Agree", the suggested subscriber numbers will be added to the list that needs to be updated.',
 
   'update': 'Update',
+  'supported_countries': 'Supported Countries',
+  'enter_country_name': 'Enter country name',
+  'buy_package': 'Buy Package',
 };

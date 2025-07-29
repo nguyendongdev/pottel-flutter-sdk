@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/constants/colors.dart';
@@ -23,9 +22,9 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
 
     useEffect(() {
       if (selectedTab == HistoryTab.topup) {
-        ref.read(topupHistoryProvider.notifier).getTopupHistory();
+        ref.read(topupHistoryProvider.notifier).getTopupHistory(context);
       } else if (selectedTab == HistoryTab.service) {
-        ref.read(serviceHistoryProvider.notifier).getServiceHistory();
+        ref.read(serviceHistoryProvider.notifier).getServiceHistory(context);
       }
 
       return null;
@@ -44,7 +43,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
         ),
       ),
@@ -92,7 +91,8 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 16),
-                  DateHeaderWidget(date: context.l10n.translate('history_header')),
+                  DateHeaderWidget(
+                      date: context.l10n.translate('history_header')),
                   const SizedBox(height: 16),
                   if (selectedTab == HistoryTab.topup)
                     ...topupHistory.map(

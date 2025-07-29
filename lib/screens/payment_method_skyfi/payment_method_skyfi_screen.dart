@@ -8,8 +8,8 @@ import 'package:skyfi_sdk/screens/payment_method_skyfi/models/payment_respone/pa
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
-import '../../l10n/localization_extension.dart';
 import '../../core/widgets/bottom_button.dart';
+import '../../l10n/localization_extension.dart';
 import '../../network/api.dart';
 import '../../routers/routers.dart';
 import '../../utilities/common.dart';
@@ -41,9 +41,11 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
 
     void getLinkPayment(String orderID) async {
       isLoading.value = true;
-      final response = await api.post(
-          '/bss/payment/gateways/GALAXYPAY/redirect',
-          data: {'orderNumber': orderID});
+      final response = await api
+          .post('/bss/payment/gateways/GALAXYPAY/redirect', data: {
+        'orderNumber': orderID,
+        'locale': context.l10n.locale.languageCode
+      });
 
       isLoading.value = false;
       final data = PaymentRespone.fromJson(response.data);
@@ -77,7 +79,8 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
         }
       }
       if (response.statusCode == 200 && data.code == 400) {
-        Common.showToast(data.message ?? context.l10n.translate('error_general'), context);
+        Common.showToast(
+            data.message ?? context.l10n.translate('error_general'), context);
         return;
       }
     }
@@ -158,7 +161,8 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
-        title: Text(context.l10n.translate('payment_method_title'), style: AppTextStyles.title),
+        title: Text(context.l10n.translate('payment_method_title'),
+            style: AppTextStyles.title),
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(Icons.arrow_back_ios),
@@ -224,8 +228,8 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
                                             paymentMethods.value[index]
                                                     .paymentMethod ==
                                                 'COD') {
-                                          showToast(
-                                              context.l10n.translate('esim_not_support_cod'));
+                                          showToast(context.l10n.translate(
+                                              'esim_not_support_cod'));
                                           return;
                                         }
                                         ref
@@ -253,7 +257,8 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
                           },
                         )
                       : Center(
-                          child: Text(context.l10n.translate('no_payment_methods_available')),
+                          child: Text(context.l10n
+                              .translate('no_payment_methods_available')),
                         ),
                 ),
               ],
