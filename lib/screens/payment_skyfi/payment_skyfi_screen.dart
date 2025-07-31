@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/screens/cart_skyfi/provider/cart_provider.dart';
 import 'package:skyfi_sdk/screens/payment_skyfi/provider/address_provider.dart';
 import 'package:skyfi_sdk/screens/payment_skyfi/provider/payment_order_provider.dart';
 import 'package:skyfi_sdk/screens/payment_skyfi/widgets/coupon_code_input.dart';
@@ -95,7 +94,8 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
                 TransactionSummary(
                   totalAmountCart: totalAmountCart ?? 0,
                   fee: totalFee.value,
-                  countItem: ref.watch(cartProvider.notifier).itemCount,
+                  countItem: items.fold(
+                      0, (total, item) => total + (item.quantity ?? 1)),
                   discountAmount:
                       ref.watch(paymentOrderProvider).discountAmount ?? 0,
                   shippingAmount:
