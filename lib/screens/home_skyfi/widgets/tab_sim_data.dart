@@ -445,7 +445,9 @@ class TabSimData extends HookConsumerWidget {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        context.pushNamed(AppRouter.topupSkyFi);
+                                        // context.pushNamed(AppRouter.topupSkyFi);
+                                        Common.popupMaintaining(context);
+
                                       },
                                       child: FeatureCard(
                                         icon: 'assets/icons/feat_bank.svg',

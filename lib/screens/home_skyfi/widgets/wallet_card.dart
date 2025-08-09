@@ -40,7 +40,8 @@ class WalletCard extends StatelessWidget {
               ),
               OutlineButton(
                 onPressed: () {
-                  context.pushNamed(AppRouter.topupSkyFi);
+                  // context.pushNamed(AppRouter.topupSkyFi);
+                  Common.popupMaintaining(context);
                 },
                 text: context.l10n.translate('topup_money'),
                 textStyle: AppTextStyles.button.copyWith(
