@@ -57,10 +57,46 @@ class _MyAppState extends State<MyApp> {
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
+                    // SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => PopScope(
+                          canPop: false,
+                          child: SkyfiSdk(
+                            phone: '0707040618',
+                            env: SkyfiEnv.dev,
+                            initialLocation: SkyfiRoute.infoRegis.path,
+                            locale: AppLocale.vi,
+                          ),
+                        ),
+                      ),
+                    );
                   },
                   child: const Text('Mở màn hình đăng ký'),
                 ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    // SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => PopScope(
+                          canPop: false,
+                          child: SkyfiSdk(
+                            phone: '0707040618',
+                            env: SkyfiEnv.dev,
+                            initialLocation: SkyfiRoute.scanNfcChipcardNew.path,
+                            locale: AppLocale.vi,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Mở màn hình NFC'),
+                ),
+
               ],
             ),
           );

@@ -105,8 +105,8 @@ class AccountInfoSkyFiScreen extends HookConsumerWidget {
                 title: context.l10n.translate('activate_sim'),
                 iconPath: 'assets/icons/simcard.svg',
                 onTap: () {
-                  // context.pushNamed(AppRouter.infoRegis);
-                  Common.openRegisSkyFiApp();
+                  context.pushNamed(AppRouter.infoRegis);
+                  // Common.openRegisSkyFiApp();
                 },
               ),
 

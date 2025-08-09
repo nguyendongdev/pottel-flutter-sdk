@@ -354,18 +354,19 @@ class TabSimData extends HookConsumerWidget {
                                                 child: OutlineButton(
                                                   height: 48,
                                                   onPressed: () {
-                                                    context.l10n.locale ==
-                                                            AppLocale.vi
-                                                        ? Common
-                                                            .openRegisSkyFiApp(
-                                                                locale:
-                                                                    AppLocale
-                                                                        .vi)
-                                                        : Common
-                                                            .openRegisSkyFiApp(
-                                                                locale:
-                                                                    AppLocale
-                                                                        .en);
+                                                    // context.l10n.locale ==
+                                                    //         AppLocale.vi
+                                                    //     ? Common
+                                                    //         .openRegisSkyFiApp(
+                                                    //             locale:
+                                                    //                 AppLocale
+                                                    //                     .vi)
+                                                    //     : Common
+                                                    //         .openRegisSkyFiApp(
+                                                    //             locale:
+                                                    //                 AppLocale
+                                                    //                     .en);
+                                                    context.pushNamed(AppRouter.infoRegis);
                                                   },
                                                   text: context.l10n.translate(
                                                       'activate_sim'),

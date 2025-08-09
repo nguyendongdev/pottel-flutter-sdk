@@ -278,29 +278,29 @@ class AppRouter {
           //   },
           // ),
 
-          // GoRoute(
-          //   path: videoCallJitsi,
-          //   name: videoCallJitsi,
-          //   builder: (context, state) {
-          //     final data = state.extra as Map<String, dynamic>;
-          //     return VideoCallViewJitsiScreen(
-          //       msisdn: data['msisdn'] as String,
-          //       serial: data['serial'] as String,
-          //     );
-          //   },
-          // ),
-          // GoRoute(
-          //   path: scanNfcChipcard,
-          //   name: scanNfcChipcard,
-          //   builder: (context, state) {
-          //     final data = state.extra as Map<String, dynamic>;
-          //     return ScanNfcChipcardScreen(
-          //       docNumber: data['docNumber'] as String,
-          //       dob: data['dob'] as String,
-          //       doe: data['doe'] as String,
-          //     );
-          //   },
-          // ),
+          GoRoute(
+            path: videoCallJitsi,
+            name: videoCallJitsi,
+            builder: (context, state) {
+              final data = state.extra as Map<String, dynamic>;
+              return VideoCallViewJitsiScreen(
+                msisdn: data['msisdn'] as String,
+                serial: data['serial'] as String,
+              );
+            },
+          ),
+          GoRoute(
+            path: scanNfcChipcard,
+            name: scanNfcChipcard,
+            builder: (context, state) {
+              final data = state.extra as Map<String, dynamic>;
+              return ScanNfcChipcardScreen(
+                docNumber: data['docNumber'] as String,
+                dob: data['dob'] as String,
+                doe: data['doe'] as String,
+              );
+            },
+          ),
           GoRoute(
             path: contactDetail,
             name: contactDetail,
@@ -309,11 +309,11 @@ class AppRouter {
             ),
           ),
 
-          // GoRoute(
-          //   path: scanNfcChipcardNew,
-          //   name: scanNfcChipcardNew,
-          //   builder: (context, state) => const ScanNfcChipcardScreenNew(),
-          // ),
+          GoRoute(
+            path: scanNfcChipcardNew,
+            name: scanNfcChipcardNew,
+            builder: (context, state) => const ScanNfcChipcardScreenNew(),
+          ),
 
           GoRoute(
             path: loginSkyFi,

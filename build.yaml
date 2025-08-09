@@ -1,0 +1,12 @@
+targets:
+  $default:
+    sources:
+      exclude:
+        - "example/ios/.symlinks/**"
+        - "example/android/.symlinks/**"
+        - "example/linux/.symlinks/**"
+        - "example/macos/.symlinks/**"
+        - "example/windows/.symlinks/**"
+        - "**/.fvm/**"
+        - "**/test/**"
+        - "**/integration_test/**"

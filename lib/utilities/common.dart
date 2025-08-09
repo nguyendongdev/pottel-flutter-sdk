@@ -296,7 +296,7 @@ class Common {
     AppLocale locale = AppLocale.vi,
   }) async {
     final String deepLink =
-        'skyfi://scan-barcode?locale=${locale.code.toString()}';
+        'skyfi://scan-barcode?locale=${locale.code.toString()}&from=SkyJoy';
     print('deeplink: $deepLink');
     const String androidStoreUrl =
         'https://play.google.com/store/apps/details?id=vn.galaxytelecom.skyfi';
