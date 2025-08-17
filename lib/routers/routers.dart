@@ -50,7 +50,7 @@ import '../screens/register/register_screen.dart';
 import '../screens/sim_data_skyfi/sim_data_skyfi_screen.dart';
 import '../screens/topup_skyfi/topup_skyfi_screen.dart';
 import '../screens/user_info/user_info_screen.dart';
-import '../screens/video_call/VideoCallViewJitsiScreen.dart';
+// import '../screens/video_call/VideoCallViewJitsiScreen.dart';
 import '../screens/webview/webview_screen.dart';
 import '../screens/webview_payment_skyfi/webview_payment_skyfi_screen.dart';
 
@@ -278,17 +278,17 @@ class AppRouter {
           //   },
           // ),
 
-          GoRoute(
-            path: videoCallJitsi,
-            name: videoCallJitsi,
-            builder: (context, state) {
-              final data = state.extra as Map<String, dynamic>;
-              return VideoCallViewJitsiScreen(
-                msisdn: data['msisdn'] as String,
-                serial: data['serial'] as String,
-              );
-            },
-          ),
+          // GoRoute(
+          //   path: videoCallJitsi,
+          //   name: videoCallJitsi,
+          //   builder: (context, state) {
+          //     final data = state.extra as Map<String, dynamic>;
+          //     return VideoCallViewJitsiScreen(
+          //       msisdn: data['msisdn'] as String,
+          //       serial: data['serial'] as String,
+          //     );
+          //   },
+          // ),
           GoRoute(
             path: scanNfcChipcard,
             name: scanNfcChipcard,
