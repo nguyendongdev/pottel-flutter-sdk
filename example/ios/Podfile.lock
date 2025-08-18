@@ -21,10 +21,10 @@ PODS:
     - Flutter
   - integration_test (0.0.1):
     - Flutter
-  - jitsi_meet_flutter_sdk (11.3.0):
+  - jitsi_meet_flutter_sdk (11.4.0):
     - Flutter
-    - JitsiMeetSDK (= 11.3.0)
-  - JitsiMeetSDK (11.3.0):
+    - JitsiMeetSDK (= 11.4.0)
+  - JitsiMeetSDK (11.4.0):
     - Giphy (= 2.2.12)
     - JitsiWebRTC (~> 124.0)
   - JitsiWebRTC (124.0.2)
@@ -163,8 +163,8 @@ SPEC CHECKSUMS:
   Giphy: 83628960ed04e1c3428ff1b4fb2b027f65e82f50
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
-  jitsi_meet_flutter_sdk: c6715c37a1098396d6caf1a164283b847251724a
-  JitsiMeetSDK: 39df41cda49c290e41293e60e01f822c59b92b64
+  jitsi_meet_flutter_sdk: f3858cf1ca222dc31165356c1df97a277ecd8760
+  JitsiMeetSDK: 7d779172ac5b2fd7790ce8959f1e0dc71cd85b32
   JitsiWebRTC: b47805ab5668be38e7ee60e2258f49badfe8e1d0
   just_audio: a42c63806f16995daf5b219ae1d679deb76e6a79
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
@@ -184,4 +184,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: aa138be8409ad2ab7f70f36aee65b237099b922e
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.15.2
