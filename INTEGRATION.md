@@ -65,6 +65,32 @@ Thêm các permissions vào `ios/Runner/Info.plist`:
 <string>Ứng dụng cần quyền truy cập microphone cho video call</string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Ứng dụng cần quyền truy cập thư viện ảnh</string>
+
+<key>NFCReaderUsageDescription</key>
+<string>SkyFiSdk need access to your NFC to read data from your card<string>
+
+<key>com.apple.developer.nfc.readersession.formats</key>
+	<array>
+		<string>NFCISO7816</string>
+	</array>
+<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+	<array>
+		<string>A0000002471001</string>
+	</array>
+
+<!-- Runner.entitlements -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.nfc.readersession.formats</key>
+	<array>
+		<string>TAG</string>
+	</array>
+</dict>
+</plist>
+
+
 ```
 
 ### 5. Cấu hình môi trường (Tùy chọn)

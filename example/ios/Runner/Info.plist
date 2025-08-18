@@ -27,8 +27,8 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NFCReaderUsageDescription</key>
-	<!-- <string>SkyFiSdk need access to your NFC to read data from your card</string>
-	<key>NSCalendarsUsageDescription</key> -->
+	<string>SkyFiSdk need access to your NFC to read data from your card</string>
+	<key>NSCalendarsUsageDescription</key>
 	<string>SkyFiSdk need access to your calendar to save events</string>
 	<key>NSCameraUsageDescription</key>
 	<string>SkyFiSdk need access to your camera to scan QR codes</string>
