@@ -28,11 +28,11 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
     final api = API();
     final isLoading = useState<bool>(false);
     print('modeUI: ${modeUI}');
-    final isSelected = useState<String>('GALAXYPAY');
+    final isSelected = useState<String>('international');
     final paymentMethods = useState<List<dynamic>>([]);
 
     void fetchPaymentMethods() async {
-      final response = await api.get('/bss/payment/gateways/GALAXYPAY/methods');
+      final response = await api.get('/bss/payment/gateways/SDK/methods');
       final data = PaymentMethod.fromJson(response.data);
       if (response.statusCode == 200 && data.code == 200) {
         paymentMethods.value = data.result?.methods ?? [];
@@ -40,11 +40,13 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
     }
 
     void getLinkPayment(String orderID) async {
+      print('paymentMethod: ${isSelected.value}');
       isLoading.value = true;
       final response = await api
           .post('/bss/payment/gateways/GALAXYPAY/redirect', data: {
         'orderNumber': orderID,
-        'locale': context.l10n.locale.languageCode
+        'locale': context.l10n.locale.languageCode,
+        'paymentMethod': isSelected.value
       });
 
       isLoading.value = false;
@@ -65,6 +67,7 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
       final itemsJson = items?.map((item) => item.toJson()).toList();
       final orderJson = order.toJson();
       orderJson['items'] = itemsJson;
+      orderJson['source'] = 'SDK';
       print('orderJson: $orderJson');
       isLoading.value = false;
       final response = await api.post('/bss/app/create-order', data: orderJson);
@@ -125,12 +128,12 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
         return;
       }
 
-      if (isSelected.value == 'COD') {
-        checkOutOrderCOD();
-      }
-      if (isSelected.value == 'GALAXYPAY') {
+      // if (isSelected.value == 'COD') {
+      //   checkOutOrderCOD();
+      // }
+      // if (isSelected.value == 'GALAXYPAY') {
         checkOutOrderGALAXYPAY();
-      }
+      // }
       return;
     }
 

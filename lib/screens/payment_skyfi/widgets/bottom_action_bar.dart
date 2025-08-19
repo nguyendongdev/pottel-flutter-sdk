@@ -190,7 +190,8 @@ class BottomActionBar extends HookConsumerWidget {
         }
 
         // Set payment method and proceed with checkout
-        setPaymentMethodAndCheckout();
+        // setPaymentMethodAndCheckout();
+        context.pushNamed(AppRouter.paymentMethodSkyFi, extra: modeUI);
         return;
       }
 
@@ -250,7 +251,8 @@ class BottomActionBar extends HookConsumerWidget {
         }
 
         // Set payment method and proceed with checkout
-        setPaymentMethodAndCheckout();
+        // setPaymentMethodAndCheckout();
+        context.pushNamed(AppRouter.paymentMethodSkyFi, extra: modeUI);
         return;
       }
     }
@@ -338,11 +340,15 @@ class BottomActionBar extends HookConsumerWidget {
               onValidate(modeUI);
               // context.pushNamed(AppRouter.paymentMethodSkyFi);
             },
+            // text: isLoading.value
+            //     ? context.l10n.translate('loading_text')
+            //     : (modeUI == 'USIM'
+            //         ? context.l10n.translate('choose_payment_method_button')
+            //         : context.l10n.translate('payment')),
+
             text: isLoading.value
                 ? context.l10n.translate('loading_text')
-                : (modeUI == 'USIM'
-                    ? context.l10n.translate('choose_payment_method_button')
-                    : context.l10n.translate('payment')),
+                : context.l10n.translate('choose_payment_method_button'),
             height: 48,
             disabled: isLoading.value,
             textStyle: AppTextStyles.button.copyWith(
