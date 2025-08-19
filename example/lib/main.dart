@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
                           child: SkyfiSdk(
                             phone: '0707040618',
                             env: SkyfiEnv.dev,
-                            initialLocation: SkyfiRoute.infoRegis.path,
+                            initialLocation: SkyfiRoute.scanBarcode.path,
                             locale: AppLocale.vi,
                           ),
                         ),

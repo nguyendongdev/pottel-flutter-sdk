@@ -312,7 +312,8 @@ enum SkyfiRoute {
   topupSkyFi('/topup-skyfi'),
   infoRegisSkyFi('/info-regis'),
   detailDataUsage('/detail-data-usage'),
-  scanNfcChipcardNew('/scan-nfc-chipcard-new');
+  scanNfcChipcardNew('/scan-nfc-chipcard-new'),
+  scanBarcode('/scan-barcode');
 
   const SkyfiRoute(this.path);
   final String path;
