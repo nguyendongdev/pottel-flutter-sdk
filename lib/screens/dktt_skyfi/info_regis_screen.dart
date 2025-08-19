@@ -21,10 +21,12 @@ import 'widgets/phone_display_field.dart';
 import 'widgets/serial_input_field.dart';
 
 class InfoRegisScreen extends HookConsumerWidget {
-  const InfoRegisScreen({super.key});
+  final String? barcode;
+  const InfoRegisScreen({super.key, this.barcode});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final serialController = useTextEditingController(
       text: '', // 03120000431 // 03120000449
     );
@@ -35,7 +37,7 @@ class InfoRegisScreen extends HookConsumerWidget {
     final isUpdateMsisdn = useState(true);
     final api = API();
 
-    Future<void> checkPermissionCamera() async {
+    Future<void> _checkPermissionCamera() async {
       final permission = await Permission.camera.request();
       if (permission.isGranted) {
         print('permission camera granted');
@@ -43,14 +45,16 @@ class InfoRegisScreen extends HookConsumerWidget {
       } else {
         // The permission was denied, either just once or permanently.
         Common.showToast(
-            context.l10n.translate('camera_permission_required'), context);
+          context.l10n.translate('camera_permission_required'),
+          context,
+        );
       }
     }
 
     Future<Object?> getInfoFromIccid(String iccid) async {
       try {
         // Show loading
-        Common.loadingWithContext(context, show: true);
+        // Common.loadingWithContext(context, show: true);
 
         final result = await api.post(
           '/bss/videocall/get-info-from-iccd',
@@ -87,16 +91,35 @@ class InfoRegisScreen extends HookConsumerWidget {
           );
         }
       } catch (e) {
-        Common.showToast(
-            context.l10n.translate('general_error_occurred'), context);
+        Common.showToast(context.l10n.translate('general_error_occurred'), context);
         return null;
       } finally {
         // Hide loading
-        Common.loadingWithContext(context, show: false);
+        // Common.loadingWithContext(context, show: false);
       }
     }
 
-    Future<void> onScanBarcode() async {
+    // Handle barcode from navigation
+    useEffect(() {
+      if (barcode != null) {
+        getInfoFromIccid(barcode!).then((infoFromIccid) {
+          if (infoFromIccid != null && infoFromIccid is! CodeErrorHandle) {
+            final info = infoFromIccid as Result;
+            serialController.text =
+                info.iccid?.substring(2, info.iccid!.length - 1) ?? '';
+            msisdnController.text = info.msisdn ?? '';
+            isUpdateMsisdn.value = false;
+          } else if (infoFromIccid is CodeErrorHandle) {
+            Common.showToast(
+                infoFromIccid.message ?? context.l10n.translate('iccid_info_error'),
+                context);
+          }
+        });
+      }
+      return null;
+    }, [barcode]);
+
+    Future<void> _onScanBarcode() async {
       isUpdateMsisdn.value = true;
       final result = await context.pushNamed<String>(AppRouter.scanBarcode);
       print("result $result");
@@ -119,8 +142,7 @@ class InfoRegisScreen extends HookConsumerWidget {
             // This is a CodeErrorHandle (error case)
             final errorHandle = infoFromIccid;
             Common.showToast(
-                errorHandle.message ??
-                    context.l10n.translate('iccid_info_error'),
+                errorHandle.message ?? context.l10n.translate('iccid_info_error'),
                 context);
           }
         }
@@ -128,7 +150,7 @@ class InfoRegisScreen extends HookConsumerWidget {
       print("serialController.text ${serialController.text}");
     }
 
-    Future<void> onCheckSim() async {
+    Future<void> _onCheckSim() async {
       try {
         isLoading.value = true;
         final result = await api.post(
@@ -145,7 +167,7 @@ class InfoRegisScreen extends HookConsumerWidget {
             Common.showDialogConfirm(
               context,
               context.l10n.translate('notification_dktt'),
-              context.l10n
+              context
                   .translate('phone_in_process_message')
                   .replaceAll('{0}', msisdnController.text),
               () {
@@ -191,8 +213,7 @@ class InfoRegisScreen extends HookConsumerWidget {
               context);
         }
       } catch (e) {
-        Common.showToast(
-            context.l10n.translate('general_error_occurred'), context);
+        Common.showToast(context.l10n.translate('general_error_occurred'), context);
       } finally {
         isLoading.value = false;
         // Common.stopLoading();
@@ -246,8 +267,7 @@ class InfoRegisScreen extends HookConsumerWidget {
                       ),
                       const SizedBox(height: AppSpacing.lg),
                       PhoneDisplayField(
-                        label:
-                            context.l10n.translate('phone_number_to_activate'),
+                        label: context.l10n.translate('phone_number_to_activate'),
                         controller: msisdnController,
                         isEditable: isUpdateMsisdn.value,
                         onChanged: (value) {
@@ -258,7 +278,7 @@ class InfoRegisScreen extends HookConsumerWidget {
                       const SizedBox(height: AppSpacing.lg),
                       SerialInputField(
                         controller: serialController,
-                        onScanTap: onScanBarcode,
+                        onScanTap: _onScanBarcode,
                         onChanged: (value) {
                           serialController.text = value;
                         },
@@ -271,9 +291,9 @@ class InfoRegisScreen extends HookConsumerWidget {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.xl,
-            vertical: MediaQuery.of(context).padding.bottom + AppSpacing.lg,
+            vertical: AppSpacing.xxl,
           ),
           child: BottomButton(
             onPressed: () {
@@ -285,11 +305,10 @@ class InfoRegisScreen extends HookConsumerWidget {
               }
               if (serialController.text.length != 16) {
                 Common.showToast(
-                    context.l10n.translate('serial_16_digits_required'),
-                    context);
+                    context.l10n.translate('serial_16_digits_required'), context);
                 return;
               }
-              onCheckSim();
+              _onCheckSim();
             },
             text: isLoading.value
                 ? context.l10n.translate('processing_dktt')

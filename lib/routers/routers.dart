@@ -193,7 +193,9 @@ class AppRouter {
           GoRoute(
             path: infoRegis,
             name: infoRegis,
-            builder: (context, state) => const InfoRegisScreen(),
+            builder: (context, state) => InfoRegisScreen(
+              barcode: state.extra as String?,
+            ),
           ),
           GoRoute(
             path: scanBarcode,

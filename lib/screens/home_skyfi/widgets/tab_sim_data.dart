@@ -366,7 +366,8 @@ class TabSimData extends HookConsumerWidget {
                                                     //             locale:
                                                     //                 AppLocale
                                                     //                     .en);
-                                                    context.pushNamed(AppRouter.infoRegis);
+                                                    // context.pushNamed(AppRouter.infoRegis);
+                                                    context.pushNamed(AppRouter.scanBarcode);
                                                   },
                                                   text: context.l10n.translate(
                                                       'activate_sim'),

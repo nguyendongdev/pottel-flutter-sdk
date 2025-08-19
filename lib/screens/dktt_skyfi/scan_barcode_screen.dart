@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:skyfi_sdk/routers/routers.dart';
 
 import 'widgets/scan_overlay.dart';
 
@@ -40,13 +41,15 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
     final barcode = barcodes.barcodes.firstOrNull?.rawValue;
     if (barcode != null) {
       // final last11Digits = barcode.substring(barcode.length - 11);
-      context.pop(barcode.trim());
+      // context.pop(barcode.trim());
+      context.goNamed(AppRouter.infoRegis, extra: barcode.trim());
     }
     controller.stop();
   }
 
   void _onManualInput() {
-    context.pop();
+    // context.pop();
+    context.pushNamed(AppRouter.infoRegis);
   }
 
   Future<void> _onUpload() async {
@@ -60,7 +63,8 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
         if (result != null && result.barcodes.isNotEmpty) {
           final barcode = result.barcodes.first.rawValue;
           if (barcode != null && mounted) {
-            context.pop(barcode.trim());
+            // context.pop(barcode.trim());
+            context.goNamed(AppRouter.infoRegis, extra: barcode.trim());
           }
         } else {
           if (mounted) {
@@ -77,7 +81,7 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(context.l10n
+            content: Text(context
                 .translate('image_read_error')
                 .replaceAll('{0}', e.toString())),
             backgroundColor: Colors.red,
