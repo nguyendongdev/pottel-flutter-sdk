@@ -761,6 +761,11 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
     }
   }
 
+  void onBackPressed() {
+    // context.pop();
+    context.pushNamed(AppRouter.infoRegis);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -768,7 +773,8 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-            context.pop();
+            // context.pop();
+            onBackPressed();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
