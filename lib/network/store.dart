@@ -13,6 +13,7 @@ class StoreClient {
   static const String _tokenAppota = "tokenAppota";
   static const String _rankId = 'rankId';
   static const String _currentPoint = 'currentPoint';
+  static const String _sodKey = 'SOD_KEY';
 
   static Future<void> setToken(String token) async {
     final preferences = await SharedPreferences.getInstance();
@@ -184,5 +185,20 @@ class StoreClient {
   static Future<String?> getTokenAppota() async {
     final preferences = await SharedPreferences.getInstance();
     return preferences.getString(_tokenAppota);
+  }
+
+  static Future<void> setSod(String key, String sodData) async {
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.setString(key, sodData);
+  }
+
+  static Future<String?> getSod(String key) async {
+    final preferences = await SharedPreferences.getInstance();
+    return preferences.getString(key);
+  }
+
+  static Future<void> clearSod(String key) async {
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.remove(key);
   }
 }

@@ -23,6 +23,7 @@ import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/snack_bar_app.dart';
+import '../../network/store.dart';
 import 'widgets/step_indicator.dart';
 
 class MrtdData {
@@ -472,6 +473,20 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
     print('pace: ${_checkBoxPACE}');
     print("Button pressed");
 
+    // Check if SOD data exists in storage
+    final storedSod = await StoreClient.getSod(_docNumber.text);
+
+    if (storedSod != null && mounted) {
+      SnackBarApp.showSuccess(context,
+          message: context.l10n.translate('card_read_success_detail'));
+
+      // Navigate to next screen with stored SOD data
+      context.pushNamed(AppRouter.doubleCheckInfo, extra: {
+        'sod': storedSod,
+      });
+      return;
+    }
+
     // Cache translations to avoid BuildContext async gaps
     final expiryDateRequired = context.l10n.translate('expiry_date_required');
     final birthDateRequired = context.l10n.translate('birth_date_required');
@@ -703,7 +718,8 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
           _log.error("PassportError: ${e.message}");
           print("(3) PassportError: ${e.message}");
         } else {
-          print("(4) An exception was encountered while trying to read Passport: $e");
+          print(
+              "(4) An exception was encountered while trying to read Passport: $e");
           _log.error(
               "An exception was encountered while trying to read Passport: $e");
         }
@@ -750,20 +766,23 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
           setState(() {
             _isReading = false;
           });
-          context.pushNamed(AppRouter.doubleCheckInfo, extra: {
-            'sod': _mrtdData!.sod!.toBytes().hex(),
-          });
+          // save sod to pass to next screen
+          var saveSod = _mrtdData!.sod!.toBytes().hex();
+
+          // Save SOD data to storage with docNumber as key
+          await StoreClient.setSod(_docNumber.text, saveSod);
+
+          if (mounted) {
+            context.pushNamed(AppRouter.doubleCheckInfo, extra: {
+              'sod': saveSod,
+            });
+          }
         }
       }
     } on Exception catch (e) {
       print("(5) Read MRTD error: $e");
       _log.error("Read MRTD error: $e");
     }
-  }
-
-  void onBackPressed() {
-    // context.pop();
-    context.pushNamed(AppRouter.infoRegis);
   }
 
   @override
@@ -773,8 +792,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-            // context.pop();
-            onBackPressed();
+            context.pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
