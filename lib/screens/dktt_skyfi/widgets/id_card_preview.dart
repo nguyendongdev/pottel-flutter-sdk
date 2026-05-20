@@ -24,7 +24,7 @@ class IdCardPreview extends StatelessWidget {
         children: [
           SvgPicture.asset(
             'assets/icons/chip_card_img.svg',
-            package: 'skyfi_sdk',
+            package: 'pottel_sdk',
           ),
         ],
       ),

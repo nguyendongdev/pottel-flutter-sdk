@@ -1,8 +1,8 @@
-# Hướng dẫn tích hợp SkyFi SDK
+# Hướng dẫn tích hợp Pottel SDK
 
 ## Giới thiệu
 
-SkyFi SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, nạp tiền, đăng ký thông tin thuê bao và các dịch vụ viễn thông khác. SDK được xây dựng với Flutter 3.29.0 và sử dụng các công nghệ hiện đại như Riverpod, GoRouter, và Flutter Hooks.
+Pottel SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, nạp tiền, đăng ký thông tin thuê bao và các dịch vụ viễn thông khác. SDK được xây dựng với Flutter 3.29.0 và sử dụng các công nghệ hiện đại như Riverpod, GoRouter, và Flutter Hooks.
 
 ## Yêu cầu hệ thống
 
@@ -17,12 +17,12 @@ SkyFi SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, n
 
 ```yaml
 dependencies:
-  skyfi_sdk:
+  pottel_sdk:
     git:
-      url: https://github.com/skyfi2024/new_sdk_SkyFi.git
+      url: <YOUR_POTTEL_SDK_REPO_URL>
       ref: main
     # Hoặc nếu sử dụng local path trong development
-    # path: ../skyfi_sdk
+    # path: ../pottel_sdk
 ```
 
 ### 2. Cài đặt các dependencies cần thiết
@@ -67,7 +67,7 @@ Thêm các permissions vào `ios/Runner/Info.plist`:
 <string>Ứng dụng cần quyền truy cập thư viện ảnh</string>
 
 <key>NFCReaderUsageDescription</key>
-<string>SkyFiSdk need access to your NFC to read data from your card<string>
+<string>PottelSdk need access to your NFC to read data from your card<string>
 
 <key>com.apple.developer.nfc.readersession.formats</key>
 	<array>
@@ -119,14 +119,14 @@ flutter:
 ### 1. Import SDK
 
 ```dart
-import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:pottel_sdk/pottel_sdk.dart';
 ```
 
 ### 2. Khởi tạo SDK đơn giản
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:pottel_sdk/pottel_sdk.dart';
 
 void main() {
   runApp(const MyApp());
@@ -146,13 +146,13 @@ class MyApp extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => SkyfiSdk(
-                    phone: '0707040618', // Số điện thoại cần thiết
+                  builder: (_) => PottelSdk(
+                    phone: '0959999111', // Số điện thoại cần thiết
                   ),
                 ),
               );
             },
-            child: const Text('Mở SkyFi SDK'),
+            child: const Text('Mở Pottel SDK'),
           ),
         ),
       ),
@@ -168,9 +168,9 @@ class MyApp extends StatelessWidget {
 Navigator.push(
   context,
   MaterialPageRoute(
-    builder: (_) => SkyfiSdk.toScreen(
-      initialLocation: SkyfiRoute.infoRegis.path,
-      phone: '0707991197', // Số điện thoại cần thiết
+    builder: (_) => PottelSdk.toScreen(
+      initialLocation: PottelRoute.infoRegis.path,
+      phone: '0959999111', // Số điện thoại cần thiết
     ),
   ),
 );
@@ -179,9 +179,9 @@ Navigator.push(
 Navigator.push(
   context,
   MaterialPageRoute(
-    builder: (_) => SkyfiSdk.toScreen(
-      initialLocation: SkyfiRoute.topupSkyFi.path,
-      phone: '0807991197', // Số điện thoại cần thiết
+    builder: (_) => PottelSdk.toScreen(
+      initialLocation: PottelRoute.topupPottel.path,
+      phone: '0959999111', // Số điện thoại cần thiết
     ),
   ),
 );
@@ -193,11 +193,11 @@ SDK cung cấp các route sau:
 
 | Route | Path | Mô tả |
 |-------|------|-------|
-| `SkyfiRoute.home` | `/` | Màn hình chính |
-| `SkyfiRoute.topup` | `/topup-skyfi` | Màn hình nạp tiền |
-| `SkyfiRoute.infoRegis` | `/info-regis` | Màn hình đăng ký thông tin |
-| `SkyfiRoute.topupSkyFi` | `/topup-skyfi` | Màn hình nạp tiền SkyFi |
-| `SkyfiRoute.infoRegisSkyFi` | `/info-regis` | Màn hình đăng ký SkyFi |
+| `PottelRoute.home` | `/` | Màn hình chính |
+| `PottelRoute.topup` | `/topup-skyfi` | Màn hình nạp tiền |
+| `PottelRoute.infoRegis` | `/info-regis` | Màn hình đăng ký thông tin |
+| `PottelRoute.topupPottel` | `/topup-skyfi` | Màn hình nạp tiền Pottel |
+| `PottelRoute.infoRegisPottel` | `/info-regis` | Màn hình đăng ký Pottel |
 
 ### Các màn hình khác có sẵn:
 
@@ -217,7 +217,7 @@ SDK cung cấp các route sau:
 
 ```dart
 import 'package:go_router/go_router.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:pottel_sdk/pottel_sdk.dart';
 
 final GoRouter _router = GoRouter(
   routes: [
@@ -226,14 +226,14 @@ final GoRouter _router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      path: '/skyfi',
-      builder: (context, state) => const SkyfiSdk(),
+      path: '/pottel',
+      builder: (context, state) => const PottelSdk(),
     ),
     GoRoute(
-      path: '/skyfi/:route',
+      path: '/pottel/:route',
       builder: (context, state) {
         final route = state.pathParameters['route'];
-        return SkyfiSdk.toScreen(initialLocation: '/$route');
+        return PottelSdk.toScreen(initialLocation: '/$route');
       },
     ),
   ],
@@ -253,7 +253,7 @@ class MyApp extends StatelessWidget {
 
 ```dart
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:pottel_sdk/pottel_sdk.dart';
 
 void main() {
   runApp(
@@ -268,8 +268,8 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       home: Scaffold(
-        body: SkyfiSdk.toScreen(
-          phone: '0707040618', // Số điện thoại cần thiết
+        body: PottelSdk.toScreen(
+          phone: '0959999111', // Số điện thoại cần thiết
         ),
       ),
     );
@@ -280,25 +280,25 @@ class MyApp extends ConsumerWidget {
 ### 3. Xử lý callback và navigation
 
 ```dart
-class SkyfiIntegration extends StatefulWidget {
+class PottelIntegration extends StatefulWidget {
   @override
-  _SkyfiIntegrationState createState() => _SkyfiIntegrationState();
+  _PottelIntegrationState createState() => _PottelIntegrationState();
 }
 
-class _SkyfiIntegrationState extends State<SkyfiIntegration> {
-  void _openSkyfiWithCallback() {
+class _PottelIntegrationState extends State<PottelIntegration> {
+  void _openPottelWithCallback() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => SkyfiSdk.toScreen(
-          initialLocation: SkyfiRoute.topupSkyFi.path,
-          phone: '0707040618', // Số điện thoại cần thiết
+        builder: (_) => PottelSdk.toScreen(
+          initialLocation: PottelRoute.topupPottel.path,
+          phone: '0959999111', // Số điện thoại cần thiết
         ),
       ),
     ).then((result) {
       // Xử lý kết quả trả về từ SDK
       if (result != null) {
-        print('Kết quả từ SkyFi SDK: $result');
+        print('Kết quả từ Pottel SDK: $result');
       }
     });
   }
@@ -308,8 +308,8 @@ class _SkyfiIntegrationState extends State<SkyfiIntegration> {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: _openSkyfiWithCallback,
-          child: Text('Mở SkyFi với callback'),
+          onPressed: _openPottelWithCallback,
+          child: Text('Mở Pottel với callback'),
         ),
       ),
     );
@@ -329,8 +329,8 @@ MaterialApp(
     primarySwatch: Colors.blue,
     fontFamily: 'KoHo', // SDK hỗ trợ font KoHo và Inter
   ),
-  home: SkyfiSdk.toScreen(
-    phone: '0707040618', // Số điện thoại cần thiết
+  home: PottelSdk.toScreen(
+    phone: '0959999111', // Số điện thoại cần thiết
   ),
 )
 ```
@@ -432,7 +432,7 @@ flutter run --release
 ```dart
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:pottel_sdk/pottel_sdk.dart';
 
 void main() {
   runApp(
@@ -446,7 +446,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SkyFi Integration Demo',
+      title: 'Pottel Integration Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Inter',
@@ -463,7 +463,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SkyFi Integration Demo'),
+        title: const Text('Pottel Integration Demo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -471,16 +471,16 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              'Chọn tính năng SkyFi:',
+              'Chọn tính năng Pottel:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             _buildFeatureButton(
               context,
-              'Trang chủ SkyFi',
+              'Trang chủ Pottel',
               'Truy cập trang chủ với đầy đủ tính năng',
               Icons.home,
-              () => _navigateToSkyfi(context, SkyfiRoute.home.path),
+              () => _navigateToPottel(context, PottelRoute.home.path),
             ),
             const SizedBox(height: 12),
             _buildFeatureButton(
@@ -488,15 +488,15 @@ class HomeScreen extends StatelessWidget {
               'Đăng ký thông tin',
               'Đăng ký thông tin thuê bao mới',
               Icons.person_add,
-              () => _navigateToSkyfi(context, SkyfiRoute.infoRegis.path),
+              () => _navigateToPottel(context, PottelRoute.infoRegis.path),
             ),
             const SizedBox(height: 12),
             _buildFeatureButton(
               context,
               'Nạp tiền',
-              'Nạp tiền vào tài khoản SkyFi',
+              'Nạp tiền vào tài khoản Pottel',
               Icons.account_balance_wallet,
-              () => _navigateToSkyfi(context, SkyfiRoute.topupSkyFi.path),
+              () => _navigateToPottel(context, PottelRoute.topupPottel.path),
             ),
           ],
         ),
@@ -522,13 +522,13 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  void _navigateToSkyfi(BuildContext context, String initialLocation) {
+  void _navigateToPottel(BuildContext context, String initialLocation) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => SkyfiSdk.toScreen(
+        builder: (_) => PottelSdk.toScreen(
           initialLocation: initialLocation,
-          phone: '0707040618', // Số điện thoại cần thiết
+          phone: '0959999111', // Số điện thoại cần thiết
         ),
       ),
     );

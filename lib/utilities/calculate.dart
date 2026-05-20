@@ -1,5 +1,5 @@
-import 'package:skyfi_sdk/screens/sim_data_skyfi/models/choose_sim/result.dart';
-import 'package:skyfi_sdk/screens/sim_data_skyfi/provider/simType_provider.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/models/choose_sim/result.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/provider/simType_provider.dart';
 
 int priceSim(Result? chooseSim, {TypeOfSim simType = TypeOfSim.physical}) {
   if (chooseSim == null) {

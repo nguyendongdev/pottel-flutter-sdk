@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image/image.dart' as img;
 import 'package:permission_handler/permission_handler.dart';
-import 'package:skyfi_sdk/l10n/l10n.dart';
+import 'package:pottel_sdk/l10n/l10n.dart';
 
 import '../../routers/routers.dart';
 import '../../utilities/ekyc_helper.dart';

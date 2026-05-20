@@ -28,7 +28,7 @@
         android:required="false" />
 
     <application
-        android:label="skyfi_sdk_example"
+        android:label="pottel_sdk_example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         tools:replace="android:label">

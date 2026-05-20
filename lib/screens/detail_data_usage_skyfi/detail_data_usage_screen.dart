@@ -3,12 +3,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
-import 'package:skyfi_sdk/network/api.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
-import 'package:skyfi_sdk/screens/detail_data_usage_skyfi/widgets/card_used_square.dart';
-import 'package:skyfi_sdk/screens/home_skyfi/models/current_package.dart';
-import 'package:skyfi_sdk/screens/home_skyfi/provider/login_provider.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/network/api.dart';
+import 'package:pottel_sdk/routers/routers.dart';
+import 'package:pottel_sdk/screens/detail_data_usage_skyfi/widgets/card_used_square.dart';
+import 'package:pottel_sdk/screens/home_skyfi/models/current_package.dart';
+import 'package:pottel_sdk/screens/home_skyfi/provider/login_provider.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';

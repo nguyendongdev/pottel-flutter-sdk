@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';

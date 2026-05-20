@@ -26,14 +26,14 @@ class PackageBenefitItem extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppColors.red,
+            color: AppColors.primary,
             borderRadius: BorderRadius.circular(AppSpacing.xs),
           ),
           child: SvgPicture.asset(
             icon,
             width: 32,
             height: 32,
-            package: 'skyfi_sdk',
+            package: 'pottel_sdk',
           ),
         ),
 

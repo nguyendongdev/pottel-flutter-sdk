@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/screens/sim_data_skyfi/provider/simType_provider.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
-import 'package:skyfi_sdk/utilities/search_sim.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/provider/simType_provider.dart';
+import 'package:pottel_sdk/utilities/common.dart';
+import 'package:pottel_sdk/utilities/search_sim.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -28,7 +28,7 @@ class SearchSimData extends HookConsumerWidget {
     final api = API();
     final searchControllers =
         List.generate(7, (index) => useTextEditingController());
-    final searchNumber = useState('070xxxxxxx');
+    final searchNumber = useState('095xxxxxxx');
     final simData = useState<List<Result>>([]);
     // when click back or remove number -> focus to previous
     final focusNodes = List.generate(6, (index) => useFocusNode());
@@ -38,13 +38,13 @@ class SearchSimData extends HookConsumerWidget {
       //  length of search is 6
       print('search: $search');
       if (search.length == 7) {
-        search = '070${search}';
+        search = '095${search}';
       }
       try {
         final response = await api.post('/bss/app/get-phone-numbers',
             data: ParamsSims(
               filters:
-                  Filters(search: search.isNotEmpty ? search : '070xxxxxxx'),
+                  Filters(search: search.isNotEmpty ? search : '095xxxxxxx'),
               page: 1,
               pageSize: 20,
             ).toJson());
@@ -114,7 +114,7 @@ class SearchSimData extends HookConsumerWidget {
           onChanged: (value) {
             if (value.isNotEmpty && index < 6) {
               focusNodes[index + 1].requestFocus();
-              searchNumber.value = "070xxxxxxx";
+              searchNumber.value = "095xxxxxxx";
             }
           },
         ),
@@ -224,7 +224,7 @@ class SearchSimData extends HookConsumerWidget {
               'assets/icons/feat_search_empty.svg',
               width: 101,
               height: 108,
-              package: 'skyfi_sdk',
+              package: 'pottel_sdk',
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(

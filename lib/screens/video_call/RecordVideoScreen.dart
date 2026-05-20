@@ -5,14 +5,14 @@ import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
-import 'package:skyfi_sdk/network/api.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
-import 'package:skyfi_sdk/utilities/security.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/network/api.dart';
+import 'package:pottel_sdk/routers/routers.dart';
+import 'package:pottel_sdk/utilities/common.dart';
+import 'package:pottel_sdk/utilities/security.dart';
 import 'package:video_player/video_player.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 enum EnumStatusRecord { open, progress, finish }
 

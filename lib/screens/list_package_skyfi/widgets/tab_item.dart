@@ -24,7 +24,7 @@ class TabItem extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: isSelected ? AppColors.red : Colors.transparent,
+                color: isSelected ? AppColors.primary : Colors.transparent,
                 width: 2,
               ),
             ),
@@ -33,7 +33,7 @@ class TabItem extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: AppTextStyles.body.copyWith(
-              color: isSelected ? AppColors.red : AppColors.textLight,
+              color: isSelected ? AppColors.primary : AppColors.textLight,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
             ),
           ),

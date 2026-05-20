@@ -56,6 +56,55 @@ final wardsProvider = AutoDisposeFutureProvider<List<AddressModel>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WardsRef = AutoDisposeFutureProviderRef<List<AddressModel>>;
+String _$newCitiesHash() => r'99198fabb1f132a71a8a8c66d05ccb0ab99d1055';
+
+/// See also [newCities].
+@ProviderFor(newCities)
+final newCitiesProvider =
+    AutoDisposeFutureProvider<List<AddressModel>>.internal(
+  newCities,
+  name: r'newCitiesProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$newCitiesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef NewCitiesRef = AutoDisposeFutureProviderRef<List<AddressModel>>;
+String _$newWardsHash() => r'17e0c5ce5f39768f809ceb59b369dff0e2e4896f';
+
+/// See also [newWards].
+@ProviderFor(newWards)
+final newWardsProvider = AutoDisposeFutureProvider<List<AddressModel>>.internal(
+  newWards,
+  name: r'newWardsProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$newWardsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef NewWardsRef = AutoDisposeFutureProviderRef<List<AddressModel>>;
+String _$addressModeStateHash() => r'77dfc1495d8d1be815ded2155d5751832a0f3284';
+
+/// See also [AddressModeState].
+@ProviderFor(AddressModeState)
+final addressModeStateProvider =
+    AutoDisposeNotifierProvider<AddressModeState, AddressMode>.internal(
+  AddressModeState.new,
+  name: r'addressModeStateProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$addressModeStateHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AddressModeState = AutoDisposeNotifier<AddressMode>;
 String _$addressSelectionHash() => r'627691a5cd2dd5eead8ed0f2eb32f4137aee3b65';
 
 /// See also [AddressSelection].
@@ -72,7 +121,7 @@ final addressSelectionProvider =
 );
 
 typedef _$AddressSelection = AutoDisposeNotifier<SelectedAddress>;
-String _$addressStepHash() => r'8c4a8bc6e2aca90b220ff4e4eabda384ba1c9939';
+String _$addressStepHash() => r'f4131fb9ffcca300fb127e76b0f367070bae0726';
 
 /// See also [AddressStep].
 @ProviderFor(AddressStep)

@@ -161,7 +161,7 @@ class TabESimTravelDetail extends StatelessWidget {
                                     'assets/icons/top_calendar.svg',
                                     width: 16,
                                     height: 16,
-                                    package: 'skyfi_sdk',
+                                    package: 'pottel_sdk',
                                   ),
                                   const SizedBox(width: AppSpacing.xs),
                                   Text(

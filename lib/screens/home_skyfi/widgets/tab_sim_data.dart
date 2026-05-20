@@ -3,8 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
+import 'package:pottel_sdk/core/widgets/gradient_button.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -327,7 +326,7 @@ class TabSimData extends HookConsumerWidget {
                                             width: 121,
                                             height: 110,
                                             fit: BoxFit.contain,
-                                            package: 'skyfi_sdk',
+                                            package: 'pottel_sdk',
                                           ),
 
                                           const SizedBox(height: AppSpacing.md),
@@ -455,23 +454,7 @@ class TabSimData extends HookConsumerWidget {
                                         label: context.l10n.translate('topup'),
                                       ),
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        context.pushNamed(
-                                            AppRouter.esimTravelSkyFi);
-                                        // context.pushNamed(AppRouter.scanNfcChipcard, extra: {
-                                        //   'docNumber': '0930009672',
-                                        //   'dob': '11/01/1993',
-                                        //   'doe': '11/01/2033',
-                                        // });
-                                      },
-                                      child: FeatureCard(
-                                        // icon: 'assets/icons/feat_gift.svg',
-                                        icon: 'assets/icons/nav_travel.svg',
-                                        label: context.l10n
-                                            .translate('esim_travel'),
-                                      ),
-                                    ),
+                                    // Temporarily hidden: eSIM travel feature icon on Home.
                                   ],
                                 ),
                               ),

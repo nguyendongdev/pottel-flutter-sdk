@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
-import 'package:skyfi_sdk/screens/video_call/RecordVideoScreen.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/screens/video_call/RecordVideoScreen.dart';
+import 'package:pottel_sdk/utilities/common.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -59,7 +59,7 @@ class StartVideoCallScreen extends StatelessWidget {
                   width: 303,
                   height: 188,
                   fit: BoxFit.contain,
-                  package: 'skyfi_sdk',
+                  package: 'pottel_sdk',
                 ),
               ),
             ),

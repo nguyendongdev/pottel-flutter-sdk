@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
 import '../../../l10n/localization_extension.dart';
-import 'package:skyfi_sdk/screens/manager_sim/models/response_package/result_package.dart';
-import 'package:skyfi_sdk/screens/manager_sim/widgets/package_register_button.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:pottel_sdk/screens/manager_sim/models/response_package/result_package.dart';
+import 'package:pottel_sdk/screens/manager_sim/widgets/package_register_button.dart';
+import 'package:pottel_sdk/utilities/common.dart';
 
 class DataPackageCard extends ConsumerWidget {
   final ResultPackage package;

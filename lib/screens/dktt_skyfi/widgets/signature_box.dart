@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:signature/signature.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -38,7 +38,7 @@ class SignatureBox extends StatelessWidget {
                   'assets/icons/feat_signature.svg',
                   width: 36,
                   height: 36,
-                  package: 'skyfi_sdk',
+                  package: 'pottel_sdk',
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(

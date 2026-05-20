@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:skyfi_sdk/utilities/modal.dart';
+import 'package:pottel_sdk/utilities/modal.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 import '../core/constants/colors.dart';
 import '../core/constants/spacing.dart';
 import '../core/constants/text_styles.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 class WebViewPopup extends HookWidget {
   final String url;

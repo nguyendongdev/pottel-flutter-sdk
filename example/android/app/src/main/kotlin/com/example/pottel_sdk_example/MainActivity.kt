@@ -1,4 +1,4 @@
-package com.example.skyfi_sdk_example
+package com.example.pottel_sdk_example
 
 import io.flutter.embedding.android.FlutterActivity
 

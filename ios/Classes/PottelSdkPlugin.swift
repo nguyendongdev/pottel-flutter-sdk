@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class SkyfiSdkPlugin: NSObject, FlutterPlugin {
+public class PottelSdkPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "skyfi_sdk", binaryMessenger: registrar.messenger())
-    let instance = SkyfiSdkPlugin()
+    let channel = FlutterMethodChannel(name: "pottel_sdk", binaryMessenger: registrar.messenger())
+    let instance = PottelSdkPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 

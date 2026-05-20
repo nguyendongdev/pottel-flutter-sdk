@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/utilities/modal.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/utilities/modal.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -103,7 +103,7 @@ class CartItemWidget extends HookConsumerWidget {
                     height: 40,
                     uri,
                     fit: BoxFit.cover,
-                    package: 'skyfi_sdk',
+                    package: 'pottel_sdk',
                   ),
           ),
           const SizedBox(width: AppSpacing.md),

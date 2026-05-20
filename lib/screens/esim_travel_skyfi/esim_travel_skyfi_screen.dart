@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
-import 'package:skyfi_sdk/screens/esim_travel_skyfi/models/region_model.dart';
+import 'package:pottel_sdk/routers/routers.dart';
+import 'package:pottel_sdk/screens/esim_travel_skyfi/models/region_model.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';

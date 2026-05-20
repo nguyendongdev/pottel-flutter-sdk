@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/widgets/snack_bar_app.dart';
-import 'package:skyfi_sdk/screens/payment_method_skyfi/models/payment_respone/payment_respone.dart';
+import 'package:pottel_sdk/core/widgets/snack_bar_app.dart';
+import 'package:pottel_sdk/screens/payment_method_skyfi/models/payment_respone/payment_respone.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/constants/payment_gateway.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/bottom_button.dart';
@@ -13,6 +14,7 @@ import '../../l10n/localization_extension.dart';
 import '../../network/api.dart';
 import '../../routers/routers.dart';
 import '../../utilities/common.dart';
+import '../payment_skyfi/provider/address_provider.dart';
 import '../payment_skyfi/provider/payment_order_provider.dart';
 import 'models/create_order/create_order.dart';
 import 'models/payment_method/payment_method.dart';
@@ -24,15 +26,14 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final order = ref.read(paymentOrderProvider);
     final api = API();
     final isLoading = useState<bool>(false);
     print('modeUI: ${modeUI}');
-    final isSelected = useState<String>('international');
+    final isSelected = useState<String>(PaymentGateway.gatewayName);
     final paymentMethods = useState<List<dynamic>>([]);
 
     void fetchPaymentMethods() async {
-      final response = await api.get('/bss/payment/gateways/SDK/methods');
+      final response = await api.get(PaymentGateway.methodsEndpoint());
       final data = PaymentMethod.fromJson(response.data);
       if (response.statusCode == 200 && data.code == 200) {
         paymentMethods.value = data.result?.methods ?? [];
@@ -42,9 +43,8 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
     void getLinkPayment(String orderID) async {
       print('paymentMethod: ${isSelected.value}');
       isLoading.value = true;
-      final response = await api
-          .post('/bss/payment/gateways/GALAXYPAY/redirect', data: {
-        'orderNumber': orderID,
+      final response = await api.post(PaymentGateway.redirectEndpoint(), data: {
+        'orderCode': orderID,
         'locale': context.l10n.locale.languageCode,
         'paymentMethod': isSelected.value
       });
@@ -52,14 +52,14 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
       isLoading.value = false;
       final data = PaymentRespone.fromJson(response.data);
       if (response.statusCode == 200 && data.code == 200) {
-        final link = data.result?.redirectUrl;
+        final link = data.result?.iframeUrl ?? data.result?.redirectUrl;
         if (link != null) {
           context.pushNamed(AppRouter.webviewPaymentSkyfi, extra: link);
         }
       }
     }
 
-    void checkOutOrderGALAXYPAY() async {
+    void checkOutOrderVNPD() async {
       isLoading.value = true;
 
       final order = ref.read(paymentOrderProvider);
@@ -68,6 +68,13 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
       final orderJson = order.toJson();
       orderJson['items'] = itemsJson;
       orderJson['source'] = 'SDK';
+      final addressMode = ref.read(addressModeStateProvider);
+      if (addressMode == AddressMode.twoLevel) {
+        orderJson.remove('district_id');
+      }
+      if (order.couponCode == null || order.couponCode!.isEmpty) {
+        orderJson.remove('coupon_code');
+      }
       print('orderJson: $orderJson');
       isLoading.value = false;
       final response = await api.post('/bss/app/create-order', data: orderJson);
@@ -104,6 +111,10 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
       final itemsJson = items?.map((item) => item.toJson()).toList();
       final orderJson = order.toJson();
       orderJson['items'] = itemsJson;
+      final addressMode = ref.read(addressModeStateProvider);
+      if (addressMode == AddressMode.twoLevel) {
+        orderJson.remove('district_id');
+      }
       final response = await api.post('/bss/app/create-order', data: orderJson);
       print('response: ${response.data}');
       if (response.statusCode == 200 && response.data['code'] == 200) {
@@ -128,12 +139,13 @@ class PaymentMethodSkyFiScreen extends HookConsumerWidget {
         return;
       }
 
-      // if (isSelected.value == 'COD') {
-      //   checkOutOrderCOD();
-      // }
-      // if (isSelected.value == 'GALAXYPAY') {
-        checkOutOrderGALAXYPAY();
-      // }
+      if (isSelected.value == 'COD') {
+        checkOutOrderCOD();
+      } else if (isSelected.value == PaymentGateway.gatewayName) {
+        checkOutOrderVNPD();
+      } else {
+        checkOutOrderVNPD();
+      }
       return;
     }
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
-import 'package:skyfi_sdk/skyfi_sdk_config.dart';
+import 'package:pottel_sdk/skyfi_sdk_config.dart';
 
 class SkyfiSdkAuth {
   loginWithPhone(String phone) async {

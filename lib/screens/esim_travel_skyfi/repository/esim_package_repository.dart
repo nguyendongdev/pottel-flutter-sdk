@@ -1,4 +1,4 @@
-import 'package:skyfi_sdk/network/api.dart';
+import 'package:pottel_sdk/network/api.dart';
 
 import '../models/esim_package_model.dart';
 

@@ -3,9 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
-import 'package:skyfi_sdk/l10n/l10n.dart';
-import 'package:skyfi_sdk/screens/topup_skyfi/repositorty/topup_repository.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/l10n/l10n.dart';
+import 'package:pottel_sdk/screens/topup_skyfi/repositorty/topup_repository.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/widgets/gradient_button.dart';
@@ -60,11 +60,11 @@ class TopupSkyFiScreen extends HookConsumerWidget {
       void validatePhone() {
         final phone = phoneController.text.replaceAll(' ', '');
         isValidPhone.value =
-            phone.length == 10 && RegExp(r'^(070)(\d{7})$').hasMatch(phone);
+            phone.length == 10 && RegExp(r'^(095)(\d{7})$').hasMatch(phone);
         if (phone.length != 10) {
           textError.value = context.translate('invalid_phone');
-        } else if (!RegExp(r'^(070)(\d{7})$').hasMatch(phone)) {
-          textError.value = context.translate('phone_starts_with_070');
+        } else if (!RegExp(r'^(095)(\d{7})$').hasMatch(phone)) {
+          textError.value = context.translate('phone_starts_with_095');
         } else {
           textError.value = null;
         }
@@ -174,7 +174,7 @@ class TopupSkyFiScreen extends HookConsumerWidget {
                         'assets/icons/feat_sim_global.svg',
                         width: 20,
                         height: 20,
-                        package: 'skyfi_sdk',
+                        package: 'pottel_sdk',
                       ),
                     ),
                     const SizedBox(width: 8),

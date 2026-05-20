@@ -102,7 +102,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
                           'assets/icons/arrow-circle-down.svg',
                           width: 21,
                           height: 21,
-                          package: 'skyfi_sdk',
+                          package: 'pottel_sdk',
                         ),
                       ),
                     )
@@ -114,7 +114,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
                           'assets/icons/arrow-circle-up.svg',
                           width: 21,
                           height: 21,
-                          package: 'skyfi_sdk',
+                          package: 'pottel_sdk',
                         ),
                       ),
                     )
@@ -126,7 +126,7 @@ class HistoryMobileSkyFiScreen extends HookConsumerWidget {
                           'assets/icons/phone-outgoing-01.svg',
                           width: 21,
                           height: 21,
-                          package: 'skyfi_sdk',
+                          package: 'pottel_sdk',
                         ),
                       ),
                     ),

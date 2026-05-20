@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -75,6 +75,11 @@ class _BannerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLocalAsset = imageUrl.startsWith('asset://');
+    final assetPath = isLocalAsset
+        ? imageUrl.replaceFirst('asset://', '')
+        : 'assets/images/banner-home.png';
+
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: AppSpacing.sm,
@@ -83,7 +88,7 @@ class _BannerItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSpacing.borderRadius),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -91,14 +96,24 @@ class _BannerItem extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppSpacing.borderRadius),
-        child: CachedNetworkImage(
-          imageUrl: imageUrl,
-          fit: BoxFit.cover,
-          placeholder: (context, url) => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-        ),
+        child: isLocalAsset
+            ? Image.asset(
+                assetPath,
+                package: 'pottel_sdk',
+                fit: BoxFit.cover,
+              )
+            : CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                errorWidget: (context, url, error) => Image.asset(
+                  'assets/images/banner-home.png',
+                  package: 'pottel_sdk',
+                  fit: BoxFit.cover,
+                ),
+              ),
       ),
     );
   }

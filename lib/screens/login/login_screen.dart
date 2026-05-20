@@ -53,7 +53,7 @@ class LoginScreen extends HookConsumerWidget {
                     child: Image.asset(
                       'assets/images/logo_white.png',
                       height: 120,
-                      package: 'skyfi_sdk',
+                      package: 'pottel_sdk',
                     ),
                   ),
                   const SizedBox(height: 40),

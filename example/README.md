@@ -1,6 +1,6 @@
-# skyfi_sdk_example
+# pottel_sdk_example
 
-Demonstrates how to use the skyfi_sdk plugin.
+Demonstrates how to use the pottel_sdk plugin.
 
 ## Getting Started
 

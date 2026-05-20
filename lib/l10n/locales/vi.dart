@@ -812,7 +812,7 @@ const Map<String, String> viStrings = {
   'email_required': 'Email là bắt buộc',
   'invalid_email': 'Email không hợp lệ',
   'phone_required': 'Số điện thoại là bắt buộc',
-  'phone_starts_with_070': 'Số điện thoại phải bắt đầu bằng 070',
+  'phone_starts_with_095': 'Số điện thoại phải bắt đầu bằng 095',
   'order_creation_failed': 'Lỗi: Không thể tạo đơn hàng',
   'invalid_phone': 'Số điện thoại không hợp lệ',
   'name_required': 'Tên là bắt buộc',

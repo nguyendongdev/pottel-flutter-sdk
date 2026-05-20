@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/routers/routers.dart';
 
 import 'widgets/scan_overlay.dart';
 

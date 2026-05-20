@@ -54,7 +54,7 @@ class _SearchSimState extends State<SearchSim> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '070',
+                '095',
                 style: AppTextStyles.heading.copyWith(
                   color: AppColors.text,
                 ),

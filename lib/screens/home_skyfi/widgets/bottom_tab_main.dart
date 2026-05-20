@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/spacing.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/spacing.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 import '../../../core/constants/text_styles.dart';
 import '../../../utilities/common.dart';
@@ -126,7 +126,7 @@ Widget _buildNavItem({
               isSelected ? AppColors.navHomeTextSelected : AppColors.text,
               BlendMode.srcIn,
             ),
-            package: 'skyfi_sdk',
+            package: 'pottel_sdk',
           ),
         ),
         const SizedBox(height: AppSpacing.xs),

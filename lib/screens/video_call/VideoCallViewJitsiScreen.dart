@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
-import 'package:skyfi_sdk/skyfi_sdk_config.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/skyfi_sdk_config.dart';
+import 'package:pottel_sdk/utilities/common.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
@@ -288,7 +288,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
                 'assets/images/logo_skyfi_yellow.png',
                 width: MediaQuery.of(context).size.width * 0.6,
                 fit: BoxFit.contain,
-                package: 'skyfi_sdk',
+                package: 'pottel_sdk',
               ),
               const SizedBox(height: 20),
               Text(

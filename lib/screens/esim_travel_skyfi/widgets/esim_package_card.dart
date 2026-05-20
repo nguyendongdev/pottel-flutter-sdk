@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
-import 'package:skyfi_sdk/screens/esim_travel_skyfi/widgets/modalContris.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
-import 'package:skyfi_sdk/utilities/modal.dart';
+import 'package:pottel_sdk/core/widgets/gradient_button.dart';
+import 'package:pottel_sdk/screens/esim_travel_skyfi/widgets/modalContris.dart';
+import 'package:pottel_sdk/utilities/common.dart';
+import 'package:pottel_sdk/utilities/modal.dart';
 
 import '../../../l10n/localization_extension.dart';
 
@@ -61,7 +61,7 @@ class EsimPackageCard extends HookConsumerWidget {
               decoration: BoxDecoration(
                 image: const DecorationImage(
                   image: AssetImage('assets/images/bgcard.png',
-                      package: 'skyfi_sdk'),
+                      package: 'pottel_sdk'),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),

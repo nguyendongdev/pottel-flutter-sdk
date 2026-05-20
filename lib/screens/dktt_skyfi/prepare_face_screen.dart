@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/constants/text_styles.dart';
@@ -54,7 +54,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                   'assets/icons/pre_face_1.svg',
                   width: 62,
                   height: 62,
-                  package: 'skyfi_sdk',
+                  package: 'pottel_sdk',
                 ),
                 const SizedBox(width: AppSpacing.lg),
                 Text(
@@ -73,7 +73,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                   'assets/icons/pre_face_2.svg',
                   width: 62,
                   height: 62,
-                  package: 'skyfi_sdk',
+                  package: 'pottel_sdk',
                 ),
                 const SizedBox(width: AppSpacing.lg),
                 Expanded(
@@ -95,7 +95,7 @@ class PrepareFaceScreen extends HookConsumerWidget {
                   'assets/icons/pre_face_3.svg',
                   width: 62,
                   height: 62,
-                  package: 'skyfi_sdk',
+                  package: 'pottel_sdk',
                 ),
                 const SizedBox(width: AppSpacing.lg),
                 Text(

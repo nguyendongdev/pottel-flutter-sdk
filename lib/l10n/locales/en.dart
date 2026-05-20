@@ -822,7 +822,7 @@ const Map<String, String> enStrings = {
   'email_required': 'Email is required',
   'invalid_email': 'Invalid email',
   'phone_required': 'Phone number is required',
-  'phone_starts_with_070': 'Phone number must start with 070',
+  'phone_starts_with_095': 'Phone number must start with 095',
   'order_creation_failed': 'Order creation failed',
   'invalid_phone': 'Invalid phone number',
   'name_required': 'Name is required',

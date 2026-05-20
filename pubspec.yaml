@@ -1,6 +1,7 @@
-name: skyfi_sdk
-description: "A new Flutter plugin project."
+name: pottel_sdk
+description: "Pottel SDK Flutter plugin for telecom services"
 version: 0.0.1
+publish_to: 'none'
 homepage:
 
 environment:
@@ -38,16 +39,11 @@ dependencies:
   mobile_scanner: ^7.0.0
   permission_handler: ^12.0.0+1
   signature: ^6.0.0
-  # syncfusion_flutter_pdfviewer: ^29.1.1
-  syncfusion_flutter_pdfviewer:
-    git:
-      url: https://github.com/gj-loitp/lib_flutter-widgets.git
-      path: packages/syncfusion_flutter_pdfviewer
+  syncfusion_flutter_pdfviewer: ^29.1.1
   dmrtd:
     git:
-      #      url: https://github.com/matheonguyen73/dmrtd.git
-      url: https://github.com/gj-loitp/dmrtd.git
-      ref: main
+      url: https://github.com/matheonguyen73/dmrtd.git
+
   lazy_load_indexed_stack: ^1.2.1
   flutter_carousel_widget: ^3.1.0
   cached_network_image: ^3.3.1
@@ -77,10 +73,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.example.skyfi_sdk
-        pluginClass: SkyfiSdkPlugin
+        package: com.example.pottel_sdk
+        pluginClass: PottelSdkPlugin
       ios:
-        pluginClass: SkyfiSdkPlugin
+        pluginClass: PottelSdkPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   assets:

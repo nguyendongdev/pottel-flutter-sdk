@@ -35,3 +35,6 @@ build/
 
 # FVM Version Cache
 .fvm/
+
+# Local agent/runtime state
+.omx/

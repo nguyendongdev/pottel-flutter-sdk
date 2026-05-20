@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/models/get_number_id_regis/get_number_id_regis.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
-import 'package:skyfi_sdk/utilities/ekyc_helper.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/screens/dktt_skyfi/models/get_number_id_regis/get_number_id_regis.dart';
+import 'package:pottel_sdk/utilities/common.dart';
+import 'package:pottel_sdk/utilities/ekyc_helper.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 
 import '../../core/models/code_error_handle/code_error_handle.dart';
 import '../../core/widgets/snack_bar_app.dart';

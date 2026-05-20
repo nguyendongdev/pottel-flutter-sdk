@@ -3,10 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
-import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
-import 'package:skyfi_sdk/network/api.dart';
-import 'package:skyfi_sdk/screens/package_detail_skyfi/models/package_model_detail/result.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/core/widgets/gradient_button.dart';
+import 'package:pottel_sdk/network/api.dart';
+import 'package:pottel_sdk/screens/package_detail_skyfi/models/package_model_detail/result.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';

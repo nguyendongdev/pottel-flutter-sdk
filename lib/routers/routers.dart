@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skyfi_sdk/screens/account_info_skyfi/account_list_pdf.dart';
-import 'package:skyfi_sdk/screens/account_info_skyfi/account_term_policy.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/contact_detail_screen.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/double_check_info_screen.dart';
-import 'package:skyfi_sdk/screens/manager_sim/detail_eSim.dart';
-import 'package:skyfi_sdk/screens/manager_sim/manager_sim.dart';
-import 'package:skyfi_sdk/screens/manager_sim/models/response_manager_esim/item_my_esim.dart';
-import 'package:skyfi_sdk/screens/sim_data_skyfi/models/create_order/item.dart';
-import 'package:skyfi_sdk/screens/video_call/RecordVideoScreen.dart'
+import 'package:pottel_sdk/screens/account_info_skyfi/account_list_pdf.dart';
+import 'package:pottel_sdk/screens/account_info_skyfi/account_term_policy.dart';
+import 'package:pottel_sdk/screens/dktt_skyfi/contact_detail_screen.dart';
+import 'package:pottel_sdk/screens/dktt_skyfi/double_check_info_screen.dart';
+import 'package:pottel_sdk/screens/manager_sim/detail_eSim.dart';
+import 'package:pottel_sdk/screens/manager_sim/manager_sim.dart';
+import 'package:pottel_sdk/screens/manager_sim/models/response_manager_esim/item_my_esim.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/models/create_order/item.dart';
+import 'package:pottel_sdk/screens/video_call/RecordVideoScreen.dart'
     show EnumServiceSim, RecordVideoScreen;
 
 import '../screens/account_detail_skyfi/account_detail_skyfi_screen.dart';

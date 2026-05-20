@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:skyfi_sdk/l10n/l10n.dart';
-import 'package:skyfi_sdk/screens/history_mobile_skyfi/services/historyService.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:pottel_sdk/l10n/l10n.dart';
+import 'package:pottel_sdk/screens/history_mobile_skyfi/services/historyService.dart';
+import 'package:pottel_sdk/utilities/common.dart';
 
 import '../models/history_item.dart';
 

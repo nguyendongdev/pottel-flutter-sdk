@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skyfi_sdk/l10n/locales/en.dart';
-import 'package:skyfi_sdk/l10n/locales/vi.dart';
+import 'package:pottel_sdk/l10n/locales/en.dart';
+import 'package:pottel_sdk/l10n/locales/vi.dart';
 
 class AppLocalization {
   final Locale locale;

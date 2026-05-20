@@ -6,8 +6,18 @@ part 'result.g.dart';
 @freezed
 class Result with _$Result {
   factory Result({
+    @JsonKey(name: 'iframeUrl') String? iframeUrl,
     String? redirectUrl,
     String? orderNumber,
+    String? orderCode,
+    String? token,
+    String? baseUrl,
+    String? socketUrl,
+    String? requestId,
+    String? paymentId,
+    int? amount,
+    String? showPTTT,
+    int? expireIn,
     int? orderAmount,
   }) = _Result;
 

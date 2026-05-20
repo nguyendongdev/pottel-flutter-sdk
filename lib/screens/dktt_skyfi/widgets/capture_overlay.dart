@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/routers/routers.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -63,7 +63,7 @@ class CaptureOverlay extends StatelessWidget {
                     'assets/icons/feat_take.svg',
                     width: 71,
                     height: 71,
-                    package: 'skyfi_sdk',
+                    package: 'pottel_sdk',
                   ),
                 ),
               ),

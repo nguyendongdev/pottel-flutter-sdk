@@ -1,8 +1,8 @@
-import 'package:skyfi_sdk/network/api.dart';
-import 'package:skyfi_sdk/screens/history_mobile_skyfi/models/response_history_pack/package_history.dart';
-import 'package:skyfi_sdk/screens/history_mobile_skyfi/models/response_history_pack/response_history_pack.dart';
-import 'package:skyfi_sdk/screens/history_mobile_skyfi/models/response_history_toup/response_history_toup.dart';
-import 'package:skyfi_sdk/screens/history_mobile_skyfi/models/response_history_toup/topup_history.dart';
+import 'package:pottel_sdk/network/api.dart';
+import 'package:pottel_sdk/screens/history_mobile_skyfi/models/response_history_pack/package_history.dart';
+import 'package:pottel_sdk/screens/history_mobile_skyfi/models/response_history_pack/response_history_pack.dart';
+import 'package:pottel_sdk/screens/history_mobile_skyfi/models/response_history_toup/response_history_toup.dart';
+import 'package:pottel_sdk/screens/history_mobile_skyfi/models/response_history_toup/topup_history.dart';
 
 class Historyservice {
   final API _api = API();

@@ -29,7 +29,7 @@ class FeatureCard extends StatelessWidget {
             icon,
             width: 24,
             height: 24,
-            package: 'skyfi_sdk',
+            package: 'pottel_sdk',
             colorFilter: const ColorFilter.mode(
               AppColors.white,
               BlendMode.srcIn,

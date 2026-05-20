@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
 
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';

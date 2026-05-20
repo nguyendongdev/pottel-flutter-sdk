@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/routers/routers.dart';
+import 'package:pottel_sdk/utilities/common.dart';
 import '../../l10n/localization_extension.dart';
 
 import 'models/response_manager_esim/item_my_esim.dart';
@@ -348,7 +348,8 @@ class SimNotActiveDetail extends ConsumerWidget {
     context.pushNamed(
       AppRouter.webviewTermsSkyfi,
       extra: {
-        'url': 'https://skyfi.vn/vi/esimGuide?src=app',
+        'url':
+            'https://pottel.dev/${context.l10n.locale.languageCode}/esimGuide?src=app',
         'title': context.l10n.translate('view_installation_guide_sim'),
         'isCheckbox': false,
       },

@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:skyfi_sdk/screens/register/register_state.dart';
+import 'package:pottel_sdk/screens/register/register_state.dart';
 
 part 'register_controller.g.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/modals/modalMessage.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/modals/modalMessage.dart';
+import 'package:pottel_sdk/routers/routers.dart';
 
 class ResponseModal<T> {
   final T? result;

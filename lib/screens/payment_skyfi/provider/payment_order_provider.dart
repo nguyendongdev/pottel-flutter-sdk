@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:skyfi_sdk/screens/sim_data_skyfi/models/create_order/create_order.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/models/create_order/create_order.dart';
 
+import '../../../core/constants/payment_gateway.dart';
 import '../../sim_data_skyfi/models/create_order/item.dart';
 
 part 'payment_order_provider.g.dart';
@@ -24,7 +25,7 @@ class PaymentOrder extends _$PaymentOrder {
           createFromCartId: null,
           discountAmount: 0,
           shippingAmount: 0,
-          paymentMethod: 'GALAXYPAY',
+          paymentMethod: PaymentGateway.gatewayName,
           items: [],
         );
   }
@@ -92,6 +93,19 @@ class PaymentOrder extends _$PaymentOrder {
   // shipping amount
   void changeShippingAmount(int shippingAmount) {
     _cachedOrder = state.copyWith(shippingAmount: shippingAmount);
+    state = _cachedOrder!;
+  }
+
+  // keep total amount consistent when shipping amount is recalculated
+  void updateShippingAmount(int shippingAmount) {
+    final previousShipping = state.shippingAmount ?? 0;
+    final currentTotal = state.totalAmount ?? 0;
+    final nextTotal = currentTotal - previousShipping + shippingAmount;
+
+    _cachedOrder = state.copyWith(
+      shippingAmount: shippingAmount,
+      totalAmount: nextTotal < 0 ? 0 : nextTotal,
+    );
     state = _cachedOrder!;
   }
 

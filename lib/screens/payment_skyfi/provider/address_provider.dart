@@ -4,6 +4,20 @@ import '../services/address_service.dart';
 
 part 'address_provider.g.dart';
 
+enum AddressMode { twoLevel, threeLevel }
+
+@riverpod
+class AddressModeState extends _$AddressModeState {
+  @override
+  AddressMode build() {
+    return AddressMode.twoLevel;
+  }
+
+  void setMode(AddressMode mode) {
+    state = mode;
+  }
+}
+
 @riverpod
 class AddressSelection extends _$AddressSelection {
   @override
@@ -32,7 +46,7 @@ class AddressSelection extends _$AddressSelection {
 class AddressStep extends _$AddressStep {
   @override
   int build() {
-    return 0; // 0: Province, 1: District, 2: Ward
+    return 0; // 0: Province, 1: District/Ward, 2: Ward (3-level only)
   }
 
   void setStep(int step) {
@@ -40,7 +54,9 @@ class AddressStep extends _$AddressStep {
   }
 
   void nextStep() {
-    if (state < 2) {
+    final mode = ref.read(addressModeStateProvider);
+    final maxStep = mode == AddressMode.twoLevel ? 1 : 2;
+    if (state < maxStep) {
       state++;
     }
   }
@@ -49,6 +65,11 @@ class AddressStep extends _$AddressStep {
     if (state > 0) {
       state--;
     }
+  }
+
+  int getTotalSteps() {
+    final mode = ref.read(addressModeStateProvider);
+    return mode == AddressMode.twoLevel ? 2 : 3;
   }
 }
 
@@ -98,6 +119,37 @@ Future<List<AddressModel>> wards(WardsRef ref) async {
             name: ward.name ?? '',
             parentId: ward.districtId.toString(),
             level: 2,
+          ))
+      .toList();
+}
+
+@riverpod
+Future<List<AddressModel>> newCities(NewCitiesRef ref) async {
+  final addressService = ref.watch(addressServiceProvider);
+  final cities = await addressService.getNewCities();
+  return cities
+      .map((city) => AddressModel(
+            id: city.id.toString(),
+            name: city.name ?? '',
+          ))
+      .toList();
+}
+
+@riverpod
+Future<List<AddressModel>> newWards(NewWardsRef ref) async {
+  final addressService = ref.watch(addressServiceProvider);
+  final selectedProvince = ref.watch(addressSelectionProvider).province;
+
+  if (selectedProvince == null) return [];
+
+  final wards = await addressService.getNewWards();
+  return wards
+      .where((ward) => ward.cityId.toString() == selectedProvince.id)
+      .map((ward) => AddressModel(
+            id: ward.id.toString(),
+            name: ward.name ?? '',
+            parentId: ward.cityId.toString(),
+            level: 1,
           ))
       .toList();
 }

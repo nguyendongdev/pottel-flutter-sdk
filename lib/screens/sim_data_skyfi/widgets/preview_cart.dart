@@ -35,7 +35,7 @@ class PreviewCart extends HookConsumerWidget {
                 'assets/icons/feat_success_check.svg',
                 width: 22,
                 height: 22,
-                package: 'skyfi_sdk',
+                package: 'pottel_sdk',
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(

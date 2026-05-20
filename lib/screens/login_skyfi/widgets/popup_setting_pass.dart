@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:skyfi_sdk/utilities/modal.dart';
+import 'package:pottel_sdk/utilities/modal.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';

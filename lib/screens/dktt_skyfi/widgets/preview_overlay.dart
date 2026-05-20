@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
+import 'package:pottel_sdk/core/widgets/gradient_button.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';

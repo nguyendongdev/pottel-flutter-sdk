@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
 import '../../l10n/localization_extension.dart';
-import 'package:skyfi_sdk/screens/manager_sim/providers/provider_manager_esim.dart';
-import 'package:skyfi_sdk/screens/manager_sim/widgets/sim_active.dart';
-import 'package:skyfi_sdk/screens/manager_sim/widgets/sim_not_active.dart';
+import 'package:pottel_sdk/screens/manager_sim/providers/provider_manager_esim.dart';
+import 'package:pottel_sdk/screens/manager_sim/widgets/sim_active.dart';
+import 'package:pottel_sdk/screens/manager_sim/widgets/sim_not_active.dart';
 
 class ManagerSimScreen extends HookConsumerWidget {
   const ManagerSimScreen({super.key});

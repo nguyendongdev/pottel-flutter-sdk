@@ -13,9 +13,9 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
-import 'package:skyfi_sdk/core/widgets/gradient_button.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
+import 'package:pottel_sdk/core/widgets/gradient_button.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/routers/routers.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
-import 'package:skyfi_sdk/utilities/common.dart' as SkyFiSDK;
+import 'package:pottel_sdk/pottel_sdk.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +31,7 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Center(
-                  child: Text('SkyFi SDK Example App'),
+                  child: Text('Pottel SDK Example App'),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
@@ -42,31 +41,30 @@ class _MyAppState extends State<MyApp> {
                       MaterialPageRoute(
                         builder: (_) => PopScope(
                           canPop: false,
-                          child: SkyfiSdk(
-                            phone: '0707040618',
-                            env: SkyfiEnv.dev,
-                            initialLocation: SkyfiRoute.home.path,
+                          child: PottelSdk(
+                            phone: '0959999111',
+                            env: PottelEnv.dev,
+                            initialLocation: PottelRoute.home.path,
                             locale: AppLocale.vi,
                           ),
                         ),
                       ),
                     );
                   },
-                  child: const Text('Mở SkyFi SDK'),
+                  child: const Text('Mở Pottel SDK'),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => PopScope(
                           canPop: false,
-                          child: SkyfiSdk(
-                            phone: '0707040618',
-                            env: SkyfiEnv.dev,
-                            initialLocation: SkyfiRoute.scanBarcode.path,
+                          child: PottelSdk(
+                            phone: '0959999111',
+                            env: PottelEnv.dev,
+                            initialLocation: PottelRoute.scanBarcode.path,
                             locale: AppLocale.vi,
                           ),
                         ),
@@ -78,16 +76,15 @@ class _MyAppState extends State<MyApp> {
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => PopScope(
                           canPop: false,
-                          child: SkyfiSdk(
-                            phone: '0707040618',
-                            env: SkyfiEnv.dev,
-                            initialLocation: SkyfiRoute.scanNfcChipcardNew.path,
+                          child: PottelSdk(
+                            phone: '0959999111',
+                            env: PottelEnv.dev,
+                            initialLocation: PottelRoute.scanNfcChipcardNew.path,
                             locale: AppLocale.vi,
                           ),
                         ),

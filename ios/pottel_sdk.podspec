@@ -1,13 +1,13 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint skyfi_sdk.podspec` to validate before publishing.
+# Run `pod lib lint pottel_sdk.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'skyfi_sdk'
+  s.name             = 'pottel_sdk'
   s.version          = '0.0.1'
-  s.summary          = 'A new Flutter plugin project.'
+  s.summary          = 'Pottel SDK Flutter plugin.'
   s.description      = <<-DESC
-A new Flutter plugin project.
+Pottel SDK Flutter plugin.
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }

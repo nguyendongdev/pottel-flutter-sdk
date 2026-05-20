@@ -86,3 +86,48 @@ class WardModel with _$WardModel {
   factory WardModel.fromJson(Map<String, dynamic> json) =>
       _$WardModelFromJson(json);
 }
+
+@freezed
+class NewCitiesResponse with _$NewCitiesResponse {
+  const factory NewCitiesResponse({
+    @JsonKey(name: 'cities') List<NewCityModel>? cities,
+  }) = _NewCitiesResponse;
+
+  factory NewCitiesResponse.fromJson(Map<String, dynamic> json) =>
+      _$NewCitiesResponseFromJson(json);
+}
+
+@freezed
+class NewWardsResponse with _$NewWardsResponse {
+  const factory NewWardsResponse({
+    @JsonKey(name: 'wards') List<NewWardModel>? wards,
+  }) = _NewWardsResponse;
+
+  factory NewWardsResponse.fromJson(Map<String, dynamic> json) =>
+      _$NewWardsResponseFromJson(json);
+}
+
+@freezed
+class NewCityModel with _$NewCityModel {
+  const factory NewCityModel({
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'vnpost_province_code') int? vnpostProvinceCode,
+  }) = _NewCityModel;
+
+  factory NewCityModel.fromJson(Map<String, dynamic> json) =>
+      _$NewCityModelFromJson(json);
+}
+
+@freezed
+class NewWardModel with _$NewWardModel {
+  const factory NewWardModel({
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'vnpost_commune_code') int? vnpostCommuneCode,
+    @JsonKey(name: 'city_id') int? cityId,
+  }) = _NewWardModel;
+
+  factory NewWardModel.fromJson(Map<String, dynamic> json) =>
+      _$NewWardModelFromJson(json);
+}

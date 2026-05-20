@@ -7,11 +7,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:signature/signature.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
-import 'package:skyfi_sdk/modals/modalWebview.dart';
-import 'package:skyfi_sdk/screens/account_info_skyfi/account_list_pdf.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/provider/ekyc_provider.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/modals/modalWebview.dart';
+import 'package:pottel_sdk/screens/account_info_skyfi/account_list_pdf.dart';
+import 'package:pottel_sdk/screens/dktt_skyfi/provider/ekyc_provider.dart';
+import 'package:pottel_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -214,7 +214,7 @@ class PreviewContactScreen extends HookConsumerWidget {
                                   WebViewModal.showWebContent(
                                     context: context,
                                     url:
-                                        'https://skyfi.vn/vi/terms-and-conditions?src=app',
+                                        'https://pottel.dev/vi/terms-and-conditions?src=app',
                                     title: 'Điều khoản & Điều kiện ',
                                   );
                                 },
@@ -256,7 +256,7 @@ class PreviewContactScreen extends HookConsumerWidget {
                                 ..onTap = () {
                                   showPdfViewer(
                                     context,
-                                    'https://skyfi.vn/assets/document/dktt/GT_Chap_thuan_xu_ly_du_lieu_ca_nhan.pdf',
+                                    'https://pottel.dev/assets/document/dktt/GT_Chap_thuan_xu_ly_du_lieu_ca_nhan.pdf',
                                     title:
                                         'Giấy tờ chấp thuận xử lý dữ liệu cá nhân',
                                   );

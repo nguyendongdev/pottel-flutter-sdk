@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/l10n/l10n.dart';
-import 'package:skyfi_sdk/modals/modalMessage.dart';
-import 'package:skyfi_sdk/network/store.dart';
-import 'package:skyfi_sdk/skyfi_sdk_auth.dart';
-import 'package:skyfi_sdk/skyfi_sdk_config.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:pottel_sdk/l10n/l10n.dart';
+import 'package:pottel_sdk/modals/modalMessage.dart';
+import 'package:pottel_sdk/network/store.dart';
+import 'package:pottel_sdk/skyfi_sdk_auth.dart';
+import 'package:pottel_sdk/skyfi_sdk_config.dart';
+import 'package:pottel_sdk/utilities/common.dart';
 
 import 'data/configs/app_configs.dart';
 import 'routers/routers.dart';
@@ -101,7 +101,7 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
   }
 
   bool _checkPhone(String phone) {
-    final phoneRegex = RegExp(r'^(\+8470|8470|070)(\d{7})$').hasMatch(phone);
+    final phoneRegex = RegExp(r'^(\+8495|8495|095)(\d{7})$').hasMatch(phone);
     return !phoneRegex;
   }
 
@@ -121,8 +121,8 @@ class _SkyfiSdkState extends State<SkyfiSdk> {
     });
 
     try {
-      // cut 7 number from phone and + 070
-      final phoneNumber = '070${phone.substring(phone.length - 7)}';
+      // cut 7 number from phone and + 095
+      final phoneNumber = '095${phone.substring(phone.length - 7)}';
       print('phoneNumber: $phoneNumber');
       final res = await SkyfiSdkAuth().loginWithPhone(phoneNumber);
       if (res['code'] == 200) {

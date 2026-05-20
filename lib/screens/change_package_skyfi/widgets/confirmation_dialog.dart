@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skyfi_sdk/l10n/l10n.dart';
+import 'package:pottel_sdk/l10n/l10n.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';

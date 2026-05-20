@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/modals/modalWebview.dart';
-import 'package:skyfi_sdk/screens/esim_travel_skyfi/compatible_devices_screen.dart';
+import 'package:pottel_sdk/modals/modalWebview.dart';
+import 'package:pottel_sdk/screens/esim_travel_skyfi/compatible_devices_screen.dart';
 
 import '../../../core/constants/colors.dart';
+import '../../../core/constants/payment_gateway.dart';
 import '../../../core/constants/spacing.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/app_checkbox_with_link.dart';
@@ -14,6 +15,7 @@ import '../../../l10n/localization_extension.dart';
 import '../../../network/api.dart';
 import '../../../routers/routers.dart';
 import '../../../utilities/common.dart';
+import '../provider/address_provider.dart';
 import '../../payment_method_skyfi/models/create_order/create_order.dart';
 import '../../payment_method_skyfi/models/payment_respone/payment_respone.dart';
 import '../provider/payment_order_provider.dart';
@@ -50,15 +52,15 @@ class BottomActionBar extends HookConsumerWidget {
 
     Future<String?> getLinkPayment(String orderID) async {
       try {
-        final response = await api
-            .post('/bss/payment/gateways/GALAXYPAY/redirect', data: {
-          'orderNumber': orderID,
-          'locale': context.l10n.locale.languageCode
-        });
+        final response = await api.post(PaymentGateway.redirectEndpoint(),
+            data: {
+              'orderCode': orderID,
+              'locale': context.l10n.locale.languageCode
+            });
         // isLoading.value = false;
         final data = PaymentRespone.fromJson(response.data);
         if (response.statusCode != 200 && data.code != 200) return null;
-        final link = data.result?.redirectUrl;
+        final link = data.result?.iframeUrl ?? data.result?.redirectUrl;
         if (link == null) return null;
         return link;
       } catch (e) {
@@ -66,7 +68,7 @@ class BottomActionBar extends HookConsumerWidget {
       }
     }
 
-    void checkOutOrderGALAXYPAY() async {
+    void checkOutOrderVNPD() async {
       try {
         isLoading.value = true;
         final order = ref.read(paymentOrderProvider);
@@ -75,6 +77,13 @@ class BottomActionBar extends HookConsumerWidget {
         final orderJson = order.toJson();
         orderJson['items'] = itemsJson;
         orderJson['source'] = 'SDK';
+        final addressMode = ref.read(addressModeStateProvider);
+        if (addressMode == AddressMode.twoLevel) {
+          orderJson.remove('district_id');
+        }
+        if (order.couponCode == null || order.couponCode!.isEmpty) {
+          orderJson.remove('coupon_code');
+        }
         final response =
             await api.post('/bss/app/create-order', data: orderJson);
         final data = CreateOrder.fromJson(response.data);
@@ -98,14 +107,11 @@ class BottomActionBar extends HookConsumerWidget {
       }
     }
 
-    // Helper method to set payment method and proceed with checkout
     void setPaymentMethodAndCheckout() {
-      // Set payment method
-      ref.read(paymentOrderProvider.notifier).changePaymentMethod("GALAXYPAY");
-
-      // Use Future.microtask to ensure the state update is processed
-      // before calling checkOutOrderGALAXYPAY
-      Future.microtask(() => checkOutOrderGALAXYPAY());
+      ref
+          .read(paymentOrderProvider.notifier)
+          .changePaymentMethod(PaymentGateway.gatewayName);
+      Future.microtask(checkOutOrderVNPD);
     }
 
     void onValidate(modeUI) async {
@@ -146,11 +152,14 @@ class BottomActionBar extends HookConsumerWidget {
           showToast(context.l10n.translate('please_select_city'));
           return;
         }
-        if (state.districtId == null || state.districtId == 0) {
-          showToast(context.l10n.translate('please_select_district'));
-          return;
+        final addressMode = ref.read(addressModeStateProvider);
+        if (addressMode == AddressMode.threeLevel) {
+          if (state.districtId == null || state.districtId == 0) {
+            showToast(context.l10n.translate('please_select_district'));
+            return;
+          }
         }
-        if (state.wardId == null || state.districtId == null) {
+        if (state.wardId == null || state.wardId == 0) {
           showToast(context.l10n.translate('please_select_ward'));
           return;
         }
@@ -189,9 +198,7 @@ class BottomActionBar extends HookConsumerWidget {
           return;
         }
 
-        // Set payment method and proceed with checkout
-        // setPaymentMethodAndCheckout();
-        context.pushNamed(AppRouter.paymentMethodSkyFi, extra: modeUI);
+        setPaymentMethodAndCheckout();
         return;
       }
 
@@ -226,13 +233,19 @@ class BottomActionBar extends HookConsumerWidget {
           return;
         }
         // address -> required
-        if (state.cityId == null ||
-            state.cityId == 0 ||
-            state.districtId == null ||
-            state.districtId == 0 ||
-            state.wardId == null ||
-            state.wardId == 0) {
+        if (state.cityId == null || state.cityId == 0) {
           showToast(context.l10n.translate('address_required'));
+          return;
+        }
+        final addressMode = ref.read(addressModeStateProvider);
+        if (addressMode == AddressMode.threeLevel) {
+          if (state.districtId == null || state.districtId == 0) {
+            showToast(context.l10n.translate('please_select_district'));
+            return;
+          }
+        }
+        if (state.wardId == null || state.wardId == 0) {
+          showToast(context.l10n.translate('please_select_ward'));
           return;
         }
         if (state.deliveryAddress == null || state.deliveryAddress!.isEmpty) {
@@ -250,9 +263,7 @@ class BottomActionBar extends HookConsumerWidget {
           return;
         }
 
-        // Set payment method and proceed with checkout
-        // setPaymentMethodAndCheckout();
-        context.pushNamed(AppRouter.paymentMethodSkyFi, extra: modeUI);
+        setPaymentMethodAndCheckout();
         return;
       }
     }
@@ -315,7 +326,7 @@ class BottomActionBar extends HookConsumerWidget {
                         WebViewModal.showWebContent(
                           context: context,
                           url:
-                              'https://skyfi.pro/vi/terms-and-conditions?src=app',
+                              'https://pottel.dev/${context.l10n.locale.languageCode}/terms-and-conditions?src=app',
                           title: context.l10n
                               .translate('terms_conditions_transaction'),
                         );
@@ -327,7 +338,8 @@ class BottomActionBar extends HookConsumerWidget {
                   onTap: () {
                     WebViewModal.showWebContent(
                       context: context,
-                      url: 'https://skyfi.pro/vi/terms-and-conditions?src=app',
+                      url:
+                          'https://pottel.dev/${context.l10n.locale.languageCode}/terms-and-conditions?src=app',
                       title: context.l10n.translate('terms_conditions'),
                     );
                   },
@@ -340,15 +352,11 @@ class BottomActionBar extends HookConsumerWidget {
               onValidate(modeUI);
               // context.pushNamed(AppRouter.paymentMethodSkyFi);
             },
-            // text: isLoading.value
-            //     ? context.l10n.translate('loading_text')
-            //     : (modeUI == 'USIM'
-            //         ? context.l10n.translate('choose_payment_method_button')
-            //         : context.l10n.translate('payment')),
-
             text: isLoading.value
                 ? context.l10n.translate('loading_text')
-                : context.l10n.translate('choose_payment_method_button'),
+                : (modeUI == 'USIM'
+                    ? context.l10n.translate('choose_payment_method_button')
+                    : context.l10n.translate('payment')),
             height: 48,
             disabled: isLoading.value,
             textStyle: AppTextStyles.button.copyWith(

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
-import 'package:skyfi_sdk/screens/cart_skyfi/provider/cart_provider.dart';
-import 'package:skyfi_sdk/screens/esim_travel_skyfi/compatible_devices_screen.dart';
-import 'package:skyfi_sdk/screens/esim_travel_skyfi/widgets/modalContris.dart';
-import 'package:skyfi_sdk/screens/payment_skyfi/provider/payment_order_provider.dart';
-import 'package:skyfi_sdk/screens/sim_data_skyfi/models/create_order/item.dart';
-import 'package:skyfi_sdk/screens/sim_data_skyfi/widgets/preview_cart.dart';
-import 'package:skyfi_sdk/utilities/modal.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/routers/routers.dart';
+import 'package:pottel_sdk/screens/cart_skyfi/provider/cart_provider.dart';
+import 'package:pottel_sdk/screens/esim_travel_skyfi/compatible_devices_screen.dart';
+import 'package:pottel_sdk/screens/esim_travel_skyfi/widgets/modalContris.dart';
+import 'package:pottel_sdk/screens/payment_skyfi/provider/payment_order_provider.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/models/create_order/item.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/widgets/preview_cart.dart';
+import 'package:pottel_sdk/utilities/modal.dart';
 
 import '../../l10n/localization_extension.dart';
 import '../../themes/colors.dart';
@@ -99,7 +99,7 @@ class DetailEsimContent extends HookConsumerWidget {
                     Image.asset('assets/images/bannerEsim.png',
                         width: double.infinity,
                         fit: BoxFit.contain,
-                        package: 'skyfi_sdk',
+                        package: 'pottel_sdk',
                         height: MediaQuery.of(context).size.height * 0.1),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -3,11 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/spacing.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
-import 'package:skyfi_sdk/network/api.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/models/save_log_respone/save_log_respone.dart';
-import 'package:skyfi_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
+import 'package:pottel_sdk/core/constants/spacing.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/network/api.dart';
+import 'package:pottel_sdk/screens/dktt_skyfi/models/save_log_respone/save_log_respone.dart';
+import 'package:pottel_sdk/screens/dktt_skyfi/provider/save_log_dktt_provider.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';

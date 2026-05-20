@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
 
 class MenuItem extends StatelessWidget {
   const MenuItem({
@@ -35,7 +35,7 @@ class MenuItem extends StatelessWidget {
                     AppColors.text,
                     BlendMode.srcIn,
                   ),
-                  package: 'skyfi_sdk',
+                  package: 'pottel_sdk',
                 ),
                 const SizedBox(width: 12),
                 Expanded(

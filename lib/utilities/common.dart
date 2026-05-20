@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:skyfi_sdk/l10n/localization_extension.dart';
+import 'package:pottel_sdk/l10n/localization_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../core/constants/colors.dart';
@@ -292,6 +292,10 @@ class Common {
     }
   }
 
+  static Future<void> openPottelApp({AppLocale locale = AppLocale.vi}) async {
+    await openSkyFiApp(locale: locale);
+  }
+
   static Future<void> openRegisSkyFiApp({
     AppLocale locale = AppLocale.vi,
   }) async {
@@ -319,5 +323,11 @@ class Common {
         print('Error opening store: $storeError');
       }
     }
+  }
+
+  static Future<void> openRegisPottelApp({
+    AppLocale locale = AppLocale.vi,
+  }) async {
+    await openRegisSkyFiApp(locale: locale);
   }
 }

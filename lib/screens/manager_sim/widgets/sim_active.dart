@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/colors.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
-import 'package:skyfi_sdk/core/widgets/circular_progress_gradient.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
+import 'package:pottel_sdk/core/constants/colors.dart';
+import 'package:pottel_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/core/widgets/circular_progress_gradient.dart';
+import 'package:pottel_sdk/routers/routers.dart';
 import '../../../l10n/localization_extension.dart';
 
 import '../models/response_manager_esim/item_my_esim.dart';

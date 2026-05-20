@@ -87,7 +87,7 @@ class SerialInputField extends StatelessWidget {
               'assets/icons/feat_scan.svg',
               width: 20,
               height: 20,
-              package: 'skyfi_sdk',
+              package: 'pottel_sdk',
             ),
           ),
         ],

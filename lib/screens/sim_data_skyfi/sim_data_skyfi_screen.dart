@@ -3,11 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/screens/sim_data_skyfi/models/choose_sim/package.dart';
-import 'package:skyfi_sdk/screens/sim_data_skyfi/models/choose_sim/result.dart';
-import 'package:skyfi_sdk/utilities/calculate.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
-import 'package:skyfi_sdk/widgets/core/tooltip.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/models/choose_sim/package.dart';
+import 'package:pottel_sdk/screens/sim_data_skyfi/models/choose_sim/result.dart';
+import 'package:pottel_sdk/utilities/calculate.dart';
+import 'package:pottel_sdk/utilities/common.dart';
+import 'package:pottel_sdk/widgets/core/tooltip.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -264,14 +264,14 @@ class _SimNumberSection extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(AppSpacing.sm),
               decoration: BoxDecoration(
-                color: AppColors.red,
+                color: AppColors.primary,
                 borderRadius: BorderRadius.circular(AppSpacing.sm),
               ),
               child: SvgPicture.asset(
                 'assets/icons/feat_sim_global.svg',
                 width: 24,
                 height: 24,
-                package: 'skyfi_sdk',
+                package: 'pottel_sdk',
               ),
             ),
             const SizedBox(width: AppSpacing.md),
@@ -511,7 +511,7 @@ class _DataPackage extends StatelessWidget {
                       isHot
                           ? const Icon(
                               Icons.local_fire_department,
-                              color: AppColors.red,
+                              color: AppColors.primary,
                               size: 24,
                             )
                           : const SizedBox(),
@@ -541,14 +541,14 @@ class _DataPackage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(2),
                         decoration: BoxDecoration(
-                          color: AppColors.red,
+                          color: AppColors.primary,
                           borderRadius: BorderRadius.circular(AppSpacing.xs),
                         ),
                         child: SvgPicture.asset(
                           'assets/icons/dashboard-speed.svg',
                           width: 18,
                           height: 18,
-                          package: 'skyfi_sdk',
+                          package: 'pottel_sdk',
                         ),
                       ),
                       const SizedBox(width: AppSpacing.sm),
@@ -569,14 +569,14 @@ class _DataPackage extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(2),
                           decoration: BoxDecoration(
-                            color: AppColors.red,
+                            color: AppColors.primary,
                             borderRadius: BorderRadius.circular(AppSpacing.xs),
                           ),
                           child: SvgPicture.asset(
                             'assets/icons/phone-home.svg',
                             width: 18,
                             height: 18,
-                            package: 'skyfi_sdk',
+                            package: 'pottel_sdk',
                           ),
                         ),
                         const SizedBox(width: AppSpacing.sm),
@@ -597,14 +597,14 @@ class _DataPackage extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(2),
                           decoration: BoxDecoration(
-                            color: AppColors.red,
+                            color: AppColors.primary,
                             borderRadius: BorderRadius.circular(AppSpacing.xs),
                           ),
                           child: SvgPicture.asset(
                             'assets/icons/message-home.svg',
                             width: 18,
                             height: 18,
-                            package: 'skyfi_sdk',
+                            package: 'pottel_sdk',
                           ),
                         ),
                         const SizedBox(width: AppSpacing.sm),

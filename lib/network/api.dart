@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:skyfi_sdk/skyfi_sdk_config.dart';
+import 'package:pottel_sdk/skyfi_sdk_config.dart';
 
 import 'intercepters/dio_intercepter.dart';
 

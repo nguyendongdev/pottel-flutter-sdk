@@ -1,6 +1,6 @@
-# SkyFi SDK
+# Pottel SDK
 
-SkyFi SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, nạp tiền, đăng ký thông tin thuê bao và các dịch vụ viễn thông khác.
+Pottel SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, nạp tiền, đăng ký thông tin thuê bao và các dịch vụ viễn thông khác.
 
 ## ✅ Yêu cầu hệ thống
 
@@ -15,9 +15,9 @@ SkyFi SDK là một Flutter plugin cung cấp các tính năng quản lý SIM, n
 
 ```yaml
 dependencies:
-  skyfi_sdk:
+  pottel_sdk:
     git:
-      url: https://github.com/skyfi2024/new_sdk_SkyFi.git
+      url: <YOUR_POTTEL_SDK_REPO_URL>
       ref: main
 ```
 
@@ -55,13 +55,13 @@ Thêm permissions vào `ios/Runner/Info.plist`:
 ### Import SDK
 
 ```dart
-import 'package:skyfi_sdk/skyfi_sdk.dart';
-import 'package:skyfi_sdk/utilities/common.dart' as SkyFiSDK;
+import 'package:pottel_sdk/pottel_sdk.dart';
+import 'package:pottel_sdk/utilities/common.dart' as PottelSDK;
 ```
 
 ### 🎯 Cách sử dụng chính
 
-#### 1. Mở SkyFi SDK đầy đủ
+#### 1. Mở Pottel SDK đầy đủ
 
 ```dart
 Navigator.push(
@@ -69,10 +69,10 @@ Navigator.push(
   MaterialPageRoute(
     builder: (_) => PopScope(
       canPop: false,
-      child: SkyfiSdk(
-        phone: '0707040618',
-        env: SkyfiEnv.dev,
-        initialLocation: SkyfiRoute.home.path,
+      child: PottelSdk(
+        phone: '0959999111',
+        env: PottelEnv.dev,
+        initialLocation: PottelRoute.home.path,
         locale: AppLocale.vi,
       ),
     ),
@@ -88,10 +88,10 @@ Navigator.push(
   MaterialPageRoute(
     builder: (_) => PopScope(
       canPop: false,
-      child: SkyfiSdk(
-        phone: '0707040618',
-        env: SkyfiEnv.dev,
-        initialLocation: SkyfiRoute.scanBarcode.path,
+      child: PottelSdk(
+        phone: '0959999111',
+        env: PottelEnv.dev,
+        initialLocation: PottelRoute.scanBarcode.path,
         locale: AppLocale.vi,
       ),
     ),
@@ -102,7 +102,7 @@ Navigator.push(
 #### 3. Sử dụng utility function
 
 ```dart
-SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
+PottelSDK.Common.openRegisPottelApp(locale: AppLocale.vi);
 ```
 
 ## ⚙️ Tham số cấu hình
@@ -110,15 +110,15 @@ SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
 | Tham số | Kiểu | Mặc định | Mô tả |
 |---------|------|----------|--------|
 | `phone` | `String?` | `null` | Số điện thoại tự động đăng nhập |
-| `env` | `SkyfiEnv` | `SkyfiEnv.dev` | Môi trường: `dev` hoặc `prod` |
+| `env` | `PottelEnv` | `PottelEnv.dev` | Môi trường: `dev` hoặc `prod` |
 | `locale` | `AppLocale` | `AppLocale.vi` | Ngôn ngữ: `vi` hoặc `en` |
 | `initialLocation` | `String?` | `null` | Màn hình khởi tạo ban đầu |
 
 ## 🌍 Môi trường & Ngôn ngữ
 
 **Môi trường:**
-- `SkyfiEnv.dev` - Phát triển
-- `SkyfiEnv.prod` - Sản xuất
+- `PottelEnv.dev` - Phát triển
+- `PottelEnv.prod` - Sản xuất
 
 **Ngôn ngữ:**
 - `AppLocale.vi` - Tiếng Việt 🇻🇳
@@ -128,8 +128,8 @@ SkyFiSDK.Common.openRegisSkyFiApp(locale: AppLocale.vi);
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:skyfi_sdk/skyfi_sdk.dart';
-import 'package:skyfi_sdk/utilities/common.dart' as SkyFiSDK;
+import 'package:pottel_sdk/pottel_sdk.dart';
+import 'package:pottel_sdk/utilities/common.dart' as PottelSDK;
 
 void main() {
   runApp(const MyApp());
@@ -141,9 +141,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SkyFi SDK Example',
+      title: 'Pottel SDK Example',
       home: Scaffold(
-        appBar: AppBar(title: const Text('SkyFi SDK Demo')),
+        appBar: AppBar(title: const Text('Pottel SDK Demo')),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -154,16 +154,16 @@ class MyApp extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => PopScope(
                       canPop: false,
-                      child: SkyfiSdk(
-                        phone: '0707040618',
-                        env: SkyfiEnv.dev,
-                        initialLocation: SkyfiRoute.home.path,
+                      child: PottelSdk(
+                        phone: '0959999111',
+                        env: PottelEnv.dev,
+                        initialLocation: PottelRoute.home.path,
                         locale: AppLocale.vi,
                       ),
                     ),
                   ),
                 ),
-                child: const Text('Mở SkyFi SDK'),
+                child: const Text('Mở Pottel SDK'),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
@@ -172,10 +172,10 @@ class MyApp extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => PopScope(
                       canPop: false,
-                      child: SkyfiSdk(
-                        phone: '0707040618',
-                        env: SkyfiEnv.dev,
-                        initialLocation: SkyfiRoute.scanBarcode.path,
+                      child: PottelSdk(
+                        phone: '0959999111',
+                        env: PottelEnv.dev,
+                        initialLocation: PottelRoute.scanBarcode.path,
                         locale: AppLocale.vi,
                       ),
                     ),

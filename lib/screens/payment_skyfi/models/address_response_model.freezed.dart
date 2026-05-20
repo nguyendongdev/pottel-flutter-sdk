@@ -1390,3 +1390,764 @@ abstract class _WardModel implements WardModel {
   _$$WardModelImplCopyWith<_$WardModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+NewCitiesResponse _$NewCitiesResponseFromJson(Map<String, dynamic> json) {
+  return _NewCitiesResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NewCitiesResponse {
+  @JsonKey(name: 'cities')
+  List<NewCityModel>? get cities => throw _privateConstructorUsedError;
+
+  /// Serializes this NewCitiesResponse to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of NewCitiesResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $NewCitiesResponseCopyWith<NewCitiesResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NewCitiesResponseCopyWith<$Res> {
+  factory $NewCitiesResponseCopyWith(
+          NewCitiesResponse value, $Res Function(NewCitiesResponse) then) =
+      _$NewCitiesResponseCopyWithImpl<$Res, NewCitiesResponse>;
+  @useResult
+  $Res call({@JsonKey(name: 'cities') List<NewCityModel>? cities});
+}
+
+/// @nodoc
+class _$NewCitiesResponseCopyWithImpl<$Res, $Val extends NewCitiesResponse>
+    implements $NewCitiesResponseCopyWith<$Res> {
+  _$NewCitiesResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of NewCitiesResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cities = freezed,
+  }) {
+    return _then(_value.copyWith(
+      cities: freezed == cities
+          ? _value.cities
+          : cities // ignore: cast_nullable_to_non_nullable
+              as List<NewCityModel>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NewCitiesResponseImplCopyWith<$Res>
+    implements $NewCitiesResponseCopyWith<$Res> {
+  factory _$$NewCitiesResponseImplCopyWith(_$NewCitiesResponseImpl value,
+          $Res Function(_$NewCitiesResponseImpl) then) =
+      __$$NewCitiesResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({@JsonKey(name: 'cities') List<NewCityModel>? cities});
+}
+
+/// @nodoc
+class __$$NewCitiesResponseImplCopyWithImpl<$Res>
+    extends _$NewCitiesResponseCopyWithImpl<$Res, _$NewCitiesResponseImpl>
+    implements _$$NewCitiesResponseImplCopyWith<$Res> {
+  __$$NewCitiesResponseImplCopyWithImpl(_$NewCitiesResponseImpl _value,
+      $Res Function(_$NewCitiesResponseImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NewCitiesResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cities = freezed,
+  }) {
+    return _then(_$NewCitiesResponseImpl(
+      cities: freezed == cities
+          ? _value._cities
+          : cities // ignore: cast_nullable_to_non_nullable
+              as List<NewCityModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NewCitiesResponseImpl implements _NewCitiesResponse {
+  const _$NewCitiesResponseImpl(
+      {@JsonKey(name: 'cities') final List<NewCityModel>? cities})
+      : _cities = cities;
+
+  factory _$NewCitiesResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewCitiesResponseImplFromJson(json);
+
+  final List<NewCityModel>? _cities;
+  @override
+  @JsonKey(name: 'cities')
+  List<NewCityModel>? get cities {
+    final value = _cities;
+    if (value == null) return null;
+    if (_cities is EqualUnmodifiableListView) return _cities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'NewCitiesResponse(cities: $cities)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NewCitiesResponseImpl &&
+            const DeepCollectionEquality().equals(other._cities, _cities));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_cities));
+
+  /// Create a copy of NewCitiesResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NewCitiesResponseImplCopyWith<_$NewCitiesResponseImpl> get copyWith =>
+      __$$NewCitiesResponseImplCopyWithImpl<_$NewCitiesResponseImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NewCitiesResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NewCitiesResponse implements NewCitiesResponse {
+  const factory _NewCitiesResponse(
+          {@JsonKey(name: 'cities') final List<NewCityModel>? cities}) =
+      _$NewCitiesResponseImpl;
+
+  factory _NewCitiesResponse.fromJson(Map<String, dynamic> json) =
+      _$NewCitiesResponseImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'cities')
+  List<NewCityModel>? get cities;
+
+  /// Create a copy of NewCitiesResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NewCitiesResponseImplCopyWith<_$NewCitiesResponseImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+NewWardsResponse _$NewWardsResponseFromJson(Map<String, dynamic> json) {
+  return _NewWardsResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NewWardsResponse {
+  @JsonKey(name: 'wards')
+  List<NewWardModel>? get wards => throw _privateConstructorUsedError;
+
+  /// Serializes this NewWardsResponse to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of NewWardsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $NewWardsResponseCopyWith<NewWardsResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NewWardsResponseCopyWith<$Res> {
+  factory $NewWardsResponseCopyWith(
+          NewWardsResponse value, $Res Function(NewWardsResponse) then) =
+      _$NewWardsResponseCopyWithImpl<$Res, NewWardsResponse>;
+  @useResult
+  $Res call({@JsonKey(name: 'wards') List<NewWardModel>? wards});
+}
+
+/// @nodoc
+class _$NewWardsResponseCopyWithImpl<$Res, $Val extends NewWardsResponse>
+    implements $NewWardsResponseCopyWith<$Res> {
+  _$NewWardsResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of NewWardsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? wards = freezed,
+  }) {
+    return _then(_value.copyWith(
+      wards: freezed == wards
+          ? _value.wards
+          : wards // ignore: cast_nullable_to_non_nullable
+              as List<NewWardModel>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NewWardsResponseImplCopyWith<$Res>
+    implements $NewWardsResponseCopyWith<$Res> {
+  factory _$$NewWardsResponseImplCopyWith(_$NewWardsResponseImpl value,
+          $Res Function(_$NewWardsResponseImpl) then) =
+      __$$NewWardsResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({@JsonKey(name: 'wards') List<NewWardModel>? wards});
+}
+
+/// @nodoc
+class __$$NewWardsResponseImplCopyWithImpl<$Res>
+    extends _$NewWardsResponseCopyWithImpl<$Res, _$NewWardsResponseImpl>
+    implements _$$NewWardsResponseImplCopyWith<$Res> {
+  __$$NewWardsResponseImplCopyWithImpl(_$NewWardsResponseImpl _value,
+      $Res Function(_$NewWardsResponseImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NewWardsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? wards = freezed,
+  }) {
+    return _then(_$NewWardsResponseImpl(
+      wards: freezed == wards
+          ? _value._wards
+          : wards // ignore: cast_nullable_to_non_nullable
+              as List<NewWardModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NewWardsResponseImpl implements _NewWardsResponse {
+  const _$NewWardsResponseImpl(
+      {@JsonKey(name: 'wards') final List<NewWardModel>? wards})
+      : _wards = wards;
+
+  factory _$NewWardsResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewWardsResponseImplFromJson(json);
+
+  final List<NewWardModel>? _wards;
+  @override
+  @JsonKey(name: 'wards')
+  List<NewWardModel>? get wards {
+    final value = _wards;
+    if (value == null) return null;
+    if (_wards is EqualUnmodifiableListView) return _wards;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'NewWardsResponse(wards: $wards)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NewWardsResponseImpl &&
+            const DeepCollectionEquality().equals(other._wards, _wards));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_wards));
+
+  /// Create a copy of NewWardsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NewWardsResponseImplCopyWith<_$NewWardsResponseImpl> get copyWith =>
+      __$$NewWardsResponseImplCopyWithImpl<_$NewWardsResponseImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NewWardsResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NewWardsResponse implements NewWardsResponse {
+  const factory _NewWardsResponse(
+          {@JsonKey(name: 'wards') final List<NewWardModel>? wards}) =
+      _$NewWardsResponseImpl;
+
+  factory _NewWardsResponse.fromJson(Map<String, dynamic> json) =
+      _$NewWardsResponseImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'wards')
+  List<NewWardModel>? get wards;
+
+  /// Create a copy of NewWardsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NewWardsResponseImplCopyWith<_$NewWardsResponseImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+NewCityModel _$NewCityModelFromJson(Map<String, dynamic> json) {
+  return _NewCityModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NewCityModel {
+  @JsonKey(name: 'id')
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vnpost_province_code')
+  int? get vnpostProvinceCode => throw _privateConstructorUsedError;
+
+  /// Serializes this NewCityModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of NewCityModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $NewCityModelCopyWith<NewCityModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NewCityModelCopyWith<$Res> {
+  factory $NewCityModelCopyWith(
+          NewCityModel value, $Res Function(NewCityModel) then) =
+      _$NewCityModelCopyWithImpl<$Res, NewCityModel>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'vnpost_province_code') int? vnpostProvinceCode});
+}
+
+/// @nodoc
+class _$NewCityModelCopyWithImpl<$Res, $Val extends NewCityModel>
+    implements $NewCityModelCopyWith<$Res> {
+  _$NewCityModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of NewCityModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? vnpostProvinceCode = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vnpostProvinceCode: freezed == vnpostProvinceCode
+          ? _value.vnpostProvinceCode
+          : vnpostProvinceCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NewCityModelImplCopyWith<$Res>
+    implements $NewCityModelCopyWith<$Res> {
+  factory _$$NewCityModelImplCopyWith(
+          _$NewCityModelImpl value, $Res Function(_$NewCityModelImpl) then) =
+      __$$NewCityModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'vnpost_province_code') int? vnpostProvinceCode});
+}
+
+/// @nodoc
+class __$$NewCityModelImplCopyWithImpl<$Res>
+    extends _$NewCityModelCopyWithImpl<$Res, _$NewCityModelImpl>
+    implements _$$NewCityModelImplCopyWith<$Res> {
+  __$$NewCityModelImplCopyWithImpl(
+      _$NewCityModelImpl _value, $Res Function(_$NewCityModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NewCityModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? vnpostProvinceCode = freezed,
+  }) {
+    return _then(_$NewCityModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vnpostProvinceCode: freezed == vnpostProvinceCode
+          ? _value.vnpostProvinceCode
+          : vnpostProvinceCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NewCityModelImpl implements _NewCityModel {
+  const _$NewCityModelImpl(
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'vnpost_province_code') this.vnpostProvinceCode});
+
+  factory _$NewCityModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewCityModelImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'id')
+  final int? id;
+  @override
+  @JsonKey(name: 'name')
+  final String? name;
+  @override
+  @JsonKey(name: 'vnpost_province_code')
+  final int? vnpostProvinceCode;
+
+  @override
+  String toString() {
+    return 'NewCityModel(id: $id, name: $name, vnpostProvinceCode: $vnpostProvinceCode)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NewCityModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.vnpostProvinceCode, vnpostProvinceCode) ||
+                other.vnpostProvinceCode == vnpostProvinceCode));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, vnpostProvinceCode);
+
+  /// Create a copy of NewCityModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NewCityModelImplCopyWith<_$NewCityModelImpl> get copyWith =>
+      __$$NewCityModelImplCopyWithImpl<_$NewCityModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NewCityModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NewCityModel implements NewCityModel {
+  const factory _NewCityModel(
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'name') final String? name,
+      @JsonKey(name: 'vnpost_province_code')
+      final int? vnpostProvinceCode}) = _$NewCityModelImpl;
+
+  factory _NewCityModel.fromJson(Map<String, dynamic> json) =
+      _$NewCityModelImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'id')
+  int? get id;
+  @override
+  @JsonKey(name: 'name')
+  String? get name;
+  @override
+  @JsonKey(name: 'vnpost_province_code')
+  int? get vnpostProvinceCode;
+
+  /// Create a copy of NewCityModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NewCityModelImplCopyWith<_$NewCityModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+NewWardModel _$NewWardModelFromJson(Map<String, dynamic> json) {
+  return _NewWardModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NewWardModel {
+  @JsonKey(name: 'id')
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vnpost_commune_code')
+  int? get vnpostCommuneCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'city_id')
+  int? get cityId => throw _privateConstructorUsedError;
+
+  /// Serializes this NewWardModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of NewWardModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $NewWardModelCopyWith<NewWardModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NewWardModelCopyWith<$Res> {
+  factory $NewWardModelCopyWith(
+          NewWardModel value, $Res Function(NewWardModel) then) =
+      _$NewWardModelCopyWithImpl<$Res, NewWardModel>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'vnpost_commune_code') int? vnpostCommuneCode,
+      @JsonKey(name: 'city_id') int? cityId});
+}
+
+/// @nodoc
+class _$NewWardModelCopyWithImpl<$Res, $Val extends NewWardModel>
+    implements $NewWardModelCopyWith<$Res> {
+  _$NewWardModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of NewWardModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? vnpostCommuneCode = freezed,
+    Object? cityId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vnpostCommuneCode: freezed == vnpostCommuneCode
+          ? _value.vnpostCommuneCode
+          : vnpostCommuneCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cityId: freezed == cityId
+          ? _value.cityId
+          : cityId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NewWardModelImplCopyWith<$Res>
+    implements $NewWardModelCopyWith<$Res> {
+  factory _$$NewWardModelImplCopyWith(
+          _$NewWardModelImpl value, $Res Function(_$NewWardModelImpl) then) =
+      __$$NewWardModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'vnpost_commune_code') int? vnpostCommuneCode,
+      @JsonKey(name: 'city_id') int? cityId});
+}
+
+/// @nodoc
+class __$$NewWardModelImplCopyWithImpl<$Res>
+    extends _$NewWardModelCopyWithImpl<$Res, _$NewWardModelImpl>
+    implements _$$NewWardModelImplCopyWith<$Res> {
+  __$$NewWardModelImplCopyWithImpl(
+      _$NewWardModelImpl _value, $Res Function(_$NewWardModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NewWardModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? vnpostCommuneCode = freezed,
+    Object? cityId = freezed,
+  }) {
+    return _then(_$NewWardModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vnpostCommuneCode: freezed == vnpostCommuneCode
+          ? _value.vnpostCommuneCode
+          : vnpostCommuneCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cityId: freezed == cityId
+          ? _value.cityId
+          : cityId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NewWardModelImpl implements _NewWardModel {
+  const _$NewWardModelImpl(
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'vnpost_commune_code') this.vnpostCommuneCode,
+      @JsonKey(name: 'city_id') this.cityId});
+
+  factory _$NewWardModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewWardModelImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'id')
+  final int? id;
+  @override
+  @JsonKey(name: 'name')
+  final String? name;
+  @override
+  @JsonKey(name: 'vnpost_commune_code')
+  final int? vnpostCommuneCode;
+  @override
+  @JsonKey(name: 'city_id')
+  final int? cityId;
+
+  @override
+  String toString() {
+    return 'NewWardModel(id: $id, name: $name, vnpostCommuneCode: $vnpostCommuneCode, cityId: $cityId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NewWardModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.vnpostCommuneCode, vnpostCommuneCode) ||
+                other.vnpostCommuneCode == vnpostCommuneCode) &&
+            (identical(other.cityId, cityId) || other.cityId == cityId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, vnpostCommuneCode, cityId);
+
+  /// Create a copy of NewWardModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NewWardModelImplCopyWith<_$NewWardModelImpl> get copyWith =>
+      __$$NewWardModelImplCopyWithImpl<_$NewWardModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NewWardModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NewWardModel implements NewWardModel {
+  const factory _NewWardModel(
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'name') final String? name,
+      @JsonKey(name: 'vnpost_commune_code') final int? vnpostCommuneCode,
+      @JsonKey(name: 'city_id') final int? cityId}) = _$NewWardModelImpl;
+
+  factory _NewWardModel.fromJson(Map<String, dynamic> json) =
+      _$NewWardModelImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'id')
+  int? get id;
+  @override
+  @JsonKey(name: 'name')
+  String? get name;
+  @override
+  @JsonKey(name: 'vnpost_commune_code')
+  int? get vnpostCommuneCode;
+  @override
+  @JsonKey(name: 'city_id')
+  int? get cityId;
+
+  /// Create a copy of NewWardModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NewWardModelImplCopyWith<_$NewWardModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

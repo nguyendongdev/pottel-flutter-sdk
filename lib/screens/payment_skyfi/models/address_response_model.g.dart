@@ -124,3 +124,61 @@ Map<String, dynamic> _$$WardModelImplToJson(_$WardModelImpl instance) =>
       'name': instance.name,
       'district_id': instance.districtId,
     };
+
+_$NewCitiesResponseImpl _$$NewCitiesResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NewCitiesResponseImpl(
+      cities: (json['cities'] as List<dynamic>?)
+          ?.map((e) => NewCityModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$NewCitiesResponseImplToJson(
+        _$NewCitiesResponseImpl instance) =>
+    <String, dynamic>{
+      'cities': instance.cities,
+    };
+
+_$NewWardsResponseImpl _$$NewWardsResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NewWardsResponseImpl(
+      wards: (json['wards'] as List<dynamic>?)
+          ?.map((e) => NewWardModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$NewWardsResponseImplToJson(
+        _$NewWardsResponseImpl instance) =>
+    <String, dynamic>{
+      'wards': instance.wards,
+    };
+
+_$NewCityModelImpl _$$NewCityModelImplFromJson(Map<String, dynamic> json) =>
+    _$NewCityModelImpl(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      vnpostProvinceCode: (json['vnpost_province_code'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$$NewCityModelImplToJson(_$NewCityModelImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'vnpost_province_code': instance.vnpostProvinceCode,
+    };
+
+_$NewWardModelImpl _$$NewWardModelImplFromJson(Map<String, dynamic> json) =>
+    _$NewWardModelImpl(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      vnpostCommuneCode: (json['vnpost_commune_code'] as num?)?.toInt(),
+      cityId: (json['city_id'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$$NewWardModelImplToJson(_$NewWardModelImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'vnpost_commune_code': instance.vnpostCommuneCode,
+      'city_id': instance.cityId,
+    };

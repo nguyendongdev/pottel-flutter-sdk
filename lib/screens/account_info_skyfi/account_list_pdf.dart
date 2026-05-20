@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/text_styles.dart';
-import 'package:skyfi_sdk/screens/account_info_skyfi/widgets/menu_item.dart';
-import 'package:skyfi_sdk/themes/colors.dart' as AppColors;
+import 'package:pottel_sdk/core/constants/text_styles.dart';
+import 'package:pottel_sdk/screens/account_info_skyfi/widgets/menu_item.dart';
+import 'package:pottel_sdk/themes/colors.dart' as AppColors;
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class ItemPdf {

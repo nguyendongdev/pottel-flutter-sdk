@@ -23,7 +23,7 @@ final selectedHistoryTabProvider =
 );
 
 typedef _$SelectedHistoryTab = AutoDisposeNotifier<HistoryTab>;
-String _$topupHistoryHash() => r'e68a7af6cdb79afb159799b6653f0da20d630a83';
+String _$topupHistoryHash() => r'2d30448309c160a124cf99f190f94e0dfd659a9f';
 
 /// See also [TopupHistory].
 @ProviderFor(TopupHistory)
@@ -38,7 +38,7 @@ final topupHistoryProvider =
 );
 
 typedef _$TopupHistory = AutoDisposeNotifier<List<HistoryItem>>;
-String _$serviceHistoryHash() => r'c8a8af5812b9de7af2118718df24f736ba640387';
+String _$serviceHistoryHash() => r'3f94dcc7eb7f82cfef328e91179664d370c87626';
 
 /// See also [ServiceHistory].
 @ProviderFor(ServiceHistory)

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/screens/payment_skyfi/provider/address_provider.dart';
-import 'package:skyfi_sdk/screens/payment_skyfi/provider/payment_order_provider.dart';
-import 'package:skyfi_sdk/screens/payment_skyfi/widgets/coupon_code_input.dart';
+import 'package:pottel_sdk/screens/payment_skyfi/provider/address_provider.dart';
+import 'package:pottel_sdk/screens/payment_skyfi/provider/payment_order_provider.dart';
+import 'package:pottel_sdk/screens/payment_skyfi/widgets/coupon_code_input.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -26,7 +26,6 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
     final modeUI = useState<String>('ALL');
     final totalAmountCart = ref.watch(paymentOrderProvider).totalAmount;
     final totalFee = useState<int>(0);
-    final discountAmount = useState<int>(0);
 
     useEffect(() {
       if (items.isNotEmpty) {
@@ -63,6 +62,10 @@ class PaymentSkyfiScreen extends HookConsumerWidget {
           onPressed: () {
             ref.read(paymentOrderProvider.notifier).resetOrder();
             ref.read(addressSelectionProvider.notifier).reset();
+            ref
+                .read(addressModeStateProvider.notifier)
+                .setMode(AddressMode.twoLevel);
+            ref.read(addressStepProvider.notifier).setStep(0);
             // reset shipping amount
             ref.read(paymentOrderProvider.notifier).changeShippingAmount(0);
             ref.read(paymentOrderProvider.notifier).changeDiscountAmount(0);

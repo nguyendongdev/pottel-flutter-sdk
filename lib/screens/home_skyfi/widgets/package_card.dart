@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:skyfi_sdk/screens/home_skyfi/models/outstanding_pakage.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:pottel_sdk/screens/home_skyfi/models/outstanding_pakage.dart';
+import 'package:pottel_sdk/utilities/common.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
@@ -62,7 +62,7 @@ class PackageCard extends StatelessWidget {
                                 children: [
                                   const Icon(
                                     Icons.local_fire_department,
-                                    color: AppColors.red,
+                                    color: AppColors.primary,
                                     size: 24,
                                   ),
                                   const SizedBox(width: AppSpacing.xs),
@@ -100,7 +100,7 @@ class PackageCard extends StatelessWidget {
                                 Container(
                                   padding: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
-                                    color: AppColors.red,
+                                    color: AppColors.primary,
                                     borderRadius:
                                         BorderRadius.circular(AppSpacing.xs),
                                   ),
@@ -108,7 +108,7 @@ class PackageCard extends StatelessWidget {
                                     'assets/icons/dashboard-speed.svg',
                                     width: 18,
                                     height: 18,
-                                    package: 'skyfi_sdk',
+                                    package: 'pottel_sdk',
                                   ),
                                 ),
                                 const SizedBox(width: AppSpacing.sm),
@@ -127,7 +127,7 @@ class PackageCard extends StatelessWidget {
                                   Container(
                                     padding: const EdgeInsets.all(2),
                                     decoration: BoxDecoration(
-                                      color: AppColors.red,
+                                      color: AppColors.primary,
                                       borderRadius:
                                           BorderRadius.circular(AppSpacing.xs),
                                     ),
@@ -135,7 +135,7 @@ class PackageCard extends StatelessWidget {
                                       'assets/icons/phone-home.svg',
                                       width: 18,
                                       height: 18,
-                                      package: 'skyfi_sdk',
+                                      package: 'pottel_sdk',
                                     ),
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
@@ -155,7 +155,7 @@ class PackageCard extends StatelessWidget {
                                   Container(
                                     padding: const EdgeInsets.all(2),
                                     decoration: BoxDecoration(
-                                      color: AppColors.red,
+                                      color: AppColors.primary,
                                       borderRadius:
                                           BorderRadius.circular(AppSpacing.xs),
                                     ),
@@ -163,7 +163,7 @@ class PackageCard extends StatelessWidget {
                                       'assets/icons/message-home.svg',
                                       width: 18,
                                       height: 18,
-                                      package: 'skyfi_sdk',
+                                      package: 'pottel_sdk',
                                     ),
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
@@ -258,7 +258,7 @@ class PackageCard extends StatelessWidget {
                         'assets/icons/tag_sale.svg',
                         width: 33,
                         height: 33,
-                        package: 'skyfi_sdk',
+                        package: 'pottel_sdk',
                       ),
                       // center the text
                       RotationTransition(

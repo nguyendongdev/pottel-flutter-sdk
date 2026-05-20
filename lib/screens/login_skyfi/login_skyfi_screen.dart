@@ -6,13 +6,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/core/constants/spacing.dart';
-import 'package:skyfi_sdk/routers/routers.dart';
-import 'package:skyfi_sdk/screens/login_skyfi/repository/auth_service.dart';
-import 'package:skyfi_sdk/screens/login_skyfi/repository/login_repository.dart';
-import 'package:skyfi_sdk/screens/login_skyfi/widgets/popup_input_pass.dart';
-import 'package:skyfi_sdk/screens/login_skyfi/widgets/popup_setting_pass.dart';
-import 'package:skyfi_sdk/utilities/modal.dart';
+import 'package:pottel_sdk/core/constants/spacing.dart';
+import 'package:pottel_sdk/routers/routers.dart';
+import 'package:pottel_sdk/screens/login_skyfi/repository/auth_service.dart';
+import 'package:pottel_sdk/screens/login_skyfi/repository/login_repository.dart';
+import 'package:pottel_sdk/screens/login_skyfi/widgets/popup_input_pass.dart';
+import 'package:pottel_sdk/screens/login_skyfi/widgets/popup_setting_pass.dart';
+import 'package:pottel_sdk/utilities/modal.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
@@ -532,7 +532,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
                 width: 118,
                 height: 36,
                 fit: BoxFit.contain,
-                package: 'skyfi_sdk',
+                package: 'pottel_sdk',
               ),
               const SizedBox(height: 16),
               Text(

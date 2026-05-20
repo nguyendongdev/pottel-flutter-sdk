@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:skyfi_sdk/utilities/common.dart';
+import 'package:pottel_sdk/utilities/common.dart';
 
 import '../../routers/routers.dart';
 

@@ -32,7 +32,7 @@ class EmptyCart extends StatelessWidget {
             'assets/images/empty_cart.png',
             width: 200,
             height: 200,
-            package: 'skyfi_sdk',
+            package: 'pottel_sdk',
           ),
           const SizedBox(height: AppSpacing.xl),
           Text(
