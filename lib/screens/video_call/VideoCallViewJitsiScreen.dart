@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
-import 'package:pottel_sdk/skyfi_sdk_config.dart';
+import 'package:pottel_sdk/pottel_sdk_config.dart';
 import 'package:pottel_sdk/utilities/common.dart';
 import 'package:pottel_sdk/l10n/localization_extension.dart';
 
@@ -36,7 +36,7 @@ class _VideoCallViewJitsiScreenState extends State<VideoCallViewJitsiScreen> {
   String tellerId = '';
   Timer? timerClear;
   // String linkVideoCall = dotenv.get('JITSI_MEET_URL');
-  String linkVideoCall = SkyfiSdkConfig.baseUrlJitsi;
+  String linkVideoCall = PottelSdkConfig.baseUrlJitsi;
   late ParamTime paramTime = ParamTime();
   ParamTime? paramTimeSave;
 

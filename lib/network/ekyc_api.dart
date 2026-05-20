@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:pottel_sdk/skyfi_sdk_config.dart';
+import 'package:pottel_sdk/pottel_sdk_config.dart';
 
 import 'intercepters/dio_intercepter.dart';
 
 class EKYC_API {
   late final Dio _dio;
   EKYC_API() : _dio = Dio() {
-    _dio.options.baseUrl = SkyfiSdkConfig.baseUrlEKYC;
+    _dio.options.baseUrl = PottelSdkConfig.baseUrlEKYC;
     _dio.interceptors.add(DioInterceptor());
     _dio.options.connectTimeout = const Duration(seconds: 60);
     _dio.options.receiveTimeout = const Duration(seconds: 40);

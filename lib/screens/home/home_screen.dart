@@ -43,7 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 child: const Text('SDK SkyFi Home')),
             ElevatedButton(
                 onPressed: () {
-                   Common.openRegisSkyFiApp();
+                   Common.openRegisPottelApp();
                 },
                 child: const Text('SDK SkyFi DKTT')),
             ElevatedButton(

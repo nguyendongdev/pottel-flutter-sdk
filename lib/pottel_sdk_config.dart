@@ -1,7 +1,7 @@
-import 'package:pottel_sdk/skyfi_sdk.dart';
+import 'package:pottel_sdk/pottel_sdk.dart';
 
-class SkyfiSdkConfig {
-  final SkyfiEnv environment;
+class PottelSdkConfig {
+  final PottelEnv environment;
 
   static const String _devBaseUrl = 'https://bss-api.pottel.dev/api';
   static const String _devBaseUrlEKYC =
@@ -11,14 +11,14 @@ class SkyfiSdkConfig {
   static const String _devTokenEKYC =
       'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwMDAxNzg4MywiaWF0IjoxNzAwMDE3ODgzfQ.F_nnc-SaoTSWYgNWhCxqikDna2TrMmfKunNPhCVQIKY';
 
-  SkyfiSdkConfig({this.environment = SkyfiEnv.dev}) {
-    if (environment == SkyfiEnv.dev) {
+  PottelSdkConfig({this.environment = PottelEnv.dev}) {
+    if (environment == PottelEnv.dev) {
       _baseUrl = _devBaseUrl;
       _baseUrlEKYC = _devBaseUrlEKYC;
       _baseUrlSocket = _devBaseUrlSocket;
       _baseUrlJitsi = _devBaseUrlJitsi;
       _tokenEKYC = _devTokenEKYC;
-    } else if (environment == SkyfiEnv.prod) {
+    } else if (environment == PottelEnv.prod) {
       _baseUrl = _toProdUrl(_devBaseUrl);
       _baseUrlEKYC = _toProdUrl(_devBaseUrlEKYC);
       _baseUrlSocket = _toProdUrl(_devBaseUrlSocket);
@@ -45,3 +45,6 @@ class SkyfiSdkConfig {
   static String get baseUrlJitsi => _baseUrlJitsi;
   static String get tokenEKYC => _tokenEKYC;
 }
+
+@Deprecated('Use PottelSdkConfig instead')
+typedef SkyfiSdkConfig = PottelSdkConfig;

@@ -15,7 +15,7 @@ import '../core/widgets/PopupCenterCard.dart';
 import '../core/widgets/Popup_notice.dart';
 import '../core/widgets/global_loading.dart';
 import '../routers/routers.dart';
-import '../skyfi_sdk.dart';
+import '../pottel_sdk.dart';
 // import '../network/store.dart';
 
 class Common {

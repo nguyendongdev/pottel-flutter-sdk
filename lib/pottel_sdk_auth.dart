@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
-import 'package:pottel_sdk/skyfi_sdk_config.dart';
+import 'package:pottel_sdk/pottel_sdk_config.dart';
 
-class SkyfiSdkAuth {
+class PottelSdkAuth {
   loginWithPhone(String phone) async {
     try {
       final response = await Dio().post(
-          '${SkyfiSdkConfig.baseUrl}/bss/app/login-with-access-token',
+          '${PottelSdkConfig.baseUrl}/bss/app/login-with-access-token',
           data: {
             'msisdn': phone,
             'code': encodeHmacSHA256(phone, 'c2t5ZmkyMDI1'),
@@ -27,3 +27,6 @@ class SkyfiSdkAuth {
     return digest.toString();
   }
 }
+
+@Deprecated('Use PottelSdkAuth instead')
+typedef SkyfiSdkAuth = PottelSdkAuth;

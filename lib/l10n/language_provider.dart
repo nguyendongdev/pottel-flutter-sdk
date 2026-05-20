@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pottel_sdk/skyfi_sdk.dart';
+import 'package:pottel_sdk/pottel_sdk.dart';
 
 // Language provider
 final languageProvider = StateNotifierProvider<LanguageNotifier, Locale>((ref) {

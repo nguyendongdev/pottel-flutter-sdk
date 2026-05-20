@@ -1,9 +1,9 @@
-import 'package:pottel_sdk/skyfi_sdk_config.dart';
+import 'package:pottel_sdk/pottel_sdk_config.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketService {
   late IO.Socket? _io;
-  final String baseUrl = SkyfiSdkConfig.baseUrlSocket;
+  final String baseUrl = PottelSdkConfig.baseUrlSocket;
 
   connect() {
     _io =
