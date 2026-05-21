@@ -823,11 +823,11 @@ const Map<String, String> viStrings = {
   'delivery_address_required': 'Vui lòng nhập địa chỉ giao hàng',
   'address_required': 'Địa chỉ là bắt buộc',
   'terms_required_skyfi':
-      'Bạn phải đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi',
+      'Bạn phải đồng ý với Điều khoản & Điều kiện giao dịch chung của Pottel',
   'terms_required_esim': 'Bạn phải đồng ý với Điều kiện & Điều khoản',
   'terms_required_general': 'Bạn phải đồng ý với Điều kiền & Điều khoản',
   'terms_required_esim_travel':
-      'Tôi đồng ý với Điều khoản & Điều kiện giao dịch chung của SkyFi',
+      'Tôi đồng ý với Điều khoản & Điều kiện giao dịch chung của Pottel',
 
   // Bottom Action Bar
   'device_compatible_esim':

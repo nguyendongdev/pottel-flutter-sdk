@@ -41,7 +41,7 @@ class CartItemWidget extends HookConsumerWidget {
     final isTravel = item.simType == 'ESIM_TRAVEL';
     final uri = isTravel
         ? 'assets/images/global_flag.png'
-        : 'assets/images/sim_logo.png';
+        : 'assets/images/sim_logo_pottel.png';
     final quantity = useState(1);
 
     final textController =

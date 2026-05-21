@@ -33,15 +33,15 @@ class PreviewCartItem extends ConsumerWidget {
       child: Row(
         children: [
           // image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.network(
-              item.icon,
-              width: 40,
-              height: 40,
-              fit: BoxFit.cover,
-            ),
-          ),
+          // ClipRRect(
+          //   borderRadius: BorderRadius.circular(20),
+          //   child: Image.network(
+          //     item.icon,
+          //     width: 40,
+          //     height: 40,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: item.simType == 'ESIM_TRAVEL'
