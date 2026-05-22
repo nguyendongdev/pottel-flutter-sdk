@@ -406,7 +406,7 @@ class PackageDetailSkyfiScreen extends HookConsumerWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFFE60A32),
+                        color: AppColors.primary,
                       ),
                     ),
                     Text(

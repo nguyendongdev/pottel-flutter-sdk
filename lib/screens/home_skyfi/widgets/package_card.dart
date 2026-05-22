@@ -139,13 +139,15 @@ class PackageCard extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
-                                  Text(
-                                    context.l10n.translate('call_minutes').replaceAll('{0}', package.freeCallMinute.toString()),
-                                    style: AppTextStyles.button.copyWith(
-                                      color: AppColors.text,
+                                  Expanded(
+                                    child: Text(
+                                      context.l10n.translate('call_minutes').replaceAll('{0}', package.freeCallMinute.toString()),
+                                      style: AppTextStyles.button.copyWith(
+                                        color: AppColors.text,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                  const SizedBox(width: AppSpacing.sm),
                                 ],
                               ),
                             const SizedBox(height: AppSpacing.sm),
@@ -167,13 +169,15 @@ class PackageCard extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
-                                  Text(
-                                    context.l10n.translate('sms_messages').replaceAll('{0}', package.freeSms.toString()),
-                                    style: AppTextStyles.button.copyWith(
-                                      color: AppColors.text,
+                                  Expanded(
+                                    child: Text(
+                                      context.l10n.translate('sms_messages').replaceAll('{0}', package.freeSms.toString()),
+                                      style: AppTextStyles.button.copyWith(
+                                        color: AppColors.text,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                  const SizedBox(width: AppSpacing.sm),
                                 ],
                               ),
                           ],
@@ -204,7 +208,7 @@ class PackageCard extends StatelessWidget {
                                 '${Common.formatCurrency(package.salePrice.toString())} VND',
                                 style: AppTextStyles.title.copyWith(
                                   color: package.salePrice != package.price
-                                      ? AppColors.red
+                                      ? AppColors.primary
                                       : AppColors.text,
                                 ),
                               ),

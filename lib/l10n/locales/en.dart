@@ -49,7 +49,7 @@ const Map<String, String> enStrings = {
   'vnd': 'VND',
 
   // Tab sim data
-  'do_you_have_skyfi_sim': 'Do you have a SkyFi SIM yet?',
+  'do_you_have_skyfi_sim': 'Do you have a Pottel SIM yet?',
   'choose_buy_sim_description':
       'Choose \'Buy SIM\' now to own a beautiful number and attractive packages',
   'activate_sim': 'Activate SIM',
@@ -73,7 +73,7 @@ const Map<String, String> enStrings = {
   'good_night': 'Good night',
   'hello': 'Hello',
 
-  // Sim Data SkyFi Screen
+  // Sim Data Pottel Screen
   'choose_number_and_package': 'Choose number and package',
   'number_for_you': 'Number for you',
   'choose_another_number': 'Choose another',
@@ -105,7 +105,7 @@ const Map<String, String> enStrings = {
       '!!! Sorry, the number you are looking for is currently unavailable. You might like these numbers:',
   'confirm': 'Confirm',
 
-  // eSIM Travel SkyFi Screens
+  // eSIM Travel Pottel Screens
   'buy_esim_travel': 'Buy eSIM Travel',
   'countries_tab': 'Countries',
   'regions': 'Regions',
@@ -168,7 +168,7 @@ const Map<String, String> enStrings = {
   'search_by_region': 'Search by region',
   'search_global': 'Search global',
 
-  // List Package SkyFi Screen
+  // List Package Pottel Screen
   'package_list': 'Package List',
   'monthly_package': 'Monthly Package',
   'daily_package_tab': 'Daily Package',
@@ -294,7 +294,7 @@ const Map<String, String> enStrings = {
   'mb_unit': 'MB',
   'day_count': 'day',
 
-  // DKTT SkyFi (eKYC/SIM Registration) Screens
+  // DKTT Pottel (eKYC/SIM Registration) Screens
 
   // General
   'view_document': 'View Document',
@@ -433,7 +433,7 @@ const Map<String, String> enStrings = {
   'video_call_requirement':
       'According to regulations of the Ministry of Information and Communications, to complete the registration/update of subscriber information procedures, please make a Video call with an operator.',
   'multiple_subscriber_warning':
-      'Note: The document you are using to Register/Update subscriber information is named for 2 or more SkyFi subscribers. Please choose 1 of the following 2 cases:',
+      'Note: The document you are using to Register/Update subscriber information is named for 2 or more Pottel subscribers. Please choose 1 of the following 2 cases:',
   'case_1_instruction':
       'Select 1 phone number you are using, press "Send OTP" button',
   'case_2_instruction':
@@ -441,14 +441,14 @@ const Map<String, String> enStrings = {
   'subscriber_continuation_message':
       'Phone number ... is proceeding to the call center step. You can go directly to the call center step or start over from the document photo step',
   'confirm_no_skyfi_numbers':
-      'You confirm NOT TO USE any SkyFi subscriber numbers in the list. If you choose "Agree", the suggested phone numbers will be added to the list that needs to be updated with subscriber information.',
+      'You confirm NOT TO USE any Pottel subscriber numbers in the list. If you choose "Agree", the suggested phone numbers will be added to the list that needs to be updated with subscriber information.',
   'otp_instruction': 'Please enter the OTP code sent',
   'otp_verification_title':
       'OTP verification for registration/update information',
   'case_1': 'Case 1: ',
   'case_2': 'Case 2: ',
 
-  // Additional DKTT SkyFi Translations
+  // Additional DKTT Pottel Translations
   // Contract and Document Processing
   'contract_info_error_vi': 'Error viewing contract information',
 
@@ -584,11 +584,11 @@ const Map<String, String> enStrings = {
   'subscription_registration_info':
       'Subscriber information registration on the system will only be performed after providing complete documents and information as required by law.',
   'dispute_resolution_agreement':
-      'During the waiting period and after completing information registration on the system, if any complaints or disputes arise related to the above subscriber number, I agree to let SkyFi reclaim the subscriber number to resolve complaints, and I commit to cooperate with SkyFi to resolve and take full responsibility before the law.',
+      'During the waiting period and after completing information registration on the system, if any complaints or disputes arise related to the above subscriber number, I agree to let Pottel reclaim the subscriber number to resolve complaints, and I commit to cooperate with Pottel to resolve and take full responsibility before the law.',
   'auto_fill_info_notice':
       'Your information and signature will be automatically filled in the Subscriber Information Confirmation Form.# Consent to process and protect personal data',
   'agree_terms_conditions':
-      'I have read, understood, and agree to let SkyFi process my personal data according to the# Privacy Policy',
+      'I have read, understood, and agree to let Pottel process my personal data according to the# Privacy Policy',
   'sign_and_check_contract':
       'Please sign your name at the bottom of the contract and check the contract information ',
   'here_link': 'here',
@@ -604,15 +604,15 @@ const Map<String, String> enStrings = {
   'successful_connection': 'Successfully connected to {0}',
   'call_terminated_by_admin': 'Call terminated',
 
-  // History Mobile SkyFi Screen
+  // History Mobile Pottel Screen
   'mobile_history': 'Mobile History',
   'topup_tab': 'Top-up',
   'service_tab': 'Service',
   'call_tab': 'Calls',
   'history_header': 'History',
 
-  // Login SkyFi Screen
-  'welcome_to_skyfi': 'Welcome to SkyFi',
+  // Login Pottel Screen
+  'welcome_to_skyfi': 'Welcome to Pottel',
   'please_login_to_explore': 'Please login to start exploring',
   'phone_number_login': 'Phone number',
   'login_button': 'Login',
@@ -635,7 +635,7 @@ const Map<String, String> enStrings = {
   // OTP Dialog
   'confirm_otp_title': 'Confirm OTP',
   'otp_sent_message':
-      'SkyFi has sent a verification OTP code to your phone number {0}.',
+      'Pottel has sent a verification OTP code to your phone number {0}.',
   'enter_otp_to_verify_login': 'Enter OTP code to verify',
   'resend_otp_countdown': 'Resend OTP ({0})',
   'resend_otp': 'Resend OTP',
@@ -832,11 +832,11 @@ const Map<String, String> enStrings = {
   'ward_required': 'Please select ward',
   'delivery_address_required': 'Please enter delivery address',
   'address_required': 'Address is required',
-  'terms_required_skyfi': 'You must agree to the Terms & Conditions of SkyFi',
+  'terms_required_skyfi': 'You must agree to the Terms & Conditions of Pottel',
   'terms_required_esim': 'You must agree to the Terms & Conditions',
   'terms_required_general': 'You must agree to the Terms & Conditions',
   'terms_required_esim_travel':
-      'I agree to the general Terms & Conditions of SkyFi',
+      'I agree to the general Terms & Conditions of Pottel',
 
   // Bottom Action Bar
   'device_compatible_esim':
@@ -872,7 +872,7 @@ const Map<String, String> enStrings = {
   'register_update_info': 'Register/Update Information',
   'connecting': 'Connecting...',
   'registration_success':
-      'SkyFi has successfully received your registration/update request! Thank you for trusting and choosing SkyFi services!',
+      'Pottel has successfully received your registration/update request! Thank you for trusting and choosing Pottel services!',
   'call_ended_message': 'Call ended',
   'video_call_ended': 'Call ended',
   'no_free_teller_message':
@@ -892,16 +892,16 @@ const Map<String, String> enStrings = {
   'close_button': 'Close',
   'ok_button': 'OK',
   'modal_required_service_condition':
-      'This is a mandatory condition to use SkyFi services.',
+      'This is a mandatory condition to use Pottel services.',
   'please_agree_terms_conditions': 'Please agree to the terms and conditions.',
   'agree_terms_conditions_skyfi':
-      'I agree to the terms and conditions of SkyFi',
+      'I agree to the terms and conditions of Pottel',
   'agree_button': 'Agree',
   'terms_conditions_title': 'Terms & Conditions',
 
   //confirm_not_using_skyfi_numbers
   'confirm_not_using_skyfi_numbers':
-      'You confirm that you do not use any SkyFi numbers in the list. If you select "Agree", the suggested subscriber numbers will be added to the list that needs to be updated.',
+      'You confirm that you do not use any Pottel numbers in the list. If you select "Agree", the suggested subscriber numbers will be added to the list that needs to be updated.',
 
   'update': 'Update',
   'supported_countries': 'Supported Countries',

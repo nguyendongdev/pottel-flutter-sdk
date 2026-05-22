@@ -19,7 +19,6 @@ import '../models/outstanding_pakage.dart';
 import '../models/user_info.dart';
 import '../provider/login_provider.dart';
 import '../provider/user_info_provider.dart';
-import 'banner_home_card.dart';
 import 'data_usage_card.dart';
 import 'feature_card.dart';
 import 'package_card.dart';
@@ -133,13 +132,18 @@ class TabSimData extends HookConsumerWidget {
                                         children: [
                                           Row(
                                             children: [
-                                              GestureDetector(
-                                                onTap: () {
+                                              IconButton(
+                                                onPressed: () {
                                                   Navigator.of(context,
                                                           rootNavigator: true)
                                                       .pop();
                                                 },
-                                                child: const Icon(
+                                                padding: EdgeInsets.zero,
+                                                constraints: const BoxConstraints(
+                                                  minWidth: 44,
+                                                  minHeight: 44,
+                                                ),
+                                                icon: const Icon(
                                                   Icons.arrow_back_ios_new,
                                                   color: AppColors.white,
                                                   size: 25,
@@ -203,7 +207,7 @@ class TabSimData extends HookConsumerWidget {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(height: isLogin ? 60 : 120),
+                              SizedBox(height: isLogin ? 60 : 140),
                               if (isLogin)
                                 Column(
                                   children: [
@@ -218,13 +222,18 @@ class TabSimData extends HookConsumerWidget {
                                           const SizedBox(height: AppSpacing.sm),
                                           Row(
                                             children: [
-                                              GestureDetector(
-                                                onTap: () {
+                                              IconButton(
+                                                onPressed: () {
                                                   Navigator.of(context,
                                                           rootNavigator: true)
                                                       .pop();
                                                 },
-                                                child: const Icon(
+                                                padding: EdgeInsets.zero,
+                                                constraints: const BoxConstraints(
+                                                  minWidth: 44,
+                                                  minHeight: 44,
+                                                ),
+                                                icon: const Icon(
                                                   Icons.arrow_back_ios_new,
                                                   color: AppColors.white,
                                                   size: 25,
@@ -460,12 +469,10 @@ class TabSimData extends HookConsumerWidget {
                               ),
 
                               const SizedBox(height: AppSpacing.md),
-                              // center the banner
-                              const Center(
-                                child: BannerHomeCard(),
-                              ),
-                              // const DataAddonCard(),
-                              // const SizedBox(height: AppSpacing.xl),
+                              // TODO: re-enable banner when API is ready
+                              // const Center(
+                              //   child: BannerHomeCard(),
+                              // ),
                               const SizedBox(height: AppSpacing.xl),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -507,7 +514,7 @@ class TabSimData extends HookConsumerWidget {
                               ),
                               const SizedBox(height: AppSpacing.sm),
                               SizedBox(
-                                height: 230,
+                                height: 270,
                                 child: ListView.separated(
                                   shrinkWrap: true,
                                   padding: const EdgeInsets.symmetric(

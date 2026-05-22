@@ -630,7 +630,7 @@ class _DataPackage extends StatelessWidget {
                   '${Common.formatCurrency(price)} VND',
                   style: AppTextStyles.heading.copyWith(
                     color:
-                        originalPrice != null ? AppColors.red : AppColors.text,
+                        originalPrice != null ? AppColors.primary : AppColors.text,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.xs),

@@ -49,7 +49,7 @@ const Map<String, String> viStrings = {
   'vnd': 'VND',
 
   // Tab sim data
-  'do_you_have_skyfi_sim': 'Bạn đã có SIM SkyFi chưa?',
+  'do_you_have_skyfi_sim': 'Bạn đã có SIM Pottel chưa?',
   'choose_buy_sim_description':
       'Chọn ngay \'Mua SIM\' để sở hữu số đẹp và gói cước hấp dẫn',
   'activate_sim': 'Kích hoạt SIM',
@@ -73,7 +73,7 @@ const Map<String, String> viStrings = {
   'good_night': 'Chúc ngủ ngon',
   'hello': 'Xin chào',
 
-  // Sim Data SkyFi Screen
+  // Sim Data Pottel Screen
   'choose_number_and_package': 'Chọn số và gói cước',
   'number_for_you': 'Số dành cho bạn',
   'choose_another_number': 'Chọn số khác',
@@ -105,7 +105,7 @@ const Map<String, String> viStrings = {
       '!!! Rất tiếc, số bạn đang tìm hiện không còn. Có thể bạn sẽ thích những số sau:',
   'confirm': 'Xác nhận',
 
-  // eSIM Travel SkyFi Screens
+  // eSIM Travel Pottel Screens
   'buy_esim_travel': 'Mua eSIM du lịch',
   'countries_tab': 'Các quốc gia',
   'regions': 'Các khu vực',
@@ -168,7 +168,7 @@ const Map<String, String> viStrings = {
   'search_by_region': 'Tìm kiếm theo khu vực',
   'search_global': 'Tìm kiếm toàn cầu',
 
-  // List Package SkyFi Screen
+  // List Package Pottel Screen
   'package_list': 'Danh sách gói cước',
   'monthly_package': 'Gói tháng',
   'daily_package_tab': 'Gói ngày',
@@ -290,7 +290,7 @@ const Map<String, String> viStrings = {
   'mb_unit': 'MB',
   'day_count': 'ngày',
 
-  // DKTT SkyFi (eKYC/SIM Registration) Screens
+  // DKTT Pottel (eKYC/SIM Registration) Screens
 
   // General
   'view_document': 'Xem phiếu',
@@ -428,7 +428,7 @@ const Map<String, String> viStrings = {
   'video_call_requirement':
       'Theo quy định của Bộ Thông tin truyền thông, để hoàn tất thủ tục đăng ký/cập nhật thông tin thuê bao, Bạn vui lòng thực hiện cuộc Video với tổng đài viên.',
   'multiple_subscriber_warning':
-      'Lưu ý: Giấy tờ Bạn đang sử dụng để Đăng ký/Cập nhật thông tin thuê bao đang đứng tên cho từ 02 số thuê bao SkyFi trở lên. Vui lòng chọn 1 trong 2 trường hợp sau:',
+      'Lưu ý: Giấy tờ Bạn đang sử dụng để Đăng ký/Cập nhật thông tin thuê bao đang đứng tên cho từ 02 số thuê bao Pottel trở lên. Vui lòng chọn 1 trong 2 trường hợp sau:',
   'case_1_instruction':
       'Chọn 1 số thuê bao Bạn đang sử dụng, bấm nút "Gửi OTP"',
   'case_2_instruction':
@@ -436,13 +436,13 @@ const Map<String, String> viStrings = {
   'subscriber_continuation_message':
       'Số thuê bao ... đang tiến hành đến bước gọi tổng đài. Bạn có thể đi thẳng tới bước gọi tổng đài hoặc thực hiện lại từ đầu từ bước chụp ảnh giấy tờ',
   'confirm_no_skyfi_numbers':
-      'Bạn xác nhận KHÔNG SỬ DỤNG Số TB SkyFi nào trong danh sách. Nếu chọn "Đồng ý" các số thuê bao gợi ý sẽ được đưa vào danh sách cần cập nhật lại TTTB.',
+      'Bạn xác nhận KHÔNG SỬ DỤNG Số TB Pottel nào trong danh sách. Nếu chọn "Đồng ý" các số thuê bao gợi ý sẽ được đưa vào danh sách cần cập nhật lại TTTB.',
   'otp_instruction': 'Vui lòng nhập mã OTP được gửi',
   'otp_verification_title': 'Xác thực OTP đăng ký/ cập nhật thông tin',
   'case_1': 'Trường hợp 1: ',
   'case_2': 'Trường hợp 2: ',
 
-  // Additional DKTT SkyFi Translations
+  // Additional DKTT Pottel Translations
   // Contract and Document Processing
   'contract_info_error_vi': 'Lỗi xem thông tin hợp đồng',
 
@@ -572,11 +572,11 @@ const Map<String, String> viStrings = {
   'subscription_registration_info':
       'Việc đăng ký thông tin thuê bao trên hệ thống sẽ chỉ được thực hiện sau khi cung cấp đầy đủ các giấy tờ, thông tin theo quy định của pháp luật.',
   'dispute_resolution_agreement':
-      'Trong quá trình chờ và sau khi hoàn thành đăng ký thông tin trên hệ thống, nếu có xảy ra bất kỳ khiếu kiện, tranh chấp nào liên quan đến số thuê bao trên, tôi đồng ý để SkyFi thu hồi số thuê bao để giải quyết khiếu nại, đồng thời tôi cam kết sẽ phối hợp SkyFi để giải quyết và chịu hoàn toàn trách nhiệm trước pháp luật.',
+      'Trong quá trình chờ và sau khi hoàn thành đăng ký thông tin trên hệ thống, nếu có xảy ra bất kỳ khiếu kiện, tranh chấp nào liên quan đến số thuê bao trên, tôi đồng ý để Pottel thu hồi số thuê bao để giải quyết khiếu nại, đồng thời tôi cam kết sẽ phối hợp Pottel để giải quyết và chịu hoàn toàn trách nhiệm trước pháp luật.',
   'auto_fill_info_notice':
       'Các thông tin và chữ ký của bạn sẽ được tự đồng điền vào Phiếu xác nhận thông tin thuê bao.# Chấp thuận xử lý và bảo vệ dữ liệu cá nhân',
   'agree_terms_conditions':
-      'Tôi đã đọc hiểu và đồng ý để SkyFi xử lý dữ liệu cá nhân của tôi theo# Chính sách bảo mật ',
+      'Tôi đã đọc hiểu và đồng ý để Pottel xử lý dữ liệu cá nhân của tôi theo# Chính sách bảo mật ',
   'sign_and_check_contract':
       'Vui lòng ký tên của bạn tại phía dưới cùng của hợp đồng và kiểm tra lại thông tin hợp đồng ',
   'here_link': 'tại đây',
@@ -592,15 +592,15 @@ const Map<String, String> viStrings = {
   'successful_connection': 'Kết nối thành công {0}',
   'call_terminated_by_admin': 'Cuộc gọi đã được tắt',
   'record_video': 'Quay video',
-  // History Mobile SkyFi Screen
+  // History Mobile Pottel Screen
   'mobile_history': 'Lịch sử di động',
   'topup_tab': 'Nạp thẻ',
   'service_tab': 'Dịch vụ',
   'call_tab': 'Cuộc gọi',
   'history_header': 'Lịch sử',
 
-  // Login SkyFi Screen
-  'welcome_to_skyfi': 'Chào mừng đến với SkyFi',
+  // Login Pottel Screen
+  'welcome_to_skyfi': 'Chào mừng đến với Pottel',
   'please_login_to_explore': 'Vui lòng đăng nhập để bắt đầu khám phá',
   'phone_number_login': 'Số điện thoại',
   'login_button': 'Đăng nhập',
@@ -623,7 +623,7 @@ const Map<String, String> viStrings = {
   // OTP Dialog
   'confirm_otp_title': 'Xác nhận OTP',
   'otp_sent_message':
-      'SkyFi đã gửi một mã xác thực OTP đến số điện thoại {0} của Bạn.',
+      'Pottel đã gửi một mã xác thực OTP đến số điện thoại {0} của Bạn.',
   'enter_otp_to_verify_login': 'Nhập mã OTP để xác thực',
   'resend_otp_countdown': 'Gửi lại OTP ({0})',
   'resend_otp': 'Gửi lại OTP',
@@ -862,7 +862,7 @@ const Map<String, String> viStrings = {
   'register_update_info': 'Đăng ký/cập nhật TTTB',
   'connecting': 'Đang kết nối...',
   'registration_success':
-      'SkyFi đã tiếp nhận hồ sơ đăng ký/ cập nhật TTTB thành công! Cảm ơn Bạn vì đã tin tưởng và lựa chọn dịch vụ của SkyFi!',
+      'Pottel đã tiếp nhận hồ sơ đăng ký/ cập nhật TTTB thành công! Cảm ơn Bạn vì đã tin tưởng và lựa chọn dịch vụ của Pottel!',
   'call_ended_message': 'Cuộc gọi đã kết thúc',
   'video_call_ended': 'Cuộc gọi đã kết thúc',
   'no_free_teller_message':
@@ -882,17 +882,17 @@ const Map<String, String> viStrings = {
   'close_button': 'Đóng',
   'ok_button': 'OK',
   'modal_required_service_condition':
-      'Đây là điều kiện bắt buộc để sử dụng dịch vụ của SkyFi.',
+      'Đây là điều kiện bắt buộc để sử dụng dịch vụ của Pottel.',
   'please_agree_terms_conditions':
       'Vui lòng đồng ý với các điều khoản và điều kiện.',
   'agree_terms_conditions_skyfi':
-      'Tôi đồng ý với các điều khoản và điều kiện của SkyFi',
+      'Tôi đồng ý với các điều khoản và điều kiện của Pottel',
   'agree_button': 'Đồng ý',
   'terms_conditions_title': 'Điều khoản & Điều kiện',
 
   // Verify OTP Screen
   'confirm_not_using_skyfi_numbers':
-      'Bạn xác nhận KHÔNG SỬ DỤNG Số TB SkyFi nào trong danh sách. Nếu chọn "Đồng ý" các số thuê bao gợi ý sẽ được đưa vào danh sách cần cập nhật lại TTTB?',
+      'Bạn xác nhận KHÔNG SỬ DỤNG Số TB Pottel nào trong danh sách. Nếu chọn "Đồng ý" các số thuê bao gợi ý sẽ được đưa vào danh sách cần cập nhật lại TTTB?',
 
   'update': 'Cập nhật',
   'supported_countries': 'Quốc gia được hỗ trợ',

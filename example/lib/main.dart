@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
                         builder: (_) => PopScope(
                           canPop: false,
                           child: PottelSdk(
-                            phone: '0959999111',
+                            phone: '', //0959999111
                             env: PottelEnv.dev,
                             initialLocation: PottelRoute.home.path,
                             locale: AppLocale.vi,

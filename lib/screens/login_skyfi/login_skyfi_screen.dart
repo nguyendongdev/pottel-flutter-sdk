@@ -530,7 +530,7 @@ class LoginSkyFiScreen extends HookConsumerWidget {
               Image.asset(
                 'assets/images/logo_skyfi_red.png',
                 width: 118,
-                height: 36,
+                height: 70,
                 fit: BoxFit.contain,
                 package: 'pottel_sdk',
               ),
