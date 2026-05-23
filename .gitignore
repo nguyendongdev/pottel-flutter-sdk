@@ -38,3 +38,5 @@ build/
 
 # Local agent/runtime state
 .omx/
+.omc/
+settings.local.json
