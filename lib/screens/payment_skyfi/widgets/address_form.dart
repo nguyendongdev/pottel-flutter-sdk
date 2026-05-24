@@ -294,13 +294,13 @@ class AddressForm extends HookConsumerWidget {
         Row(
           children: [
             _buildModeToggle(
-              label: 'Hanh chinh 2 cap',
+              label: 'Hành chính 2 cap',
               isActive: addressMode == AddressMode.twoLevel,
               onTap: () => handleModeChange(AddressMode.twoLevel),
             ),
             const SizedBox(width: AppSpacing.sm),
             _buildModeToggle(
-              label: 'Hanh chinh 3 cap',
+              label: 'Hành chính 3 cap',
               isActive: addressMode == AddressMode.threeLevel,
               onTap: () => handleModeChange(AddressMode.threeLevel),
             ),

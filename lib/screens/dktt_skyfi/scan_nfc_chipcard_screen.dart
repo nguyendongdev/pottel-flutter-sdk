@@ -389,7 +389,7 @@ class _ScanNfcChipcardScreenState extends State<ScanNfcChipcardScreen>
     if (!Platform.isAndroid) return;
 
     try {
-      const platform = MethodChannel('nfc.skyfi.suppressor');
+      const platform = MethodChannel('nfc.pottel.suppressor');
       await platform.invokeMethod('suppressNfcDialog');
       _log.info("Android: Đã gọi suppress NFC dialog");
     } catch (e) {

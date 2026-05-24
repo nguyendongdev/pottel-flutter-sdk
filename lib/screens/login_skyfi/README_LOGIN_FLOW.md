@@ -39,7 +39,7 @@ lib/screens/login_skyfi/
 
 ### 1. Check User Password API
 ```bash
-curl --location 'https://bss-api.skyfi.network/api/bss/app/check-user-password' \
+curl --location 'https://bss-api.pottel.network/api/bss/app/check-user-password' \
 --header 'Content-Type: application/json' \
 --data '{"msisdn": "0772574115"}'
 ```
@@ -57,7 +57,7 @@ curl --location 'https://bss-api.skyfi.network/api/bss/app/check-user-password' 
 
 ### 2. Login With Password API
 ```bash
-curl --location 'https://bss-api.skyfi.network/api/bss/app/login-with-password' \
+curl --location 'https://bss-api.pottel.network/api/bss/app/login-with-password' \
 --header 'Content-Type: application/json' \
 --data '{"msisdn": "0772574115", "password": "123456"}'
 ```

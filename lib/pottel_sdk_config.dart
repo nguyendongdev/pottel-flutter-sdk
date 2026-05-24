@@ -6,8 +6,8 @@ class PottelSdkConfig {
   static const String _devBaseUrl = 'https://bss-api.pottel.dev/api';
   static const String _devBaseUrlEKYC =
       'https://ocr-api-dev.ekyc.solutions/api';
-  static const String _devBaseUrlSocket = 'https://socket.skyfi.network/';
-  static const String _devBaseUrlJitsi = 'https://meet.skyfi.network/';
+  static const String _devBaseUrlSocket = 'https://socket.pottel.network/';
+  static const String _devBaseUrlJitsi = 'https://meet.pottel.network/';
   static const String _devTokenEKYC =
       'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwMDAxNzg4MywiaWF0IjoxNzAwMDE3ODgzfQ.F_nnc-SaoTSWYgNWhCxqikDna2TrMmfKunNPhCVQIKY';
 

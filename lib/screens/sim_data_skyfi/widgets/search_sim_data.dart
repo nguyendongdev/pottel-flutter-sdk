@@ -160,7 +160,7 @@ class SearchSimData extends HookConsumerWidget {
                         style: AppTextStyles.body.copyWith(
                           fontWeight: FontWeight.w500,
                           color: originalPrice != null
-                              ? AppColors.red
+                              ? AppColors.primary
                               : AppColors.text,
                         ),
                       ),

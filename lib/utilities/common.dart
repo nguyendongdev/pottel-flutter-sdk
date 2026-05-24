@@ -267,12 +267,10 @@ class Common {
   }
 
   static Future<void> openSkyFiApp({AppLocale locale = AppLocale.vi}) async {
-    String deepLink = 'skyfi://home-skyfi-new?locale=${locale.code.toString()}';
+    String deepLink = 'pottel://home-skyfi-new?locale=${locale.code.toString()}';
     print('deeplink: $deepLink');
-    const String androidStoreUrl =
-        'https://play.google.com/store/apps/details?id=vn.galaxytelecom.skyfi';
-    const String iosStoreUrl =
-        'https://apps.apple.com/us/app/skyfi/id6747164804';
+    const String androidStoreUrl = '';
+    const String iosStoreUrl = '';
 
     try {
       // Try to launch the deeplink directly
@@ -300,12 +298,12 @@ class Common {
     AppLocale locale = AppLocale.vi,
   }) async {
     final String deepLink =
-        'skyfi://scan-barcode?locale=${locale.code.toString()}&from=SkyJoy';
+        'pottel://scan-barcode?locale=${locale.code.toString()}&from=SkyJoy';
     print('deeplink: $deepLink');
     const String androidStoreUrl =
-        'https://play.google.com/store/apps/details?id=vn.galaxytelecom.skyfi';
+        'https://play.google.com/store/apps/details?id=vn.galaxytelecom.pottel';
     const String iosStoreUrl =
-        'https://apps.apple.com/us/app/skyfi/id6747164804';
+        'https://apps.apple.com/us/app/pottel/id6747164804';
 
     try {
       // Try to launch the deeplink directly
